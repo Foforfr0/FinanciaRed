@@ -33,7 +33,10 @@
                 <Button Click="ClickCheckAccount" Margin="10px" Grid.Column="4" Background="Transparent" BorderBrush="Transparent">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="center">
                         <Image Width="40px" Source="/View/Images/icon-user.png"/>
-                        <Label Content="Account" VerticalAlignment="Center" FontWeight="Bold" FontSize="20"/>
+                        <StackPanel VerticalAlignment="Center" Orientation="Vertical" Margin="10px 0 0 0">
+                            <Label Content="Account" FontWeight="Bold" FontSize="20" Padding="0"/>
+                            <Label Content="Rol" FontSize="15" Padding="0"/>
+                        </StackPanel>
                     </StackPanel>
                 </Button>
             </Grid>
@@ -62,7 +65,8 @@
                 <Grid Width="870px" Height="630px">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="20px"/>
-                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="742.086"/>
+                        <ColumnDefinition Width="72.914"/>
                         <ColumnDefinition Width="20px"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
@@ -70,8 +74,8 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="20px"/>
                     </Grid.RowDefinitions>
-                    
-                    <Frame x:Name="innerFrameContainer" Background="#FFFFFF" NavigationUIVisibility="Hidden" Height="550px" Width="815px" Grid.Column="1" Grid.Row="1">
+
+                    <Frame x:Name="innerFrameContainer" Background="#FFFFFF" NavigationUIVisibility="Hidden" Height="550px" Width="815px" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2">
                         <Frame.Effect>
                             <DropShadowEffect ShadowDepth="5" Direction="320" Opacity="0.5" BlurRadius="5" Color="Black"/>
                         </Frame.Effect>
