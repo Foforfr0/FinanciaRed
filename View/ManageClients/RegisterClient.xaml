@@ -1,0 +1,160 @@
+﻿<Window x:Class="FinanciaRed.View.ManageClients.RegisterClient"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FinanciaRed.View.ManageClients"
+            mc:Ignorable="d" d:Height="1500"
+    Title="Detalles del cliente" Height="500" Width="800" 
+    WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#EADDD9" Offset="0"/>
+                <GradientStop Color="#E9E7D7" Offset="0.5"/>
+                <GradientStop Color="#DFE2DD" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <StackPanel Orientation="Vertical" Width="800" HorizontalAlignment="Left">
+            <Grid Background="#FFFEEA" Width="800" Height="50">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="FinanciaRed" VerticalAlignment="Center" FontWeight="Bold" FontSize="20" Padding="0" Margin="10"/>
+            </Grid>
+            <StackPanel d:Height="1400" Height="375" Width="740" Margin="20" Background="#FFFFFF">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden" d:Height="1400" Height="375" Width="740">
+                    <StackPanel Margin="20 10" d:Height="1400">
+                        <Label Content="Registrar cliente nuevo" FontSize="24" FontWeight="Bold" Padding="0"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0" Margin="0 0 15 5">
+                                <Label Content="Datos personales" FontSize="18" FontWeight="Bold" Padding="0"/>
+                                <StackPanel Margin="10 0 0 0">
+                                    <Label Content="Nombre(s):"/>
+                                    <TextBox/>
+                                    <Label Content="Apellido paterno:"/>
+                                    <TextBox/>
+                                    <Label Content="Apellido materno:"/>
+                                    <TextBox/>
+                                    <Label Content="Fecha de nacimiento"/>
+                                    <TextBox/>
+                                    <Label Content="Género"/>
+                                    <TextBox/>
+                                    <Label Content="Estado Civil"/>
+                                    <TextBox/>
+                                    <Label Content="Código Único de Registro de Población: "/>
+                                    <TextBox/>
+                                    <Label Content="Domicilio: "/>
+                                    <TextBox/>
+                                </StackPanel>
+
+                                <Label Content="Datos de contacto" FontSize="18" FontWeight="Bold" Padding="0"/>
+                                <StackPanel Margin="10 0 0 0">
+                                    <Label Content="Correo electrónico (1):"/>
+                                    <TextBox/>
+                                    <Label Content="Correo electrónico (2):"/>
+                                    <TextBox/>
+                                    <Label Content="Teléfono de cóntacto (1):"/>
+                                    <TextBox/>
+                                    <Label Content="Teléfono de contacto (2):"/>
+                                    <TextBox/>
+                                </StackPanel>
+
+                                <Label Content="Lugar de trabajo" FontSize="18" FontWeight="Bold" Padding="0"/>
+                                <StackPanel Margin="10 0 0 0">
+                                    <Label Content="Tipo:"/>
+                                    <TextBox/>
+                                    <Label Content="Trabajo:"/>
+                                    <TextBox/>
+                                    <Label Content="Salario mensual:"/>
+                                    <TextBox/>
+                                </StackPanel>
+
+                                <Label Content="Contactos de referencia:" FontSize="18" FontWeight="Bold" Padding="0"/>
+                                <StackPanel Margin="10 0 0 0">
+                                    <Label Content="Referencia (1):" FontSize="14" FontWeight="Bold" Padding="0"/>
+                                    <StackPanel Margin="10 0 0 0">
+                                        <Label Content="Nombre(s):"/>
+                                        <TextBox/>
+                                        <Label Content="Apellido paterno:"/>
+                                        <TextBox/>
+                                        <Label Content="Apellido materno:"/>
+                                        <TextBox/>
+                                        <Label Content="Fecha de nacimiento"/>
+                                        <TextBox/>
+                                        <Label Content="Género"/>
+                                        <TextBox/>
+                                        <Label Content="Tipo de relación"/>
+                                        <TextBox/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Margin="15 0 0 5">
+                                <StackPanel Margin="10 0 0 0">
+                                    <Label Content="Referencia (2):" FontSize="14" FontWeight="Bold" Padding="0"/>
+                                    <StackPanel Margin="10 0 0 0">
+                                        <Label Content="Nombre(s):"/>
+                                        <TextBox/>
+                                        <Label Content="Apellido paterno:"/>
+                                        <TextBox/>
+                                        <Label Content="Apellido materno:"/>
+                                        <TextBox/>
+                                        <Label Content="Fecha de nacimiento"/>
+                                        <TextBox/>
+                                        <Label Content="Género"/>
+                                        <TextBox/>
+                                        <Label Content="Tipo de relación"/>
+                                        <TextBox/>
+                                    </StackPanel>
+                                </StackPanel>
+
+                                <Label Content="Datos bancarios" FontSize="18" FontWeight="Bold" Padding="0"/>
+                                <StackPanel Margin="10 0 0 0">
+                                    <Label Content="Registro Federal del Contribuyente"/>
+                                    <TextBox/>
+                                    <Label Content="Cuenta de depósito" FontSize="14" FontWeight="Bold" Padding="0"/>
+                                    <StackPanel Margin="10 0 0 0">
+                                        <Label Content="Nombre del banco"/>
+                                        <TextBox/>
+                                        <Label Content="Clave Estandarizada Bancaria"/>
+                                        <TextBox/>
+                                        <Label Content="Número de tarjeta"/>
+                                        <TextBox/>
+                                        <Label Content="Tipo de tarjeta"/>
+                                        <TextBox/>
+                                    </StackPanel>
+
+                                    <Label Content="Cuenta de cobro" FontSize="14" FontWeight="Bold" Padding="0"/>
+                                    <StackPanel Margin="10 0 0 0">
+                                        <Label Content="Nombre del banco"/>
+                                        <TextBox/>
+                                        <Label Content="Clave Estandarizada Bancaria"/>
+                                        <TextBox/>
+                                        <Label Content="Número de tarjeta"/>
+                                        <TextBox/>
+                                        <Label Content="Tipo de tarjeta"/>
+                                        <TextBox/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+                            <Button Click="ClickCloseWindow" Content="Cancelar" Width="80" Height="25" HorizontalAlignment="Right" Margin="0 0 20 0"/>
+                            <Button Content="Guardar" Width="80" Height="25" HorizontalAlignment="Right"/>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

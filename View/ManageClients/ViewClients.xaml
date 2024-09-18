@@ -1,0 +1,63 @@
+﻿<Page x:Class="FinanciaRed.View.ManageClients.ViewClients"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FinanciaRed.View.ManageClients"
+      Title="Gestión de clientes" Height="590" Width="830">
+
+    <Grid Background="#FFFFFF">
+        <StackPanel>
+            <Label Content="Gestión de clientes" FontSize="24" FontWeight="Bold" Margin="10 5 10 0"/>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20 10 40 0">
+                <Label Content="Palabra clave: " Padding="0" VerticalContentAlignment="Center"/>
+                <TextBox Margin="3 0 8 0" Padding="1" Width="240"/>
+                <Label Content="Créditos solicitados: " Padding="0" VerticalContentAlignment="Center"/>
+                <TextBox Margin="3 0 8 0" Padding="1" Width="60"/>
+                <Label Content="Crédito activo:" Padding="0" VerticalContentAlignment="Center"/>
+                <CheckBox Margin="3 0 8 0" VerticalAlignment="Center"/>
+
+                <Button Click="ClickSearchClients" BorderBrush="Transparent" Margin="20 0 43 0"  Height="30" Width="30">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Grid>
+                                <Ellipse Fill="{TemplateBinding Background}" Height="28" Width="28"/>
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Button.Template>
+                    <Image Source="/View/Images/icon-search.png" Width="18"/>
+                </Button>
+
+                <Button Click="ClickRegisterClient" Content="Registrar" Padding="10 4" BorderBrush="Transparent"/>
+            </StackPanel>
+            <DataGrid x:Name="dataGridClients" AutoGenerateColumns="False" Height="430" Width="770" 
+                      HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20 20 40 50" 
+                      ScrollViewer.CanContentScroll="True"
+                      ScrollViewer.VerticalScrollBarVisibility="Auto"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                      ItemsSource="{Binding retrievedClients}" IsReadOnly="true">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Nombre(s)" Binding="{Binding FirstName}" Width="*" />
+                    <DataGridTextColumn Header="Apellido paterno" Binding="{Binding MiddleName}" Width="*" />
+                    <DataGridTextColumn Header="Apellido materno" Binding="{Binding LastName}" Width="*" />
+                    <DataGridTextColumn Header="RFC" Binding="{Binding CodeRFC}" Width="*" />
+                    <DataGridTextColumn Header="CURP" Binding="{Binding CodeCURP}" Width="*" />
+
+                    <!-- Columna con botón de detalles -->
+                    <DataGridTemplateColumn Header="Detalles">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Click="ClicShowDetailsClient" BorderBrush="Transparent" Height="20" Width="20">
+                                    <Button.Background>
+                                        <ImageBrush ImageSource="/View/Images/icon-search.png"/>
+                                    </Button.Background>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+    </Grid>
+</Page>

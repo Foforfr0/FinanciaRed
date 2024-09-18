@@ -13,103 +13,127 @@ GO
 
 
 --CREATION DATABASE
-CREATE TABLE Bank (
-	IdBank INT NOT NULL PRIMARY KEY,
+CREATE TABLE MaritalStatuses (
+	IdMaritalStatus INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+	Status VARCHAR(20) NOT NULL UNIQUE
+);
+
+CREATE TABLE Banks (
+	IdBank INT NOT NULL PRIMARY KEY IDENTITY(1,1),
 	Name VARCHAR(30) UNIQUE
 );
 
 CREATE TABLE BankCardTypes (
-	IdBankCardType INT NOT NULL PRIMARY KEY,
-	Type VARCHAR(15) UNIQUE
+	IdBankCardType INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+	Type VARCHAR(15) NOT NULL UNIQUE
 );
 
 CREATE TABLE BankAccounts (
-	IdBankAccount INT NOT NULL PRIMARY KEY,
-	NameBank INT NOT NULL,
+	IdBankAccount INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+	IdNameBank INT NOT NULL,
 	CardNumber VARCHAR(16) NOT NULL UNIQUE,
-	CardType INT NOT NULL,
+	CLABE VARCHAR(18) NOT NULL UNIQUE,
+	IdCardType INT NOT NULL,
 
-	CONSTRAINT fk_Bank_BankAccount FOREIGN KEY (NameBank) REFERENCES Bank (IdBank),
-	CONSTRAINT fk_CardType_BankAccount FOREIGN KEY (CardType) REFERENCES BankCardTypes (IdBankCardType)
+	CONSTRAINT fk_Bank_BankAccount FOREIGN KEY (IdNameBank) REFERENCES Banks (IdBank),
+	CONSTRAINT fk_CardType_BankAccount FOREIGN KEY (IdCardType) REFERENCES BankCardTypes (IdBankCardType)
+);
+
+CREATE TABLE RelationshipsClientsTypes (
+	IdRelationshipClient INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+	Type VARCHAR(15) NOT NULL UNIQUE
+);
+
+CREATE TABLE ContactsReferencesClients (
+	IdContactReference INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+	FirstName VARCHAR(80) NOT NULL,
+    MiddleName VARCHAR(80) NOT NULL,
+    LastName VARCHAR(80) NOT NULL,
+    PhoneNumber VARCHAR(80) NOT NULL,
+    Email VARCHAR(80) NOT NULL,
+	IdRelationshipType INT NOT NULL,
+
+	CONSTRAINT fk_RelationshipClientType_ContactReferenceClient FOREIGN KEY (IdRelationshipType) REFERENCES RelationshipsClientsTypes (IdRelationshipClient),
 );
 
 CREATE TABLE AddressesTypes (
-    IdAddressType INT NOT NULL PRIMARY KEY,
-    Type VARCHAR(15) NOT NULL UNIQUE
+    IdAddressType INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+    Type VARCHAR(20) NOT NULL UNIQUE
 );
 
 CREATE TABLE ClientsAddresses (
-    IdClientAddress INT NOT NULL PRIMARY KEY,
-    ExteriorNumber VARCHAR(10) NOT NULL,
-    InteriorNumber VARCHAR(10),
+    IdClientAddress INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+    ExteriorNumber VARCHAR(30) NOT NULL,
+    InteriorNumber VARCHAR(30),
     Street VARCHAR(80) NOT NULL,
     Colony VARCHAR(80) NOT NULL,
     PostalCode VARCHAR(10) NOT NULL,
     State VARCHAR(80) NOT NULL,
-    IdType INT NOT NULL,
+    IdAddressType INT NOT NULL,
 
-	CONSTRAINT fk_AddressType_ClientAddress FOREIGN KEY (IdType) REFERENCES AddressesTypes (IdAddressType)
+	CONSTRAINT fk_AddressType_ClientAddress FOREIGN KEY (IdAddressType) REFERENCES AddressesTypes (IdAddressType)
 );
 
 CREATE TABLE WorkAreaTypes (
-    IdWorkAreaType INT NOT NULL PRIMARY KEY,
+    IdWorkAreaType INT NOT NULL PRIMARY KEY IDENTITY(1,1),
     Type VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE WorkAreas (
-    IdWorkArea INT NOT NULL PRIMARY KEY,
+    IdWorkArea INT NOT NULL PRIMARY KEY IDENTITY(1,1),
     WorkArea VARCHAR(50) NOT NULL,
-    IdType INT NOT NULL,
+    IdWorkAreaType INT NOT NULL,
+    MonthlySalary FLOAT NOT NULL,
 
-	CONSTRAINT fk_WorkAreaType_WorkArea FOREIGN KEY (IdType) REFERENCES WorkAreaTypes (IdWorkAreaType)
+	CONSTRAINT fk_WorkAreaType_WorkArea FOREIGN KEY (IdWorkAreaType) REFERENCES WorkAreaTypes (IdWorkAreaType)
 );
 
-CREATE TABLE MaritalStatuses (
-	IdMaritalStatus INT NOT NULL PRIMARY KEY,
-	Status VARCHAR(20) NOT NULL UNIQUE
-
-);
 CREATE TABLE Clients (
-    IdClient INT NOT NULL PRIMARY KEY,
+    IdClient INT NOT NULL PRIMARY KEY IDENTITY(1,1),
     FirstName VARCHAR(80) NOT NULL,
     MiddleName VARCHAR(80) NOT NULL,
     LastName VARCHAR(80) NOT NULL,
     DateBirth DATE NOT NULL,
     Gender CHAR NOT NULL,
-    MaritalStatus INT NOT NULL,
+    IdMaritalStatus INT NOT NULL,
     PhoneNumber1 VARCHAR(15) NOT NULL UNIQUE,
     PhoneNumber2 VARCHAR(15) NOT NULL UNIQUE,
     Email1 VARCHAR(80) NOT NULL UNIQUE,
     Email2 VARCHAR(80) NOT NULL UNIQUE,
     CodeRFC VARCHAR(13) NOT NULL UNIQUE,
     CodeCURP VARCHAR(18) NOT NULL UNIQUE,
-    BankAccount1 INT NOT NULL,
-    BankAccount2 INT,
+    IdContactReference1 INT NOT NULL,
+	IdContactReference2 INT,
+    IdBankAccount1 INT NOT NULL,
+    IdBankAccount2 INT,
     IdAddress INT NOT NULL,
     IdWorkArea INT NOT NULL,
 
-	CONSTRAINT fk_MaritalStatus_Client FOREIGN KEY (MaritalStatus) REFERENCES MaritalStatuses (IdMaritalStatus),
-	CONSTRAINT fk_BankAccount1_Client FOREIGN KEY (BankAccount1) REFERENCES BankAccounts (IdBankAccount),
-	CONSTRAINT fk_BankAccount2_Client FOREIGN KEY (BankAccount2) REFERENCES BankAccounts (IdBankAccount),
+	CONSTRAINT fk_MaritalStatus_Client FOREIGN KEY (IdMaritalStatus) REFERENCES MaritalStatuses (IdMaritalStatus),
+	CONSTRAINT fk_ContactReference1_Client FOREIGN KEY (IdContactReference1) REFERENCES ContactsReferencesClients (IdContactReference),
+	CONSTRAINT fk_ContactReference2_Client FOREIGN KEY (IdContactReference2) REFERENCES ContactsReferencesClients (IdContactReference),
+	CONSTRAINT fk_BankAccount1_Client FOREIGN KEY (IdBankAccount1) REFERENCES BankAccounts (IdBankAccount),
+	CONSTRAINT fk_BankAccount2_Client FOREIGN KEY (IdBankAccount2) REFERENCES BankAccounts (IdBankAccount),
 	CONSTRAINT fk_AddressClient_Client FOREIGN KEY (IdAddress) REFERENCES ClientsAddresses (IdClientAddress),
 	CONSTRAINT fk_WorkArea_Client FOREIGN KEY (IdWorkArea) REFERENCES WorkAreas (IdWorkArea)
 );
 
 CREATE TABLE StatesCredits (
-	IdStateCredit INT NOT NULL PRIMARY KEY,
+	IdStateCredit INT NOT NULL PRIMARY KEY IDENTITY(1,1),
 	State VARCHAR(15) NOT NULL UNIQUE
 );
 
 CREATE TABLE RolesEmployees (
-    IdRoleEmployee INT NOT NULL PRIMARY KEY,
-    Role VARCHAR(15) NOT NULL
+    IdRoleEmployee INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+    Role VARCHAR(30) NOT NULL
 );
 
 CREATE TABLE Employees (
-    IdEmployee INT NOT NULL PRIMARY KEY,
+    IdEmployee INT NOT NULL PRIMARY KEY IDENTITY(1,1),
     FirstName VARCHAR(80) NOT NULL,
     MiddleName VARCHAR(80) NOT NULL,
     LastName VARCHAR(80) NOT NULL,
+    ProfilePhoto VARBINARY(MAX),
     Email VARCHAR(80) NOT NULL,
     Password VARCHAR(80) NOT NULL,
     IdRole INT NOT NULL,
@@ -118,44 +142,89 @@ CREATE TABLE Employees (
 );
 
 CREATE TABLE Credits (
-    IdCredit INT NOT NULL PRIMARY KEY,
+    IdCredit INT NOT NULL PRIMARY KEY IDENTITY(1,1),
     Amount BIGINT NOT NULL,
     AmountLeft BIGINT,
     IdClient INT NOT NULL,
     IdStateCredit INT NOT NULL,
-    DocumentaAplication BIT NOT NULL,
-    Interest FLOAT NOT NULL,
-    StartDATE DATETIME NOT NULL,
-    EndDATE DATETIME NOT NULL,
+    SignedDocument VARBINARY(MAX),
+    InterestRate FLOAT NOT NULL,
+    StartDate DATETIME NOT NULL,
+    EndDate DATETIME NOT NULL,
     IdEmployee INT NOT NULL,
 
 	CONSTRAINT fk_Client_Credit FOREIGN KEY (IdClient) REFERENCES Clients (IdClient),
 	CONSTRAINT fk_StateCredit_Credit FOREIGN KEY (IdStateCredit) REFERENCES StatesCredits (IdStateCredit),
 	CONSTRAINT fk_Employee_Credit FOREIGN KEY (IdEmployee) REFERENCES Employees (IdEmployee)
 );
-
 --INSERTIONS-CONSTANTS------------------------------------------------
-INSERT INTO Bank (Name) 
+INSERT INTO MaritalStatuses (Status) 
+			VALUES ('Soltero/a'),
+				   ('Casado/a'),
+				   ('Divorciado/a'),
+				   ('Viudo/a'),
+				   ('Separado/a'),
+				   ('Concubinato');
+
+INSERT INTO Banks (Name) 
 			VALUES ('Banamex'),
-				   ('HSBC MÈxico'),
-				   ('Santander MÈxico'),
+				   ('HSBC M√©xico'),
+				   ('Santander M√©xico'),
 				   ('Banorte'),
-				   ('Scotiabank MÈxico'),
+				   ('Scotiabank M√©xico'),
 				   ('Bancomer'), 
 				   ('Mercado Pago'),
-				   ('NU MÈxico');
+				   ('NU M√©xico');
 
-INSERT INTO BankCardTypes (Type) VALUES ('DÈbito'), ('CrÈdito');
+INSERT INTO BankCardTypes (Type) VALUES ('D√©bito'), ('Cr√©dito');
 
-INSERT INTO AddressesTypes (Type) VALUES ('Cuarto'), ('Departamento'), ('Casa Residencial');
+INSERT INTO RelationshipsClientsTypes (Type)
+            VALUES ('Amigo/a'), ('Familiar');
 
-INSERT INTO WorkAreaTypes (Type ) VALUES ('');
+INSERT INTO AddressesTypes (Type) VALUES ('Cuarto'), ('Departamento'), ('Casa');
+
+INSERT INTO WorkAreaTypes (Type) VALUES ('Inform√°tica');
+
+INSERT INTO StatesCredits (State) VALUES ('Cobrable'), ('Incobrale');
+
+INSERT INTO RolesEmployees (Role) VALUES ('Asesor de cr√©dito'), ('Analista de cr√©dito');
 
 --INSERTIONS----------------------------------------------------------
-INSERT INTO BankAccounts (NameBank, CardNumber, CardType) VALUES ();
-INSERT INTO Clients (FirstName, MiddleName, LastName, DateBirth, Gender, MaritalStatus, 
+INSERT INTO BankAccounts (IdNameBank, CardNumber, CLABE, IdCardType)
+            VALUES (1, '1234567890123456', '123456789012345678', 1);
+INSERT INTO BankAccounts (IdNameBank, CardNumber, CLABE, IdCardType)
+            VALUES (2, '6543210987654321', '876543210987654321', 2);
+
+INSERT INTO ContactsReferencesClients (FirstName, MiddleName, LastName,
+                                      Email, PhoneNumber, IdRelationshipType) 
+            VALUES ('C√©sar', 'Basilio', 'G√≥mez', 'basilios@gmail.com', '9221914346', 1);
+INSERT INTO ContactsReferencesClients (FirstName, MiddleName, LastName,
+                                      Email, PhoneNumber, IdRelationshipType) 
+            VALUES ('Andr√©s', 'Arellano', 'Garc√≠a', 'and_are@gmail.com', '2282196472', 1);
+
+INSERT INTO ClientsAddresses (ExteriorNumber, InteriorNumber, Street, Colony, 
+                             PostalCode, State, IdAddressType)
+            VALUES ('Azahares 3', '308', 'Circuito Primavera', 'Nuevo Xalapa', 
+                   '91097', 'Veracruz', 2);
+
+INSERT INTO WorkAreas (WorkArea, IdWorkAreaType, MonthlySalary)
+            VALUES ('Ingeniero de software', 1, 20000);
+
+INSERT INTO Clients (FirstName, MiddleName, LastName, DateBirth, Gender, IdMaritalStatus, 
 					 PhoneNumber1, PhoneNumber2, Email1, Email2, CodeRFC, CodeCURP, 
-					 BankAccount1, BankAccount2, IdAddress, IdWorkArea) 
-			VALUES  ('Rodolfo', 'Fern·ndez', 'RodrÌguez', '2003-10-26', 'M', 'Soltero', 
-					 '2281856845', '2281856846', 'foforfr007@gmail.com', 'foforfr07@gmail.com', 
-					 'FERR031026TG6', 'FERR031026HVZRDDA2', 1, 2, 1, 1);
+					 IdBankAccount1, IdBankAccount2, IdContactReference1, IdContactReference2, IdAddress, IdWorkArea) 
+			VALUES  ('Pedro', 'Pica', 'Piedra', '2003-10-26', 'M', 1, 
+					 '2281231234', '2283214321', 'p_p_p@gmail.com', 'pedro_loco@gmail.com', 
+					 'PIPP031026Q12', 'PIPPE031026JUSREF3', 1, 2, 1, 2, 1, 1);
+
+INSERT INTO Employees (FirstName, MiddleName, LastName, Email, Password, IdRole)
+            VALUES ('Rodolfo', 'Fern√°ndez', 'Rodr√≠guez', 'foforfr007@gmail.com', '1234', 1);
+INSERT INTO Employees (FirstName, MiddleName, LastName, Email, Password, IdRole)
+            VALUES ('Martin Emmanuel', 'Cruz', 'Carmona', 'lecape_27@gmail.com', '4321', 2);
+
+INSERT INTO Credits (Amount, AmountLeft, IdClient, IdStateCredit, SignedDocument, InterestRate, 
+                    StartDate, EndDate, IdEmployee) 
+            VALUES (100000, 100000, 1, 1, NULL, 10.0, '2024-11-12 11:50:00', '2025-11-12 11:50:00', 1);
+
+SELECT * FROM Employees;
+SELECT * FROM Clients;
