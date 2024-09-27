@@ -70,13 +70,21 @@
     <Compile Include="Model\DAO\DAO_Client.cs" />
     <Compile Include="Model\DAO\DAO_Credit.cs" />
     <Compile Include="Model\DAO\DAO_Employee.cs" />
+    <Compile Include="Model\DAO\DAO_GeneralVariables.cs" />
+    <Compile Include="Model\DTO\DTO_AddressClient.cs" />
+    <Compile Include="Model\DTO\DTO_AddressType.cs" />
+    <Compile Include="Model\DTO\DTO_Bank.cs" />
+    <Compile Include="Model\DTO\DTO_CardType.cs" />
     <Compile Include="Model\DTO\DTO_Client_Consult.cs" />
     <Compile Include="Model\DTO\DTO_Client_DetailsClient.cs" />
     <Compile Include="Model\DTO\DTO_Credit_Consult.cs" />
     <Compile Include="Model\DTO\DTO_Employee_DetailsEmployee.cs" />
     <Compile Include="Model\DTO\DTO_Employee_Login.cs" />
     <Compile Include="Model\DTO\DTO_Employee_ModifyData.cs" />
+    <Compile Include="Model\DTO\DTO_MaritalStatus.cs" />
+    <Compile Include="Model\DTO\DTO_RelationshipType.cs" />
     <Compile Include="Model\DTO\MessageResponse.cs" />
+    <Compile Include="Model\DTO\DTO_WorkType.cs" />
     <Compile Include="Model\Model_Entity\AddressesTypes.cs">
       <DependentUpon>Model_Entity.tt</DependentUpon>
     </Compile>
@@ -138,7 +146,9 @@
       <DependentUpon>Model_Entity.tt</DependentUpon>
     </Compile>
     <Compile Include="Utils\CheckFormat.cs" />
+    <Compile Include="Utils\Converters.cs" />
     <Compile Include="Utils\ManageLabelsError.cs" />
+    <Compile Include="Utils\RetrieveDataVariables.cs" />
     <Compile Include="View\ManageClients\DetailsClient.xaml.cs">
       <DependentUpon>DetailsClient.xaml</DependentUpon>
     </Compile>
@@ -162,6 +172,9 @@
     </Compile>
     <Compile Include="View\ManageCredits\ViewCredits.xaml.cs">
       <DependentUpon>ViewCredits.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManageUsers\ViewEmployees.xaml.cs">
+      <DependentUpon>ViewEmployees.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\WindowContainer.xaml.cs">
       <DependentUpon>WindowContainer.xaml</DependentUpon>
@@ -199,6 +212,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ManageCredits\ViewCredits.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ManageUsers\ViewEmployees.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,4 +1,7 @@
-﻿namespace FinanciaRed.Model.DTO {
+﻿using System;
+using System.Windows.Controls;
+
+namespace FinanciaRed.Model.DTO {
     internal class DTO_Client_DetailsClient {
         public int IdClient {
             get; set;
@@ -15,7 +18,10 @@
         public string Gender {
             get; set;
         }
-        public string DateBirth {
+        public DateTime DateBirth {
+            get; set;
+        }
+        public int IdMaritalStatus {
             get; set;
         }
         public string MaritalStatus {
@@ -24,7 +30,7 @@
         public string CodeCurp {
             get; set;
         }
-        public string PersonalAddress {
+        public DTO_AddressClient AddressClient {
             get; set;
         }
         public string Email1 {
@@ -37,6 +43,9 @@
             get; set;
         }
         public string PhoneNumber2 {
+            get; set;
+        }
+        public int IdWorkType {
             get; set;
         }
         public string WorkType {
@@ -63,6 +72,9 @@
         public string Reference1PhoneNumber {
             get; set;
         }
+        public int IdReference1RelationshipType {
+            get; set;
+        }
         public string Reference1RelationshipType {
             get; set;
         }
@@ -81,10 +93,16 @@
         public string Reference2PhoneNumber {
             get; set;
         }
+        public int IdReference2RelationshipType {
+            get; set;
+        }
         public string Reference2RelationshipType {
             get; set;
         }
         public string CodeRFC {
+            get; set;
+        }
+        public int IdBankAccount1Name {
             get; set;
         }
         public string BankAccount1Name {
@@ -96,7 +114,13 @@
         public string BankAccount1CardNumber {
             get; set;
         }
+        public int IdBankAccount1CardType {
+            get; set;
+        }
         public string BankAccount1CardType {
+            get; set;
+        }
+        public int IdBankAccount2Name {
             get; set;
         }
         public string BankAccount2Name {
@@ -108,7 +132,13 @@
         public string BankAccount2CardNumber {
             get; set;
         }
+        public int IdBankAccount2CardType {
+            get; set;
+        }
         public string BankAccount2CardType {
+            get; set;
+        }
+        public string StatusActive {
             get; set;
         }
     }

@@ -13,7 +13,7 @@
             <StackPanel Margin="20 0" Orientation="Horizontal">
                 <StackPanel Grid.Column="0" Width="385" Margin="0 0 10 0">
                     <Label Content="Foto de perfil"/>
-                    <Image x:Name="image_ImageProfile" Width="100" Height="100" Source="/View/Images/icon-user.png">
+                    <Image x:Name="image_ImageProfile" Width="100" Height="100" Source="/View/Images/icon-user.png" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform">
                         <Image.Clip>
                             <EllipseGeometry Center="50,50" RadiusX="50" RadiusY="50" />
                         </Image.Clip>

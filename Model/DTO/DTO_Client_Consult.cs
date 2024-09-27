@@ -1,7 +1,7 @@
 ﻿namespace FinanciaRed.Model.DTO {
     internal class DTO_Client_Consult {
         public int IdClient {
-        get; set; 
+            get; set;
         }
         public string FirstName {
             get; set;
@@ -16,6 +16,9 @@
             get; set;
         }
         public string CodeCURP {
+            get; set;
+        }
+        public string StatusActive {
             get; set;
         }
     }

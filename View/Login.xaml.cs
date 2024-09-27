@@ -2,12 +2,10 @@
 using FinanciaRed.Model.DTO;
 using FinanciaRed.Utils;
 using System;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Xml.Linq;
 
 namespace FinanciaRed.View {
     /// <summary>
@@ -25,12 +23,13 @@ namespace FinanciaRed.View {
 
         private void ClicShowPassword (object sender, RoutedEventArgs e) {
             isPasswordVisible = !isPasswordVisible;
-            /* after form
             if (isPasswordVisible) {
+                passwordBox_Password.Visibility = Visibility.Collapsed;
                 iconEyePassword.Source = new BitmapImage (new Uri ("Images/icon-eye-open.png", UriKind.Relative));
             } else {
+                passwordBox_Password.Visibility = Visibility.Visible;
                 iconEyePassword.Source = new BitmapImage (new Uri ("Images/icon-eye-close.png", UriKind.Relative));
-            }*/
+            }
         }
 
         private void ClickRecoverPassword (Object sender, RoutedEventArgs e) {
@@ -38,10 +37,10 @@ namespace FinanciaRed.View {
         }
 
         private bool VerifyFormLogin () {
-            bool IsFormCorrect = true;
-            
-            if (textBox_Email.Text.Length == 0) {
-                IsFormCorrect = false;
+            bool isFormCorrect = true;
+
+            if (string.IsNullOrEmpty(textBox_Email.Text)) {
+                isFormCorrect = false;
                 if (ManageLabelsError.ExistsLabelInStack (stackPanel_FormLogIn, "errorEmailLabel") == false) {
                     stackPanel_FormLogIn.Children.Insert (
                         stackPanel_FormLogIn.Children.IndexOf (textBox_Email) + 1,
@@ -50,13 +49,13 @@ namespace FinanciaRed.View {
                     stackPanel_MainContainer.Height += 20;
                 }
             } else {
-                if (ManageLabelsError.ExistsLabelInStack(stackPanel_FormLogIn, "errorEmailLabel")) {
+                if (ManageLabelsError.ExistsLabelInStack (stackPanel_FormLogIn, "errorEmailLabel")) {
                     ManageLabelsError.RemoveLabel (stackPanel_FormLogIn, "errorEmailLabel");
                     stackPanel_MainContainer.Height -= 20;
                 }
             }
-            if (passwordBox_Password.Password.Length == 0) {
-                IsFormCorrect = false;
+            if (string.IsNullOrEmpty (passwordBox_Password.Password)) {
+                isFormCorrect = false;
                 if (ManageLabelsError.ExistsLabelInStack (stackPanel_FormLogIn, "errorPasswordLabel") == false) {
                     stackPanel_FormLogIn.Children.Insert (
                         stackPanel_FormLogIn.Children.IndexOf (passwordBox_Password) + 1,
@@ -71,14 +70,14 @@ namespace FinanciaRed.View {
                 }
             }
 
-            return IsFormCorrect;
+            return isFormCorrect;
         }
 
         private async void ClickLogin (object sender, RoutedEventArgs e) {
             if (VerifyFormLogin () == true) {
                 string emailLogin = textBox_Email.Text;
                 string passwordLogin = passwordBox_Password.Password;
-                MessageResponse<DTO_Employee_Login> messageResponseLogin = 
+                MessageResponse<DTO_Employee_Login> messageResponseLogin =
                     await DAO_Employee.GetLogin (emailLogin, passwordLogin);
 
                 if (messageResponseLogin.DataRetrieved == null) {
@@ -91,6 +90,14 @@ namespace FinanciaRed.View {
                     navService.Navigate (new MainWindow (messageResponseLogin.DataRetrieved));
                 }
             }
+        }
+
+        private void ChangedTextBoxPassword (object sender, EventArgs e) {
+            passwordBox_Password.Password = textBox_Password.Text;
+        }
+
+        private void ChangedPasswordBoxPassword (object sender, EventArgs e) {
+            textBox_Password.Text = passwordBox_Password.Password;
         }
     }
 }

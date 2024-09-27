@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="FinanciaRedModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="FinanciaRedModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AddressesTypes">
           <Key>
             <PropertyRef Name="IdAddressType" />
@@ -59,6 +59,7 @@
           <Property Name="IdBankAccount2" Type="int" />
           <Property Name="IdAddress" Type="int" Nullable="false" />
           <Property Name="IdWorkArea" Type="int" Nullable="false" />
+          <Property Name="StatusActive" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="ClientsAddresses">
           <Key>
@@ -430,8 +431,7 @@
             <End Role="WorkAreas" EntitySet="WorkAreas" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FinanciaRedModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -504,6 +504,7 @@
           <NavigationProperty Name="ContactsReferencesClients1" Relationship="Self.fk_ContactReference2_Client" FromRole="Clients" ToRole="ContactsReferencesClients" />
           <NavigationProperty Name="MaritalStatuses" Relationship="Self.fk_MaritalStatus_Client" FromRole="Clients" ToRole="MaritalStatuses" />
           <NavigationProperty Name="WorkAreas" Relationship="Self.fk_WorkArea_Client" FromRole="Clients" ToRole="WorkAreas" />
+          <Property Name="StatusActive" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="ClientsAddresses">
           <Key>
@@ -936,6 +937,7 @@
           <EntitySetMapping Name="Clients">
             <EntityTypeMapping TypeName="FinanciaRedModel.Clients">
               <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="StatusActive" ColumnName="StatusActive" />
                 <ScalarProperty Name="IdClient" ColumnName="IdClient" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />

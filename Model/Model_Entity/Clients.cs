@@ -39,6 +39,7 @@ namespace FinanciaRed.Model.Model_Entity
         public Nullable<int> IdBankAccount2 { get; set; }
         public int IdAddress { get; set; }
         public int IdWorkArea { get; set; }
+        public bool StatusActive { get; set; }
     
         public virtual BankAccounts BankAccounts { get; set; }
         public virtual BankAccounts BankAccounts1 { get; set; }

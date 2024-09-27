@@ -3,6 +3,9 @@
         public int IdEmployee {
             get; set;
         }
+        public byte[] ProfilePhoto {
+            get; set;
+        }
         public string Email {
             get; set;
         }

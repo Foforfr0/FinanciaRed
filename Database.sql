@@ -31,8 +31,8 @@ CREATE TABLE BankCardTypes (
 CREATE TABLE BankAccounts (
 	IdBankAccount INT NOT NULL PRIMARY KEY IDENTITY(1,1),
 	IdNameBank INT NOT NULL,
-	CardNumber VARCHAR(16) NOT NULL UNIQUE,
-	CLABE VARCHAR(18) NOT NULL UNIQUE,
+	CardNumber VARCHAR(19) NOT NULL UNIQUE,
+	CLABE VARCHAR(23) NOT NULL UNIQUE,
 	IdCardType INT NOT NULL,
 
 	CONSTRAINT fk_Bank_BankAccount FOREIGN KEY (IdNameBank) REFERENCES Banks (IdBank),
@@ -108,6 +108,7 @@ CREATE TABLE Clients (
     IdBankAccount2 INT,
     IdAddress INT NOT NULL,
     IdWorkArea INT NOT NULL,
+    StatusActive BIT NOT NULL,
 
 	CONSTRAINT fk_MaritalStatus_Client FOREIGN KEY (IdMaritalStatus) REFERENCES MaritalStatuses (IdMaritalStatus),
 	CONSTRAINT fk_ContactReference1_Client FOREIGN KEY (IdContactReference1) REFERENCES ContactsReferencesClients (IdContactReference),
@@ -179,28 +180,28 @@ INSERT INTO Banks (Name)
 INSERT INTO BankCardTypes (Type) VALUES ('Débito'), ('Crédito');
 
 INSERT INTO RelationshipsClientsTypes (Type)
-            VALUES ('Amigo/a'), ('Familiar');
+            VALUES ('Amigo/a'), ('Familiar'), ('Pareja');
 
 INSERT INTO AddressesTypes (Type) VALUES ('Cuarto'), ('Departamento'), ('Casa');
 
-INSERT INTO WorkAreaTypes (Type) VALUES ('Informática');
+INSERT INTO WorkAreaTypes (Type) VALUES ('Desarrollo tecnológico');
 
 INSERT INTO StatesCredits (State) VALUES ('Cobrable'), ('Incobrale');
 
-INSERT INTO RolesEmployees (Role) VALUES ('Asesor de crédito'), ('Analista de crédito');
+INSERT INTO RolesEmployees (Role) VALUES ('Asesor de crédito'), ('Analista de crédito'), ('Administrador');
 
 --INSERTIONS----------------------------------------------------------
 INSERT INTO BankAccounts (IdNameBank, CardNumber, CLABE, IdCardType)
-            VALUES (1, '1234567890123456', '123456789012345678', 1);
+            VALUES (1, '4234-5678-9012-3456', '123-456-789-012-345-678', 1);
 INSERT INTO BankAccounts (IdNameBank, CardNumber, CLABE, IdCardType)
-            VALUES (2, '6543210987654321', '876543210987654321', 2);
+            VALUES (2, '4543-2109-8765-4321', '876-543-210-987-654-321', 2);
 
 INSERT INTO ContactsReferencesClients (FirstName, MiddleName, LastName,
                                       Email, PhoneNumber, IdRelationshipType) 
-            VALUES ('César', 'Basilio', 'Gómez', 'basilios@gmail.com', '9221914346', 1);
+            VALUES ('César', 'Basilio', 'Gómez', 'basilios@gmail.com', '922-191-4346', 1);
 INSERT INTO ContactsReferencesClients (FirstName, MiddleName, LastName,
                                       Email, PhoneNumber, IdRelationshipType) 
-            VALUES ('Andrés', 'Arellano', 'García', 'and_are@gmail.com', '2282196472', 1);
+            VALUES ('Andrés', 'Arellano', 'García', 'and_are@gmail.com', '228-219-6472', 1);
 
 INSERT INTO ClientsAddresses (ExteriorNumber, InteriorNumber, Street, Colony, 
                              PostalCode, State, IdAddressType)
@@ -212,19 +213,20 @@ INSERT INTO WorkAreas (WorkArea, IdWorkAreaType, MonthlySalary)
 
 INSERT INTO Clients (FirstName, MiddleName, LastName, DateBirth, Gender, IdMaritalStatus, 
 					 PhoneNumber1, PhoneNumber2, Email1, Email2, CodeRFC, CodeCURP, 
-					 IdBankAccount1, IdBankAccount2, IdContactReference1, IdContactReference2, IdAddress, IdWorkArea) 
+					 IdBankAccount1, IdBankAccount2, IdContactReference1, IdContactReference2, IdAddress, IdWorkArea, StatusActive) 
 			VALUES  ('Pedro', 'Pica', 'Piedra', '2003-10-26', 'M', 1, 
-					 '2281231234', '2283214321', 'p_p_p@gmail.com', 'pedro_loco@gmail.com', 
-					 'PIPP031026Q12', 'PIPPE031026JUSREF3', 1, 2, 1, 2, 1, 1);
+					 '228-123-1234', '228-321-4321', 'p_p_p@gmail.com', 'pedro_loco@gmail.com', 
+					 'PIPP031026TG', 'PIPP031026HVZRDDA2', 1, 2, 1, 2, 1, 1, 1);
 
 INSERT INTO Employees (FirstName, MiddleName, LastName, Email, Password, IdRole)
             VALUES ('Rodolfo', 'Fernández', 'Rodríguez', 'foforfr007@gmail.com', '1234', 1);
 INSERT INTO Employees (FirstName, MiddleName, LastName, Email, Password, IdRole)
             VALUES ('Martin Emmanuel', 'Cruz', 'Carmona', 'lecape_27@gmail.com', '4321', 2);
+INSERT INTO Employees (FirstName, MiddleName, LastName, Email, Password, IdRole)
+            VALUES ('Mario Alberto', 'Hernández', 'Pérez', 'mariohernandez2@gmail.com', 'admin', 3);
 
 INSERT INTO Credits (Amount, AmountLeft, IdClient, IdStateCredit, SignedDocument, InterestRate, 
                     StartDate, EndDate, IdEmployee) 
             VALUES (100000, 100000, 1, 1, NULL, 10.0, '2024-11-12 11:50:00', '2025-11-12 11:50:00', 1);
 
-SELECT * FROM Employees;
-SELECT * FROM Clients;
+SELECT * FROM Banks;

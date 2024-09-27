@@ -13,7 +13,7 @@ namespace FinanciaRed.Model.DAO {
 
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
                 try {
-                    List<DTO_Credit_Consult> retrievedConsultCredits = await
+                    List<DTO_Credit_Consult> dataRetrieved = await
                         context.Credits.
                         Select (crdt => new DTO_Credit_Consult {
                             IdCredit = crdt.IdCredit,
@@ -29,10 +29,10 @@ namespace FinanciaRed.Model.DAO {
                         }).
                         ToListAsync ();
 
-                    if (retrievedConsultCredits != null) {
+                    if (dataRetrieved != null) {
                         responseConsultClients = MessageResponse<List<DTO_Credit_Consult>>.Success (
-                            retrievedConsultCredits.Count + " clients retrieved",
-                            retrievedConsultCredits);
+                            dataRetrieved.Count + " clients retrieved",
+                            dataRetrieved);
                     } else {
                         responseConsultClients = MessageResponse<List<DTO_Credit_Consult>>.Failure ("Wrong credentials");
                     }

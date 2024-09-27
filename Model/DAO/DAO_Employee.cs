@@ -13,7 +13,7 @@ namespace FinanciaRed.Model.DAO {
 
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
                 try {
-                    DTO_Employee_Login retrievedUser = await
+                    DTO_Employee_Login dataRetrieved = await
                         context.Employees.
                         Where (empl => empl.Email.Equals (email) &&
                                 empl.Password.Equals (password)).
@@ -22,16 +22,16 @@ namespace FinanciaRed.Model.DAO {
                             FirstName = empl.FirstName,
                             MiddleName = empl.MiddleName,
                             LastName = empl.LastName,
-                            Email = empl.Email,
+                            ProfilePhoto = empl.ProfilePhoto,
                             IdRol = empl.RolesEmployees.IdRoleEmployee,
                             Rol = empl.RolesEmployees.Role
                         }).
                         FirstOrDefaultAsync ();
 
-                    if (retrievedUser != null) {
+                    if (dataRetrieved != null) {
                         responseLogin = MessageResponse<DTO_Employee_Login>.Success (
-                            $"Welcome {retrievedUser.FirstName}.",
-                            retrievedUser
+                            $"Welcome {dataRetrieved.FirstName}.",
+                            dataRetrieved
                         );
                     } else {
                         responseLogin = MessageResponse<DTO_Employee_Login>.Failure ("Wrong credentials.");
@@ -44,11 +44,11 @@ namespace FinanciaRed.Model.DAO {
         }
 
         public static async Task<MessageResponse<DTO_Employee_DetailsEmployee>> GetDetailsEmployee (int idEmployee, bool withPassword) {
-            MessageResponse<DTO_Employee_DetailsEmployee> responseLogin = null;
+            MessageResponse<DTO_Employee_DetailsEmployee> responseDetailsEmployee = null;
 
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
                 try {
-                    DTO_Employee_DetailsEmployee retrievedUser = await
+                    DTO_Employee_DetailsEmployee retrievedData = await
                         context.Employees.
                         Where (empl => empl.IdEmployee == idEmployee).
                         Select (empl => new DTO_Employee_DetailsEmployee {
@@ -56,6 +56,7 @@ namespace FinanciaRed.Model.DAO {
                             FirstName = empl.FirstName,
                             MiddleName = empl.MiddleName,
                             LastName = empl.LastName,
+                            ProfilePhoto = empl.ProfilePhoto,
                             Email = empl.Email,
                             Password = withPassword ? empl.Password : "",
                             IdRol = empl.RolesEmployees.IdRoleEmployee,
@@ -63,22 +64,22 @@ namespace FinanciaRed.Model.DAO {
                         }).
                         FirstOrDefaultAsync ();
 
-                    if (retrievedUser != null) {
-                        responseLogin = MessageResponse<DTO_Employee_DetailsEmployee>.Success (
-                            $"Details of ID {retrievedUser.IdEmployee} retrieved.",
-                            retrievedUser
+                    if (retrievedData != null) {
+                        responseDetailsEmployee = MessageResponse<DTO_Employee_DetailsEmployee>.Success (
+                            $"Details of ID {retrievedData.IdEmployee} retrieved.",
+                            retrievedData
                         );
                     } else {
-                        responseLogin = MessageResponse<DTO_Employee_DetailsEmployee>.Failure ("Details doesn't retrieved.");
+                        responseDetailsEmployee = MessageResponse<DTO_Employee_DetailsEmployee>.Failure ("Details doesn't retrieved.");
                     }
                 } catch (Exception ex) {
-                    responseLogin = MessageResponse<DTO_Employee_DetailsEmployee>.Failure (ex.ToString ());
+                    responseDetailsEmployee = MessageResponse<DTO_Employee_DetailsEmployee>.Failure (ex.ToString ());
                 }
             }
-            return responseLogin;
+            return responseDetailsEmployee;
         }
 
-        public static MessageResponse<int> ModifyDataEmployee (DTO_Employee_ModifyData newDataEmployee) {
+        public static MessageResponse<int> ModifyDataEmployee (DTO_Employee_ModifyData newDataEmployee, bool changePassword) {
             MessageResponse<int> responseModify = null;
 
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
@@ -87,8 +88,11 @@ namespace FinanciaRed.Model.DAO {
 
                     if (currentEmployee != null) {
                         context.Employees.Attach (currentEmployee);
+
+                        currentEmployee.ProfilePhoto = newDataEmployee.ProfilePhoto;
                         currentEmployee.Email = newDataEmployee.Email;
-                        currentEmployee.Password = newDataEmployee.Password;
+                        if (changePassword)
+                            currentEmployee.Password = newDataEmployee.Password;
 
                         bool failedSave = false;
                         do {

@@ -12,7 +12,7 @@
         public string LastName {
             get; set;
         }
-        public string Email {
+        public byte[] ProfilePhoto {
             get; set;
         }
         public int IdRol {

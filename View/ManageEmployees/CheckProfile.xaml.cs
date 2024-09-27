@@ -40,23 +40,12 @@ namespace FinanciaRed.View.ManageEmployees {
                     image_ImageProfile.Source = new BitmapImage (new Uri ("../Images/icon-user.png", UriKind.Relative));
                     label_PhotoStatus.Content = "Sin foto";
                 } else {
-                    image_ImageProfile.Source = ConvertByteToBitmapImage (currentEmployee.ProfilePhoto);
+                    image_ImageProfile.Source = Converters.ConvertByteToBitmapImage (currentEmployee.ProfilePhoto);
                     label_PhotoStatus.Content = "";
                 }
             } else {
                 MessageBox.Show ("No se pudo obtener los datos.", "Error inesperado");
             }
-        }
-
-        private BitmapImage ConvertByteToBitmapImage (byte[] bytesImage) {
-            BitmapImage bitmapImage = new BitmapImage ();
-            using (MemoryStream ms = new MemoryStream (bytesImage)) {
-                bitmapImage.BeginInit ();
-                bitmapImage.StreamSource = ms;
-                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                bitmapImage.EndInit ();
-            }
-            return bitmapImage;
         }
 
         private void ClickSelectPhoto (object sender, RoutedEventArgs e) {
@@ -94,6 +83,8 @@ namespace FinanciaRed.View.ManageEmployees {
 
             await RetrieveDetailsAccount (currentEmployee.IdEmployee, true);
 
+            textBox_Password.Text = "";
+
             textBox_Email.IsReadOnly = false;
             textBox_Password.IsReadOnly = false;
             textBox_PasswordConfirmation.IsReadOnly = false;
@@ -102,15 +93,21 @@ namespace FinanciaRed.View.ManageEmployees {
             textBox_PasswordConfirmation.BorderBrush = new SolidColorBrush (Colors.LightGray);
         }
 
-        private void ClickAcceptModification (object sender, RoutedEventArgs e) {
+        private async void ClickAcceptModification (object sender, RoutedEventArgs e) {
             if (VerifyForm ()) {
                 DTO_Employee_ModifyData newDataEmployee = new DTO_Employee_ModifyData {
                     IdEmployee = currentEmployee.IdEmployee,
                     Email = textBox_Email.Text,
-                    Password = textBox_PasswordConfirmation.Text
+                    Password = textBox_PasswordConfirmation.Text,
+                    ProfilePhoto = TEMP_profileImageSelected
                 };
 
-                MessageResponse<int> responseModify = DAO_Employee.ModifyDataEmployee (newDataEmployee);
+                MessageResponse<int> responseModify;
+                if (string.IsNullOrEmpty (textBox_Password.Text) && string.IsNullOrEmpty (textBox_PasswordConfirmation.Text)) {
+                    responseModify = DAO_Employee.ModifyDataEmployee (newDataEmployee, false);
+                } else {
+                    responseModify = DAO_Employee.ModifyDataEmployee (newDataEmployee, true);
+                }
 
                 if (responseModify.IsError) {
                     MessageBox.Show (
@@ -118,15 +115,16 @@ namespace FinanciaRed.View.ManageEmployees {
                         "Error inesperado"
                     );
                 } else {
-                    MessageBox.Show (
-                        "Se ha realizado la modificación de datos correctamente.",
-                        "Modificación realizada"
-                    );
+                    await SetFormNoEditable ();
                 }
             }
         }
 
         private async void ClickCancelModification (object sender, RoutedEventArgs e) {
+            await SetFormNoEditable ();
+        }
+
+        private async Task SetFormNoEditable () {
             button_Modify.Visibility = Visibility.Visible;
             button_UploadImage.Visibility = Visibility.Collapsed;
             button_Accept.Visibility = Visibility.Collapsed;
@@ -143,6 +141,13 @@ namespace FinanciaRed.View.ManageEmployees {
             textBox_Email.BorderBrush = new SolidColorBrush (Colors.Transparent);
             textBox_Password.BorderBrush = new SolidColorBrush (Colors.Transparent);
             textBox_PasswordConfirmation.BorderBrush = new SolidColorBrush (Colors.Transparent);
+            if (currentEmployee.ProfilePhoto == null) {
+                image_ImageProfile.Source = new BitmapImage (new Uri ("../Images/icon-user.png", UriKind.Relative));
+                label_PhotoStatus.Content = "Sin foto";
+            } else {
+                image_ImageProfile.Source = Converters.ConvertByteToBitmapImage (currentEmployee.ProfilePhoto);
+                label_PhotoStatus.Content = "";
+            }
             label_PhotoStatus.Content = currentEmployee.ProfilePhoto == null ? "Sin foto" : "";
         }
 
@@ -162,30 +167,34 @@ namespace FinanciaRed.View.ManageEmployees {
                     ManageLabelsError.RemoveLabel (stackPanel_Form, "errorEmailLabel");
                 }
             }
-            if (CheckFormat.IsValidPassword (textBox_Password.Text) == false) {
-                isFormCorrect = false;
-                if (ManageLabelsError.ExistsLabelInStack (stackPanel_Form, "errorPasswordLabel") == false) {
-                    stackPanel_Form.Children.Insert (
-                        stackPanel_Form.Children.IndexOf (textBox_Password) + 1,
-                        ManageLabelsError.CreateNewLabel ("errorPasswordLabel", "8 caracteres, incluya mayúsculas, minúsculas, números y signos.", 11, 0)
-                    );
-                }
+            if (string.IsNullOrEmpty (textBox_Password.Text) && string.IsNullOrEmpty (textBox_PasswordConfirmation.Text)) {
+
             } else {
-                if (ManageLabelsError.ExistsLabelInStack (stackPanel_Form, "errorPasswordLabel")) {
-                    ManageLabelsError.RemoveLabel (stackPanel_Form, "errorPasswordLabel");
+                if (CheckFormat.IsValidPassword (textBox_Password.Text) == false) {
+                    isFormCorrect = false;
+                    if (ManageLabelsError.ExistsLabelInStack (stackPanel_Form, "errorPasswordLabel") == false) {
+                        stackPanel_Form.Children.Insert (
+                            stackPanel_Form.Children.IndexOf (textBox_Password) + 1,
+                            ManageLabelsError.CreateNewLabel ("errorPasswordLabel", "8 caracteres, incluya mayúsculas, minúsculas, números y signos.", 11, 0)
+                        );
+                    }
+                } else {
+                    if (ManageLabelsError.ExistsLabelInStack (stackPanel_Form, "errorPasswordLabel")) {
+                        ManageLabelsError.RemoveLabel (stackPanel_Form, "errorPasswordLabel");
+                    }
                 }
-            }
-            if (textBox_Password.Text.Equals (textBox_PasswordConfirmation.Text) == false) {
-                isFormCorrect = false;
-                if (ManageLabelsError.ExistsLabelInStack (stackPanel_Form, "errorPasswordConfirmationLabel") == false) {
-                    stackPanel_Form.Children.Insert (
-                        stackPanel_Form.Children.IndexOf (textBox_PasswordConfirmation) + 1,
-                        ManageLabelsError.CreateNewLabel ("errorPasswordConfirmationLabel", "Confirmación de contraseña incorrecta.", 11, 0)
-                    );
-                }
-            } else {
-                if (ManageLabelsError.ExistsLabelInStack (stackPanel_Form, "errorPasswordConfirmationLabel")) {
-                    ManageLabelsError.RemoveLabel (stackPanel_Form, "errorPasswordConfirmationLabel");
+                if (textBox_Password.Text.Equals (textBox_PasswordConfirmation.Text) == false) {
+                    isFormCorrect = false;
+                    if (ManageLabelsError.ExistsLabelInStack (stackPanel_Form, "errorPasswordConfirmationLabel") == false) {
+                        stackPanel_Form.Children.Insert (
+                            stackPanel_Form.Children.IndexOf (textBox_PasswordConfirmation) + 1,
+                            ManageLabelsError.CreateNewLabel ("errorPasswordConfirmationLabel", "Confirmación de contraseña incorrecta.", 11, 0)
+                        );
+                    }
+                } else {
+                    if (ManageLabelsError.ExistsLabelInStack (stackPanel_Form, "errorPasswordConfirmationLabel")) {
+                        ManageLabelsError.RemoveLabel (stackPanel_Form, "errorPasswordConfirmationLabel");
+                    }
                 }
             }
 

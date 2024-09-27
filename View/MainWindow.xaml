@@ -32,7 +32,11 @@
                 </StackPanel>
                 <Button Click="ClickCheckAccount" Margin="10" Grid.Column="4" Background="Transparent" BorderBrush="Transparent">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="center" Margin="0 0 10 0">
-                        <Image Width="40" Source="/View/Images/icon-user.png"/>
+                        <Image x:Name="image_ImageProfile" Width="35" Height="35" Margin="0" Source="/View/Images/icon-user.png" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform">
+                            <Image.Clip>
+                                <EllipseGeometry Center="25,25" RadiusX="40" RadiusY="40" />
+                            </Image.Clip>
+                        </Image>
                         <StackPanel VerticalAlignment="Center" Orientation="Vertical" Margin="10 0 0 0" Width="auto">
                             <Label x:Name="label_NameEmployee" Content="Account" FontWeight="Bold" FontSize="20" Padding="0" Width="auto"/>
                             <Label x:Name="label_RolEmployee" Content="Rol" FontSize="15" Padding="0" Width="auto"/>
@@ -44,14 +48,19 @@
             <StackPanel Orientation="Horizontal" Height="630" VerticalAlignment="Center">
                 <StackPanel Orientation="Vertical" Width="130" Height="630" Background="#FFFFFF">
                     <StackPanel Margin="10 5">
-                        <Label>
+                        <Label x:Name="label_GlobalOptionClients">
                             <Hyperlink Click="ClickShowManagementClientsFrame">
                                 <Run Text="Clientes"/>
                             </Hyperlink>
                         </Label>
-                        <Label>
+                        <Label x:Name="label_GlobalOptionCredits">
                             <Hyperlink Click="ClickShowManagementCreditsFrame">
                                 <Run Text="Créditos"/>
+                            </Hyperlink>
+                        </Label>
+                        <Label x:Name="label_GlobalOptionEmployees">
+                            <Hyperlink Click="ClickShowManagementEmployeesFrame">
+                                <Run Text="Empleados"/>
                             </Hyperlink>
                         </Label>
                         <Label>
