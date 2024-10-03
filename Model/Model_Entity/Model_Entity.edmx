@@ -1,0 +1,1093 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="FinanciaRedModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AddressesTypes">
+          <Key>
+            <PropertyRef Name="IdAddressType" />
+          </Key>
+          <Property Name="IdAddressType" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BankAccounts">
+          <Key>
+            <PropertyRef Name="IdBankAccount" />
+          </Key>
+          <Property Name="IdBankAccount" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdNameBank" Type="int" Nullable="false" />
+          <Property Name="CardNumber" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="CLABE" Type="varchar" MaxLength="18" Nullable="false" />
+          <Property Name="IdCardType" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BankCardTypes">
+          <Key>
+            <PropertyRef Name="IdBankCardType" />
+          </Key>
+          <Property Name="IdBankCardType" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Banks">
+          <Key>
+            <PropertyRef Name="IdBank" />
+          </Key>
+          <Property Name="IdBank" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="IdClient" />
+          </Key>
+          <Property Name="IdClient" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="MiddleName" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="DateBirth" Type="date" Nullable="false" />
+          <Property Name="Gender" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="IdMaritalStatus" Type="int" Nullable="false" />
+          <Property Name="PhoneNumber1" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="PhoneNumber2" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Email1" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="Email2" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="CodeRFC" Type="varchar" MaxLength="13" Nullable="false" />
+          <Property Name="CodeCURP" Type="varchar" MaxLength="18" Nullable="false" />
+          <Property Name="IdContactReference1" Type="int" Nullable="false" />
+          <Property Name="IdContactReference2" Type="int" />
+          <Property Name="IdBankAccount1" Type="int" Nullable="false" />
+          <Property Name="IdBankAccount2" Type="int" />
+          <Property Name="IdAddress" Type="int" Nullable="false" />
+          <Property Name="IdWorkArea" Type="int" Nullable="false" />
+          <Property Name="StatusActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClientsAddresses">
+          <Key>
+            <PropertyRef Name="IdClientAddress" />
+          </Key>
+          <Property Name="IdClientAddress" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ExteriorNumber" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="InteriorNumber" Type="varchar" MaxLength="30" />
+          <Property Name="Street" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="Colony" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="PostalCode" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="State" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="IdAddressType" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ContactsReferencesClients">
+          <Key>
+            <PropertyRef Name="IdContactReference" />
+          </Key>
+          <Property Name="IdContactReference" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="MiddleName" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="IdRelationshipType" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Credits">
+          <Key>
+            <PropertyRef Name="IdCredit" />
+          </Key>
+          <Property Name="IdCredit" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Amount" Type="bigint" Nullable="false" />
+          <Property Name="AmountLeft" Type="bigint" />
+          <Property Name="IdClient" Type="int" Nullable="false" />
+          <Property Name="IdStateCredit" Type="int" Nullable="false" />
+          <Property Name="SignedDocument" Type="varbinary(max)" />
+          <Property Name="InterestRate" Type="float" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" Nullable="false" />
+          <Property Name="IdEmployee" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="IdEmployee" />
+          </Key>
+          <Property Name="IdEmployee" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="MiddleName" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="ProfilePhoto" Type="varbinary(max)" />
+          <Property Name="Email" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="IdRole" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MaritalStatuses">
+          <Key>
+            <PropertyRef Name="IdMaritalStatus" />
+          </Key>
+          <Property Name="IdMaritalStatus" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RelationshipsClientsTypes">
+          <Key>
+            <PropertyRef Name="IdRelationshipClient" />
+          </Key>
+          <Property Name="IdRelationshipClient" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RolesEmployees">
+          <Key>
+            <PropertyRef Name="IdRoleEmployee" />
+          </Key>
+          <Property Name="IdRoleEmployee" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Role" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StatesCredits">
+          <Key>
+            <PropertyRef Name="IdStateCredit" />
+          </Key>
+          <Property Name="IdStateCredit" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="State" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkAreas">
+          <Key>
+            <PropertyRef Name="IdWorkArea" />
+          </Key>
+          <Property Name="IdWorkArea" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WorkArea" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdWorkAreaType" Type="int" Nullable="false" />
+          <Property Name="MonthlySalary" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkAreaTypes">
+          <Key>
+            <PropertyRef Name="IdWorkAreaType" />
+          </Key>
+          <Property Name="IdWorkAreaType" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_AddressClient_Client">
+          <End Role="ClientsAddresses" Type="Self.ClientsAddresses" Multiplicity="1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientsAddresses">
+              <PropertyRef Name="IdClientAddress" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="IdAddress" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_AddressType_ClientAddress">
+          <End Role="AddressesTypes" Type="Self.AddressesTypes" Multiplicity="1" />
+          <End Role="ClientsAddresses" Type="Self.ClientsAddresses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AddressesTypes">
+              <PropertyRef Name="IdAddressType" />
+            </Principal>
+            <Dependent Role="ClientsAddresses">
+              <PropertyRef Name="IdAddressType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Bank_BankAccount">
+          <End Role="Banks" Type="Self.Banks" Multiplicity="1" />
+          <End Role="BankAccounts" Type="Self.BankAccounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Banks">
+              <PropertyRef Name="IdBank" />
+            </Principal>
+            <Dependent Role="BankAccounts">
+              <PropertyRef Name="IdNameBank" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_BankAccount1_Client">
+          <End Role="BankAccounts" Type="Self.BankAccounts" Multiplicity="1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BankAccounts">
+              <PropertyRef Name="IdBankAccount" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="IdBankAccount1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_BankAccount2_Client">
+          <End Role="BankAccounts" Type="Self.BankAccounts" Multiplicity="0..1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BankAccounts">
+              <PropertyRef Name="IdBankAccount" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="IdBankAccount2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_CardType_BankAccount">
+          <End Role="BankCardTypes" Type="Self.BankCardTypes" Multiplicity="1" />
+          <End Role="BankAccounts" Type="Self.BankAccounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BankCardTypes">
+              <PropertyRef Name="IdBankCardType" />
+            </Principal>
+            <Dependent Role="BankAccounts">
+              <PropertyRef Name="IdCardType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Client_Credit">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Credits" Type="Self.Credits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="IdClient" />
+            </Principal>
+            <Dependent Role="Credits">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ContactReference1_Client">
+          <End Role="ContactsReferencesClients" Type="Self.ContactsReferencesClients" Multiplicity="1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContactsReferencesClients">
+              <PropertyRef Name="IdContactReference" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="IdContactReference1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ContactReference2_Client">
+          <End Role="ContactsReferencesClients" Type="Self.ContactsReferencesClients" Multiplicity="0..1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContactsReferencesClients">
+              <PropertyRef Name="IdContactReference" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="IdContactReference2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Employee_Credit">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="Credits" Type="Self.Credits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="IdEmployee" />
+            </Principal>
+            <Dependent Role="Credits">
+              <PropertyRef Name="IdEmployee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_MaritalStatus_Client">
+          <End Role="MaritalStatuses" Type="Self.MaritalStatuses" Multiplicity="1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MaritalStatuses">
+              <PropertyRef Name="IdMaritalStatus" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="IdMaritalStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_RelationshipClientType_ContactReferenceClient">
+          <End Role="RelationshipsClientsTypes" Type="Self.RelationshipsClientsTypes" Multiplicity="1" />
+          <End Role="ContactsReferencesClients" Type="Self.ContactsReferencesClients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RelationshipsClientsTypes">
+              <PropertyRef Name="IdRelationshipClient" />
+            </Principal>
+            <Dependent Role="ContactsReferencesClients">
+              <PropertyRef Name="IdRelationshipType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_RolesEmployee_Employee">
+          <End Role="RolesEmployees" Type="Self.RolesEmployees" Multiplicity="1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RolesEmployees">
+              <PropertyRef Name="IdRoleEmployee" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="IdRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_StateCredit_Credit">
+          <End Role="StatesCredits" Type="Self.StatesCredits" Multiplicity="1" />
+          <End Role="Credits" Type="Self.Credits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatesCredits">
+              <PropertyRef Name="IdStateCredit" />
+            </Principal>
+            <Dependent Role="Credits">
+              <PropertyRef Name="IdStateCredit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_WorkArea_Client">
+          <End Role="WorkAreas" Type="Self.WorkAreas" Multiplicity="1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkAreas">
+              <PropertyRef Name="IdWorkArea" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="IdWorkArea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_WorkAreaType_WorkArea">
+          <End Role="WorkAreaTypes" Type="Self.WorkAreaTypes" Multiplicity="1" />
+          <End Role="WorkAreas" Type="Self.WorkAreas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkAreaTypes">
+              <PropertyRef Name="IdWorkAreaType" />
+            </Principal>
+            <Dependent Role="WorkAreas">
+              <PropertyRef Name="IdWorkAreaType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FinanciaRedModelStoreContainer">
+          <EntitySet Name="AddressesTypes" EntityType="Self.AddressesTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BankAccounts" EntityType="Self.BankAccounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BankCardTypes" EntityType="Self.BankCardTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Banks" EntityType="Self.Banks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClientsAddresses" EntityType="Self.ClientsAddresses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContactsReferencesClients" EntityType="Self.ContactsReferencesClients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Credits" EntityType="Self.Credits" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MaritalStatuses" EntityType="Self.MaritalStatuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RelationshipsClientsTypes" EntityType="Self.RelationshipsClientsTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RolesEmployees" EntityType="Self.RolesEmployees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StatesCredits" EntityType="Self.StatesCredits" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkAreas" EntityType="Self.WorkAreas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkAreaTypes" EntityType="Self.WorkAreaTypes" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_AddressClient_Client" Association="Self.fk_AddressClient_Client">
+            <End Role="ClientsAddresses" EntitySet="ClientsAddresses" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="fk_AddressType_ClientAddress" Association="Self.fk_AddressType_ClientAddress">
+            <End Role="AddressesTypes" EntitySet="AddressesTypes" />
+            <End Role="ClientsAddresses" EntitySet="ClientsAddresses" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Bank_BankAccount" Association="Self.fk_Bank_BankAccount">
+            <End Role="Banks" EntitySet="Banks" />
+            <End Role="BankAccounts" EntitySet="BankAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="fk_BankAccount1_Client" Association="Self.fk_BankAccount1_Client">
+            <End Role="BankAccounts" EntitySet="BankAccounts" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="fk_BankAccount2_Client" Association="Self.fk_BankAccount2_Client">
+            <End Role="BankAccounts" EntitySet="BankAccounts" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="fk_CardType_BankAccount" Association="Self.fk_CardType_BankAccount">
+            <End Role="BankCardTypes" EntitySet="BankCardTypes" />
+            <End Role="BankAccounts" EntitySet="BankAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Client_Credit" Association="Self.fk_Client_Credit">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Credits" EntitySet="Credits" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ContactReference1_Client" Association="Self.fk_ContactReference1_Client">
+            <End Role="ContactsReferencesClients" EntitySet="ContactsReferencesClients" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ContactReference2_Client" Association="Self.fk_ContactReference2_Client">
+            <End Role="ContactsReferencesClients" EntitySet="ContactsReferencesClients" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Employee_Credit" Association="Self.fk_Employee_Credit">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Credits" EntitySet="Credits" />
+          </AssociationSet>
+          <AssociationSet Name="fk_MaritalStatus_Client" Association="Self.fk_MaritalStatus_Client">
+            <End Role="MaritalStatuses" EntitySet="MaritalStatuses" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="fk_RelationshipClientType_ContactReferenceClient" Association="Self.fk_RelationshipClientType_ContactReferenceClient">
+            <End Role="RelationshipsClientsTypes" EntitySet="RelationshipsClientsTypes" />
+            <End Role="ContactsReferencesClients" EntitySet="ContactsReferencesClients" />
+          </AssociationSet>
+          <AssociationSet Name="fk_RolesEmployee_Employee" Association="Self.fk_RolesEmployee_Employee">
+            <End Role="RolesEmployees" EntitySet="RolesEmployees" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="fk_StateCredit_Credit" Association="Self.fk_StateCredit_Credit">
+            <End Role="StatesCredits" EntitySet="StatesCredits" />
+            <End Role="Credits" EntitySet="Credits" />
+          </AssociationSet>
+          <AssociationSet Name="fk_WorkArea_Client" Association="Self.fk_WorkArea_Client">
+            <End Role="WorkAreas" EntitySet="WorkAreas" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="fk_WorkAreaType_WorkArea" Association="Self.fk_WorkAreaType_WorkArea">
+            <End Role="WorkAreaTypes" EntitySet="WorkAreaTypes" />
+            <End Role="WorkAreas" EntitySet="WorkAreas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FinanciaRedModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AddressesTypes">
+          <Key>
+            <PropertyRef Name="IdAddressType" />
+          </Key>
+          <Property Name="IdAddressType" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ClientsAddresses" Relationship="Self.fk_AddressType_ClientAddress" FromRole="AddressesTypes" ToRole="ClientsAddresses" />
+        </EntityType>
+        <EntityType Name="BankAccounts">
+          <Key>
+            <PropertyRef Name="IdBankAccount" />
+          </Key>
+          <Property Name="IdBankAccount" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdNameBank" Type="Int32" Nullable="false" />
+          <Property Name="CardNumber" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CLABE" Type="String" MaxLength="18" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdCardType" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Banks" Relationship="Self.fk_Bank_BankAccount" FromRole="BankAccounts" ToRole="Banks" />
+          <NavigationProperty Name="Clients" Relationship="Self.fk_BankAccount1_Client" FromRole="BankAccounts" ToRole="Clients" />
+          <NavigationProperty Name="Clients1" Relationship="Self.fk_BankAccount2_Client" FromRole="BankAccounts" ToRole="Clients" />
+          <NavigationProperty Name="BankCardTypes" Relationship="Self.fk_CardType_BankAccount" FromRole="BankAccounts" ToRole="BankCardTypes" />
+        </EntityType>
+        <EntityType Name="BankCardTypes">
+          <Key>
+            <PropertyRef Name="IdBankCardType" />
+          </Key>
+          <Property Name="IdBankCardType" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="BankAccounts" Relationship="Self.fk_CardType_BankAccount" FromRole="BankCardTypes" ToRole="BankAccounts" />
+        </EntityType>
+        <EntityType Name="Banks">
+          <Key>
+            <PropertyRef Name="IdBank" />
+          </Key>
+          <Property Name="IdBank" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BankAccounts" Relationship="Self.fk_Bank_BankAccount" FromRole="Banks" ToRole="BankAccounts" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="IdClient" />
+          </Key>
+          <Property Name="IdClient" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="IdMaritalStatus" Type="Int32" Nullable="false" />
+          <Property Name="PhoneNumber1" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PhoneNumber2" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email1" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email2" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CodeRFC" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CodeCURP" Type="String" MaxLength="18" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdContactReference1" Type="Int32" Nullable="false" />
+          <Property Name="IdContactReference2" Type="Int32" />
+          <Property Name="IdBankAccount1" Type="Int32" Nullable="false" />
+          <Property Name="IdBankAccount2" Type="Int32" />
+          <Property Name="IdAddress" Type="Int32" Nullable="false" />
+          <Property Name="IdWorkArea" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BankAccounts" Relationship="Self.fk_BankAccount1_Client" FromRole="Clients" ToRole="BankAccounts" />
+          <NavigationProperty Name="BankAccounts1" Relationship="Self.fk_BankAccount2_Client" FromRole="Clients" ToRole="BankAccounts" />
+          <NavigationProperty Name="ClientsAddresses" Relationship="Self.fk_AddressClient_Client" FromRole="Clients" ToRole="ClientsAddresses" />
+          <NavigationProperty Name="Credits" Relationship="Self.fk_Client_Credit" FromRole="Clients" ToRole="Credits" />
+          <NavigationProperty Name="ContactsReferencesClients" Relationship="Self.fk_ContactReference1_Client" FromRole="Clients" ToRole="ContactsReferencesClients" />
+          <NavigationProperty Name="ContactsReferencesClients1" Relationship="Self.fk_ContactReference2_Client" FromRole="Clients" ToRole="ContactsReferencesClients" />
+          <NavigationProperty Name="MaritalStatuses" Relationship="Self.fk_MaritalStatus_Client" FromRole="Clients" ToRole="MaritalStatuses" />
+          <NavigationProperty Name="WorkAreas" Relationship="Self.fk_WorkArea_Client" FromRole="Clients" ToRole="WorkAreas" />
+          <Property Name="StatusActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClientsAddresses">
+          <Key>
+            <PropertyRef Name="IdClientAddress" />
+          </Key>
+          <Property Name="IdClientAddress" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ExteriorNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="InteriorNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Street" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Colony" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PostalCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="State" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdAddressType" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AddressesTypes" Relationship="Self.fk_AddressType_ClientAddress" FromRole="ClientsAddresses" ToRole="AddressesTypes" />
+          <NavigationProperty Name="Clients" Relationship="Self.fk_AddressClient_Client" FromRole="ClientsAddresses" ToRole="Clients" />
+        </EntityType>
+        <EntityType Name="ContactsReferencesClients">
+          <Key>
+            <PropertyRef Name="IdContactReference" />
+          </Key>
+          <Property Name="IdContactReference" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdRelationshipType" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Clients" Relationship="Self.fk_ContactReference1_Client" FromRole="ContactsReferencesClients" ToRole="Clients" />
+          <NavigationProperty Name="Clients1" Relationship="Self.fk_ContactReference2_Client" FromRole="ContactsReferencesClients" ToRole="Clients" />
+          <NavigationProperty Name="RelationshipsClientsTypes" Relationship="Self.fk_RelationshipClientType_ContactReferenceClient" FromRole="ContactsReferencesClients" ToRole="RelationshipsClientsTypes" />
+        </EntityType>
+        <EntityType Name="Credits">
+          <Key>
+            <PropertyRef Name="IdCredit" />
+          </Key>
+          <Property Name="IdCredit" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Amount" Type="Int64" Nullable="false" />
+          <Property Name="AmountLeft" Type="Int64" />
+          <Property Name="IdClient" Type="Int32" Nullable="false" />
+          <Property Name="IdStateCredit" Type="Int32" Nullable="false" />
+          <Property Name="SignedDocument" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="InterestRate" Type="Double" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdEmployee" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Clients" Relationship="Self.fk_Client_Credit" FromRole="Credits" ToRole="Clients" />
+          <NavigationProperty Name="Employees" Relationship="Self.fk_Employee_Credit" FromRole="Credits" ToRole="Employees" />
+          <NavigationProperty Name="StatesCredits" Relationship="Self.fk_StateCredit_Credit" FromRole="Credits" ToRole="StatesCredits" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="IdEmployee" />
+          </Key>
+          <Property Name="IdEmployee" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProfilePhoto" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Email" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdRole" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Credits" Relationship="Self.fk_Employee_Credit" FromRole="Employees" ToRole="Credits" />
+          <NavigationProperty Name="RolesEmployees" Relationship="Self.fk_RolesEmployee_Employee" FromRole="Employees" ToRole="RolesEmployees" />
+        </EntityType>
+        <EntityType Name="MaritalStatuses">
+          <Key>
+            <PropertyRef Name="IdMaritalStatus" />
+          </Key>
+          <Property Name="IdMaritalStatus" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Clients" Relationship="Self.fk_MaritalStatus_Client" FromRole="MaritalStatuses" ToRole="Clients" />
+        </EntityType>
+        <EntityType Name="RelationshipsClientsTypes">
+          <Key>
+            <PropertyRef Name="IdRelationshipClient" />
+          </Key>
+          <Property Name="IdRelationshipClient" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ContactsReferencesClients" Relationship="Self.fk_RelationshipClientType_ContactReferenceClient" FromRole="RelationshipsClientsTypes" ToRole="ContactsReferencesClients" />
+        </EntityType>
+        <EntityType Name="RolesEmployees">
+          <Key>
+            <PropertyRef Name="IdRoleEmployee" />
+          </Key>
+          <Property Name="IdRoleEmployee" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Role" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Employees" Relationship="Self.fk_RolesEmployee_Employee" FromRole="RolesEmployees" ToRole="Employees" />
+        </EntityType>
+        <EntityType Name="StatesCredits">
+          <Key>
+            <PropertyRef Name="IdStateCredit" />
+          </Key>
+          <Property Name="IdStateCredit" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="State" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Credits" Relationship="Self.fk_StateCredit_Credit" FromRole="StatesCredits" ToRole="Credits" />
+        </EntityType>
+        <EntityType Name="WorkAreas">
+          <Key>
+            <PropertyRef Name="IdWorkArea" />
+          </Key>
+          <Property Name="IdWorkArea" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WorkArea" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdWorkAreaType" Type="Int32" Nullable="false" />
+          <Property Name="MonthlySalary" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Clients" Relationship="Self.fk_WorkArea_Client" FromRole="WorkAreas" ToRole="Clients" />
+          <NavigationProperty Name="WorkAreaTypes" Relationship="Self.fk_WorkAreaType_WorkArea" FromRole="WorkAreas" ToRole="WorkAreaTypes" />
+        </EntityType>
+        <EntityType Name="WorkAreaTypes">
+          <Key>
+            <PropertyRef Name="IdWorkAreaType" />
+          </Key>
+          <Property Name="IdWorkAreaType" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="WorkAreas" Relationship="Self.fk_WorkAreaType_WorkArea" FromRole="WorkAreaTypes" ToRole="WorkAreas" />
+        </EntityType>
+        <Association Name="fk_AddressType_ClientAddress">
+          <End Role="AddressesTypes" Type="Self.AddressesTypes" Multiplicity="1" />
+          <End Role="ClientsAddresses" Type="Self.ClientsAddresses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AddressesTypes">
+              <PropertyRef Name="IdAddressType" />
+            </Principal>
+            <Dependent Role="ClientsAddresses">
+              <PropertyRef Name="IdAddressType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Bank_BankAccount">
+          <End Role="Banks" Type="Self.Banks" Multiplicity="1" />
+          <End Role="BankAccounts" Type="Self.BankAccounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Banks">
+              <PropertyRef Name="IdBank" />
+            </Principal>
+            <Dependent Role="BankAccounts">
+              <PropertyRef Name="IdNameBank" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_BankAccount1_Client">
+          <End Role="BankAccounts" Type="Self.BankAccounts" Multiplicity="1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BankAccounts">
+              <PropertyRef Name="IdBankAccount" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="IdBankAccount1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_BankAccount2_Client">
+          <End Role="BankAccounts" Type="Self.BankAccounts" Multiplicity="0..1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BankAccounts">
+              <PropertyRef Name="IdBankAccount" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="IdBankAccount2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_CardType_BankAccount">
+          <End Role="BankCardTypes" Type="Self.BankCardTypes" Multiplicity="1" />
+          <End Role="BankAccounts" Type="Self.BankAccounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BankCardTypes">
+              <PropertyRef Name="IdBankCardType" />
+            </Principal>
+            <Dependent Role="BankAccounts">
+              <PropertyRef Name="IdCardType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_AddressClient_Client">
+          <End Role="ClientsAddresses" Type="Self.ClientsAddresses" Multiplicity="1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClientsAddresses">
+              <PropertyRef Name="IdClientAddress" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="IdAddress" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Client_Credit">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Credits" Type="Self.Credits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="IdClient" />
+            </Principal>
+            <Dependent Role="Credits">
+              <PropertyRef Name="IdClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ContactReference1_Client">
+          <End Role="ContactsReferencesClients" Type="Self.ContactsReferencesClients" Multiplicity="1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContactsReferencesClients">
+              <PropertyRef Name="IdContactReference" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="IdContactReference1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ContactReference2_Client">
+          <End Role="ContactsReferencesClients" Type="Self.ContactsReferencesClients" Multiplicity="0..1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContactsReferencesClients">
+              <PropertyRef Name="IdContactReference" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="IdContactReference2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_MaritalStatus_Client">
+          <End Role="MaritalStatuses" Type="Self.MaritalStatuses" Multiplicity="1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MaritalStatuses">
+              <PropertyRef Name="IdMaritalStatus" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="IdMaritalStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_WorkArea_Client">
+          <End Role="WorkAreas" Type="Self.WorkAreas" Multiplicity="1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkAreas">
+              <PropertyRef Name="IdWorkArea" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="IdWorkArea" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_RelationshipClientType_ContactReferenceClient">
+          <End Role="RelationshipsClientsTypes" Type="Self.RelationshipsClientsTypes" Multiplicity="1" />
+          <End Role="ContactsReferencesClients" Type="Self.ContactsReferencesClients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RelationshipsClientsTypes">
+              <PropertyRef Name="IdRelationshipClient" />
+            </Principal>
+            <Dependent Role="ContactsReferencesClients">
+              <PropertyRef Name="IdRelationshipType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Employee_Credit">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="Credits" Type="Self.Credits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="IdEmployee" />
+            </Principal>
+            <Dependent Role="Credits">
+              <PropertyRef Name="IdEmployee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_StateCredit_Credit">
+          <End Role="StatesCredits" Type="Self.StatesCredits" Multiplicity="1" />
+          <End Role="Credits" Type="Self.Credits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatesCredits">
+              <PropertyRef Name="IdStateCredit" />
+            </Principal>
+            <Dependent Role="Credits">
+              <PropertyRef Name="IdStateCredit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_RolesEmployee_Employee">
+          <End Role="RolesEmployees" Type="Self.RolesEmployees" Multiplicity="1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RolesEmployees">
+              <PropertyRef Name="IdRoleEmployee" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="IdRole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_WorkAreaType_WorkArea">
+          <End Role="WorkAreaTypes" Type="Self.WorkAreaTypes" Multiplicity="1" />
+          <End Role="WorkAreas" Type="Self.WorkAreas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkAreaTypes">
+              <PropertyRef Name="IdWorkAreaType" />
+            </Principal>
+            <Dependent Role="WorkAreas">
+              <PropertyRef Name="IdWorkAreaType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FinanciaRedEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AddressesTypes" EntityType="Self.AddressesTypes" />
+          <EntitySet Name="BankAccounts" EntityType="Self.BankAccounts" />
+          <EntitySet Name="BankCardTypes" EntityType="Self.BankCardTypes" />
+          <EntitySet Name="Banks" EntityType="Self.Banks" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" />
+          <EntitySet Name="ClientsAddresses" EntityType="Self.ClientsAddresses" />
+          <EntitySet Name="ContactsReferencesClients" EntityType="Self.ContactsReferencesClients" />
+          <EntitySet Name="Credits" EntityType="Self.Credits" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" />
+          <EntitySet Name="MaritalStatuses" EntityType="Self.MaritalStatuses" />
+          <EntitySet Name="RelationshipsClientsTypes" EntityType="Self.RelationshipsClientsTypes" />
+          <EntitySet Name="RolesEmployees" EntityType="Self.RolesEmployees" />
+          <EntitySet Name="StatesCredits" EntityType="Self.StatesCredits" />
+          <EntitySet Name="WorkAreas" EntityType="Self.WorkAreas" />
+          <EntitySet Name="WorkAreaTypes" EntityType="Self.WorkAreaTypes" />
+          <AssociationSet Name="fk_AddressType_ClientAddress" Association="Self.fk_AddressType_ClientAddress">
+            <End Role="AddressesTypes" EntitySet="AddressesTypes" />
+            <End Role="ClientsAddresses" EntitySet="ClientsAddresses" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Bank_BankAccount" Association="Self.fk_Bank_BankAccount">
+            <End Role="Banks" EntitySet="Banks" />
+            <End Role="BankAccounts" EntitySet="BankAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="fk_BankAccount1_Client" Association="Self.fk_BankAccount1_Client">
+            <End Role="BankAccounts" EntitySet="BankAccounts" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="fk_BankAccount2_Client" Association="Self.fk_BankAccount2_Client">
+            <End Role="BankAccounts" EntitySet="BankAccounts" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="fk_CardType_BankAccount" Association="Self.fk_CardType_BankAccount">
+            <End Role="BankCardTypes" EntitySet="BankCardTypes" />
+            <End Role="BankAccounts" EntitySet="BankAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="fk_AddressClient_Client" Association="Self.fk_AddressClient_Client">
+            <End Role="ClientsAddresses" EntitySet="ClientsAddresses" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Client_Credit" Association="Self.fk_Client_Credit">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Credits" EntitySet="Credits" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ContactReference1_Client" Association="Self.fk_ContactReference1_Client">
+            <End Role="ContactsReferencesClients" EntitySet="ContactsReferencesClients" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ContactReference2_Client" Association="Self.fk_ContactReference2_Client">
+            <End Role="ContactsReferencesClients" EntitySet="ContactsReferencesClients" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="fk_MaritalStatus_Client" Association="Self.fk_MaritalStatus_Client">
+            <End Role="MaritalStatuses" EntitySet="MaritalStatuses" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="fk_WorkArea_Client" Association="Self.fk_WorkArea_Client">
+            <End Role="WorkAreas" EntitySet="WorkAreas" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="fk_RelationshipClientType_ContactReferenceClient" Association="Self.fk_RelationshipClientType_ContactReferenceClient">
+            <End Role="RelationshipsClientsTypes" EntitySet="RelationshipsClientsTypes" />
+            <End Role="ContactsReferencesClients" EntitySet="ContactsReferencesClients" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Employee_Credit" Association="Self.fk_Employee_Credit">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Credits" EntitySet="Credits" />
+          </AssociationSet>
+          <AssociationSet Name="fk_StateCredit_Credit" Association="Self.fk_StateCredit_Credit">
+            <End Role="StatesCredits" EntitySet="StatesCredits" />
+            <End Role="Credits" EntitySet="Credits" />
+          </AssociationSet>
+          <AssociationSet Name="fk_RolesEmployee_Employee" Association="Self.fk_RolesEmployee_Employee">
+            <End Role="RolesEmployees" EntitySet="RolesEmployees" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="fk_WorkAreaType_WorkArea" Association="Self.fk_WorkAreaType_WorkArea">
+            <End Role="WorkAreaTypes" EntitySet="WorkAreaTypes" />
+            <End Role="WorkAreas" EntitySet="WorkAreas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FinanciaRedModelStoreContainer" CdmEntityContainer="FinanciaRedEntities">
+          <EntitySetMapping Name="AddressesTypes">
+            <EntityTypeMapping TypeName="FinanciaRedModel.AddressesTypes">
+              <MappingFragment StoreEntitySet="AddressesTypes">
+                <ScalarProperty Name="IdAddressType" ColumnName="IdAddressType" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BankAccounts">
+            <EntityTypeMapping TypeName="FinanciaRedModel.BankAccounts">
+              <MappingFragment StoreEntitySet="BankAccounts">
+                <ScalarProperty Name="IdBankAccount" ColumnName="IdBankAccount" />
+                <ScalarProperty Name="IdNameBank" ColumnName="IdNameBank" />
+                <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
+                <ScalarProperty Name="CLABE" ColumnName="CLABE" />
+                <ScalarProperty Name="IdCardType" ColumnName="IdCardType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BankCardTypes">
+            <EntityTypeMapping TypeName="FinanciaRedModel.BankCardTypes">
+              <MappingFragment StoreEntitySet="BankCardTypes">
+                <ScalarProperty Name="IdBankCardType" ColumnName="IdBankCardType" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Banks">
+            <EntityTypeMapping TypeName="FinanciaRedModel.Banks">
+              <MappingFragment StoreEntitySet="Banks">
+                <ScalarProperty Name="IdBank" ColumnName="IdBank" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="FinanciaRedModel.Clients">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="StatusActive" ColumnName="StatusActive" />
+                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="DateBirth" ColumnName="DateBirth" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="IdMaritalStatus" ColumnName="IdMaritalStatus" />
+                <ScalarProperty Name="PhoneNumber1" ColumnName="PhoneNumber1" />
+                <ScalarProperty Name="PhoneNumber2" ColumnName="PhoneNumber2" />
+                <ScalarProperty Name="Email1" ColumnName="Email1" />
+                <ScalarProperty Name="Email2" ColumnName="Email2" />
+                <ScalarProperty Name="CodeRFC" ColumnName="CodeRFC" />
+                <ScalarProperty Name="CodeCURP" ColumnName="CodeCURP" />
+                <ScalarProperty Name="IdContactReference1" ColumnName="IdContactReference1" />
+                <ScalarProperty Name="IdContactReference2" ColumnName="IdContactReference2" />
+                <ScalarProperty Name="IdBankAccount1" ColumnName="IdBankAccount1" />
+                <ScalarProperty Name="IdBankAccount2" ColumnName="IdBankAccount2" />
+                <ScalarProperty Name="IdAddress" ColumnName="IdAddress" />
+                <ScalarProperty Name="IdWorkArea" ColumnName="IdWorkArea" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientsAddresses">
+            <EntityTypeMapping TypeName="FinanciaRedModel.ClientsAddresses">
+              <MappingFragment StoreEntitySet="ClientsAddresses">
+                <ScalarProperty Name="IdClientAddress" ColumnName="IdClientAddress" />
+                <ScalarProperty Name="ExteriorNumber" ColumnName="ExteriorNumber" />
+                <ScalarProperty Name="InteriorNumber" ColumnName="InteriorNumber" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="Colony" ColumnName="Colony" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="IdAddressType" ColumnName="IdAddressType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContactsReferencesClients">
+            <EntityTypeMapping TypeName="FinanciaRedModel.ContactsReferencesClients">
+              <MappingFragment StoreEntitySet="ContactsReferencesClients">
+                <ScalarProperty Name="IdContactReference" ColumnName="IdContactReference" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="IdRelationshipType" ColumnName="IdRelationshipType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Credits">
+            <EntityTypeMapping TypeName="FinanciaRedModel.Credits">
+              <MappingFragment StoreEntitySet="Credits">
+                <ScalarProperty Name="IdCredit" ColumnName="IdCredit" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="AmountLeft" ColumnName="AmountLeft" />
+                <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+                <ScalarProperty Name="IdStateCredit" ColumnName="IdStateCredit" />
+                <ScalarProperty Name="SignedDocument" ColumnName="SignedDocument" />
+                <ScalarProperty Name="InterestRate" ColumnName="InterestRate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="IdEmployee" ColumnName="IdEmployee" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="FinanciaRedModel.Employees">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="IdEmployee" ColumnName="IdEmployee" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="ProfilePhoto" ColumnName="ProfilePhoto" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="IdRole" ColumnName="IdRole" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MaritalStatuses">
+            <EntityTypeMapping TypeName="FinanciaRedModel.MaritalStatuses">
+              <MappingFragment StoreEntitySet="MaritalStatuses">
+                <ScalarProperty Name="IdMaritalStatus" ColumnName="IdMaritalStatus" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RelationshipsClientsTypes">
+            <EntityTypeMapping TypeName="FinanciaRedModel.RelationshipsClientsTypes">
+              <MappingFragment StoreEntitySet="RelationshipsClientsTypes">
+                <ScalarProperty Name="IdRelationshipClient" ColumnName="IdRelationshipClient" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RolesEmployees">
+            <EntityTypeMapping TypeName="FinanciaRedModel.RolesEmployees">
+              <MappingFragment StoreEntitySet="RolesEmployees">
+                <ScalarProperty Name="IdRoleEmployee" ColumnName="IdRoleEmployee" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StatesCredits">
+            <EntityTypeMapping TypeName="FinanciaRedModel.StatesCredits">
+              <MappingFragment StoreEntitySet="StatesCredits">
+                <ScalarProperty Name="IdStateCredit" ColumnName="IdStateCredit" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkAreas">
+            <EntityTypeMapping TypeName="FinanciaRedModel.WorkAreas">
+              <MappingFragment StoreEntitySet="WorkAreas">
+                <ScalarProperty Name="IdWorkArea" ColumnName="IdWorkArea" />
+                <ScalarProperty Name="WorkArea" ColumnName="WorkArea" />
+                <ScalarProperty Name="IdWorkAreaType" ColumnName="IdWorkAreaType" />
+                <ScalarProperty Name="MonthlySalary" ColumnName="MonthlySalary" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkAreaTypes">
+            <EntityTypeMapping TypeName="FinanciaRedModel.WorkAreaTypes">
+              <MappingFragment StoreEntitySet="WorkAreaTypes">
+                <ScalarProperty Name="IdWorkAreaType" ColumnName="IdWorkAreaType" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

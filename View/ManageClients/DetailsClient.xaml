@@ -1,0 +1,234 @@
+﻿<Window x:Class="FinanciaRed.View.ManageClients.DetailsClient"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FinanciaRed.View.ManageClients"
+        mc:Ignorable="d" d:Height="1500"
+        Title="Detalles del cliente" Height="500" Width="800" 
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#EADDD9" Offset="0"/>
+                <GradientStop Color="#E9E7D7" Offset="0.5"/>
+                <GradientStop Color="#DFE2DD" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <StackPanel Orientation="Vertical" Width="800" HorizontalAlignment="Left">
+            <Grid Background="#FFFEEA" Width="800" Height="50">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="FinanciaRed" VerticalAlignment="Center" FontWeight="Bold" FontSize="20" Padding="0" Margin="10"/>
+            </Grid>
+            <StackPanel d:Height="1400" Height="375" Width="740" Margin="20" Background="#FFFFFF">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" d:Height="1400" Height="375" Width="740">
+                    <StackPanel Margin="20 10" d:Height="1400">
+                        <Label Content="Datos del cliente" FontSize="24" FontWeight="Bold" Padding="0"/>
+                        <Label x:Name="label_InstructionPage" Content="Ingrese los datos necesarios (*)" FontSize="17" Padding="0" HorizontalAlignment="Right" d:Visibility="Visible" Visibility="Collapsed"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0" Margin="0 0 15 5">
+                                <Label Content="Datos personales" FontSize="18" FontWeight="Bold" Padding="0"/>
+                                <StackPanel x:Name="stackPanel_PersonalData" Margin="10 0 0 0">
+                                    <Label Content="Nombre(s):" FontWeight="Bold"/>
+                                    <TextBox x:Name="textBox_FirstName" IsReadOnly="True" BorderBrush="Transparent"/>
+                                    <Label Content="Apellido paterno:" FontWeight="Bold"/>
+                                    <TextBox x:Name="textBox_MiddleName" IsReadOnly="True" BorderBrush="Transparent"/>
+                                    <Label Content="Apellido materno:" FontWeight="Bold"/>
+                                    <TextBox x:Name="textBox_LastName" IsReadOnly="True" BorderBrush="Transparent"/>
+                                    <Label Content="Fecha de nacimiento" FontWeight="Bold"/>
+                                    <TextBox x:Name="textBox_DateBirth" IsReadOnly="True" BorderBrush="Transparent"/>
+                                    <Label Content="Género" FontWeight="Bold"/>
+                                    <StackPanel x:Name="stackPanel_Gender">
+                                        <Grid>
+                                            <TextBox x:Name="textBox_Gender" IsReadOnly="True" BorderBrush="Transparent" FontWeight="Bold"/>
+                                            <ComboBox x:Name="comboBox_Gender" d:Visibility="Visible" Visibility="Collapsed"/>
+                                        </Grid>
+                                    </StackPanel>
+                                    <Label Content="Estado Civil" FontWeight="Bold"/>
+                                    <StackPanel x:Name="stackPanel_MaritalStatus">
+                                        <Grid>
+                                            <TextBox x:Name="textBox_MaritalStatus" IsReadOnly="True" BorderBrush="Transparent" />
+                                            <ComboBox x:Name="comboBox_MaritalStatus" d:Visibility="Visible" Visibility="Collapsed"/>
+                                        </Grid>
+                                    </StackPanel>
+                                    <Label Content="Código Único de Registro de Población: " FontWeight="Bold"/>
+                                    <TextBox x:Name="textBox_CodeCurp" IsReadOnly="True" BorderBrush="Transparent"/>
+                                </StackPanel>
+
+                                <Label Content="Datos de domicilio" FontSize="18" FontWeight="Bold" Padding="0"/>
+                                <StackPanel x:Name="stackPanel_AddressData" Margin="10 0 0 0">
+                                    <Label Content="Estado:" FontWeight="Bold"/>
+                                    <TextBox x:Name="textBox_State" IsReadOnly="True" BorderBrush="Transparent"/>
+                                    <Label Content="Código postal:" FontWeight="Bold"/>
+                                    <TextBox x:Name="textBox_PostalCode" IsReadOnly="True" BorderBrush="Transparent"/>
+                                    <Label Content="Nombre de colonia:" FontWeight="Bold"/>
+                                    <TextBox x:Name="textBox_Colony" IsReadOnly="True" BorderBrush="Transparent"/>
+                                    <Label Content="Nombre de calle:"  FontWeight="Bold"/>
+                                    <TextBox x:Name="textBox_ExteriorNumber" IsReadOnly="True" BorderBrush="Transparent"/>
+                                    <Label Content="Número exterior:" FontWeight="Bold"/>
+                                    <TextBox x:Name="textBox_InteriorNumber" IsReadOnly="True" BorderBrush="Transparent"/>
+                                    <Label Content="Número interior:" FontWeight="Bold"/>
+                                    <TextBox x:Name="textBox_Street" IsReadOnly="True" BorderBrush="Transparent"/>
+                                    <Label Content="Tipo de vivienda:" FontWeight="Bold"/>
+                                    <StackPanel x:Name="stackPanel_AddressType">
+                                        <Grid>
+                                            <TextBox x:Name="textBox_AddressType" IsReadOnly="True" BorderBrush="Transparent"/>
+                                            <ComboBox x:Name="comboBox_AddressType" d:Visibility="Visible" Visibility="Collapsed"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </StackPanel>
+
+                                <Label Content="Datos de contacto" FontSize="18" FontWeight="Bold" Padding="0"/>
+                                <StackPanel x:Name="stackPanel_ContactData" Margin="10 0 0 0">
+                                    <Label Content="Correo electrónico (1):" FontWeight="Bold"/>
+                                    <TextBox x:Name="textBox_Email1" IsReadOnly="True" BorderBrush="Transparent"/>
+                                    <Label Content="Correo electrónico (2):" FontWeight="Bold"/>
+                                    <TextBox x:Name="textBox_Email2" IsReadOnly="True" BorderBrush="Transparent"/>
+                                    <Label Content="Teléfono de cóntacto (1):"  FontWeight="Bold"/>
+                                    <TextBox x:Name="textBox_PhoneNumber1" IsReadOnly="True" BorderBrush="Transparent"/>
+                                    <Label Content="Teléfono de contacto (2):" FontWeight="Bold"/>
+                                    <TextBox x:Name="textBox_PhoneNumber2" IsReadOnly="True" BorderBrush="Transparent"/>
+                                </StackPanel>
+
+                                <Label Content="Lugar de trabajo" FontSize="18" FontWeight="Bold" Padding="0"/>
+                                <StackPanel x:Name="stackPanel_WorkAreaData" Margin="10 0 0 0">
+                                    <Label Content="Tipo:" FontWeight="Bold"/>
+                                    <StackPanel x:Name="stackPanel_WorkType">
+                                        <Grid>
+                                            <TextBox x:Name="textBox_WorkType" IsReadOnly="True" BorderBrush="Transparent" />
+                                            <ComboBox x:Name="comboBox_WorkType" d:Visibility="Visible" Visibility="Collapsed"/>
+                                        </Grid>
+                                    </StackPanel>
+                                    <Label Content="Trabajo:" FontWeight="Bold"/>
+                                    <TextBox x:Name="textBox_WorkArea" IsReadOnly="True" BorderBrush="Transparent"/>
+                                    <Label Content="Salario mensual:" FontWeight="Bold"/>
+                                    <TextBox x:Name="textBox_MonthlySalary" IsReadOnly="True" BorderBrush="Transparent"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <Label Content="Estado del cliente:" Margin="0 0 0 0" VerticalAlignment="Center" FontWeight="Bold"/>
+                                    <Label x:Name="label_StatusClient" d:Content="estado" VerticalAlignment="Center"/>
+                                </StackPanel>
+                                <Button x:Name="button_Delete" Click="ClicDeleteClient" Content="Deshabilitar" Width="80" Height="25" HorizontalAlignment="Center" d:Visibility="Visible" Visibility="Collapsed"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Margin="15 0 0 5">
+                                <Label Content="Contactos de referencia:" FontSize="18" FontWeight="Bold" Padding="0"/>
+                                <StackPanel x:Name="stackPanel_ContactReference1" Margin="10 0 0 0">
+                                    <Label Content="Referencia (1):" FontSize="14" FontWeight="Bold" Padding="0"/>
+                                    <StackPanel Margin="10 0 0 0">
+                                        <Label Content="Nombre(s):" FontWeight="Bold"/>
+                                        <TextBox x:Name="textBox_Reference1FirstName" IsReadOnly="True" BorderBrush="Transparent"/>
+                                        <Label Content="Apellido paterno:" FontWeight="Bold"/>
+                                        <TextBox x:Name="textBox_Reference1MiddleName" IsReadOnly="True" BorderBrush="Transparent"/>
+                                        <Label Content="Apellido materno:" FontWeight="Bold"/>
+                                        <TextBox x:Name="textBox_Reference1LastName" IsReadOnly="True" BorderBrush="Transparent"/>
+                                        <Label Content="Correo electrónico:" FontWeight="Bold"/>
+                                        <TextBox x:Name="textBox_Reference1Email" IsReadOnly="True" BorderBrush="Transparent"/>
+                                        <Label Content="Teléfono de contacto:" FontWeight="Bold"/>
+                                        <TextBox x:Name="textBox_Reference1PhoneNumber" IsReadOnly="True" BorderBrush="Transparent"/>
+                                        <Label Content="Tipo de relación" FontWeight="Bold"/>
+                                        <StackPanel x:Name="stackPanel_RelationShipType1">
+                                            <Grid>
+                                                <TextBox x:Name="textBox_Reference1RelationshipType" IsReadOnly="True" BorderBrush="Transparent"/>
+                                                <ComboBox x:Name="comboBox_Reference1RelationshipType" d:Visibility="Visible" Visibility="Collapsed"/>
+                                            </Grid>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+
+                                <StackPanel x:Name="stackPanel_ContactReference2" Margin="10 0 0 0">
+                                    <Label Content="Referencia (2):" FontSize="14" FontWeight="Bold" Padding="0"/>
+                                    <StackPanel Margin="10 0 0 0">
+                                        <Label Content="Nombre(s):" FontWeight="Bold"/>
+                                        <TextBox x:Name="textBox_Reference2FirstName" IsReadOnly="True" BorderBrush="Transparent"/>
+                                        <Label Content="Apellido paterno:" FontWeight="Bold"/>
+                                        <TextBox x:Name="textBox_Reference2MiddleName" IsReadOnly="True" BorderBrush="Transparent"/>
+                                        <Label Content="Apellido materno:" FontWeight="Bold"/>
+                                        <TextBox x:Name="textBox_Reference2LastName" IsReadOnly="True" BorderBrush="Transparent"/>
+                                        <Label Content="Correo electrónico:" FontWeight="Bold"/>
+                                        <TextBox x:Name="textBox_Reference2Email" IsReadOnly="True" BorderBrush="Transparent"/>
+                                        <Label Content="Teléfono de contacto:" FontWeight="Bold"/>
+                                        <TextBox x:Name="textBox_Reference2PhoneNumber" IsReadOnly="True" BorderBrush="Transparent"/>
+                                        <Label Content="Tipo de relación" FontWeight="Bold"/>
+                                        <StackPanel x:Name="stackPanel_RelationShipType2">
+                                            <Grid>
+                                                <TextBox x:Name="textBox_Reference2RelationshipType" IsReadOnly="True" BorderBrush="Transparent"/>
+                                                <ComboBox x:Name="comboBox_Reference2RelationshipType" d:Visibility="Visible" Visibility="Collapsed"/>
+                                            </Grid>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+
+                                <Label Content="Datos bancarios" FontSize="18" FontWeight="Bold" Padding="0"/>
+                                <StackPanel x:Name="stackPanel_DataBank" Margin="10 0 0 0">
+                                    <Label Content="Registro Federal del Contribuyente" FontWeight="Bold"/>
+                                    <TextBox x:Name="textBox_CodeRFC" IsReadOnly="True" BorderBrush="Transparent"/>
+                                    <Label Content="Cuenta de depósito" FontSize="14" FontWeight="Bold" Padding="0"/>
+                                    <StackPanel x:Name="stackPanel_BankAccount1" Margin="10 0 0 0">
+                                        <Label Content="Nombre del banco" FontWeight="Bold"/>
+                                        <StackPanel x:Name="stackPanel_BankAccount1Name">
+                                            <Grid>
+                                                <TextBox x:Name="textBox_BankAccount1Name" IsReadOnly="True" BorderBrush="Transparent"/>
+                                                <ComboBox x:Name="comboBox_BankAccount1Name" d:Visibility="Visible" Visibility="Collapsed"/>
+                                            </Grid>
+                                        </StackPanel>
+                                        <Label Content="Clave Estandarizada Bancaria" FontWeight="Bold"/>
+                                        <TextBox x:Name="textBox_BankAccount1CodeCLABE" IsReadOnly="True" BorderBrush="Transparent"/>
+                                        <Label Content="Número de tarjeta" FontWeight="Bold"/>
+                                        <TextBox x:Name="textBox_BankAccount1CardNumber" IsReadOnly="True" BorderBrush="Transparent"/>
+                                        <Label Content="Tipo de tarjeta" FontWeight="Bold"/>
+                                        <StackPanel x:Name="stackPanel_BankAccount1CardType">
+                                            <Grid>
+                                                <TextBox x:Name="textBox_BankAccount1CardType" IsReadOnly="True" BorderBrush="Transparent"/>
+                                                <ComboBox x:Name="comboBox_BankAccount1CardType" d:Visibility="Visible" Visibility="Collapsed"/>
+                                            </Grid>
+                                        </StackPanel>
+                                    </StackPanel>
+
+                                    <Label Content="Cuenta de cobro" FontSize="14" FontWeight="Bold" Padding="0"/>
+                                    <StackPanel x:Name="stackPanel_BankAccount2" Margin="10 0 0 0">
+                                        <Label Content="Nombre del banco" FontWeight="Bold"/>
+                                        <StackPanel x:Name="stackPanel_BankAccount2Name">
+                                            <Grid>
+                                                <TextBox x:Name="textBox_BankAccount2Name" IsReadOnly="True" BorderBrush="Transparent"/>
+                                                <ComboBox x:Name="comboBox_BankAccount2Name" d:Visibility="Visible" Visibility="Collapsed"/>
+                                            </Grid>
+                                        </StackPanel>
+                                        <Label Content="Clave Estandarizada Bancaria" FontWeight="Bold"/>
+                                        <TextBox x:Name="textBox_BankAccount2CodeCLABE" IsReadOnly="True" BorderBrush="Transparent"/>
+                                        <Label Content="Número de tarjeta" FontWeight="Bold"/>
+                                        <TextBox x:Name="textBox_BankAccount2CardNumber" IsReadOnly="True" BorderBrush="Transparent"/>
+                                        <Label Content="Tipo de tarjeta" FontWeight="Bold"/>
+                                        <StackPanel x:Name="stackPanel_BankAccount2CardType">
+                                            <Grid>
+                                                <TextBox x:Name="textBox_BankAccount2CardType" IsReadOnly="True" BorderBrush="Transparent"/>
+                                                <ComboBox x:Name="comboBox_BankAccount2CardType" d:Visibility="Visible" Visibility="Collapsed"/>
+                                            </Grid>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button x:Name="button_Modify" Click="ClicModifyClient" Content="Modificar" Width="80" Height="25" Margin="15 0 0 0" HorizontalAlignment="Right"/>
+                            <Button x:Name="button_Accept" Click="ClicAcceptModification" Content="Aceptar" IsEnabled="{Binding goa}" Visibility="Collapsed" Width="80" Height="25" Margin="15 0 0 0" HorizontalAlignment="Right"/>
+                            <Button x:Name="button_Cancel" Click="ClicCancelModification" Content="Cancelar" Visibility="Collapsed"  Width="80" Height="25" Margin="15 0 0 0" HorizontalAlignment="Right"/>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

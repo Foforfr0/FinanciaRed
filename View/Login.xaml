@@ -14,30 +14,32 @@
             </LinearGradientBrush>
         </Grid.Background>
 
-        <StackPanel Width="440" Height="338" Background="#FFFFFF">
+        <StackPanel x:Name="stackPanel_MainContainer" Width="440" Height="328" Background="#FFFFFF">
             <StackPanel.Effect>
                 <DropShadowEffect ShadowDepth="5" Direction="320" Opacity="0.5" BlurRadius="5" Color="Black"/>
             </StackPanel.Effect>
 
-            <StackPanel Margin="15px">
-                <StackPanel Margin="10px 5px" Orientation="Horizontal" VerticalAlignment="Center">
-                    <Image Width="40px" Source="/View/Images/logo-business.jpeg"/>
+            <StackPanel x:Name="stackPanel_FormLogIn" Margin="15">
+                <StackPanel Margin="10 5" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Image Width="40" Source="/View/Images/logo-business.jpeg"/>
                     <Label Content="FinanciaRed" VerticalAlignment="Center" FontWeight="Bold" FontSize="20"/>
                 </StackPanel>
-                <Label Content="Iniciar sesión" FontSize="24px" FontWeight="Bold" Margin="10px 0px"/>
-                <Label Content="Usuario:" FontSize="15px" Margin="50px 0"/>
-                <TextBox Margin="20px 0" Padding="2px" Width="300px"/>
-                <Label Content="Contraseña:" FontSize="15px" Margin="50px 0"/>
-                <!--<PasswordBox Margin="20px 0" Padding="2px" Width="300px"></PasswordBox>-->
-                <StackPanel Orientation="Horizontal" Margin="20px 0" Width="300px">
-                    <PasswordBox x:Name="passwordBox" Padding="2px" Width="275px"/>
-                    <Button Click="ClicShowPassword" Width="20px" Background="Transparent" Margin="5 0 0 0" BorderBrush="Transparent">
+                <Label Content="Iniciar sesión" FontSize="24" FontWeight="Bold" Margin="10 0"/>
+                <Label Content="Usuario:" FontSize="15" Margin="50 0"/>
+                <TextBox x:Name="textBox_Email" Margin="20 0" Padding="2" Width="300"/>
+                <Label Content="Contraseña:" FontSize="15" Margin="50 0"/>
+                <StackPanel Orientation="Horizontal" Margin="20 0" Width="300">
+                    <Grid>
+                        <TextBox x:Name="textBox_Password" TextChanged="ChangedTextBoxPassword" Padding="2" Width="275" Visibility="Visible"/>
+                        <PasswordBox x:Name="passwordBox_Password" PasswordChanged="ChangedPasswordBoxPassword" Padding="2" Width="275" Visibility="Visible"/>
+                    </Grid>
+                    <Button Click="ClicShowPassword" Width="20" Background="Transparent" Margin="5 0 0 0" BorderBrush="Transparent">
                         <Image x:Name="iconEyePassword" Source="/View/Images/icon-eye-close.png" />
                     </Button>
                 </StackPanel>
 
-                <StackPanel Orientation="Horizontal" Margin="50px 10px">
-                    <Label Content="¿Se le olvidó su contraseña?" FontSize="13px"/>
+                <StackPanel Orientation="Horizontal" Margin="50 10">
+                    <Label Content="¿Se le olvidó su contraseña?" FontSize="13"/>
                     <Label>
                         <Hyperlink Click="ClickRecoverPassword">
                             <Run Text="Clic aqui"/>
@@ -45,7 +47,7 @@
                     </Label>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button Click="ClickLogin" Content="Iniciar sesión" Width="108px" Height="32px" Padding="4px 4px" FontSize="12px" Background="#0067B8" Foreground="#FFFFFF"/>
+                    <Button Click="ClickLogin" Content="Iniciar sesión" Width="108" Height="32" Margin="0 0 55 0" Padding="4 4" FontSize="12" Background="#0067B8" Foreground="#FFFFFF"/>
                 </StackPanel>
             </StackPanel>
         </StackPanel>
