@@ -70,7 +70,7 @@ namespace FinanciaRed.Model.DAO {
                                 Street = clnt.ClientsAddresses.Street,
                                 Colony = clnt.ClientsAddresses.Colony,
                                 PostalCode = clnt.ClientsAddresses.PostalCode,
-                                State = clnt.ClientsAddresses.State,
+                                State = clnt.ClientsAddresses.StatesAddresses.Name,
                                 IdAddressType = clnt.ClientsAddresses.IdAddressType,
                                 AddressType = clnt.ClientsAddresses.AddressesTypes.Type
                             },

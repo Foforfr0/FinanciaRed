@@ -36,6 +36,34 @@ namespace FinanciaRed.Model.DAO {
             return responseConsultMaritalStatuses;
         }
 
+        public static async Task<MessageResponse<List<DTO_AddressState>>> GetAllAddressStates () {
+            MessageResponse<List<DTO_AddressState>> responseConsultStatesAddress = null;
+
+            using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                try {
+                    List<DTO_AddressState> dataRetrieved = await
+                        context.StatesAddresses.
+                        Select (state => new DTO_AddressState {
+                            IdAddressState = state.IdStateAddress,
+                            Name = state.Name
+                        }).
+                        OrderBy (wt => wt.IdAddressState).
+                        ToListAsync ();
+
+                    if (dataRetrieved != null) {
+                        responseConsultStatesAddress = MessageResponse<List<DTO_AddressState>>.Success (
+                            dataRetrieved.Count + " states address retrieved.",
+                            dataRetrieved);
+                    } else {
+                        responseConsultStatesAddress = MessageResponse<List<DTO_AddressState>>.Failure ("States address doesn´t retrieved.");
+                    }
+                } catch (Exception ex) {
+                    responseConsultStatesAddress = MessageResponse<List<DTO_AddressState>>.Failure (ex.ToString ());
+                }
+            }
+            return responseConsultStatesAddress;
+        }
+
         public static async Task<MessageResponse<List<DTO_WorkType>>> GetAllWorkTypes () {
             MessageResponse<List<DTO_WorkType>> responseConsultWorkType = null;
 

@@ -61,6 +61,11 @@ CREATE TABLE AddressesTypes (
     Type VARCHAR(20) NOT NULL UNIQUE
 );
 
+CREATE TABLE StatesAddresses(
+    IdStateAddress INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+    Name VARCHAR(50) NOT NULL UNIQUE
+);
+
 CREATE TABLE ClientsAddresses (
     IdClientAddress INT NOT NULL PRIMARY KEY IDENTITY(1,1),
     ExteriorNumber VARCHAR(30) NOT NULL,
@@ -68,10 +73,11 @@ CREATE TABLE ClientsAddresses (
     Street VARCHAR(80) NOT NULL,
     Colony VARCHAR(80) NOT NULL,
     PostalCode VARCHAR(10) NOT NULL,
-    State VARCHAR(80) NOT NULL,
+    IdState INT NOT NULL,
     IdAddressType INT NOT NULL,
 
-	CONSTRAINT fk_AddressType_ClientAddress FOREIGN KEY (IdAddressType) REFERENCES AddressesTypes (IdAddressType)
+	CONSTRAINT fk_AddressType_ClientAddress FOREIGN KEY (IdAddressType) REFERENCES AddressesTypes (IdAddressType),
+	CONSTRAINT fk_StateAddress_ClientAddress FOREIGN KEY (IdState) REFERENCES StatesAddresses (IdStateAddress)
 );
 
 CREATE TABLE WorkAreaTypes (
@@ -183,12 +189,18 @@ INSERT INTO RelationshipsClientsTypes (Type)
             VALUES ('Amigo/a'), ('Familiar'), ('Pareja');
 
 INSERT INTO AddressesTypes (Type) VALUES ('Cuarto'), ('Departamento'), ('Casa');
+INSERT INTO StatesAddresses (Name) VALUES ('Aguascalientes'), ('Baja california'), ('Baja california sur'), ('Campeche'),
+                                          ('Chiapas'), ('Chihuahua'), ('Coahuila'), ('Colima'), ('Durango'), ('Guanajuato'), 
+                                          ('Guerrero'), ('Hidalgo'), ('Jalisco'), ('Estado de méxico'), ('Michoacán'), ('Morelos'),
+                                          ('Nayarit'), ('Nuevo León'), ('Oaxaca'), ('Puebla'), ('Querétaro'), ('Quintana Roo'),
+                                          ('San Luis Potosí'), ('Sinaloa'), ('Sonora'), ('Tabasco'), ('Tamaulipas'), ('Tlaxcala'),
+                                          ('Veracruz'), ('Yucatán'), ('Zacatecas');
 
 INSERT INTO WorkAreaTypes (Type) VALUES ('Desarrollo tecnológico');
 
 INSERT INTO StatesCredits (State) VALUES ('Cobrable'), ('Incobrale');
 
-INSERT INTO RolesEmployees (Role) VALUES ('Asesor de crédito'), ('Analista de crédito'), ('Administrador');
+INSERT INTO RolesEmployees (Role) VALUES ('Asesor de crédito'), ('Analista de crédito'), ('Gestor de cobranza'), ('Administrador');
 
 --INSERTIONS----------------------------------------------------------
 INSERT INTO BankAccounts (IdNameBank, CardNumber, CLABE, IdCardType)
@@ -204,9 +216,9 @@ INSERT INTO ContactsReferencesClients (FirstName, MiddleName, LastName,
             VALUES ('Andrés', 'Arellano', 'García', 'and_are@gmail.com', '228-219-6472', 1);
 
 INSERT INTO ClientsAddresses (ExteriorNumber, InteriorNumber, Street, Colony, 
-                             PostalCode, State, IdAddressType)
+                             PostalCode, IdState, IdAddressType)
             VALUES ('Azahares 3', '308', 'Circuito Primavera', 'Nuevo Xalapa', 
-                   '91097', 'Veracruz', 2);
+                   '91097', 29, 2);
 
 INSERT INTO WorkAreas (WorkArea, IdWorkAreaType, MonthlySalary)
             VALUES ('Ingeniero de software', 1, 20000);
@@ -223,10 +235,10 @@ INSERT INTO Employees (FirstName, MiddleName, LastName, Email, Password, IdRole)
 INSERT INTO Employees (FirstName, MiddleName, LastName, Email, Password, IdRole)
             VALUES ('Martin Emmanuel', 'Cruz', 'Carmona', 'lecape_27@gmail.com', '4321', 2);
 INSERT INTO Employees (FirstName, MiddleName, LastName, Email, Password, IdRole)
-            VALUES ('Mario Alberto', 'Hernández', 'Pérez', 'mariohernandez2@gmail.com', 'admin', 3);
+            VALUES ('Mario Alberto', 'Hernández', 'Pérez', 'mariohernandez2@gmail.com', 'admin', 4);
 
 INSERT INTO Credits (Amount, AmountLeft, IdClient, IdStateCredit, SignedDocument, InterestRate, 
                     StartDate, EndDate, IdEmployee) 
             VALUES (100000, 100000, 1, 1, NULL, 10.0, '2024-11-12 11:50:00', '2025-11-12 11:50:00', 1);
 
-SELECT * FROM Banks;
+SELECT * FROM Clients;

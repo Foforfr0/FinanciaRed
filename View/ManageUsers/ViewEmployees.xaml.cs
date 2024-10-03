@@ -43,7 +43,7 @@ namespace FinanciaRed.View.ManageUsers {
             // Obtener los datos de la fila a través del DataContext del botón
             //DTO_Client_Consult rowData = button.DataContext as DTO_Client_Consult;
             if (button.DataContext is DTO_Client_Consult rowData) {
-                DetailsClient detailsClientWindow = new DetailsClient (rowData.IdClient);
+                ViewDetailsClient detailsClientWindow = new ViewDetailsClient (rowData.IdClient);
                 detailsClientWindow.ShowDialog ();
             }
         }

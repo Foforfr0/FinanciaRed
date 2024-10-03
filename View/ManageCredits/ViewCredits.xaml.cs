@@ -43,7 +43,7 @@ namespace FinanciaRed.View.ManageCredits {
             // Obtener los datos de la fila a través del DataContext del botón
             //DTO_Credit_Consult rowData = button.DataContext as DTO_Credit_Consult;
             if (button.DataContext is DTO_Credit_Consult rowData) {
-                DetailsClient detailsClientWindow = new DetailsClient (rowData.IdCredit);
+                ViewDetailsClient detailsClientWindow = new ViewDetailsClient (rowData.IdCredit);
                 detailsClientWindow.ShowDialog ();
             }
         }

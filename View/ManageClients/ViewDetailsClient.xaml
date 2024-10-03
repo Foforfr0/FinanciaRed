@@ -1,0 +1,169 @@
+﻿<Window x:Class="FinanciaRed.View.ManageClients.ViewDetailsClient"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FinanciaRed.View.ManageClients"
+        xmlns:components="clr-namespace:FinanciaRed.View.Components"
+        mc:Ignorable="d" d:Height="1500"
+        Title="Detalles del cliente" Height="550" Width="800" 
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#EADDD9" Offset="0"/>
+                <GradientStop Color="#E9E7D7" Offset="0.5"/>
+                <GradientStop Color="#DFE2DD" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <StackPanel Orientation="Vertical" Width="800" HorizontalAlignment="Left">
+            <components:Header/>
+            <StackPanel d:Height="1400" Height="425" Width="740" Margin="20" Background="#FFFFFF">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" d:Height="1400" Height="425" Width="740">
+                    <StackPanel Margin="20 10" d:Height="1400">
+                        <Label Content="Datos del cliente" Margin="0" Style="{StaticResource HeaderText}"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0" Margin="0 0 15 5">
+                                <Label Content="Datos personales" FontSize="18" FontWeight="Bold" />
+                                <StackPanel x:Name="stackPanel_PersonalData" Margin="10 0 0 0">
+                                    <Label Content="-Nombre(s):" FontWeight="Bold" />
+                                    <Label x:Name="label_FirstName" Padding="8 0 0 4"/>
+                                    <Label Content="-Apellido paterno:" FontWeight="Bold"/>
+                                    <Label x:Name="label_MiddleName" Padding="8 0 0 4"/>
+                                    <Label Content="-Apellido materno:" FontWeight="Bold"/>
+                                    <Label x:Name="label_LastName" Padding="8 0 0 4"/>
+                                    <Label Content="-Fecha de nacimiento:" FontWeight="Bold"/>
+                                    <Label x:Name="label_DateBirth" Padding="8 0 0 4"/>
+                                    <Label Content="-Género:" FontWeight="Bold"/>
+                                    <Label x:Name="label_Gender" Padding="8 0 0 4"/>
+                                    <Label Content="-Estado Civil:" FontWeight="Bold"/>
+                                    <Label x:Name="label_MaritalStatus" Padding="8 0 0 4"/>
+                                    <Label Content="-Código Único de Registro de Población:" FontWeight="Bold"/>
+                                    <Label x:Name="label_CodeCURP" Padding="8 0 0 4"/>
+                                </StackPanel>
+
+                                <Label Content="Datos de domicilio" FontSize="18" FontWeight="Bold" />
+                                <StackPanel x:Name="stackPanel_AddressData" Margin="10 0 0 0">
+                                    <Label Content="-Estado:" FontWeight="Bold"/>
+                                    <Label x:Name="label_State" Padding="8 0 0 4"/>
+                                    <Label Content="-Código postal:" FontWeight="Bold"/>
+                                    <Label x:Name="label_PostalCode" Padding="8 0 0 4"/>
+                                    <Label Content="-Nombre de colonia:" FontWeight="Bold"/>
+                                    <Label x:Name="label_Colony" Padding="8 0 0 4"/>
+                                    <Label Content="-Nombre de calle:"  FontWeight="Bold"/>
+                                    <Label x:Name="label_Street" Padding="8 0 0 4"/>
+                                    <Label Content="-Número exterior:" FontWeight="Bold"/>
+                                    <Label x:Name="label_ExteriorNumber" Padding="8 0 0 4"/>
+                                    <Label Content="-Número interior:" FontWeight="Bold"/>
+                                    <Label x:Name="label_InteriorNumber" Padding="8 0 0 4"/>
+                                    <Label Content="-Tipo de vivienda:" FontWeight="Bold"/>
+                                    <Label x:Name="label_AddressType" Padding="8 0 0 4"/>
+                                </StackPanel>
+
+                                <Label Content="Datos de contacto" FontSize="18" FontWeight="Bold" />
+                                <StackPanel x:Name="stackPanel_ContactData" Margin="10 0 0 0">
+                                    <Label Content="-Correo electrónico (1):" FontWeight="Bold"/>
+                                    <Label x:Name="label_Email1" Padding="8 0 0 4"/>
+                                    <Label Content="-Correo electrónico (2):" FontWeight="Bold"/>
+                                    <Label x:Name="label_Email2" Padding="8 0 0 4"/>
+                                    <Label Content="-Teléfono de cóntacto (1):"  FontWeight="Bold"/>
+                                    <Label x:Name="label_PhoneNumber1" Padding="8 0 0 4"/>
+                                    <Label Content="-Teléfono de contacto (2):" FontWeight="Bold"/>
+                                    <Label x:Name="label_PhoneNumber2" Padding="8 0 0 4"/>
+                                </StackPanel>
+
+                                <Label Content="Lugar de trabajo" FontSize="18" FontWeight="Bold" />
+                                <StackPanel x:Name="stackPanel_WorkAreaData" Margin="10 0 0 0">
+                                    <Label Content="-Tipo:" FontWeight="Bold"/>
+                                    <Label x:Name="label_WorkType" Padding="8 0 0 4"/>
+                                    <Label Content="-Trabajo:" FontWeight="Bold"/>
+                                    <Label x:Name="label_WorkArea" Padding="8 0 0 4"/>
+                                    <Label Content="-Salario mensual:" FontWeight="Bold"/>
+                                    <Label x:Name="label_MonthlySalary" Padding="8 0 0 4"/>
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Margin="15 0 0 5">
+                                <Label Content="Contactos de referencia:" FontSize="18" FontWeight="Bold" />
+                                <StackPanel x:Name="stackPanel_ContactReference1" Margin="10 0 0 0">
+                                    <Label Content="Referencia (1):" FontSize="14" FontWeight="Bold" />
+                                    <StackPanel Margin="10 0 0 0">
+                                        <Label Content="-Nombre(s):" FontWeight="Bold"/>
+                                        <Label x:Name="label_Reference1FirstName" Padding="8 0 0 4"/>
+                                        <Label Content="-Apellido paterno:" FontWeight="Bold"/>
+                                        <Label x:Name="label_Reference1MiddleName" Padding="8 0 0 4"/>
+                                        <Label Content="-Apellido materno:" FontWeight="Bold"/>
+                                        <Label x:Name="label_Reference1LastName" Padding="8 0 0 4"/>
+                                        <Label Content="-Correo electrónico:" FontWeight="Bold"/>
+                                        <Label x:Name="label_Reference1Email" Padding="8 0 0 4"/>
+                                        <Label Content="-Teléfono de contacto:" FontWeight="Bold"/>
+                                        <Label x:Name="label_Reference1PhoneNumber" Padding="8 0 0 4"/>
+                                        <Label Content="-Tipo de relación:" FontWeight="Bold"/>
+                                        <Label x:Name="label_Reference1RelationshipType" Padding="8 0 0 4"/>
+                                    </StackPanel>
+                                </StackPanel>
+
+                                <StackPanel x:Name="stackPanel_ContactReference2" Margin="10 0 0 0">
+                                    <Label Content="Referencia (2):" FontSize="14" FontWeight="Bold" />
+                                    <StackPanel Margin="10 0 0 0">
+                                        <Label Content="-Nombre(s):" FontWeight="Bold"/>
+                                        <Label x:Name="label_Reference2FirstName" Padding="8 0 0 4"/>
+                                        <Label Content="-Apellido paterno:" FontWeight="Bold"/>
+                                        <Label x:Name="label_Reference2MiddleName" Padding="8 0 0 4"/>
+                                        <Label Content="-Apellido materno:" FontWeight="Bold"/>
+                                        <Label x:Name="label_Reference2LastName" Padding="8 0 0 4"/>
+                                        <Label Content="-Correo electrónico:" FontWeight="Bold"/>
+                                        <Label x:Name="label_Reference2Email" Padding="8 0 0 4"/>
+                                        <Label Content="-Teléfono de contacto:" FontWeight="Bold"/>
+                                        <Label x:Name="label_Reference2PhoneNumber" Padding="8 0 0 4"/>
+                                        <Label Content="-Tipo de relación:" FontWeight="Bold"/>
+                                        <Label x:Name="label_Reference2RelationshipType" Padding="8 0 0 4"/>
+                                    </StackPanel>
+
+                                    <Label Content="Datos bancarios" FontSize="18" FontWeight="Bold" />
+                                    <StackPanel x:Name="stackPanel_DataBank" Margin="10 0 0 0">
+                                        <Label Content="-Registro Federal del Contribuyente:" FontWeight="Bold"/>
+                                        <Label x:Name="label_CodeRFC" Padding="8 0 0 4"/>
+                                        <Label Content="Cuenta de depósito" FontSize="14" FontWeight="Bold" />
+                                        <StackPanel x:Name="stackPanel_BankAccount1" Margin="10 0 0 0">
+                                            <Label Content="-Nombre del banco:" FontWeight="Bold"/>
+                                            <Label x:Name="label_BankAccount1Name" Padding="8 0 0 4"/>
+                                            <Label Content="-Clave Estandarizada Bancaria:" FontWeight="Bold"/>
+                                            <Label x:Name="label_BankAccount1CodeCLABE" Padding="8 0 0 4"/>
+                                            <Label Content="-Número de tarjeta:" FontWeight="Bold"/>
+                                            <Label x:Name="label_BankAccount1CardNumber" Padding="8 0 0 4"/>
+                                            <Label Content="-Tipo de tarjeta:" FontWeight="Bold"/>
+                                            <Label x:Name="label_BankAccount1CardType" Padding="8 0 0 4"/>
+                                        </StackPanel>
+
+                                        <Label Content="Cuenta de cobro" FontSize="14" FontWeight="Bold" />
+                                        <StackPanel x:Name="stackPanel_BankAccount2" Margin="10 0 0 0">
+                                            <Label Content="-Nombre del banco:" FontWeight="Bold"/>
+                                            <Label x:Name="label_BankAccount2Name" Padding="8 0 0 4"/>
+                                            <Label Content="-Clave Estandarizada Bancaria:" FontWeight="Bold"/>
+                                            <Label x:Name="label_BankAccount2CodeCLABE" Padding="8 0 0 4"/>
+                                            <Label Content="-Número de tarjeta:" FontWeight="Bold"/>
+                                            <Label x:Name="label_BankAccount2CardNumber" Padding="8 0 0 4"/>
+                                            <Label Content="-Tipo de tarjeta:" FontWeight="Bold"/>
+                                            <Label x:Name="label_BankAccount2CardType" Padding="8 0 0 4"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <Label Content="Estado del cliente: " Margin="0 0 0 0" VerticalAlignment="Center" FontWeight="Bold"/>
+                            <Label x:Name="label_StatusClient" d:Content="estado" VerticalAlignment="Center"/>
+                        </StackPanel>
+                        <Button x:Name="button_Modify" Click="ClicModifyClient" Content="Modificar" Width="80" Height="25" Margin="15 0 0 0" HorizontalAlignment="Right"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

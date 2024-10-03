@@ -72,6 +72,7 @@
     <Compile Include="Model\DAO\DAO_Employee.cs" />
     <Compile Include="Model\DAO\DAO_GeneralVariables.cs" />
     <Compile Include="Model\DTO\DTO_AddressClient.cs" />
+    <Compile Include="Model\DTO\DTO_AddressState.cs" />
     <Compile Include="Model\DTO\DTO_AddressType.cs" />
     <Compile Include="Model\DTO\DTO_Bank.cs" />
     <Compile Include="Model\DTO\DTO_CardType.cs" />
@@ -136,6 +137,9 @@
     <Compile Include="Model\Model_Entity\RolesEmployees.cs">
       <DependentUpon>Model_Entity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Model_Entity\StatesAddresses.cs">
+      <DependentUpon>Model_Entity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Model_Entity\StatesCredits.cs">
       <DependentUpon>Model_Entity.tt</DependentUpon>
     </Compile>
@@ -149,8 +153,14 @@
     <Compile Include="Utils\Converters.cs" />
     <Compile Include="Utils\ManageLabelsError.cs" />
     <Compile Include="Utils\RetrieveDataVariables.cs" />
-    <Compile Include="View\ManageClients\DetailsClient.xaml.cs">
-      <DependentUpon>DetailsClient.xaml</DependentUpon>
+    <Compile Include="View\Components\Header.xaml.cs">
+      <DependentUpon>Header.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManageClients\ModifyClientData.xaml.cs">
+      <DependentUpon>ModifyClientData.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManageClients\ViewDetailsClient.xaml.cs">
+      <DependentUpon>ViewDetailsClient.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ManageClients\RegisterClient.xaml.cs">
       <DependentUpon>RegisterClient.xaml</DependentUpon>
@@ -179,7 +189,15 @@
     <Compile Include="View\WindowContainer.xaml.cs">
       <DependentUpon>WindowContainer.xaml</DependentUpon>
     </Compile>
-    <Page Include="View\ManageClients\DetailsClient.xaml">
+    <Page Include="View\Components\Header.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ManageClients\ModifyClientData.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ManageClients\ViewDetailsClient.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -49,10 +49,11 @@ namespace FinanciaRed.View.ManageEmployees {
         }
 
         private void ClickSelectPhoto (object sender, RoutedEventArgs e) {
-            OpenFileDialog openFileDialog = new OpenFileDialog ();
-            openFileDialog.Filter = "Imagenes (*.jpg, *.jpeg, *.png)|*.jpg;*.jpeg;*.png;";
-            openFileDialog.Title = "Seleccionar imagen de perfil";
-            openFileDialog.Multiselect = false;
+            OpenFileDialog openFileDialog = new OpenFileDialog {
+                Filter = "Imagenes (*.jpg, *.jpeg, *.png)|*.jpg;*.jpeg;*.png;",
+                Title = "Seleccionar imagen de perfil",
+                Multiselect = false
+            };
 
             if (openFileDialog.ShowDialog () == true) {
                 string filePath = openFileDialog.FileName;
