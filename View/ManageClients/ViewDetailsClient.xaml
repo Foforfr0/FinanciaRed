@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FinanciaRed.View.ManageClients"
         xmlns:components="clr-namespace:FinanciaRed.View.Components"
-        mc:Ignorable="d" d:Height="1500"
+        mc:Ignorable="d" d:Height="850"
         Title="Detalles del cliente" Height="550" Width="800" 
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
@@ -19,8 +19,8 @@
 
         <StackPanel Orientation="Vertical" Width="800" HorizontalAlignment="Left">
             <components:Header/>
-            <StackPanel d:Height="1400" Height="425" Width="740" Margin="20" Background="#FFFFFF">
-                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" d:Height="1400" Height="425" Width="740">
+            <StackPanel d:Height="725" Height="425" Width="740" Margin="20" Background="#FFFFFF">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" d:Height="725" Height="425" Width="740">
                     <StackPanel Margin="20 10" d:Height="1400">
                         <Label Content="Datos del cliente" Margin="0" Style="{StaticResource HeaderText}"/>
                         <Grid>

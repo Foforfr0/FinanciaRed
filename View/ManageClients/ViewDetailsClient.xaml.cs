@@ -84,8 +84,12 @@ namespace FinanciaRed.View.ManageClients {
         }
 
         private void ClicModifyClient (object sender, EventArgs e) {
-            ModifyClientData modifyClientDataWindow = new ModifyClientData (selectedClient.IdClient);
-            modifyClientDataWindow.ShowDialog ();
+            if (selectedClient == null) {
+                MessageBox.Show ("No se pudo recuperar los datos del cliente.\nIntente más tarde.", "Error inesperado.");
+            } else {
+                ModifyClientData modifyClientDataWindow = new ModifyClientData (selectedClient);
+                modifyClientDataWindow.ShowDialog ();
+            }
         }
     }
 }

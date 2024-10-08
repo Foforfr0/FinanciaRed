@@ -6,7 +6,7 @@
     xmlns:local="clr-namespace:FinanciaRed.View.ManageClients"
     xmlns:components="clr-namespace:FinanciaRed.View.Components"
     mc:Ignorable="d"
-    Title="Detalles del cliente" Height="650" Width="800" 
+    Title="Detalles del cliente" d:Height="850" Height="650" Width="800" 
     WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
 
     <Grid>
@@ -22,8 +22,8 @@
             <components:Header/>
             <Grid>
                 <!--Personal Data / Address Data-->
-                <StackPanel x:Name="stackPanel_Stage1" Height="525" Width="740" Margin="20" Background="#FFFFFF">
-                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Height="525" Width="740">
+                <StackPanel x:Name="stackPanel_Stage1" d:Height="725" Height="525" Width="740" Margin="20" Background="#FFFFFF">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" d:Height="725" Height="525" Width="740">
                         <StackPanel Margin="20 10">
                             <Label Content="Registro del cliente" Margin="0" Style="{StaticResource HeaderText}"/>
                             <Label Content="Ingrese los datos necesarios (*)" FontSize="17" Padding="0" HorizontalAlignment="Left"/>
@@ -344,7 +344,7 @@
                 </StackPanel>
 
                 <!--Banck Accounts Data-->
-                <StackPanel x:Name="stackPanel_Stage4" Height="525" Width="740" Margin="20" Background="#FFFFFF" Visibility="Visible">
+                <StackPanel x:Name="stackPanel_Stage4" Height="525" Width="740" Margin="20" Background="#FFFFFF" Visibility="Collapsed">
                     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Height="525" Width="740">
                         <StackPanel Margin="20 10">
                             <Label Content="Registro del cliente" Margin="0" Style="{StaticResource HeaderText}"/>

@@ -63,14 +63,16 @@ namespace FinanciaRed.Model.DAO {
                             MaritalStatus = clnt.MaritalStatuses.Status,
                             CodeCurp = clnt.CodeCURP,
                             AddressClient = new DTO_AddressClient {
-                                IdAddressClient = clnt.IdAddress,
+                                IdAddressClient = clnt.ClientsAddresses.IdClientAddress,
                                 ExteriorNumber = clnt.ClientsAddresses.ExteriorNumber,
                                 InteriorNumber = clnt.ClientsAddresses.InteriorNumber,
                                 Street = clnt.ClientsAddresses.Street,
                                 Colony = clnt.ClientsAddresses.Colony,
                                 PostalCode = clnt.ClientsAddresses.PostalCode,
+                                Municipality = clnt.ClientsAddresses.Municipality,
+                                IdState = clnt.ClientsAddresses.StatesAddresses.IdStateAddress,
                                 State = clnt.ClientsAddresses.StatesAddresses.Name,
-                                IdAddressType = clnt.ClientsAddresses.IdAddressType,
+                                IdAddressType = clnt.ClientsAddresses.AddressesTypes.IdAddressType,
                                 AddressType = clnt.ClientsAddresses.AddressesTypes.Type
                             },
                             Email1 = clnt.Email1,
@@ -108,7 +110,7 @@ namespace FinanciaRed.Model.DAO {
                             BankAccount2CardNumber = clnt.BankAccounts1.CardNumber,
                             IdBankAccount2CardType = clnt.BankAccounts1.BankCardTypes.IdBankCardType,
                             BankAccount2CardType = clnt.BankAccounts1.BankCardTypes.Type,
-                            StatusActive = clnt.StatusActive ? "Activo" : "No activo"
+                            StatusActive = clnt.StatusActive
                         }).
                         FirstOrDefaultAsync ();
 
@@ -241,7 +243,7 @@ namespace FinanciaRed.Model.DAO {
                         currentClient.BankAccounts1.CLABE = newDataClient.BankAccount2CLABE;
                         currentClient.BankAccounts1.CardNumber = newDataClient.BankAccount2CardNumber;
                         currentClient.BankAccounts1.IdCardType = newDataClient.IdBankAccount2CardType;
-                        currentClient.StatusActive = newDataClient.StatusActive.Equals ("Activo");
+                        currentClient.StatusActive = newDataClient.StatusActive;
 
                         bool SaveFailed = false;
                         do {
@@ -257,7 +259,7 @@ namespace FinanciaRed.Model.DAO {
                                         var databaseValues = entry.GetDatabaseValues ();
 
                                         if (databaseValues != null) {
-                                            var databaseEntity = (Match)databaseValues.ToObject ();
+                                            var databaseEntity = (Clients)databaseValues.ToObject ();
                                             // Actualiza los valores originales con los valores actuales de la base de datos.
                                             entry.OriginalValues.SetValues (databaseValues);
                                             // Decide qué hacer con los valores propuestos.
@@ -293,10 +295,10 @@ namespace FinanciaRed.Model.DAO {
 
                     if (responseConsultRFC != null) {
                         responseConsultRFC = MessageResponse<string>.Success (
-                            $"rfc code \"{responseConsultRFC}\" retrieved.",
+                            $"cardNumber code \"{responseConsultRFC}\" retrieved.",
                             dataRetrieved);
                     } else {
-                        responseConsultRFC = MessageResponse<string>.Failure ("rfc doesn´t retrieved");
+                        responseConsultRFC = MessageResponse<string>.Failure ("cardNumber doesn´t retrieved");
                     }
                 } catch (Exception ex) {
                     responseConsultRFC = MessageResponse<string>.Failure (ex.ToString ());
@@ -354,7 +356,7 @@ namespace FinanciaRed.Model.DAO {
                         Select (clnt => clnt.CodeCURP).
                         FirstOrDefaultAsync ();
 
-                    if (dataRetrieved.Equals (curp)) {
+                    if (!string.IsNullOrEmpty(dataRetrieved)) {
                         return true;
                     } else {
                         return false;
@@ -374,7 +376,47 @@ namespace FinanciaRed.Model.DAO {
                         Select (clnt => clnt.CodeRFC).
                         FirstOrDefaultAsync ();
 
-                    if (dataRetrieved.Equals (rfc)) {
+                    if (!string.IsNullOrEmpty(dataRetrieved)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } catch (Exception ex) {
+                    return false;
+                }
+            }
+        }
+
+        public static async Task<bool> VerifyExistenceCardNumber (string cardNumber) {
+            using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                try {
+                    string dataRetrieved = await
+                        context.Clients.
+                        Where (clnt => clnt.BankAccounts.CardNumber.Equals (cardNumber) || clnt.BankAccounts1.CardNumber.Equals (cardNumber)).
+                        Select (clnt => clnt.BankAccounts.CardNumber).
+                        FirstOrDefaultAsync ();
+
+                    if (!string.IsNullOrEmpty (dataRetrieved)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } catch (Exception ex) {
+                    return false;
+                }
+            }
+        }
+
+        public static async Task<bool> VerifyExistenceCLABE (string clabe) {
+            using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                try {
+                    string dataRetrieved = await
+                        context.Clients.
+                        Where (clnt => clnt.BankAccounts.CLABE.Equals (clabe) || clnt.BankAccounts1.CLABE.Equals (clabe)).
+                        Select (clnt => clnt.BankAccounts.CLABE).
+                        FirstOrDefaultAsync ();
+
+                    if (!string.IsNullOrEmpty (dataRetrieved)) {
                         return true;
                     } else {
                         return false;

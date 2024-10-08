@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 
 namespace FinanciaRed.Model.DTO {
-    internal class DTO_Client_DetailsClient {
+    public class DTO_Client_DetailsClient {
         public int IdClient {
             get; set;
         }
@@ -138,7 +138,7 @@ namespace FinanciaRed.Model.DTO {
         public string BankAccount2CardType {
             get; set;
         }
-        public string StatusActive {
+        public bool StatusActive {
             get; set;
         }
     }

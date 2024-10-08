@@ -175,6 +175,7 @@ namespace FinanciaRed.View.ManageClients {
                 if (!string.IsNullOrEmpty (textBox_PhoneNumber2.Text)) {
                     existsPhoneNumber2 = await DAO_Client.VerifyExistencePhoneNumber (textBox_PhoneNumber2.Text);
                 }
+                await Task.Delay (500);
                 if (existsEmail1) {
                     label_ErrorEmail1.Content = "Correo existente en la base de datos.";
                     label_ErrorEmail1.Visibility = Visibility.Visible;
@@ -231,14 +232,41 @@ namespace FinanciaRed.View.ManageClients {
         private async void ClickFinishRegistry (object sender, RoutedEventArgs e) {
             VerifyStage4 ();
             bool existsRFC = await DAO_Client.VerifyExistenceRFC (textBox_CodeRFC.Text);
+            bool existsCLABE1 = await DAO_Client.VerifyExistenceCLABE (textBox_BankAccount1CodeCLABE.Text);
+            bool existsCardNumber1 = await DAO_Client.VerifyExistenceCardNumber (textBox_BankAccount1CardNumber.Text);
+            bool existsCLABE2;
+            bool existsCardNumber2;
+            if ((bool)!checkBox_SameAccount.IsChecked) {
+                existsCLABE2 = await DAO_Client.VerifyExistenceCLABE (textBox_BankAccount2CodeCLABE.Text);
+                existsCardNumber2 = await DAO_Client.VerifyExistenceCardNumber (textBox_BankAccount2CardNumber.Text);
+            } else {
+                existsCLABE2 = false;
+                existsCardNumber2 = false;
+            }
             await Task.Delay (500);
 
             if (_IsCorrectStage4.All (x => x == true)) {
                 if (existsRFC) {
-                    label_ErrorCodeCurp.Content = "CURP ya existente en la base de datos.";
-                    label_ErrorCodeCurp.Visibility = Visibility.Visible;
-                    _IsCorrectStage1[6] = false;
-                } else {
+                    label_ErrorCodeRFC.Content = "RFC ya existente en la base de datos.";
+                    label_ErrorCodeRFC.Visibility = Visibility.Visible;
+                }
+                if (existsCLABE1) {
+                    label_ErrorBankAccount1CodeCLABE.Content = "CLABE ya existente en la base de datos.";
+                    label_ErrorBankAccount1CodeCLABE.Visibility = Visibility.Visible;
+                }
+                if (existsCardNumber1) {
+                    label_ErrorBankAccount1CardNumber.Content = "CLABE ya existente en la base de datos.";
+                    label_ErrorBankAccount1CardNumber.Visibility = Visibility.Visible;
+                }
+                if (existsCLABE2) {
+                    label_ErrorBankAccount2CodeCLABE.Content = "CLABE ya existente en la base de datos.";
+                    label_ErrorBankAccount2CodeCLABE.Visibility = Visibility.Visible;
+                }
+                if (existsCardNumber2) {
+                    label_ErrorBankAccount2CardNumber.Content = "CLABE ya existente en la base de datos.";
+                    label_ErrorBankAccount2CardNumber.Visibility = Visibility.Visible;
+                }
+                if (!existsRFC && !existsCLABE1 && !existsCardNumber1 && !existsCLABE2 && !existsCardNumber2) {
                     await SaveDataInDatabase ();
                 }
             } else {
@@ -295,6 +323,11 @@ namespace FinanciaRed.View.ManageClients {
                 newClient.BankAccount2CLABE = newClient.BankAccount1CLABE;
                 newClient.BankAccount2CardNumber = newClient.BankAccount1CardNumber;
                 newClient.IdBankAccount2CardType = newClient.IdBankAccount1CardType;
+            } else {
+                newClient.IdBankAccount2Name = comboBox_BankAccount2Name.SelectedIndex;
+                newClient.BankAccount2CLABE = textBox_BankAccount2CodeCLABE.Text;
+                newClient.BankAccount2CardNumber = textBox_BankAccount2CardNumber.Text;
+                newClient.IdBankAccount2CardType = comboBox_BankAccount2CardType.SelectedIndex;
             }
 
             MessageResponse<bool> responseRegistryClient = await DAO_Client.RegistryNewClient (newClient);
@@ -984,12 +1017,22 @@ namespace FinanciaRed.View.ManageClients {
                 _IsCorrectStage4[1] = true;
             }
 
+            if (textBox_BankAccount1CodeCLABE.Text.Equals(textBox_BankAccount2CodeCLABE.Text)) {
+                label_ErrorBankAccount1CodeCLABE.Content = "CLABE igual al otro.";
+                label_ErrorBankAccount1CodeCLABE.Visibility = Visibility.Visible;
+                _IsCorrectStage4[2] = false;
+            }
             if (string.IsNullOrEmpty (textBox_BankAccount1CodeCLABE.Text)) {
                 label_ErrorBankAccount1CodeCLABE.Content = "Campo necesario.";
                 label_ErrorBankAccount1CodeCLABE.Visibility = Visibility.Visible;
                 _IsCorrectStage4[2] = false;
             }
 
+            if (textBox_BankAccount1CardNumber.Text.Equals (textBox_BankAccount2CardNumber.Text)) {
+                label_ErrorBankAccount1CardNumber.Content = "Número de tarjeta igual al otro.";
+                label_ErrorBankAccount1CardNumber.Visibility = Visibility.Visible;
+                _IsCorrectStage4[3] = false;
+            }
             if (string.IsNullOrEmpty (textBox_BankAccount1CardNumber.Text)) {
                 label_ErrorBankAccount1CardNumber.Content = "Campo necesario.";
                 label_ErrorBankAccount1CardNumber.Visibility = Visibility.Visible;
@@ -1017,12 +1060,22 @@ namespace FinanciaRed.View.ManageClients {
                     _IsCorrectStage4[5] = true;
                 }
 
+                if (textBox_BankAccount2CodeCLABE.Text.Equals (textBox_BankAccount1CodeCLABE.Text)) {
+                    label_ErrorBankAccount2CodeCLABE.Content = "CLABE igual al otro.";
+                    label_ErrorBankAccount2CodeCLABE.Visibility = Visibility.Visible;
+                    _IsCorrectStage4[6] = false;
+                }
                 if (string.IsNullOrEmpty (textBox_BankAccount2CodeCLABE.Text)) {
                     label_ErrorBankAccount2CodeCLABE.Content = "Campo necesario.";
                     label_ErrorBankAccount2CodeCLABE.Visibility = Visibility.Visible;
                     _IsCorrectStage4[6] = false;
                 }
 
+                if (textBox_BankAccount2CardNumber.Text.Equals (textBox_BankAccount1CardNumber.Text)) {
+                    label_ErrorBankAccount2CardNumber.Content = "Número de tarjeta igual al otro.";
+                    label_ErrorBankAccount2CardNumber.Visibility = Visibility.Visible;
+                    _IsCorrectStage4[7] = false;
+                }
                 if (string.IsNullOrEmpty (textBox_BankAccount2CardNumber.Text)) {
                     label_ErrorBankAccount2CardNumber.Content = "Campo necesario.";
                     label_ErrorBankAccount2CardNumber.Visibility = Visibility.Visible;

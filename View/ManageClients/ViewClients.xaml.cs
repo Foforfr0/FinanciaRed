@@ -68,6 +68,8 @@ namespace FinanciaRed.View.ManageClients {
         private void ClickRegisterClient (object sender, RoutedEventArgs e) {
             RegisterClient registrerClientWindow = new RegisterClient ();
             registrerClientWindow.ShowDialog ();
+
+            _ = RetrieveClientsDB ();
         }
 
         private void ClicShowDetailsClient (object sender, RoutedEventArgs e) {

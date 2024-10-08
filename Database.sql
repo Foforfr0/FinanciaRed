@@ -229,7 +229,7 @@ INSERT INTO Clients (FirstName, MiddleName, LastName, DateBirth, Gender, IdMarit
 					 IdBankAccount1, IdBankAccount2, IdContactReference1, IdContactReference2, IdAddress, IdWorkArea, StatusActive) 
 			VALUES  ('Pedro', 'Pica', 'Piedra', '2003-10-26', 'M', 1, 
 					 '228-123-1234', '228-321-4321', 'p_p_p@gmail.com', 'pedro_loco@gmail.com', 
-					 'PIPP031026TG', 'PIPP031026HVZRDDA2', 1, 2, 1, 2, 1, 1, 1);
+					 'PIPP031026TGK', 'PIPP031026HVZRDDA2', 1, 2, 1, 2, 1, 1, 1);
 
 INSERT INTO Employees (FirstName, MiddleName, LastName, Email, Password, IdRole)
             VALUES ('Rodolfo', 'Fernández', 'Rodríguez', 'foforfr007@gmail.com', '1234', 1);
