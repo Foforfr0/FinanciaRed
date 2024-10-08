@@ -37,6 +37,7 @@ namespace FinanciaRed.View.ManageClients {
 
         private void ClickSearchClients (object sender, RoutedEventArgs e) {
             //TODO
+            //Agregar funcionalidad de filtros
             string keyText = textBox_KeyWord.Text;
             int numberCredits = int.Parse (textBox_SolicitedCredits.Text);
             bool withActiveCredit = chekBox_ActiveCredit.IsChecked ?? false;

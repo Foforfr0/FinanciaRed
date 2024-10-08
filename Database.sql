@@ -73,6 +73,7 @@ CREATE TABLE ClientsAddresses (
     Street VARCHAR(80) NOT NULL,
     Colony VARCHAR(80) NOT NULL,
     PostalCode VARCHAR(10) NOT NULL,
+    Municipality VARCHAR(150) NOT NULL,
     IdState INT NOT NULL,
     IdAddressType INT NOT NULL,
 
@@ -216,9 +217,9 @@ INSERT INTO ContactsReferencesClients (FirstName, MiddleName, LastName,
             VALUES ('Andrés', 'Arellano', 'García', 'and_are@gmail.com', '228-219-6472', 1);
 
 INSERT INTO ClientsAddresses (ExteriorNumber, InteriorNumber, Street, Colony, 
-                             PostalCode, IdState, IdAddressType)
+                             PostalCode, Municipality, IdState, IdAddressType)
             VALUES ('Azahares 3', '308', 'Circuito Primavera', 'Nuevo Xalapa', 
-                   '91097', 29, 2);
+                   '91097', 'Xalapa', 29, 2);
 
 INSERT INTO WorkAreas (WorkArea, IdWorkAreaType, MonthlySalary)
             VALUES ('Ingeniero de software', 1, 20000);

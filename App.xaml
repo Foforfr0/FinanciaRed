@@ -30,5 +30,12 @@
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="Margin" Value="10 5 10 0"/>
         </Style>
+
+        <Style x:Key="LabelErrorForm" TargetType="Label">
+            <Setter Property="Content" Value=""/>
+            <Setter Property="Foreground" Value="Red"/>
+            <Setter Property="Visibility" Value="Collapsed"/>
+            <Setter Property="Margin" Value="0 0 0 0"/>
+        </Style>
     </Application.Resources>
 </Application>

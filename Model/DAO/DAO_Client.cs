@@ -7,7 +7,6 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace FinanciaRed.Model.DAO {
     internal class DAO_Client {
@@ -127,6 +126,82 @@ namespace FinanciaRed.Model.DAO {
             return responseDetails;
         }
 
+        public static async Task<MessageResponse<bool>> RegistryNewClient (DTO_Client_DetailsClient newClient) {
+            MessageResponse<bool> responseCreateClient = null;
+
+            using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                try {
+                    Clients createdClient = new Clients {
+                        FirstName = newClient.FirstName,
+                        MiddleName = newClient.MiddleName,
+                        LastName = newClient.LastName,
+                        DateBirth = newClient.DateBirth,
+                        Gender = newClient.Gender,
+                        IdMaritalStatus = newClient.IdMaritalStatus,
+                        CodeCURP = newClient.CodeCurp,
+                        ClientsAddresses = new ClientsAddresses {
+                            IdState = newClient.AddressClient.IdState,
+                            Municipality = newClient.AddressClient.Municipality,
+                            PostalCode = newClient.AddressClient.PostalCode,
+                            Colony = newClient.AddressClient.Colony,
+                            Street = newClient.AddressClient.Street,
+                            ExteriorNumber = newClient.AddressClient.ExteriorNumber,
+                            InteriorNumber = newClient.AddressClient.InteriorNumber,
+                            IdAddressType = newClient.AddressClient.IdAddressType
+                        },
+                        Email1 = newClient.Email1,
+                        Email2 = newClient.Email2,
+                        PhoneNumber1 = newClient.PhoneNumber1,
+                        PhoneNumber2 = newClient.PhoneNumber2,
+                        WorkAreas = new WorkAreas {
+                            WorkArea = newClient.WorkArea,
+                            IdWorkAreaType = newClient.IdWorkType,
+                            MonthlySalary = newClient.MonthlySalary
+                        },
+                        ContactsReferencesClients = new ContactsReferencesClients {
+                            FirstName = newClient.Reference1FirstName,
+                            MiddleName = newClient.Reference1MiddleName,
+                            LastName = newClient.Reference1LastName,
+                            Email = newClient.Reference1Email,
+                            PhoneNumber = newClient.Reference1PhoneNumber,
+                            IdRelationshipType = newClient.IdReference1RelationshipType
+                        },
+                        ContactsReferencesClients1 = new ContactsReferencesClients {
+                            FirstName = newClient.Reference2FirstName,
+                            MiddleName = newClient.Reference2MiddleName,
+                            LastName = newClient.Reference2LastName,
+                            Email = newClient.Reference2Email,
+                            PhoneNumber = newClient.Reference2PhoneNumber,
+                            IdRelationshipType = newClient.IdReference2RelationshipType
+                        },
+                        CodeRFC = newClient.CodeRFC,
+                        BankAccounts = new BankAccounts {
+                            IdNameBank = newClient.IdBankAccount1Name,
+                            CLABE = newClient.BankAccount1CLABE,
+                            CardNumber = newClient.BankAccount1CardNumber,
+                            IdCardType = newClient.IdBankAccount1CardType
+                        },
+                        BankAccounts1 = new BankAccounts {
+                            IdNameBank = newClient.IdBankAccount2Name,
+                            CLABE = newClient.BankAccount2CLABE,
+                            CardNumber = newClient.BankAccount2CardNumber,
+                            IdCardType = newClient.IdBankAccount2CardType
+                        },
+                        StatusActive = true
+                    };
+
+                    context.Clients.Add (createdClient);
+                    await context.SaveChangesAsync ();
+
+                    responseCreateClient = MessageResponse<bool>.Success (
+                        $"Client {createdClient.FirstName} created", true);
+                } catch (Exception ex) {
+                    responseCreateClient = MessageResponse<bool>.Failure ("Exception" + ex.Message);
+                }
+            }
+            return responseCreateClient;
+        }
+
         public static MessageResponse<bool> SaveChangesDataClient (DTO_Client_DetailsClient newDataClient) {
             MessageResponse<bool> responseUpdateDataClient = null;
 
@@ -199,7 +274,7 @@ namespace FinanciaRed.Model.DAO {
                         responseUpdateDataClient = MessageResponse<bool>.Failure ($"Client ID {currentClient.IdClient} doesn´t exists");
                     }
                 } catch (Exception ex) {
-                    responseUpdateDataClient = MessageResponse<bool>.Failure ("Exception"+ex.Message);
+                    responseUpdateDataClient = MessageResponse<bool>.Failure ("Exception" + ex.Message);
                 }
             }
             return responseUpdateDataClient;
@@ -218,16 +293,96 @@ namespace FinanciaRed.Model.DAO {
 
                     if (responseConsultRFC != null) {
                         responseConsultRFC = MessageResponse<string>.Success (
-                            $"RFC code \"{responseConsultRFC}\" retrieved.",
+                            $"rfc code \"{responseConsultRFC}\" retrieved.",
                             dataRetrieved);
                     } else {
-                        responseConsultRFC = MessageResponse<string>.Failure ("RFC doesn´t retrieved");
+                        responseConsultRFC = MessageResponse<string>.Failure ("rfc doesn´t retrieved");
                     }
                 } catch (Exception ex) {
                     responseConsultRFC = MessageResponse<string>.Failure (ex.ToString ());
                 }
             }
             return responseConsultRFC;
+        }
+
+        public static async Task<bool> VerifyExistenceEmail (string email) {
+            using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                try {
+                    string dataRetrieved = await
+                        context.Clients.
+                        Where (clnt => clnt.Email1.Equals (email) || clnt.Email2.Equals (email)).
+                        Select (clnt => clnt.Email1).
+                        FirstOrDefaultAsync ();
+
+                    if (!string.IsNullOrEmpty (dataRetrieved)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } catch (Exception ex) {
+                    return false;
+                }
+            }
+        }
+
+        public static async Task<bool> VerifyExistencePhoneNumber (string phoneNumber) {
+            using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                try {
+                    string dataRetrieved = await
+                        context.Clients.
+                        Where (clnt => clnt.PhoneNumber1.Equals (phoneNumber) || clnt.PhoneNumber2.Equals (phoneNumber)).
+                        Select (clnt => clnt.PhoneNumber1).
+                        FirstOrDefaultAsync ();
+
+                    if (!string.IsNullOrEmpty (dataRetrieved)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } catch (Exception ex) {
+                    return false;
+                }
+            }
+        }
+
+        public static async Task<bool> VerifyExistenceCURP (string curp) {
+            using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                try {
+                    string dataRetrieved = await
+                        context.Clients.
+                        Where (clnt => clnt.CodeCURP.Equals (curp)).
+                        Select (clnt => clnt.CodeCURP).
+                        FirstOrDefaultAsync ();
+
+                    if (dataRetrieved.Equals (curp)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } catch (Exception ex) {
+                    return false;
+                }
+            }
+        }
+
+        public static async Task<bool> VerifyExistenceRFC (string rfc) {
+            using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                try {
+                    string dataRetrieved = await
+                        context.Clients.
+                        Where (clnt => clnt.CodeRFC.Equals (rfc)).
+                        Select (clnt => clnt.CodeRFC).
+                        FirstOrDefaultAsync ();
+
+                    if (dataRetrieved.Equals (rfc)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } catch (Exception ex) {
+                    return false;
+                }
+            }
         }
     }
 }

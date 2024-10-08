@@ -18,6 +18,12 @@
         public string PostalCode {
             get; set;
         }
+        public string Municipality {
+            get; set;
+        }
+        public int IdState {
+            get; set;
+        }
         public string State {
             get; set;
         }

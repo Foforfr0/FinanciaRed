@@ -28,6 +28,7 @@ namespace FinanciaRed.Model.Model_Entity
         public string PostalCode { get; set; }
         public int IdState { get; set; }
         public int IdAddressType { get; set; }
+        public string Municipality { get; set; }
     
         public virtual AddressesTypes AddressesTypes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

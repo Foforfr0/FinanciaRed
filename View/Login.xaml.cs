@@ -39,7 +39,7 @@ namespace FinanciaRed.View {
         private bool VerifyFormLogin () {
             bool isFormCorrect = true;
 
-            if (string.IsNullOrEmpty(textBox_Email.Text)) {
+            if (string.IsNullOrEmpty (textBox_Email.Text)) {
                 isFormCorrect = false;
                 if (ManageLabelsError.ExistsLabelInStack (stackPanel_FormLogIn, "errorEmailLabel") == false) {
                     stackPanel_FormLogIn.Children.Insert (
