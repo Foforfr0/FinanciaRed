@@ -1,0 +1,101 @@
+﻿<Window x:Class="FinanciaRed.View.ManageEmployees.ModifyEmployeeData"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FinanciaRed.View.ManageEmployees"
+        xmlns:components="clr-namespace:FinanciaRed.View.Components"
+        mc:Ignorable="d"
+        Title="Modificar datos del cliente" d:Height="850" Height="650" Width="800" 
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#EADDD9" Offset="0"/>
+                <GradientStop Color="#E9E7D7" Offset="0.5"/>
+                <GradientStop Color="#DFE2DD" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <StackPanel Orientation="Vertical" Width="800" HorizontalAlignment="Left">
+            <components:Header/>
+            <Grid>
+                <!--Data employee-->
+                <StackPanel x:Name="stackPanel_Stage1" d:Height="725"  Height="525" Width="740" Margin="20" Background="#FFFFFF">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" d:Height="725" Height="525" Width="740">
+                        <StackPanel Margin="20 10">
+                            <Label Content="Modificación de datos del cliente" Margin="0" Style="{StaticResource HeaderText}"/>
+                            <Label Content="Ingrese los datos necesarios (*)" FontSize="17" Padding="0" HorizontalAlignment="Left"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0" Margin="0 0 15 5">
+                                    <StackPanel Grid.Column="0" Width="385" Margin="0 0 10 0">
+                                        <Label Content="Foto de perfil" FontSize="15" Foreground="Black" FontWeight="Bold" HorizontalAlignment="Center" Margin="0 0 0 10"/>
+                                        <Image x:Name="image_ImageProfile" Width="100" Height="100" Source="/View/Images/icon-user.png" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform">
+                                            <Image.Clip>
+                                                <EllipseGeometry Center="50,50" RadiusX="50" RadiusY="50" />
+                                            </Image.Clip>
+                                        </Image>
+                                        <Label x:Name="label_PhotoStatus" Content="Sin foto" HorizontalAlignment="Center" Margin="0 5"/>
+                                        <Button x:Name="button_UploadImage" Click="ClickSelectPhoto" Content="Seleccionar foto de perfil" 
+                                                Width="150" d:Visibility="Visible" Visibility="Collapsed" Background="#FF0693C3" Foreground="#FFFFFF" Padding="4 3"/>
+                                    </StackPanel>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1" Margin="0 0 15 5">
+                                    <Label Content="Datos de perfil" FontSize="18" FontWeight="Bold" Padding="0" Margin="0 0 0 5"/>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
+                                        <Label Content="Nombre(s):" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                    <TextBox x:Name="textBox_FirstName" TextChanged="TextChanged_FirstName" Height="22"/>
+                                    <Label x:Name="label_ErrorFirstName" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
+                                        <Label Content="Apellido paterno:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                    <TextBox x:Name="textBox_MiddleName" TextChanged="TextChanged_MiddleName" Height="22"/>
+                                    <Label x:Name="label_ErrorMiddleName" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
+                                        <Label Content="Apellido materno:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                    <Label x:Name="label_ErrorLastName" d:Content="Message TextChanged_LastName" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
+                                    <TextBox x:Name="textBox_LastName" TextChanged="TextChanged_LastName" Height="22"/>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
+                                        <Label Content="Correo electrónico" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                    <TextBox x:Name="textBox_Email" TextChanged="TextChanged_Email" Height="22"/>
+                                    <Label x:Name="label_ErrorEmail" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
+                                        <Label Content="Cargo a asignar:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                    <ComboBox x:Name="comboBox_Rol"/>
+                                    <Label x:Name="label_ErrorRol" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
+                                </StackPanel>
+                            </Grid>
+                            <Grid Height="27" Margin="0 5 0 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Button Click="ClickCancel" Content="Cancelar" Grid.Column="1" 
+                                    Width="80" Background="#FFDE2323" Foreground="#FFFFFF"/>
+                                <Button Click="ClickFinishModification" Content="Finalizar" Grid.Column="2" 
+                                    Width="80" Background="#FF06C32B" Foreground="#FFFFFF"/>
+                            </Grid>
+                        </StackPanel>
+                    </ScrollViewer>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Window>

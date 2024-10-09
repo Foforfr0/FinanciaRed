@@ -109,7 +109,7 @@ namespace FinanciaRed.View.ManageClients {
 
         private void ShowDataClient () {
             //-----------------------------------------------Personal data
-            textBox_Name.Text = selectedClient.FirstName;
+            textBox_FirstName.Text = selectedClient.FirstName;
             textBox_MiddleName.Text = selectedClient.MiddleName;
             textBox_LastName.Text = selectedClient.LastName;
             datePicker_DateBirth.SelectedDate = selectedClient.DateBirth;
@@ -165,7 +165,7 @@ namespace FinanciaRed.View.ManageClients {
         private void ClickCancel (object sender, RoutedEventArgs e) {
             MessageBoxResult result = MessageBox.Show (
                 "¿Está seguro de cancelar?\nNo se podrán recuperar los datos.",
-                "Cancelar registro.",
+                "Cancelar modificación.",
                 MessageBoxButton.YesNo
             );
             if (result == MessageBoxResult.Yes)
@@ -314,14 +314,14 @@ namespace FinanciaRed.View.ManageClients {
 
             if (_IsCorrectStage4.All (x => x == true)) {
                 if (textBox_CodeCurp.Text.Equals (selectedClient.CodeCurp)) {
-                    await SaveDataInDatabase ();
+                    SaveDataInDatabase ();
                 } else {
                     if (existsRFC) {
                         label_ErrorCodeRFC.Content = "RFC ya existente en la base de datos.";
                         label_ErrorCodeRFC.Visibility = Visibility.Visible;
                         _IsCorrectStage4[6] = false;
                     } else {
-                        await SaveDataInDatabase ();
+                        SaveDataInDatabase ();
                     }
                 }
             } else {
@@ -329,10 +329,10 @@ namespace FinanciaRed.View.ManageClients {
             }
         }
 
-        private async Task SaveDataInDatabase () {
+        private void SaveDataInDatabase () {
             DTO_Client_DetailsClient newClient = new DTO_Client_DetailsClient {
                 IdClient = selectedClient.IdClient,
-                FirstName = textBox_Name.Text,
+                FirstName = textBox_FirstName.Text,
                 MiddleName = textBox_MiddleName.Text,
                 LastName = textBox_LastName.Text,
                 DateBirth = DateTime.Parse (datePicker_DateBirth.Text),
@@ -398,7 +398,7 @@ namespace FinanciaRed.View.ManageClients {
 
         //Stage 1 validations---------------------------------------------------------------------------
         private void TextChanged_Name (object sender, TextChangedEventArgs e) {
-            if (!CheckFormat.IsValidWord (textBox_Name.Text, true, false)) {
+            if (!CheckFormat.IsValidWord (textBox_FirstName.Text, true, false)) {
                 label_ErrorName.Content = "Nombre no válido.";
                 label_ErrorName.Visibility = Visibility.Visible;
                 _IsCorrectStage1[0] = false;
@@ -494,7 +494,7 @@ namespace FinanciaRed.View.ManageClients {
         }
 
         private void VerifyStage1 () {
-            if (string.IsNullOrEmpty (textBox_Name.Text)) {
+            if (string.IsNullOrEmpty (textBox_FirstName.Text)) {
                 label_ErrorName.Content = "Campo necesario.";
                 label_ErrorName.Visibility = Visibility.Visible;
                 _IsCorrectStage1[0] = false;

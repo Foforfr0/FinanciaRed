@@ -232,7 +232,7 @@ INSERT INTO Clients (FirstName, MiddleName, LastName, DateBirth, Gender, IdMarit
 					 'PIPP031026TGK', 'PIPP031026HVZRDDA2', 1, 2, 1, 2, 1, 1, 1);
 
 INSERT INTO Employees (FirstName, MiddleName, LastName, Email, Password, IdRole)
-            VALUES ('Rodolfo', 'Fernández', 'Rodríguez', 'foforfr007@gmail.com', '1234', 1);
+            VALUES ('Rodolfo', 'Fernández', 'Rodríguez', 'foforfr007@gmail.com', '1234', 3);
 INSERT INTO Employees (FirstName, MiddleName, LastName, Email, Password, IdRole)
             VALUES ('Martin Emmanuel', 'Cruz', 'Carmona', 'lecape_27@gmail.com', '4321', 2);
 INSERT INTO Employees (FirstName, MiddleName, LastName, Email, Password, IdRole)

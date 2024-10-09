@@ -321,7 +321,7 @@ namespace FinanciaRed.Model.DAO {
                     } else {
                         return false;
                     }
-                } catch (Exception ex) {
+                } catch (Exception) {
                     return false;
                 }
             }
@@ -341,7 +341,7 @@ namespace FinanciaRed.Model.DAO {
                     } else {
                         return false;
                     }
-                } catch (Exception ex) {
+                } catch (Exception) {
                     return false;
                 }
             }
@@ -356,12 +356,12 @@ namespace FinanciaRed.Model.DAO {
                         Select (clnt => clnt.CodeCURP).
                         FirstOrDefaultAsync ();
 
-                    if (!string.IsNullOrEmpty(dataRetrieved)) {
+                    if (!string.IsNullOrEmpty (dataRetrieved)) {
                         return true;
                     } else {
                         return false;
                     }
-                } catch (Exception ex) {
+                } catch (Exception) {
                     return false;
                 }
             }
@@ -376,12 +376,12 @@ namespace FinanciaRed.Model.DAO {
                         Select (clnt => clnt.CodeRFC).
                         FirstOrDefaultAsync ();
 
-                    if (!string.IsNullOrEmpty(dataRetrieved)) {
+                    if (!string.IsNullOrEmpty (dataRetrieved)) {
                         return true;
                     } else {
                         return false;
                     }
-                } catch (Exception ex) {
+                } catch (Exception) {
                     return false;
                 }
             }
@@ -401,7 +401,7 @@ namespace FinanciaRed.Model.DAO {
                     } else {
                         return false;
                     }
-                } catch (Exception ex) {
+                } catch (Exception) {
                     return false;
                 }
             }
@@ -421,7 +421,7 @@ namespace FinanciaRed.Model.DAO {
                     } else {
                         return false;
                     }
-                } catch (Exception ex) {
+                } catch (Exception) {
                     return false;
                 }
             }

@@ -79,6 +79,8 @@
     <Compile Include="Model\DTO\DTO_Client_Consult.cs" />
     <Compile Include="Model\DTO\DTO_Client_DetailsClient.cs" />
     <Compile Include="Model\DTO\DTO_Credit_Consult.cs" />
+    <Compile Include="Model\DTO\DTO_EmployeeRol.cs" />
+    <Compile Include="Model\DTO\DTO_Employee_Consult.cs" />
     <Compile Include="Model\DTO\DTO_Employee_DetailsEmployee.cs" />
     <Compile Include="Model\DTO\DTO_Employee_Login.cs" />
     <Compile Include="Model\DTO\DTO_Employee_ModifyData.cs" />
@@ -183,7 +185,16 @@
     <Compile Include="View\ManageCredits\ViewCredits.xaml.cs">
       <DependentUpon>ViewCredits.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ManageUsers\ViewEmployees.xaml.cs">
+    <Compile Include="View\ManageEmployees\ModifyEmployeeData.xaml.cs">
+      <DependentUpon>ModifyEmployeeData.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManageEmployees\RegisterEmployee.xaml.cs">
+      <DependentUpon>RegisterEmployee.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManageEmployees\ViewDetailsEmployee.xaml.cs">
+      <DependentUpon>ViewDetailsEmployee.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManageEmployees\ViewEmployees.xaml.cs">
       <DependentUpon>ViewEmployees.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\WindowContainer.xaml.cs">
@@ -233,7 +244,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ManageUsers\ViewEmployees.xaml">
+    <Page Include="View\ManageEmployees\ModifyEmployeeData.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ManageEmployees\RegisterEmployee.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ManageEmployees\ViewDetailsEmployee.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ManageEmployees\ViewEmployees.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

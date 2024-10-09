@@ -6,7 +6,7 @@
     xmlns:local="clr-namespace:FinanciaRed.View.ManageClients"
     xmlns:components="clr-namespace:FinanciaRed.View.Components"
     mc:Ignorable="d"
-    Title="Detalles del cliente" d:Height="850" Height="650" Width="800" 
+    Title="Modificar datos del cliente" d:Height="850" Height="650" Width="800" 
     WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
 
     <Grid>
@@ -40,7 +40,7 @@
                                             <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
                                             <Label Content="Nombre(s):" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
                                         </StackPanel>
-                                        <TextBox x:Name="textBox_Name" TextChanged="TextChanged_Name" Height="22"/>
+                                        <TextBox x:Name="textBox_FirstName" TextChanged="TextChanged_Name" Height="22"/>
                                         <Label x:Name="label_ErrorName" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                             <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>

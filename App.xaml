@@ -36,6 +36,7 @@
             <Setter Property="Foreground" Value="Red"/>
             <Setter Property="Visibility" Value="Collapsed"/>
             <Setter Property="Margin" Value="0 0 0 0"/>
+            <Setter Property="Padding" Value="5 0 0 5"/>
         </Style>
     </Application.Resources>
 </Application>

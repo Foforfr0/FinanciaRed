@@ -6,7 +6,7 @@
     xmlns:local="clr-namespace:FinanciaRed.View.ManageClients"
     xmlns:components="clr-namespace:FinanciaRed.View.Components"
     mc:Ignorable="d"
-    Title="Detalles del cliente" d:Height="850" Height="650" Width="800" 
+    Title="Registro de nuevo cliente" d:Height="850" Height="650" Width="800" 
     WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
 
     <Grid>

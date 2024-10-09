@@ -4,43 +4,48 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:FinanciaRed.View.ManageEmployees"
-       mc:Ignorable="d"
+      mc:Ignorable="d"
       Title="Perfil personal" Height="590" Width="830">
 
     <Grid Background="#FFFFFF">
         <StackPanel Margin="0">
-            <Label Content="Cuenta" Style="{StaticResource HeaderText}"/>
+            <Label Content="Cuenta personal" Style="{StaticResource HeaderText}" Margin="8 8 8 10"/>
             <StackPanel Margin="20 0" Orientation="Horizontal">
                 <StackPanel Grid.Column="0" Width="385" Margin="0 0 10 0">
-                    <Label Content="Foto de perfil"/>
+                    <Label Content="Foto de perfil" FontSize="15" Foreground="Black" FontWeight="Bold" HorizontalAlignment="Center" Margin="0 0 0 10"/>
                     <Image x:Name="image_ImageProfile" Width="100" Height="100" Source="/View/Images/icon-user.png" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform">
                         <Image.Clip>
                             <EllipseGeometry Center="50,50" RadiusX="50" RadiusY="50" />
                         </Image.Clip>
                     </Image>
-                    <Label x:Name="label_PhotoStatus" Content="Sin foto" HorizontalAlignment="Center"/>
-                    <Button x:Name="button_UploadImage" Click="ClickSelectPhoto" Content="Seleccionar foto de perfil" Width="150" d:Visibility="Visible" Visibility="Collapsed"/>
+                    <Label x:Name="label_PhotoStatus" Content="Sin foto" HorizontalAlignment="Center" Margin="0 5"/>
+                    <Button x:Name="button_UploadImage" Click="ClickSelectPhoto" Content="Seleccionar foto de perfil" 
+                            Width="150" d:Visibility="Visible" Visibility="Collapsed" Background="#FF0693C3" Foreground="#FFFFFF" Padding="4 3"/>
                 </StackPanel>
 
                 <StackPanel x:Name="stackPanel_Form" Grid.Column="1" Width="365" Margin="10 0 0 0">
-                    <Label Content="Nombre(s):"/>
+                    <Label Content="Datos de perfil" FontSize="18" FontWeight="Bold" Padding="0" Margin="0 0 0 5"/>
+                    <Label Content="Nombre(s):" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
                     <TextBox x:Name="textBox_FirstName" IsReadOnly="True" BorderBrush="Transparent"/>
-                    <Label Content="Apellido paterno:"/>
+                    <Label Content="Apellido paterno:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
                     <TextBox x:Name="textBox_MiddleName" IsReadOnly="True" BorderBrush="Transparent"/>
-                    <Label Content="Apellido materno:"/>
+                    <Label Content="Apellido materno;" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
                     <TextBox x:Name="textBox_LastName" IsReadOnly="True" BorderBrush="Transparent"/>
-                    <Label Content="Correo electrónico:"/>
+                    <Label Content="Correo electrónico:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
                     <TextBox x:Name="textBox_Email" IsReadOnly="True" BorderBrush="Transparent"/>
-                    <Label Content="Contraseña:"/>
+                    <Label Content="Contraseña:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
                     <TextBox x:Name="textBox_Password" Text="*****" IsReadOnly="True" BorderBrush="Transparent"/>
-                    <Label x:Name="label_PasswordConfirmation" Content="Confirma la contraseña:" d:Visibility="Visible" Visibility="Collapsed" />
+                    <Label x:Name="label_PasswordConfirmation" Content="Confirma la contraseña:" d:Visibility="Visible" Visibility="Collapsed" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
                     <TextBox x:Name="textBox_PasswordConfirmation" IsReadOnly="True" d:Visibility="Visible" Visibility="Collapsed" BorderBrush="Transparent"/>
-                    <Label Content="Cargo actual:"/>
+                    <Label Content="Cargo actual:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
                     <TextBox x:Name="textBox_Rol" IsReadOnly="True" BorderBrush="Transparent"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 25 0 0">
-                        <Button x:Name="button_Modify" Click="ClickModifyAccount" Content="Modificar" Width="80" Height="25" HorizontalAlignment="Right"/>
-                        <Button x:Name="button_Accept" Click="ClickAcceptModification" Content="Aceptar" Visibility="Collapsed" Width="80" Height="25" Margin="15 0 0 0" HorizontalAlignment="Right"/>
-                        <Button x:Name="button_Cancel" Click="ClickCancelModification" Content="Cancelar" Visibility="Collapsed"  Width="80" Height="25" Margin="15 0 0 0" HorizontalAlignment="Right"/>
+                        <Button x:Name="button_Modify" Click="ClickModifyAccount" Content="Modificar" 
+                                Width="80" Height="25" HorizontalAlignment="Right" Background="#FF0693C3" Foreground="#FFFFFF"/>
+                        <Button x:Name="button_Accept" Click="ClickAcceptModification" Content="Aceptar" Visibility="Collapsed" 
+                                Width="80" Height="25" Margin="15 0 0 0" HorizontalAlignment="Right" Background="#FF06C32B" Foreground="#FFFFFF"/>
+                        <Button x:Name="button_Cancel" Click="ClickCancelModification" Content="Cancelar" Visibility="Collapsed" 
+                                Width="80" Height="25" Margin="15 0 0 0" HorizontalAlignment="Right" Background="#FFDE2323" Foreground="#FFFFFF"/>
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
