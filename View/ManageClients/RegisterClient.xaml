@@ -4,7 +4,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:FinanciaRed.View.ManageClients"
-    xmlns:components="clr-namespace:FinanciaRed.View.Components"
     mc:Ignorable="d"
     Title="Registro de nuevo cliente" d:Height="850" Height="650" Width="800" 
     WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
@@ -19,7 +18,16 @@
         </Grid.Background>
 
         <StackPanel Orientation="Vertical" Width="800" HorizontalAlignment="Left">
-            <components:Header/>
+            <Grid Background="#FFFEEA" Width="800" Height="50">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="FinanciaRed" VerticalAlignment="Center" FontWeight="Bold" FontSize="20" Padding="0" Margin="10"/>
+            </Grid>
             <Grid>
                 <!--Personal Data / Address Data-->
                 <StackPanel x:Name="stackPanel_Stage1" d:Height="725" Height="525" Width="740" Margin="20" Background="#FFFFFF">
@@ -82,8 +90,8 @@
                                             <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
                                             <Label Content="Código Único de Registro de Población:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
                                         </StackPanel>
-                                        <TextBox x:Name="textBox_CodeCurp" TextChanged="TextChanged_CodeCurp" Height="22"/>
-                                        <Label x:Name="label_ErrorCodeCurp" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
+                                        <TextBox x:Name="textBox_CodeCURP" TextChanged="TextChanged_CodeCURP" Height="22"/>
+                                        <Label x:Name="label_ErrorCodeCURP" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
                                     </StackPanel>
                                 </StackPanel>
 

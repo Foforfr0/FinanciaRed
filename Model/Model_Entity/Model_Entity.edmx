@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="FinanciaRedModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="FinanciaRedModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AddressesTypes">
           <Key>
             <PropertyRef Name="IdAddressType" />
@@ -110,6 +110,10 @@
           <Property Name="FirstName" Type="varchar" MaxLength="80" Nullable="false" />
           <Property Name="MiddleName" Type="varchar" MaxLength="80" Nullable="false" />
           <Property Name="LastName" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="DateBirth" Type="date" Nullable="false" />
+          <Property Name="Gender" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="CodeCURP" Type="varchar" MaxLength="18" Nullable="false" />
+          <Property Name="CodeRFC" Type="varchar" MaxLength="13" Nullable="false" />
           <Property Name="ProfilePhoto" Type="varbinary(max)" />
           <Property Name="Email" Type="varchar" MaxLength="80" Nullable="false" />
           <Property Name="Password" Type="varchar" MaxLength="80" Nullable="false" />
@@ -456,7 +460,8 @@
             <End Role="WorkAreas" EntitySet="WorkAreas" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FinanciaRedModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -541,12 +546,12 @@
           <Property Name="Street" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Colony" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PostalCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Municipality" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="IdState" Type="Int32" Nullable="false" />
           <Property Name="IdAddressType" Type="Int32" Nullable="false" />
           <NavigationProperty Name="AddressesTypes" Relationship="Self.fk_AddressType_ClientAddress" FromRole="ClientsAddresses" ToRole="AddressesTypes" />
           <NavigationProperty Name="Clients" Relationship="Self.fk_AddressClient_Client" FromRole="ClientsAddresses" ToRole="Clients" />
           <NavigationProperty Name="StatesAddresses" Relationship="Self.fk_StateAddress_ClientAddress" FromRole="ClientsAddresses" ToRole="StatesAddresses" />
-          <Property Name="Municipality" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="ContactsReferencesClients">
           <Key>
@@ -589,6 +594,10 @@
           <Property Name="FirstName" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="MiddleName" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="LastName" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="CodeCURP" Type="String" MaxLength="18" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CodeRFC" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ProfilePhoto" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="Email" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
@@ -859,7 +868,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="FinanciaRedEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AddressesTypes" EntityType="Self.AddressesTypes" />
           <EntitySet Name="BankAccounts" EntityType="Self.BankAccounts" />
           <EntitySet Name="BankCardTypes" EntityType="Self.BankCardTypes" />
@@ -950,7 +959,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="FinanciaRedModelStoreContainer" CdmEntityContainer="FinanciaRedEntities">
+        <EntityContainerMapping StorageEntityContainer="FinanciaRedModelStoreContainer" CdmEntityContainer="Entities">
           <EntitySetMapping Name="AddressesTypes">
             <EntityTypeMapping TypeName="FinanciaRedModel.AddressesTypes">
               <MappingFragment StoreEntitySet="AddressesTypes">
@@ -1015,13 +1024,13 @@
           <EntitySetMapping Name="ClientsAddresses">
             <EntityTypeMapping TypeName="FinanciaRedModel.ClientsAddresses">
               <MappingFragment StoreEntitySet="ClientsAddresses">
-                <ScalarProperty Name="Municipality" ColumnName="Municipality" />
                 <ScalarProperty Name="IdClientAddress" ColumnName="IdClientAddress" />
                 <ScalarProperty Name="ExteriorNumber" ColumnName="ExteriorNumber" />
                 <ScalarProperty Name="InteriorNumber" ColumnName="InteriorNumber" />
                 <ScalarProperty Name="Street" ColumnName="Street" />
                 <ScalarProperty Name="Colony" ColumnName="Colony" />
                 <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="Municipality" ColumnName="Municipality" />
                 <ScalarProperty Name="IdState" ColumnName="IdState" />
                 <ScalarProperty Name="IdAddressType" ColumnName="IdAddressType" />
               </MappingFragment>
@@ -1063,6 +1072,10 @@
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="DateBirth" ColumnName="DateBirth" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="CodeCURP" ColumnName="CodeCURP" />
+                <ScalarProperty Name="CodeRFC" ColumnName="CodeRFC" />
                 <ScalarProperty Name="ProfilePhoto" ColumnName="ProfilePhoto" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Password" ColumnName="Password" />

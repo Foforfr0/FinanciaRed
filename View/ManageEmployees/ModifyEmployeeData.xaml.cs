@@ -18,7 +18,7 @@ namespace FinanciaRed.View.ManageEmployees {
     public partial class ModifyEmployeeData : Window {
         private DTO_Employee_DetailsEmployee selectedEmployee = null;
         private byte[] TEMP_profileImageSelected = null;
-        private bool[] _IsCorrectStage1 = new bool[5] { false, false, false, false, false };
+        private bool[] _IsCorrectStage1 = new bool[4] { false, false, false, false };
 
         public ModifyEmployeeData (DTO_Employee_DetailsEmployee selectedEmployee) {
             InitializeComponent ();
@@ -41,9 +41,7 @@ namespace FinanciaRed.View.ManageEmployees {
         }
 
         private void ShowEmployeeClient () {
-            textBox_FirstName.Text = selectedEmployee.FirstName;
-            textBox_MiddleName.Text = selectedEmployee.MiddleName;
-            textBox_LastName.Text = selectedEmployee.LastName;
+            label_Name.Text = selectedEmployee.FirstName + " " + selectedEmployee.MiddleName + " " + selectedEmployee.LastName;
             textBox_Email.Text = selectedEmployee.Email;
             comboBox_Rol.SelectedIndex = selectedEmployee.IdRol;
         }
@@ -62,20 +60,19 @@ namespace FinanciaRed.View.ManageEmployees {
             VerifyStage1 ();
 
             if (_IsCorrectStage1.All (x => x == true)) {
-                bool exitsEmail;
-                if (textBox_Email.Text.Equals (selectedEmployee.Email)) {
-                    exitsEmail = false;
-                } else {
-                    exitsEmail = await DAO_Employee.VerifyExistenceEmail (textBox_Email.Text);
-                }
-                await Task.Delay (200);
+                bool existsEmail = await DAO_Client.VerifyExistenceEmail(textBox_Email.Text);
+                await Task.Delay (500);
 
-                if (exitsEmail) {
-                    label_ErrorEmail.Content = "Correo ya existente en la base de datos.";
-                    label_ErrorEmail.Visibility = Visibility.Visible;
-                    _IsCorrectStage1[3] = false;
-                } else {
+                if (textBox_Email.Text.Equals (selectedEmployee.Email)) {
                     SaveDataInDatabase ();
+                } else {
+                    if (existsEmail) {
+                        label_ErrorEmail.Content = "Email ya existente en la base de datos.";
+                        label_ErrorEmail.Visibility = Visibility.Visible;
+                        _IsCorrectStage1[0] = false;
+                    } else {
+                        SaveDataInDatabase ();
+                    }
                 }
             } else {
                 MessageBox.Show ("Faltan datos por ingresar o algunos datos están incorrectos.", "Formulario incompleto.");
@@ -83,17 +80,14 @@ namespace FinanciaRed.View.ManageEmployees {
         }
 
         private void SaveDataInDatabase () {
-            DTO_Employee_DetailsEmployee newDataEmployee = new DTO_Employee_DetailsEmployee {
-                IdEmployee = selectedEmployee.IdEmployee,
-                FirstName = textBox_FirstName.Text,
-                MiddleName = textBox_MiddleName.Text,
-                LastName = textBox_LastName.Text,
+            DTO_Employee_DetailsEmployee newDataEmployee = new DTO_Employee_DetailsEmployee () {
                 Email = textBox_Email.Text,
+                Password = textBox_Pasword.Text,
                 IdRol = comboBox_Rol.SelectedIndex,
                 ProfilePhoto = TEMP_profileImageSelected
             };
 
-            MessageResponse<bool> responseModifyEmployee = DAO_Employee.SaveChangesDataEmployee (newDataEmployee);
+            MessageResponse<bool> responseModifyEmployee = DAO_Employee.SaveChangesDataEmployee (newDataEmployee, false);
             if (responseModifyEmployee.IsError) {
                 MessageBox.Show ("Ha ocurrido un error inesperado.\nIntente más tarde.", "Error inesperado.");
             } else {
@@ -128,87 +122,69 @@ namespace FinanciaRed.View.ManageEmployees {
         }
 
         //Stage 1 validations---------------------------------------------------------------------------
-        private void TextChanged_FirstName (object sender, TextChangedEventArgs e) {
-            if (!CheckFormat.IsValidWord (textBox_FirstName.Text, true, false)) {
-                label_ErrorFirstName.Content = "Nombre no válido.";
-                label_ErrorFirstName.Visibility = Visibility.Visible;
+        private void TextChanged_Email (object sender, TextChangedEventArgs e) {
+            if (!CheckFormat.IsValidEmail (textBox_Email.Text)) {
+                label_ErrorEmail.Content = "Correo electrónico no válido.";
+                label_ErrorEmail.Visibility = Visibility.Visible;
                 _IsCorrectStage1[0] = false;
             } else {
-                label_ErrorFirstName.Content = "";
-                label_ErrorFirstName.Visibility = Visibility.Collapsed;
+                label_ErrorEmail.Content = "";
+                label_ErrorEmail.Visibility = Visibility.Collapsed;
                 _IsCorrectStage1[0] = true;
             }
         }
 
-        private void TextChanged_MiddleName (object sender, TextChangedEventArgs e) {
-            if (!CheckFormat.IsValidWord (textBox_MiddleName.Text, false, false)) {
-                label_ErrorMiddleName.Content = "Apellido paterno no válido.";
-                label_ErrorMiddleName.Visibility = Visibility.Visible;
+        private void TextChanged_Password (object sender, TextChangedEventArgs e) {
+            if (!CheckFormat.IsValidPassword (textBox_Pasword.Text)) {
+                label_ErrorPasword.Text = "La debe contener mayúsculas, minúsculas, signos y números.";
+                label_ErrorPasword.Visibility = Visibility.Visible;
                 _IsCorrectStage1[1] = false;
             } else {
-                label_ErrorMiddleName.Content = "";
-                label_ErrorMiddleName.Visibility = Visibility.Collapsed;
+                label_ErrorPasword.Text = "";
+                label_ErrorPasword.Visibility = Visibility.Collapsed;
                 _IsCorrectStage1[1] = true;
             }
         }
 
-        private void TextChanged_LastName (object sender, TextChangedEventArgs e) {
-            if (!CheckFormat.IsValidWord (textBox_LastName.Text, false, false)) {
-                label_ErrorLastName.Content = "Apellido materno no válido.";
-                label_ErrorLastName.Visibility = Visibility.Visible;
+        private void TextChanged_PasswordConfirmation (object sender, TextChangedEventArgs e) {
+            if (!textBox_PaswordConfirmation.Text.Equals (textBox_Pasword.Text)) {
+                label_ErrorPaswordConfirmation.Content = "No coincide.";
+                label_ErrorPaswordConfirmation.Visibility = Visibility.Visible;
                 _IsCorrectStage1[2] = false;
             } else {
-                label_ErrorLastName.Content = "";
-                label_ErrorLastName.Visibility = Visibility.Collapsed;
+                label_ErrorPaswordConfirmation.Content = "";
+                label_ErrorPaswordConfirmation.Visibility = Visibility.Collapsed;
                 _IsCorrectStage1[2] = true;
             }
         }
 
-        private void TextChanged_Email (object sender, TextChangedEventArgs e) {
-            if (!CheckFormat.IsValidEmail (textBox_Email.Text)) {
-                label_ErrorEmail.Content = "Apellido materno no válido.";
-                label_ErrorEmail.Visibility = Visibility.Visible;
-                _IsCorrectStage1[3] = false;
-            } else {
-                label_ErrorEmail.Content = "";
-                label_ErrorEmail.Visibility = Visibility.Collapsed;
-                _IsCorrectStage1[3] = true;
-            }
-        }
-
         private void VerifyStage1 () {
-            if (string.IsNullOrEmpty (textBox_FirstName.Text)) {
-                label_ErrorFirstName.Content = "Campo necesario.";
-                label_ErrorFirstName.Visibility = Visibility.Visible;
-                _IsCorrectStage1[0] = false;
-            }
-
-            if (string.IsNullOrEmpty (textBox_MiddleName.Text)) {
-                label_ErrorMiddleName.Content = "Campo necesario.";
-                label_ErrorMiddleName.Visibility = Visibility.Visible;
-                _IsCorrectStage1[1] = false;
-            }
-
-            if (string.IsNullOrEmpty (textBox_LastName.Text)) {
-                label_ErrorLastName.Content = "Campo necesario.";
-                label_ErrorLastName.Visibility = Visibility.Visible;
-                _IsCorrectStage1[2] = false;
-            }
-
             if (string.IsNullOrEmpty (textBox_Email.Text)) {
                 label_ErrorEmail.Content = "Campo necesario.";
                 label_ErrorEmail.Visibility = Visibility.Visible;
-                _IsCorrectStage1[3] = false;
+                _IsCorrectStage1[0] = false;
+            }
+
+            if (string.IsNullOrEmpty (textBox_Pasword.Text)) {
+                label_ErrorPasword.Text= "Campo necesario.";
+                label_ErrorPasword.Visibility = Visibility.Visible;
+                _IsCorrectStage1[1] = false;
+            }
+
+            if (string.IsNullOrEmpty (textBox_PaswordConfirmation.Text)) {
+                label_ErrorPaswordConfirmation.Content= "Campo necesario.";
+                label_ErrorPaswordConfirmation.Visibility = Visibility.Visible;
+                _IsCorrectStage1[2] = false;
             }
 
             if (comboBox_Rol.SelectedIndex == 0) {
                 label_ErrorRol.Content = "Campo necesario.";
                 label_ErrorRol.Visibility = Visibility.Visible;
-                _IsCorrectStage1[4] = false;
+                _IsCorrectStage1[3] = false;
             } else {
                 label_ErrorRol.Content = "";
                 label_ErrorRol.Visibility = Visibility.Collapsed;
-                _IsCorrectStage1[4] = true;
+                _IsCorrectStage1[3] = true;
             }
         }
     }

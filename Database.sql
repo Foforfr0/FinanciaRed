@@ -141,6 +141,10 @@ CREATE TABLE Employees (
     FirstName VARCHAR(80) NOT NULL,
     MiddleName VARCHAR(80) NOT NULL,
     LastName VARCHAR(80) NOT NULL,
+    DateBirth Date NOT NULL,
+    Gender CHAR NOT NULL,
+    CodeCURP VARCHAR(18) UNIQUE NOT NULL,
+    CodeRFC VARCHAR(13) UNIQUE NOT NULL,
     ProfilePhoto VARBINARY(MAX),
     Email VARCHAR(80) NOT NULL,
     Password VARCHAR(80) NOT NULL,
@@ -231,12 +235,12 @@ INSERT INTO Clients (FirstName, MiddleName, LastName, DateBirth, Gender, IdMarit
 					 '228-123-1234', '228-321-4321', 'p_p_p@gmail.com', 'pedro_loco@gmail.com', 
 					 'PIPP031026TGK', 'PIPP031026HVZRDDA2', 1, 2, 1, 2, 1, 1, 1);
 
-INSERT INTO Employees (FirstName, MiddleName, LastName, Email, Password, IdRole)
-            VALUES ('Rodolfo', 'Fernández', 'Rodríguez', 'foforfr007@gmail.com', '1234', 3);
-INSERT INTO Employees (FirstName, MiddleName, LastName, Email, Password, IdRole)
-            VALUES ('Martin Emmanuel', 'Cruz', 'Carmona', 'lecape_27@gmail.com', '4321', 2);
-INSERT INTO Employees (FirstName, MiddleName, LastName, Email, Password, IdRole)
-            VALUES ('Mario Alberto', 'Hernández', 'Pérez', 'mariohernandez2@gmail.com', 'admin', 4);
+INSERT INTO Employees (FirstName, MiddleName, LastName, DateBirth, Gender, CodeRFC, CodeCURP, Email, Password, IdRole)
+            VALUES ('Rodolfo', 'Fernández', 'Rodríguez', '2003-10-26', 'M', 'FERR031026TG6', 'FERR031026HVZRDDA2', 'foforfr007@gmail.com', '1234', 3);
+INSERT INTO Employees (FirstName, MiddleName, LastName, DateBirth, Gender, CodeRFC, CodeCURP, Email, Password, IdRole)
+            VALUES ('Martin Emmanuel', 'Cruz', 'Carmona', '2004-11-27', 'M', 'CRCM041127X4G', 'CACM041127HVZGEHE7', 'lecape_27@gmail.com', '4321', 2);
+INSERT INTO Employees (FirstName, MiddleName, LastName, DateBirth, Gender, CodeRFC, CodeCURP, Email, Password, IdRole)
+            VALUES ('Mario Alberto', 'Hernández', 'Pérez', '1990-05-13', 'M', 'HEPM900513KJS', 'HEPM900513HVZHDHG0', 'mariohernandez2@gmail.com', 'admin', 4);
 
 INSERT INTO Credits (Amount, AmountLeft, IdClient, IdStateCredit, SignedDocument, InterestRate, 
                     StartDate, EndDate, IdEmployee) 

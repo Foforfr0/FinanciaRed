@@ -22,7 +22,7 @@ namespace FinanciaRed.View.ManageClients {
         public RegisterClient () {
             InitializeComponent ();
 
-            //textBox_CodeCurp.Text = "FERR031026HVZRDDA2";
+            //textBox_CodeCURP.Text = "FERR031026HVZRDDA2";
             //TODO
 
             _ = LoadVariables ();
@@ -132,17 +132,17 @@ namespace FinanciaRed.View.ManageClients {
 
         private async void ClickContinueStage2 (object sender, RoutedEventArgs e) {
             VerifyStage1 ();
-            bool existsCURP = await DAO_Client.VerifyExistenceCURP (textBox_CodeCurp.Text);
+            bool existsCURP = await DAO_Client.VerifyExistenceCURP (textBox_CodeCURP.Text);
             await Task.Delay (500);
 
             if (_IsCorrectStage1.All (x => x == true)) {
                 if (existsCURP) {
-                    label_ErrorCodeCurp.Content = "CURP ya existente en la base de datos.";
-                    label_ErrorCodeCurp.Visibility = Visibility.Visible;
+                    label_ErrorCodeCURP.Content = "CURP ya existente en la base de datos.";
+                    label_ErrorCodeCURP.Visibility = Visibility.Visible;
                     _IsCorrectStage1[6] = false;
                 } else {
-                    label_ErrorCodeCurp.Content = "";
-                    label_ErrorCodeCurp.Visibility = Visibility.Collapsed;
+                    label_ErrorCodeCURP.Content = "";
+                    label_ErrorCodeCURP.Visibility = Visibility.Collapsed;
                     _IsCorrectStage1[6] = true;
                     stackPanel_Stage1.Visibility = Visibility.Collapsed;
                     stackPanel_Stage2.Visibility = Visibility.Visible;
@@ -270,7 +270,7 @@ namespace FinanciaRed.View.ManageClients {
                     await SaveDataInDatabase ();
                 }
             } else {
-                MessageBox.Show ("Faltan datos por ingresar o algunos datos están incorrectos.", "Formulario incompleto.");
+                MessageBox.Show ("Faltan datos por ingresar o algunos datos están incorrectos4.", "Formulario incompleto.");
             }
         }
 
@@ -282,7 +282,7 @@ namespace FinanciaRed.View.ManageClients {
                 DateBirth = DateTime.Parse (datePicker_DateBirth.Text),
                 Gender = comboBox_Gender.SelectedIndex == 1 ? "M" : "F",
                 IdMaritalStatus = comboBox_MaritalStatus.SelectedIndex,
-                CodeCurp = textBox_CodeCurp.Text,
+                CodeCURP = textBox_CodeCURP.Text,
                 AddressClient = new DTO_AddressClient {
                     IdState = comboBox_State.SelectedIndex,
                     Municipality = textBox_Municipality.Text,
@@ -376,14 +376,19 @@ namespace FinanciaRed.View.ManageClients {
             }
         }
 
-        private void TextChanged_CodeCurp (object sender, TextChangedEventArgs e) {
-            if (!CheckFormat.IsValidCURP (textBox_CodeCurp.Text)) {
-                label_ErrorCodeCurp.Content = "CURP no válido.";
-                label_ErrorCodeCurp.Visibility = Visibility.Visible;
+        private void TextChanged_CodeCURP (object sender, TextChangedEventArgs e) {
+            TextBox textbox = sender as TextBox;
+            if (textbox.Text.Length > 18) {
+                textbox.Text = textbox.Text.Substring (0, 18);
+            }
+
+            if (!CheckFormat.IsValidCURP (textBox_CodeCURP.Text)) {
+                label_ErrorCodeCURP.Content = "CURP no válido.";
+                label_ErrorCodeCURP.Visibility = Visibility.Visible;
                 _IsCorrectStage1[6] = false;
             } else {
-                label_ErrorCodeCurp.Content = "";
-                label_ErrorCodeCurp.Visibility = Visibility.Collapsed;
+                label_ErrorCodeCURP.Content = "";
+                label_ErrorCodeCURP.Visibility = Visibility.Collapsed;
                 _IsCorrectStage1[6] = true;
             }
         }
@@ -401,6 +406,11 @@ namespace FinanciaRed.View.ManageClients {
         }
 
         private void TextChanged_PostalCode (object sender, TextChangedEventArgs e) {
+            TextBox textbox = sender as TextBox;
+            if (textbox.Text.Length > 5) {
+                textbox.Text = textbox.Text.Substring (0, 5);
+            }
+
             if (!CheckFormat.IsValidPostalCode (textBox_PostalCode.Text)) {
                 label_ErrorPostalCode.Content = "Código postal no válido.";
                 label_ErrorPostalCode.Visibility = Visibility.Visible;
@@ -485,9 +495,9 @@ namespace FinanciaRed.View.ManageClients {
                 _IsCorrectStage1[5] = true;
             }
 
-            if (string.IsNullOrEmpty (textBox_CodeCurp.Text)) {
-                label_ErrorCodeCurp.Content = "Campo necesario.";
-                label_ErrorCodeCurp.Visibility = Visibility.Visible;
+            if (string.IsNullOrEmpty (textBox_CodeCURP.Text)) {
+                label_ErrorCodeCURP.Content = "Campo necesario.";
+                label_ErrorCodeCURP.Visibility = Visibility.Visible;
                 _IsCorrectStage1[6] = false;
             }
 
@@ -620,7 +630,7 @@ namespace FinanciaRed.View.ManageClients {
         private void TextChanged_WorkArea (object sender, TextChangedEventArgs e) {
             if (!string.IsNullOrEmpty (textBox_WorkArea.Text)) {
                 label_ErrorWorkArea.Content = "";
-                label_ErrorWorkArea.Visibility = Visibility.Visible;
+                label_ErrorWorkArea.Visibility = Visibility.Collapsed;
                 _IsCorrectStage2[5] = true;
             }
         }
@@ -910,7 +920,12 @@ namespace FinanciaRed.View.ManageClients {
 
         //Stage 4 validations---------------------------------------------------------------------------
         private void TextChanged_CodeRFC (object sender, TextChangedEventArgs e) {
-            if (!CheckFormat.IsValidRFC (textBox_CodeCurp.Text, textBox_CodeRFC.Text)) {
+            TextBox textbox = sender as TextBox;
+            if (textbox.Text.Length > 13) {
+                textbox.Text = textbox.Text.Substring (0, 18);
+            }
+
+            if (!CheckFormat.IsValidRFC (textBox_CodeCURP.Text, textBox_CodeRFC.Text)) {
                 label_ErrorCodeRFC.Content = "RFC no válido o no coincide con el CURP.";
                 label_ErrorCodeRFC.Visibility = Visibility.Visible;
                 _IsCorrectStage4[0] = false;

@@ -96,18 +96,23 @@ namespace FinanciaRed.View.ManageEmployees {
 
         private async void ClickAcceptModification (object sender, RoutedEventArgs e) {
             if (VerifyForm ()) {
-                DTO_Employee_ModifyData newDataEmployee = new DTO_Employee_ModifyData {
+                DTO_Employee_DetailsEmployee newDataEmployee = new DTO_Employee_DetailsEmployee {
                     IdEmployee = currentEmployee.IdEmployee,
+                    FirstName = currentEmployee.FirstName,
+                    MiddleName = currentEmployee.MiddleName,
+                    LastName = currentEmployee.LastName,
                     Email = textBox_Email.Text,
                     Password = textBox_PasswordConfirmation.Text,
-                    ProfilePhoto = TEMP_profileImageSelected
+                    ProfilePhoto = TEMP_profileImageSelected,
+                    IdRol = currentEmployee.IdRol,
+                    Rol = currentEmployee.Rol
                 };
 
-                MessageResponse<int> responseModify;
+                MessageResponse<bool> responseModify;
                 if (string.IsNullOrEmpty (textBox_Password.Text) && string.IsNullOrEmpty (textBox_PasswordConfirmation.Text)) {
-                    responseModify = DAO_Employee.ModifyDataEmployee (newDataEmployee, false);
+                    responseModify = DAO_Employee.SaveChangesDataEmployee (newDataEmployee, false);
                 } else {
-                    responseModify = DAO_Employee.ModifyDataEmployee (newDataEmployee, true);
+                    responseModify = DAO_Employee.SaveChangesDataEmployee (newDataEmployee, true);
                 }
 
                 if (responseModify.IsError) {

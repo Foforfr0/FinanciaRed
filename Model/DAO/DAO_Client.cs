@@ -61,7 +61,7 @@ namespace FinanciaRed.Model.DAO {
                             Gender = clnt.Gender,
                             IdMaritalStatus = clnt.IdMaritalStatus,
                             MaritalStatus = clnt.MaritalStatuses.Status,
-                            CodeCurp = clnt.CodeCURP,
+                            CodeCURP = clnt.CodeCURP,
                             AddressClient = new DTO_AddressClient {
                                 IdAddressClient = clnt.ClientsAddresses.IdClientAddress,
                                 ExteriorNumber = clnt.ClientsAddresses.ExteriorNumber,
@@ -140,7 +140,7 @@ namespace FinanciaRed.Model.DAO {
                         DateBirth = newClient.DateBirth,
                         Gender = newClient.Gender,
                         IdMaritalStatus = newClient.IdMaritalStatus,
-                        CodeCURP = newClient.CodeCurp,
+                        CodeCURP = newClient.CodeCURP,
                         ClientsAddresses = new ClientsAddresses {
                             IdState = newClient.AddressClient.IdState,
                             Municipality = newClient.AddressClient.Municipality,

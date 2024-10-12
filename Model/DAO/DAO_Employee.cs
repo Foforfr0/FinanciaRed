@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace FinanciaRed.Model.DAO {
@@ -86,10 +85,14 @@ namespace FinanciaRed.Model.DAO {
                         Where (empl => empl.IdEmployee == idEmployee).
                         Select (empl => new DTO_Employee_DetailsEmployee {
                             IdEmployee = empl.IdEmployee,
+                            ProfilePhoto = empl.ProfilePhoto,
                             FirstName = empl.FirstName,
                             MiddleName = empl.MiddleName,
                             LastName = empl.LastName,
-                            ProfilePhoto = empl.ProfilePhoto,
+                            DateBirth = empl.DateBirth,
+                            Gender = empl.Gender,
+                            CodeCURP = empl.CodeCURP,
+                            CodeRFC = empl.CodeRFC,
                             Email = empl.Email,
                             Password = withPassword ? empl.Password : "",
                             IdRol = empl.RolesEmployees.IdRoleEmployee,
@@ -112,7 +115,38 @@ namespace FinanciaRed.Model.DAO {
             return responseDetailsEmployee;
         }
 
-        public static MessageResponse<bool> SaveChangesDataEmployee (DTO_Employee_DetailsEmployee newDataEmployee) {
+        public static async Task<MessageResponse<bool>> RegistryNewEmployee (DTO_Employee_DetailsEmployee newEmployee) {
+            MessageResponse<bool> responseCreateEmployee = null;
+
+            using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                try {
+                    Employees createdEmployee = new Employees {
+                        FirstName = newEmployee.FirstName,
+                        MiddleName = newEmployee.MiddleName,
+                        LastName = newEmployee.LastName,
+                        DateBirth = newEmployee.DateBirth,
+                        Gender = newEmployee.Gender,
+                        CodeCURP = newEmployee.CodeCURP,
+                        CodeRFC = newEmployee.CodeRFC,
+                        Email = newEmployee.Email,
+                        Password = newEmployee.Password,
+                        IdRole = newEmployee.IdRol,
+                        ProfilePhoto = newEmployee.ProfilePhoto
+                    };
+
+                    context.Employees.Add (createdEmployee);
+                    await context.SaveChangesAsync ();
+
+                    responseCreateEmployee = MessageResponse<bool>.Success (
+                        $"Employee {createdEmployee.FirstName} created", true);
+                } catch (Exception ex) {
+                    responseCreateEmployee = MessageResponse<bool>.Failure ("Exception" + ex.Message);
+                }
+            }
+            return responseCreateEmployee;
+        }
+
+        public static MessageResponse<bool> SaveChangesDataEmployee (DTO_Employee_DetailsEmployee newDataEmployee, bool changePassword) {
             MessageResponse<bool> responseUpdateDataEmployee = null;
 
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
@@ -122,61 +156,9 @@ namespace FinanciaRed.Model.DAO {
                     if (currentEmployee != null) {
                         context.Employees.Attach (currentEmployee);
 
-                        currentEmployee.FirstName = newDataEmployee.FirstName;
-                        currentEmployee.MiddleName = newDataEmployee.MiddleName;
-                        currentEmployee.LastName = newDataEmployee.LastName;
-                        currentEmployee.Email = newDataEmployee.Email;
-                        currentEmployee.IdRole = newDataEmployee.IdRol;
                         currentEmployee.ProfilePhoto = newDataEmployee.ProfilePhoto;
-
-                        bool SaveFailed = false;
-                        do {
-                            try {
-                                context.Entry (currentEmployee).State = EntityState.Modified;
-                                context.SaveChanges ();
-
-                            } catch (DbUpdateConcurrencyException ex) {
-                                SaveFailed = true;
-                                foreach (var entry in ex.Entries) {
-                                    if (entry.Entity is Match) {
-                                        var proposedValues = entry.CurrentValues;
-                                        var databaseValues = entry.GetDatabaseValues ();
-
-                                        if (databaseValues != null) {
-                                            var databaseEntity = (Employees)databaseValues.ToObject ();
-                                            // Actualiza los valores originales con los valores actuales de la base de datos.
-                                            entry.OriginalValues.SetValues (databaseValues);
-                                            // Decide qué hacer con los valores propuestos.
-                                            entry.CurrentValues.SetValues (proposedValues);
-                                        }
-                                    }
-                                }
-                            }
-                        } while (SaveFailed);
-
-                        responseUpdateDataEmployee = MessageResponse<bool>.Success (
-                            $"Employee ID {currentEmployee.IdEmployee} updated", true);
-                    } else {
-                        responseUpdateDataEmployee = MessageResponse<bool>.Failure ($"Employee ID {currentEmployee.IdEmployee} doesn´t exists");
-                    }
-                } catch (Exception ex) {
-                    responseUpdateDataEmployee = MessageResponse<bool>.Failure ("Exception" + ex.Message);
-                }
-            }
-            return responseUpdateDataEmployee;
-        }
-
-        public static MessageResponse<int> ModifyDataEmployee (DTO_Employee_ModifyData newDataEmployee, bool changePassword) {
-            MessageResponse<int> responseModify = null;
-
-            using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
-                try {
-                    Employees currentEmployee = context.Employees.Find (newDataEmployee.IdEmployee);
-
-                    if (currentEmployee != null) {
-                        context.Employees.Attach (currentEmployee);
-
-                        currentEmployee.ProfilePhoto = newDataEmployee.ProfilePhoto;
+                        currentEmployee.CodeCURP = newDataEmployee.CodeCURP;
+                        currentEmployee.CodeRFC = newDataEmployee.CodeRFC;
                         currentEmployee.Email = newDataEmployee.Email;
                         if (changePassword)
                             currentEmployee.Password = newDataEmployee.Password;
@@ -205,18 +187,18 @@ namespace FinanciaRed.Model.DAO {
                                 }
                             }
                         } while (failedSave);
-                        responseModify = MessageResponse<int>.Success (
+                        responseUpdateDataEmployee = MessageResponse<bool>.Success (
                             $"ID {newDataEmployee.IdEmployee} data employee modified.",
-                            1
+                            true
                             );
                     } else {
-                        responseModify = MessageResponse<int>.Failure ("Modification no realized.");
+                        responseUpdateDataEmployee = MessageResponse<bool>.Failure ("Modification no realized.");
                     }
                 } catch (Exception ex) {
-                    responseModify = MessageResponse<int>.Failure (ex.ToString ());
+                    responseUpdateDataEmployee = MessageResponse<bool>.Failure (ex.ToString ());
                 }
             }
-            return responseModify;
+            return responseUpdateDataEmployee;
         }
 
         public static async Task<bool> VerifyExistenceEmail (string email) {
@@ -226,6 +208,46 @@ namespace FinanciaRed.Model.DAO {
                         context.Employees.
                         Where (employee => employee.Email.Equals (email)).
                         Select (employee => employee.Email).
+                        FirstOrDefaultAsync ();
+
+                    if (!string.IsNullOrEmpty (dataRetrieved)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } catch (Exception) {
+                    return false;
+                }
+            }
+        }
+
+        public static async Task<bool> VerifyExistenceCURP (string curp) {
+            using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                try {
+                    string dataRetrieved = await
+                        context.Employees.
+                        Where (clnt => clnt.CodeCURP.Equals (curp)).
+                        Select (clnt => clnt.CodeCURP).
+                        FirstOrDefaultAsync ();
+
+                    if (!string.IsNullOrEmpty (dataRetrieved)) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } catch (Exception) {
+                    return false;
+                }
+            }
+        }
+
+        public static async Task<bool> VerifyExistenceRFC (string rfc) {
+            using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                try {
+                    string dataRetrieved = await
+                        context.Employees.
+                        Where (clnt => clnt.CodeRFC.Equals (rfc)).
+                        Select (clnt => clnt.CodeRFC).
                         FirstOrDefaultAsync ();
 
                     if (!string.IsNullOrEmpty (dataRetrieved)) {

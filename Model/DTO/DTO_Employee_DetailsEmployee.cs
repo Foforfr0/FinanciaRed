@@ -1,6 +1,11 @@
-﻿namespace FinanciaRed.Model.DTO {
+﻿using System;
+
+namespace FinanciaRed.Model.DTO {
     public class DTO_Employee_DetailsEmployee {
         public int IdEmployee {
+            get; set;
+        }
+        public byte[] ProfilePhoto {
             get; set;
         }
         public string FirstName {
@@ -12,7 +17,16 @@
         public string LastName {
             get; set;
         }
-        public byte[] ProfilePhoto {
+        public DateTime DateBirth {
+            get; set;
+        }
+        public string Gender {
+            get; set;
+        }
+        public string CodeCURP {
+            get; set;
+        }
+        public string CodeRFC {
             get; set;
         }
         public string Email {

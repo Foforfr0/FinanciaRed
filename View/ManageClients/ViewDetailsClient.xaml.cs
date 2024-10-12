@@ -35,7 +35,7 @@ namespace FinanciaRed.View.ManageClients {
             label_DateBirth.Content = selectedClient.DateBirth.ToString ("d");
             label_Gender.Content = selectedClient.Gender.Equals ("M") ? "Masculino" : "Femenino";
             label_MaritalStatus.Content = selectedClient.MaritalStatus;
-            label_CodeCURP.Content = selectedClient.CodeCurp;
+            label_CodeCURP.Content = selectedClient.CodeCURP;
             //-----------------------------------------------Address data
             label_State.Content = selectedClient.AddressClient.State;
             label_PostalCode.Content = selectedClient.AddressClient.PostalCode;

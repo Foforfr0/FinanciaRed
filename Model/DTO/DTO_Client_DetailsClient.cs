@@ -27,7 +27,7 @@ namespace FinanciaRed.Model.DTO {
         public string MaritalStatus {
             get; set;
         }
-        public string CodeCurp {
+        public string CodeCURP {
             get; set;
         }
         public DTO_AddressClient AddressClient {

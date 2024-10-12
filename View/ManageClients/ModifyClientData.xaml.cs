@@ -115,7 +115,7 @@ namespace FinanciaRed.View.ManageClients {
             datePicker_DateBirth.SelectedDate = selectedClient.DateBirth;
             comboBox_Gender.SelectedIndex = selectedClient.Gender.Equals ("M") ? 1 : 2;
             comboBox_MaritalStatus.SelectedIndex = selectedClient.IdMaritalStatus;
-            textBox_CodeCurp.Text = selectedClient.CodeCurp;
+            textBox_CodeCurp.Text = selectedClient.CodeCURP;
             //-----------------------------------------------Address data
             comboBox_State.SelectedIndex = selectedClient.AddressClient.IdState;
             textBox_Municipality.Text = selectedClient.AddressClient.Municipality;
@@ -188,16 +188,17 @@ namespace FinanciaRed.View.ManageClients {
 
         private async void ClickContinueStage2 (object sender, RoutedEventArgs e) {
             VerifyStage1 ();
-            bool existsCURP = await DAO_Client.VerifyExistenceCURP (textBox_CodeCurp.Text);
-            await Task.Delay (500);
-
+           
             if (_IsCorrectStage1.All (x => x == true)) {
-                if (textBox_CodeCurp.Text.Equals (selectedClient.CodeCurp)) {
+                if (textBox_CodeCurp.Text.Equals (selectedClient.CodeCURP)) {
                     stackPanel_Stage1.Visibility = Visibility.Collapsed;
                     stackPanel_Stage2.Visibility = Visibility.Visible;
                     stackPanel_Stage3.Visibility = Visibility.Collapsed;
                     stackPanel_Stage4.Visibility = Visibility.Collapsed;
                 } else {
+                    bool existsCURP = await DAO_Client.VerifyExistenceCURP (textBox_CodeCurp.Text);
+                    await Task.Delay (500);
+
                     if (existsCURP) {
                         label_ErrorCodeCurp.Content = "CURP ya existente en la base de datos.";
                         label_ErrorCodeCurp.Visibility = Visibility.Visible;
@@ -309,11 +310,12 @@ namespace FinanciaRed.View.ManageClients {
 
         private async void ClickFinishModification (object sender, RoutedEventArgs e) {
             VerifyStage4 ();
-            bool existsRFC = await DAO_Client.VerifyExistenceRFC (textBox_CodeRFC.Text);
-            await Task.Delay (500);
 
             if (_IsCorrectStage4.All (x => x == true)) {
-                if (textBox_CodeCurp.Text.Equals (selectedClient.CodeCurp)) {
+                bool existsRFC = await DAO_Client.VerifyExistenceRFC (textBox_CodeRFC.Text);
+                await Task.Delay (500);
+
+                if (textBox_CodeCurp.Text.Equals (selectedClient.CodeCURP)) {
                     SaveDataInDatabase ();
                 } else {
                     if (existsRFC) {
@@ -338,7 +340,7 @@ namespace FinanciaRed.View.ManageClients {
                 DateBirth = DateTime.Parse (datePicker_DateBirth.Text),
                 Gender = comboBox_Gender.SelectedIndex == 1 ? "M" : "F",
                 IdMaritalStatus = comboBox_MaritalStatus.SelectedIndex,
-                CodeCurp = textBox_CodeCurp.Text,
+                CodeCURP = textBox_CodeCurp.Text,
                 AddressClient = new DTO_AddressClient {
                     IdState = comboBox_State.SelectedIndex,
                     Municipality = textBox_Municipality.Text,
@@ -434,6 +436,11 @@ namespace FinanciaRed.View.ManageClients {
         }
 
         private void TextChanged_CodeCurp (object sender, TextChangedEventArgs e) {
+            TextBox textbox = sender as TextBox;
+            if (textbox.Text.Length > 18) {
+                textbox.Text = textbox.Text.Substring (0, 18);
+            }
+
             if (!CheckFormat.IsValidCURP (textBox_CodeCurp.Text)) {
                 label_ErrorCodeCurp.Content = "CURP no válido.";
                 label_ErrorCodeCurp.Visibility = Visibility.Visible;
@@ -458,6 +465,11 @@ namespace FinanciaRed.View.ManageClients {
         }
 
         private void TextChanged_PostalCode (object sender, TextChangedEventArgs e) {
+            TextBox textbox = sender as TextBox;
+            if (textbox.Text.Length > 5) {
+                textbox.Text = textbox.Text.Substring (0, 5);
+            }
+
             if (!CheckFormat.IsValidPostalCode (textBox_PostalCode.Text)) {
                 label_ErrorPostalCode.Content = "Código postal no válido.";
                 label_ErrorPostalCode.Visibility = Visibility.Visible;
@@ -967,6 +979,11 @@ namespace FinanciaRed.View.ManageClients {
 
         //Stage 4 validations---------------------------------------------------------------------------
         private void TextChanged_CodeRFC (object sender, TextChangedEventArgs e) {
+            TextBox textbox = sender as TextBox;
+            if (textbox.Text.Length > 13) {
+                textbox.Text = textbox.Text.Substring (0, 13);
+            }
+
             if (!CheckFormat.IsValidRFC (textBox_CodeCurp.Text, textBox_CodeRFC.Text)) {
                 label_ErrorCodeRFC.Content = "RFC no válido o no coincide con el CURP.";
                 label_ErrorCodeRFC.Visibility = Visibility.Visible;
