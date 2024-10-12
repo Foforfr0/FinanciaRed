@@ -1,0 +1,46 @@
+﻿<Window x:Class="FinanciaRed.View.ManageEmployees.ViewDetailsEmployee"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FinanciaRed.View.ManageEmployees"
+        xmlns:components="clr-namespace:FinanciaRed.View.Components"
+        mc:Ignorable="d"
+        Title="Registro de nuevo empleado" Height="650" Width="800" 
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+
+    <Grid Background="#FFFFFF">
+        <StackPanel Margin="0">
+            <Label Content="Detalles de empleado" Style="{StaticResource HeaderText}" Margin="8 8 8 10"/>
+            <StackPanel Margin="20 0" Orientation="Horizontal">
+                <StackPanel Grid.Column="0" Width="385" Margin="0 0 10 0">
+                    <Label Content="Foto de perfil" FontSize="15" Foreground="Black" FontWeight="Bold" HorizontalAlignment="Center" Margin="0 0 0 10"/>
+                    <Image x:Name="image_ImageProfile" Width="100" Height="100" Source="/View/Images/icon-user.png" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform">
+                        <Image.Clip>
+                            <EllipseGeometry Center="50,50" RadiusX="50" RadiusY="50" />
+                        </Image.Clip>
+                    </Image>
+                    <Label x:Name="label_PhotoStatus" Content="Sin foto" HorizontalAlignment="Center" Margin="0 5"/>
+                </StackPanel>
+
+                <StackPanel x:Name="stackPanel_Form" Grid.Column="1" Width="365" Margin="10 0 0 0">
+                    <Label Content="Datos de perfil" FontSize="18" FontWeight="Bold" Padding="0" Margin="0 0 0 5"/>
+                    <Label Content="Nombre(s):" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                    <Label x:Name="label_FirstName" Background="White" Padding="5 0 0 0"/>
+                    <Label Content="Apellido paterno:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center" Margin="0 8 0 0"/>
+                    <Label x:Name="label_MiddleName" Background="White" Padding="5 0 0 0"/>
+                    <Label Content="Apellido materno:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center" Margin="0 8 0 0"/>
+                    <Label x:Name="label_LastName" Background="White" Padding="5 0 0 0"/>
+                    <Label Content="Correo electrónico:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center" Margin="0 8 0 0"/>
+                    <Label x:Name="label_Email" Background="White" Padding="5 0 0 0"/>
+                    <Label Content="Cargo actual:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center" Margin="0 8 0 0"/>
+                    <Label x:Name="label_Rol" Background="White" Padding="5 0 0 0"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 25 0 0" Width="100">
+                        <Button x:Name="button_Modify" Click="ClickModifyEmployee" Content="Modificar" 
+                            Width="80" Height="25" HorizontalAlignment="Center" Background="#FF0693C3" Foreground="#FFFFFF"/>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

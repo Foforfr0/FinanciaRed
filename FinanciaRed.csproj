@@ -14,6 +14,21 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -38,8 +53,17 @@
     <ApplicationIcon>View\Images\logo-business.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -58,7 +82,110 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="View\CheckProfile.xaml.cs">
+    <Compile Include="Model\DAO\DAO_Client.cs" />
+    <Compile Include="Model\DAO\DAO_Credit.cs" />
+    <Compile Include="Model\DAO\DAO_Employee.cs" />
+    <Compile Include="Model\DAO\DAO_GeneralVariables.cs" />
+    <Compile Include="Model\DTO\DTO_AddressClient.cs" />
+    <Compile Include="Model\DTO\DTO_AddressState.cs" />
+    <Compile Include="Model\DTO\DTO_AddressType.cs" />
+    <Compile Include="Model\DTO\DTO_Bank.cs" />
+    <Compile Include="Model\DTO\DTO_CardType.cs" />
+    <Compile Include="Model\DTO\DTO_Client_Consult.cs" />
+    <Compile Include="Model\DTO\DTO_Client_DetailsClient.cs" />
+    <Compile Include="Model\DTO\DTO_Credit_Consult.cs" />
+    <Compile Include="Model\DTO\DTO_EmployeeRol.cs" />
+    <Compile Include="Model\DTO\DTO_Employee_Consult.cs" />
+    <Compile Include="Model\DTO\DTO_Employee_DetailsEmployee.cs" />
+    <Compile Include="Model\DTO\DTO_Employee_Login.cs" />
+    <Compile Include="Model\DTO\DTO_Employee_ModifyData.cs" />
+    <Compile Include="Model\DTO\DTO_MaritalStatus.cs" />
+    <Compile Include="Model\DTO\DTO_RelationshipType.cs" />
+    <Compile Include="Model\DTO\MessageResponse.cs" />
+    <Compile Include="Model\DTO\DTO_WorkType.cs" />
+    <Compile Include="Model\Model_Entity\AddressesTypes.cs">
+      <DependentUpon>Model_Entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Model_Entity\BankAccounts.cs">
+      <DependentUpon>Model_Entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Model_Entity\BankCardTypes.cs">
+      <DependentUpon>Model_Entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Model_Entity\Banks.cs">
+      <DependentUpon>Model_Entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Model_Entity\Clients.cs">
+      <DependentUpon>Model_Entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Model_Entity\ClientsAddresses.cs">
+      <DependentUpon>Model_Entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Model_Entity\ContactsReferencesClients.cs">
+      <DependentUpon>Model_Entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Model_Entity\Credits.cs">
+      <DependentUpon>Model_Entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Model_Entity\Employees.cs">
+      <DependentUpon>Model_Entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Model_Entity\MaritalStatuses.cs">
+      <DependentUpon>Model_Entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Model_Entity\Model_Entity.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model_Entity.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Model_Entity\Model_Entity.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model_Entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Model_Entity\Model_Entity.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model_Entity.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Model_Entity\RelationshipsClientsTypes.cs">
+      <DependentUpon>Model_Entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Model_Entity\RolesEmployees.cs">
+      <DependentUpon>Model_Entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Model_Entity\StatesAddresses.cs">
+      <DependentUpon>Model_Entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Model_Entity\StatesCredits.cs">
+      <DependentUpon>Model_Entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Model_Entity\WorkAreas.cs">
+      <DependentUpon>Model_Entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Model_Entity\WorkAreaTypes.cs">
+      <DependentUpon>Model_Entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\CheckFormat.cs" />
+    <Compile Include="Utils\Converters.cs" />
+    <Compile Include="Utils\ManageLabelsError.cs" />
+    <Compile Include="Utils\RetrieveDataVariables.cs" />
+    <Compile Include="View\Components\Header.xaml.cs">
+      <DependentUpon>Header.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManageClients\ModifyClientData.xaml.cs">
+      <DependentUpon>ModifyClientData.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManageClients\ViewDetailsClient.xaml.cs">
+      <DependentUpon>ViewDetailsClient.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManageClients\RegisterClient.xaml.cs">
+      <DependentUpon>RegisterClient.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManageCredits\RegistrerCredit.xaml.cs">
+      <DependentUpon>RegistrerCredit.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManageEmployees\CheckProfile.xaml.cs">
       <DependentUpon>CheckProfile.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Login.xaml.cs">
@@ -67,16 +194,48 @@
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ViewClients.xaml.cs">
+    <Compile Include="View\ManageClients\ViewClients.xaml.cs">
       <DependentUpon>ViewClients.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ViewCredits.xaml.cs">
+    <Compile Include="View\ManageCredits\ViewCredits.xaml.cs">
       <DependentUpon>ViewCredits.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManageEmployees\ModifyEmployeeData.xaml.cs">
+      <DependentUpon>ModifyEmployeeData.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManageEmployees\RegisterEmployee.xaml.cs">
+      <DependentUpon>RegisterEmployee.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManageEmployees\ViewDetailsEmployee.xaml.cs">
+      <DependentUpon>ViewDetailsEmployee.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManageEmployees\ViewEmployees.xaml.cs">
+      <DependentUpon>ViewEmployees.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\WindowContainer.xaml.cs">
       <DependentUpon>WindowContainer.xaml</DependentUpon>
     </Compile>
-    <Page Include="View\CheckProfile.xaml">
+    <Page Include="View\Components\Header.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ManageClients\ModifyClientData.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ManageClients\ViewDetailsClient.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ManageClients\RegisterClient.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ManageCredits\RegistrerCredit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ManageEmployees\CheckProfile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -92,11 +251,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ViewClients.xaml">
+    <Page Include="View\ManageClients\ViewClients.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ViewCredits.xaml">
+    <Page Include="View\ManageCredits\ViewCredits.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ManageEmployees\ModifyEmployeeData.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ManageEmployees\RegisterEmployee.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ManageEmployees\ViewDetailsEmployee.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ManageEmployees\ViewEmployees.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -123,6 +298,14 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="Model\Model_Entity\Model_Entity.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model_Entity.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model\Model_Entity\Model_Entity.edmx.diagram">
+      <DependentUpon>Model_Entity.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -132,9 +315,16 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Model\" />
-    <Folder Include="View\Clients\" />
-    <Folder Include="View\NewFolder1\" />
+    <BootstrapperPackage Include=".NETFramework,Version=v4.8.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.8.1 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="View\Images\logo-business.jpeg" />
@@ -151,6 +341,23 @@
   <ItemGroup>
     <Resource Include="View\Images\icon-eye-close.png" />
     <Resource Include="View\Images\icon-eye-open.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".gitignore" />
+    <Content Include="Database.sql" />
+    <Content Include="Model\Model_Entity\Model_Entity.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model_Entity.edmx</DependentUpon>
+      <LastGenOutput>Model_Entity.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model\Model_Entity\Model_Entity.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model_Entity.edmx</DependentUpon>
+      <LastGenOutput>Model_Entity.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
