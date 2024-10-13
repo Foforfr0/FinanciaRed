@@ -412,7 +412,8 @@ namespace FinanciaRed.Model.DAO {
                 try {
                     string dataRetrieved = await
                         context.Clients.
-                        Where (clnt => clnt.BankAccounts.CLABE.Equals (clabe) || clnt.BankAccounts1.CLABE.Equals (clabe)).
+                        Where (clnt => clnt.BankAccounts.CLABE.Equals (clabe) || 
+                                                      clnt.BankAccounts1.CLABE.Equals (clabe)).
                         Select (clnt => clnt.BankAccounts.CLABE).
                         FirstOrDefaultAsync ();
 
