@@ -182,6 +182,9 @@
     <Compile Include="View\ManageClients\RegisterClient.xaml.cs">
       <DependentUpon>RegisterClient.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ManageCreditRequests\ViewCreditRequests.xaml.cs">
+      <DependentUpon>ViewCreditRequests.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ManageCredits\RegistrerCredit.xaml.cs">
       <DependentUpon>RegistrerCredit.xaml</DependentUpon>
     </Compile>
@@ -228,6 +231,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ManageClients\RegisterClient.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ManageCreditRequests\ViewCreditRequests.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
