@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="FinanciaRed.View.Components.Header"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FinanciaRed.View.Components">
+    <Grid Background="#FFFEEA" Width="800" Height="50">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="FinanciaRed" VerticalAlignment="Center" FontWeight="Bold" FontSize="20" Padding="0" Margin="10"/>
+    </Grid>
+</UserControl>
