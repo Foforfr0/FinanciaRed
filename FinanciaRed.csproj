@@ -14,6 +14,21 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -72,12 +87,15 @@
     <Compile Include="Model\DAO\DAO_Employee.cs" />
     <Compile Include="Model\DAO\DAO_GeneralVariables.cs" />
     <Compile Include="Model\DTO\DTO_AddressClient.cs" />
+    <Compile Include="Model\DTO\DTO_AddressState.cs" />
     <Compile Include="Model\DTO\DTO_AddressType.cs" />
     <Compile Include="Model\DTO\DTO_Bank.cs" />
     <Compile Include="Model\DTO\DTO_CardType.cs" />
     <Compile Include="Model\DTO\DTO_Client_Consult.cs" />
     <Compile Include="Model\DTO\DTO_Client_DetailsClient.cs" />
     <Compile Include="Model\DTO\DTO_Credit_Consult.cs" />
+    <Compile Include="Model\DTO\DTO_EmployeeRol.cs" />
+    <Compile Include="Model\DTO\DTO_Employee_Consult.cs" />
     <Compile Include="Model\DTO\DTO_Employee_DetailsEmployee.cs" />
     <Compile Include="Model\DTO\DTO_Employee_Login.cs" />
     <Compile Include="Model\DTO\DTO_Employee_ModifyData.cs" />
@@ -136,6 +154,9 @@
     <Compile Include="Model\Model_Entity\RolesEmployees.cs">
       <DependentUpon>Model_Entity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Model_Entity\StatesAddresses.cs">
+      <DependentUpon>Model_Entity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Model_Entity\StatesCredits.cs">
       <DependentUpon>Model_Entity.tt</DependentUpon>
     </Compile>
@@ -149,11 +170,20 @@
     <Compile Include="Utils\Converters.cs" />
     <Compile Include="Utils\ManageLabelsError.cs" />
     <Compile Include="Utils\RetrieveDataVariables.cs" />
-    <Compile Include="View\ManageClients\DetailsClient.xaml.cs">
-      <DependentUpon>DetailsClient.xaml</DependentUpon>
+    <Compile Include="View\Components\Header.xaml.cs">
+      <DependentUpon>Header.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManageClients\ModifyClientData.xaml.cs">
+      <DependentUpon>ModifyClientData.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManageClients\ViewDetailsClient.xaml.cs">
+      <DependentUpon>ViewDetailsClient.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ManageClients\RegisterClient.xaml.cs">
       <DependentUpon>RegisterClient.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManageCreditRequests\ViewCreditRequests.xaml.cs">
+      <DependentUpon>ViewCreditRequests.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ManageCredits\RegistrerCredit.xaml.cs">
       <DependentUpon>RegistrerCredit.xaml</DependentUpon>
@@ -173,17 +203,38 @@
     <Compile Include="View\ManageCredits\ViewCredits.xaml.cs">
       <DependentUpon>ViewCredits.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ManageUsers\ViewEmployees.xaml.cs">
+    <Compile Include="View\ManageEmployees\ModifyEmployeeData.xaml.cs">
+      <DependentUpon>ModifyEmployeeData.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManageEmployees\RegisterEmployee.xaml.cs">
+      <DependentUpon>RegisterEmployee.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManageEmployees\ViewDetailsEmployee.xaml.cs">
+      <DependentUpon>ViewDetailsEmployee.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManageEmployees\ViewEmployees.xaml.cs">
       <DependentUpon>ViewEmployees.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\WindowContainer.xaml.cs">
       <DependentUpon>WindowContainer.xaml</DependentUpon>
     </Compile>
-    <Page Include="View\ManageClients\DetailsClient.xaml">
+    <Page Include="View\Components\Header.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ManageClients\ModifyClientData.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ManageClients\ViewDetailsClient.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ManageClients\RegisterClient.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ManageCreditRequests\ViewCreditRequests.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -215,7 +266,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ManageUsers\ViewEmployees.xaml">
+    <Page Include="View\ManageEmployees\ModifyEmployeeData.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ManageEmployees\RegisterEmployee.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ManageEmployees\ViewDetailsEmployee.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ManageEmployees\ViewEmployees.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -258,7 +321,18 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.8.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.8.1 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="View\Images\logo-business.jpeg" />
   </ItemGroup>

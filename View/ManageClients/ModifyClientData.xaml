@@ -1,11 +1,11 @@
-﻿<Window x:Class="FinanciaRed.View.ManageClients.RegisterClient"
+﻿<Window x:Class="FinanciaRed.View.ManageClients.ModifyClientData"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:FinanciaRed.View.ManageClients"
     mc:Ignorable="d"
-    Title="Registro de nuevo cliente" d:Height="850" Height="650" Width="800" 
+    Title="Modificar datos del cliente" d:Height="850" Height="650" Width="800" 
     WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
 
     <Grid>
@@ -30,10 +30,10 @@
             </Grid>
             <Grid>
                 <!--Personal Data / Address Data-->
-                <StackPanel x:Name="stackPanel_Stage1" d:Height="725" Height="525" Width="740" Margin="20" Background="#FFFFFF">
+                <StackPanel x:Name="stackPanel_Stage1" d:Height="725"  Height="525" Width="740" Margin="20" Background="#FFFFFF">
                     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" d:Height="725" Height="525" Width="740">
                         <StackPanel Margin="20 10">
-                            <Label Content="Registro del cliente" Margin="0" Style="{StaticResource HeaderText}"/>
+                            <Label Content="Modificación de datos del cliente" Margin="0" Style="{StaticResource HeaderText}"/>
                             <Label Content="Ingrese los datos necesarios (*)" FontSize="17" Padding="0" HorizontalAlignment="Left"/>
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -48,7 +48,7 @@
                                             <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
                                             <Label Content="Nombre(s):" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
                                         </StackPanel>
-                                        <TextBox x:Name="textBox_Name" TextChanged="TextChanged_Name" Height="22"/>
+                                        <TextBox x:Name="textBox_FirstName" TextChanged="TextChanged_Name" Height="22"/>
                                         <Label x:Name="label_ErrorName" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                             <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
@@ -88,10 +88,10 @@
                                         <Label x:Name="label_ErrorMaritalStatus" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                             <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
-                                            <Label Content="Código Único de Registro de Población:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                            <Label Content="Código Único de Modificación de datos de Población:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
                                         </StackPanel>
-                                        <TextBox x:Name="textBox_CodeCURP" TextChanged="TextChanged_CodeCURP" Height="22"/>
-                                        <Label x:Name="label_ErrorCodeCURP" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
+                                        <TextBox x:Name="textBox_CodeCurp" TextChanged="TextChanged_CodeCurp" Height="22"/>
+                                        <Label x:Name="label_ErrorCodeCurp" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
                                     </StackPanel>
                                 </StackPanel>
 
@@ -165,7 +165,7 @@
                 <StackPanel x:Name="stackPanel_Stage2" Height="525" Width="740" Margin="20" Background="#FFFFFF" Visibility="Collapsed">
                     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Height="525" Width="740">
                         <StackPanel Margin="20 10">
-                            <Label Content="Registro del cliente" Margin="0" Style="{StaticResource HeaderText}"/>
+                            <Label Content="Modificación de datos del cliente" Margin="0" Style="{StaticResource HeaderText}"/>
                             <Label Content="Ingrese los datos necesarios (*)" FontSize="17" Padding="0" HorizontalAlignment="Left"/>
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -242,7 +242,7 @@
                 <StackPanel x:Name="stackPanel_Stage3" Height="525" Width="740" Margin="20" Background="#FFFFFF" Visibility="Collapsed">
                     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Height="525" Width="740">
                         <StackPanel Margin="20 10">
-                            <Label Content="Registro del cliente" Margin="0" Style="{StaticResource HeaderText}"/>
+                            <Label Content="Modificación de datos del cliente" Margin="0" Style="{StaticResource HeaderText}"/>
                             <Label Content="Ingrese los datos necesarios (*)" FontSize="17" Padding="0" HorizontalAlignment="Left"/>
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -355,12 +355,12 @@
                 <StackPanel x:Name="stackPanel_Stage4" Height="525" Width="740" Margin="20" Background="#FFFFFF" Visibility="Collapsed">
                     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Height="525" Width="740">
                         <StackPanel Margin="20 10">
-                            <Label Content="Registro del cliente" Margin="0" Style="{StaticResource HeaderText}"/>
+                            <Label Content="Modificación de datos del cliente" Margin="0" Style="{StaticResource HeaderText}"/>
                             <Label Content="Ingrese los datos necesarios (*)" FontSize="17" Padding="0" HorizontalAlignment="Left"/>
                             <StackPanel Margin="10 0 0 0">
                                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                     <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
-                                    <Label Content="Registro Federal del Contribuyente:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    <Label Content="Modificación de datos Federal del Contribuyente:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
                                 </StackPanel>
                                 <TextBox x:Name="textBox_CodeRFC" TextChanged="TextChanged_CodeRFC" Height="22" Width="325" HorizontalAlignment="Left"/>
                                 <Label x:Name="label_ErrorCodeRFC" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
@@ -445,8 +445,8 @@
                                         Width="80" Background="#FF0693C3" Foreground="#FFFFFF"/>
                                 <Button Click="ClickCancel" Content="Cancelar" Grid.Column="1" 
                                         Width="80" Background="#FFDE2323" Foreground="#FFFFFF"/>
-                                <Button Click="ClickFinishRegistry" Content="Finalizar registro" Grid.Column="2" 
-                                        Width="100" Background="#FF06C32B" Foreground="#FFFFFF"/>
+                                <Button Click="ClickFinishModification" Content="Finalizar Modificación de datos" Grid.Column="2" 
+                                        Width="120" Background="#FF06C32B" Foreground="#FFFFFF"/>
                             </Grid>
                         </StackPanel>
                     </ScrollViewer>

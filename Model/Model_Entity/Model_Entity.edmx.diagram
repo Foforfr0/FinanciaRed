@@ -4,22 +4,23 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1ffb8ec3b92441c3a2b44241db462250" Name="Diagram1">
-        <EntityTypeShape EntityType="FinanciaRedModel.AddressesTypes" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
+      <Diagram DiagramId="a14c6be15af444fe92dd816bff82612f" Name="Diagram1">
+        <EntityTypeShape EntityType="FinanciaRedModel.AddressesTypes" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
         <EntityTypeShape EntityType="FinanciaRedModel.BankAccounts" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
         <EntityTypeShape EntityType="FinanciaRedModel.BankCardTypes" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="FinanciaRedModel.Banks" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FinanciaRedModel.Clients" Width="1.5" PointX="5.25" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="FinanciaRedModel.ClientsAddresses" Width="1.5" PointX="3" PointY="8.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="FinanciaRedModel.ContactsReferencesClients" Width="1.5" PointX="3" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinanciaRedModel.Clients" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinanciaRedModel.ClientsAddresses" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinanciaRedModel.ContactsReferencesClients" Width="1.5" PointX="3" PointY="13.375" IsExpanded="true" />
         <EntityTypeShape EntityType="FinanciaRedModel.Credits" Width="1.5" PointX="7.5" PointY="2.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FinanciaRedModel.Employees" Width="1.5" PointX="5.25" PointY="20.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="FinanciaRedModel.MaritalStatuses" Width="1.5" PointX="3" PointY="15.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="FinanciaRedModel.RelationshipsClientsTypes" Width="1.5" PointX="0.75" PointY="12.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="FinanciaRedModel.RolesEmployees" Width="1.5" PointX="3" PointY="21.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="FinanciaRedModel.StatesCredits" Width="1.5" PointX="5.25" PointY="8.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="FinanciaRedModel.WorkAreas" Width="1.5" PointX="3" PointY="18" IsExpanded="true" />
-        <EntityTypeShape EntityType="FinanciaRedModel.WorkAreaTypes" Width="1.5" PointX="0.75" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinanciaRedModel.Employees" Width="1.5" PointX="5.25" PointY="22.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinanciaRedModel.MaritalStatuses" Width="1.5" PointX="3" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinanciaRedModel.RelationshipsClientsTypes" Width="1.5" PointX="0.75" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinanciaRedModel.RolesEmployees" Width="1.5" PointX="3" PointY="23.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinanciaRedModel.StatesAddresses" Width="1.5" PointX="0.75" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinanciaRedModel.StatesCredits" Width="1.5" PointX="5.25" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinanciaRedModel.WorkAreas" Width="1.5" PointX="3" PointY="19.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinanciaRedModel.WorkAreaTypes" Width="1.5" PointX="0.75" PointY="19.625" IsExpanded="true" />
         <AssociationConnector Association="FinanciaRedModel.fk_AddressType_ClientAddress" ManuallyRouted="false" />
         <AssociationConnector Association="FinanciaRedModel.fk_Bank_BankAccount" ManuallyRouted="false" />
         <AssociationConnector Association="FinanciaRedModel.fk_BankAccount1_Client" ManuallyRouted="false" />
@@ -31,6 +32,7 @@
         <AssociationConnector Association="FinanciaRedModel.fk_ContactReference2_Client" ManuallyRouted="false" />
         <AssociationConnector Association="FinanciaRedModel.fk_MaritalStatus_Client" ManuallyRouted="false" />
         <AssociationConnector Association="FinanciaRedModel.fk_WorkArea_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="FinanciaRedModel.fk_StateAddress_ClientAddress" ManuallyRouted="false" />
         <AssociationConnector Association="FinanciaRedModel.fk_RelationshipClientType_ContactReferenceClient" ManuallyRouted="false" />
         <AssociationConnector Association="FinanciaRedModel.fk_Employee_Credit" ManuallyRouted="false" />
         <AssociationConnector Association="FinanciaRedModel.fk_StateCredit_Credit" ManuallyRouted="false" />

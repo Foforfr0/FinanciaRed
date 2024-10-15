@@ -1,5 +1,5 @@
 ﻿namespace FinanciaRed.Model.DTO {
-    internal class DTO_AddressClient {
+    public class DTO_AddressClient {
         public int IdAddressClient {
             get; set;
         }
@@ -16,6 +16,12 @@
             get; set;
         }
         public string PostalCode {
+            get; set;
+        }
+        public string Municipality {
+            get; set;
+        }
+        public int IdState {
             get; set;
         }
         public string State {

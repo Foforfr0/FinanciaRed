@@ -7,38 +7,66 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FinanciaRed.Model.Model_Entity
-{
+namespace FinanciaRed.Model.Model_Entity {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
-    public partial class FinanciaRedEntities : DbContext
-    {
-        public FinanciaRedEntities()
-            : base("name=FinanciaRedEntities")
-        {
+
+    public partial class FinanciaRedEntities : DbContext {
+        public FinanciaRedEntities () : base ("name=FinanciaRedEntities") {
         }
-    
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            throw new UnintentionalCodeFirstException();
+
+        protected override void OnModelCreating (DbModelBuilder modelBuilder) {
+            throw new UnintentionalCodeFirstException ();
         }
-    
-        public virtual DbSet<AddressesTypes> AddressesTypes { get; set; }
-        public virtual DbSet<BankAccounts> BankAccounts { get; set; }
-        public virtual DbSet<BankCardTypes> BankCardTypes { get; set; }
-        public virtual DbSet<Banks> Banks { get; set; }
-        public virtual DbSet<Clients> Clients { get; set; }
-        public virtual DbSet<ClientsAddresses> ClientsAddresses { get; set; }
-        public virtual DbSet<ContactsReferencesClients> ContactsReferencesClients { get; set; }
-        public virtual DbSet<Credits> Credits { get; set; }
-        public virtual DbSet<Employees> Employees { get; set; }
-        public virtual DbSet<MaritalStatuses> MaritalStatuses { get; set; }
-        public virtual DbSet<RelationshipsClientsTypes> RelationshipsClientsTypes { get; set; }
-        public virtual DbSet<RolesEmployees> RolesEmployees { get; set; }
-        public virtual DbSet<StatesCredits> StatesCredits { get; set; }
-        public virtual DbSet<WorkAreas> WorkAreas { get; set; }
-        public virtual DbSet<WorkAreaTypes> WorkAreaTypes { get; set; }
+
+        public virtual DbSet<AddressesTypes> AddressesTypes {
+            get; set;
+        }
+        public virtual DbSet<BankAccounts> BankAccounts {
+            get; set;
+        }
+        public virtual DbSet<BankCardTypes> BankCardTypes {
+            get; set;
+        }
+        public virtual DbSet<Banks> Banks {
+            get; set;
+        }
+        public virtual DbSet<Clients> Clients {
+            get; set;
+        }
+        public virtual DbSet<ClientsAddresses> ClientsAddresses {
+            get; set;
+        }
+        public virtual DbSet<ContactsReferencesClients> ContactsReferencesClients {
+            get; set;
+        }
+        public virtual DbSet<Credits> Credits {
+            get; set;
+        }
+        public virtual DbSet<Employees> Employees {
+            get; set;
+        }
+        public virtual DbSet<MaritalStatuses> MaritalStatuses {
+            get; set;
+        }
+        public virtual DbSet<RelationshipsClientsTypes> RelationshipsClientsTypes {
+            get; set;
+        }
+        public virtual DbSet<RolesEmployees> RolesEmployees {
+            get; set;
+        }
+        public virtual DbSet<StatesAddresses> StatesAddresses {
+            get; set;
+        }
+        public virtual DbSet<StatesCredits> StatesCredits {
+            get; set;
+        }
+        public virtual DbSet<WorkAreas> WorkAreas {
+            get; set;
+        }
+        public virtual DbSet<WorkAreaTypes> WorkAreaTypes {
+            get; set;
+        }
     }
 }

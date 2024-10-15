@@ -19,7 +19,7 @@ namespace FinanciaRed.Model.DAO {
                             IdMaritalStatus = ms.IdMaritalStatus,
                             Status = ms.Status
                         }).
-                        OrderBy(ms => ms.IdMaritalStatus).
+                        OrderBy (ms => ms.IdMaritalStatus).
                         ToListAsync ();
 
                     if (dataRetrieved != null) {
@@ -36,6 +36,34 @@ namespace FinanciaRed.Model.DAO {
             return responseConsultMaritalStatuses;
         }
 
+        public static async Task<MessageResponse<List<DTO_AddressState>>> GetAllAddressStates () {
+            MessageResponse<List<DTO_AddressState>> responseConsultStatesAddress = null;
+
+            using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                try {
+                    List<DTO_AddressState> dataRetrieved = await
+                        context.StatesAddresses.
+                        Select (state => new DTO_AddressState {
+                            IdAddressState = state.IdStateAddress,
+                            Name = state.Name
+                        }).
+                        OrderBy (wt => wt.IdAddressState).
+                        ToListAsync ();
+
+                    if (dataRetrieved != null) {
+                        responseConsultStatesAddress = MessageResponse<List<DTO_AddressState>>.Success (
+                            dataRetrieved.Count + " states address retrieved.",
+                            dataRetrieved);
+                    } else {
+                        responseConsultStatesAddress = MessageResponse<List<DTO_AddressState>>.Failure ("States address doesn´t retrieved.");
+                    }
+                } catch (Exception ex) {
+                    responseConsultStatesAddress = MessageResponse<List<DTO_AddressState>>.Failure (ex.ToString ());
+                }
+            }
+            return responseConsultStatesAddress;
+        }
+
         public static async Task<MessageResponse<List<DTO_WorkType>>> GetAllWorkTypes () {
             MessageResponse<List<DTO_WorkType>> responseConsultWorkType = null;
 
@@ -45,9 +73,9 @@ namespace FinanciaRed.Model.DAO {
                         context.WorkAreaTypes.
                         Select (wt => new DTO_WorkType {
                             IdWorkType = wt.IdWorkAreaType,
-                            Type= wt.Type
+                            Type = wt.Type
                         }).
-                        OrderBy(wt => wt.IdWorkType).
+                        OrderBy (wt => wt.IdWorkType).
                         ToListAsync ();
 
                     if (dataRetrieved != null) {
@@ -64,7 +92,7 @@ namespace FinanciaRed.Model.DAO {
             return responseConsultWorkType;
         }
 
-        public static async Task<MessageResponse<List<DTO_RelationshipType>>> GetAllRelationshipsTypes() {
+        public static async Task<MessageResponse<List<DTO_RelationshipType>>> GetAllRelationshipsTypes () {
             MessageResponse<List<DTO_RelationshipType>> responseConsultRelationTypes = null;
 
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
@@ -75,7 +103,7 @@ namespace FinanciaRed.Model.DAO {
                             IdRelationshipType = rst.IdRelationshipClient,
                             Type = rst.Type
                         }).
-                        OrderBy(rst => rst.IdRelationshipType).
+                        OrderBy (rst => rst.IdRelationshipType).
                         ToListAsync ();
 
                     if (dataRetrieved != null) {
@@ -103,7 +131,7 @@ namespace FinanciaRed.Model.DAO {
                             IdBank = bank.IdBank,
                             Name = bank.Name
                         }).
-                        OrderBy(bank => bank.IdBank).
+                        OrderBy (bank => bank.IdBank).
                         ToListAsync ();
 
                     if (dataRetrieved != null) {
@@ -131,7 +159,7 @@ namespace FinanciaRed.Model.DAO {
                             IdCardType = type.IdBankCardType,
                             Type = type.Type
                         }).
-                        OrderBy(type => type.IdCardType).
+                        OrderBy (type => type.IdCardType).
                         ToListAsync ();
 
                     if (dataRetrieved != null) {
@@ -155,11 +183,11 @@ namespace FinanciaRed.Model.DAO {
                 try {
                     List<DTO_AddressType> dataRetrieved = await
                         context.AddressesTypes.
-                        Select (type => new DTO_AddressType{
+                        Select (type => new DTO_AddressType {
                             IdAddressType = type.IdAddressType,
                             Type = type.Type
                         }).
-                        OrderBy(type => type.IdAddressType).
+                        OrderBy (type => type.IdAddressType).
                         ToListAsync ();
 
                     if (dataRetrieved != null) {
@@ -171,6 +199,34 @@ namespace FinanciaRed.Model.DAO {
                     }
                 } catch (Exception ex) {
                     responseConsultAddressTypes = MessageResponse<List<DTO_AddressType>>.Failure (ex.ToString ());
+                }
+            }
+            return responseConsultAddressTypes;
+        }
+
+        public static async Task<MessageResponse<List<DTO_EmployeeRol>>> GetAllEmployeeRoles () {
+            MessageResponse<List<DTO_EmployeeRol>> responseConsultAddressTypes = null;
+
+            using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                try {
+                    List<DTO_EmployeeRol> dataRetrieved = await
+                        context.RolesEmployees.
+                        Select (rol => new DTO_EmployeeRol {
+                            IdRol = rol.IdRoleEmployee,
+                            Rol = rol.Role
+                        }).
+                        OrderBy (rol => rol.IdRol).
+                        ToListAsync ();
+
+                    if (dataRetrieved != null) {
+                        responseConsultAddressTypes = MessageResponse<List<DTO_EmployeeRol>>.Success (
+                            dataRetrieved.Count + " roles retrieved.",
+                            dataRetrieved);
+                    } else {
+                        responseConsultAddressTypes = MessageResponse<List<DTO_EmployeeRol>>.Failure ("Roles employee doesn´t retrieved.");
+                    }
+                } catch (Exception ex) {
+                    responseConsultAddressTypes = MessageResponse<List<DTO_EmployeeRol>>.Failure (ex.ToString ());
                 }
             }
             return responseConsultAddressTypes;

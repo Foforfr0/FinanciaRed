@@ -20,14 +20,14 @@
             </StackPanel.Effect>
 
             <StackPanel x:Name="stackPanel_FormLogIn" Margin="15">
-                <StackPanel Margin="10 5" Orientation="Horizontal" VerticalAlignment="Center">
+                <StackPanel Margin="25 10" Orientation="Horizontal" VerticalAlignment="Center">
                     <Image Width="40" Source="/View/Images/logo-business.jpeg"/>
                     <Label Content="FinanciaRed" VerticalAlignment="Center" FontWeight="Bold" FontSize="20"/>
                 </StackPanel>
-                <Label Content="Iniciar sesión" FontSize="24" FontWeight="Bold" Margin="10 0"/>
+                <Label Content="Iniciar sesión" FontSize="24" FontWeight="Bold" Margin="25 0 0 10"/>
                 <Label Content="Usuario:" FontSize="15" Margin="50 0"/>
                 <TextBox x:Name="textBox_Email" Margin="20 0" Padding="2" Width="300"/>
-                <Label Content="Contraseña:" FontSize="15" Margin="50 0"/>
+                <Label Content="Contraseña:" FontSize="15" Margin="50 9 0 0"/>
                 <StackPanel Orientation="Horizontal" Margin="20 0" Width="300">
                     <Grid>
                         <TextBox x:Name="textBox_Password" TextChanged="ChangedTextBoxPassword" Padding="2" Width="275" Visibility="Visible"/>
@@ -38,16 +38,10 @@
                     </Button>
                 </StackPanel>
 
-                <StackPanel Orientation="Horizontal" Margin="50 10">
-                    <Label Content="¿Se le olvidó su contraseña?" FontSize="13"/>
-                    <Label>
-                        <Hyperlink Click="ClickRecoverPassword">
-                            <Run Text="Clic aqui"/>
-                        </Hyperlink>
-                    </Label>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button Click="ClickLogin" Content="Iniciar sesión" Width="108" Height="32" Margin="0 0 55 0" Padding="4 4" FontSize="12" Background="#0067B8" Foreground="#FFFFFF"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 25 0 0">
+                    <Button Click="ClickLogin" Content="Iniciar sesión" Width="108" 
+                            Height="32" Margin="0 0 0 0" Padding="4 4" FontSize="12" 
+                            Background="#0067B8" Foreground="#FFFFFF" IsDefault="True"/>
                 </StackPanel>
             </StackPanel>
         </StackPanel>

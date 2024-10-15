@@ -48,17 +48,17 @@
             <StackPanel Orientation="Horizontal" Height="630" VerticalAlignment="Center">
                 <StackPanel Orientation="Vertical" Width="130" Height="630" Background="#FFFFFF">
                     <StackPanel Margin="10 5">
-                        <Label x:Name="label_GlobalOptionClients">
+                        <Label x:Name="label_GlobalOptionClients" Padding="0 0 0 8">
                             <Hyperlink Click="ClickShowManagementClientsFrame">
                                 <Run Text="Clientes"/>
                             </Hyperlink>
                         </Label>
-                        <Label x:Name="label_GlobalOptionCredits">
+                        <Label x:Name="label_GlobalOptionCredits" Padding="0 0 0 8">
                             <Hyperlink Click="ClickShowManagementCreditsFrame">
                                 <Run Text="Créditos"/>
                             </Hyperlink>
                         </Label>
-                        <Label x:Name="label_GlobalOptionEmployees">
+                        <Label x:Name="label_GlobalOptionEmployees" Padding="0 0 0 8">
                             <Hyperlink Click="ClickShowManagementEmployeesFrame">
                                 <Run Text="Empleados"/>
                             </Hyperlink>

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="FinanciaRedModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="FinanciaRedModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AddressesTypes">
           <Key>
             <PropertyRef Name="IdAddressType" />
@@ -18,8 +18,8 @@
           </Key>
           <Property Name="IdBankAccount" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdNameBank" Type="int" Nullable="false" />
-          <Property Name="CardNumber" Type="varchar" MaxLength="16" Nullable="false" />
-          <Property Name="CLABE" Type="varchar" MaxLength="18" Nullable="false" />
+          <Property Name="CardNumber" Type="varchar" MaxLength="19" Nullable="false" />
+          <Property Name="CLABE" Type="varchar" MaxLength="23" Nullable="false" />
           <Property Name="IdCardType" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="BankCardTypes">
@@ -71,7 +71,8 @@
           <Property Name="Street" Type="varchar" MaxLength="80" Nullable="false" />
           <Property Name="Colony" Type="varchar" MaxLength="80" Nullable="false" />
           <Property Name="PostalCode" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="State" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="Municipality" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="IdState" Type="int" Nullable="false" />
           <Property Name="IdAddressType" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ContactsReferencesClients">
@@ -109,6 +110,10 @@
           <Property Name="FirstName" Type="varchar" MaxLength="80" Nullable="false" />
           <Property Name="MiddleName" Type="varchar" MaxLength="80" Nullable="false" />
           <Property Name="LastName" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="DateBirth" Type="date" Nullable="false" />
+          <Property Name="Gender" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="CodeCURP" Type="varchar" MaxLength="18" Nullable="false" />
+          <Property Name="CodeRFC" Type="varchar" MaxLength="13" Nullable="false" />
           <Property Name="ProfilePhoto" Type="varbinary(max)" />
           <Property Name="Email" Type="varchar" MaxLength="80" Nullable="false" />
           <Property Name="Password" Type="varchar" MaxLength="80" Nullable="false" />
@@ -134,6 +139,13 @@
           </Key>
           <Property Name="IdRoleEmployee" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Role" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StatesAddresses">
+          <Key>
+            <PropertyRef Name="IdStateAddress" />
+          </Key>
+          <Property Name="IdStateAddress" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="StatesCredits">
           <Key>
@@ -314,6 +326,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_StateAddress_ClientAddress">
+          <End Role="StatesAddresses" Type="Self.StatesAddresses" Multiplicity="1" />
+          <End Role="ClientsAddresses" Type="Self.ClientsAddresses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatesAddresses">
+              <PropertyRef Name="IdStateAddress" />
+            </Principal>
+            <Dependent Role="ClientsAddresses">
+              <PropertyRef Name="IdState" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_StateCredit_Credit">
           <End Role="StatesCredits" Type="Self.StatesCredits" Multiplicity="1" />
           <End Role="Credits" Type="Self.Credits" Multiplicity="*" />
@@ -363,6 +387,7 @@
           <EntitySet Name="MaritalStatuses" EntityType="Self.MaritalStatuses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RelationshipsClientsTypes" EntityType="Self.RelationshipsClientsTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RolesEmployees" EntityType="Self.RolesEmployees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StatesAddresses" EntityType="Self.StatesAddresses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StatesCredits" EntityType="Self.StatesCredits" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkAreas" EntityType="Self.WorkAreas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkAreaTypes" EntityType="Self.WorkAreaTypes" Schema="dbo" store:Type="Tables" />
@@ -418,6 +443,10 @@
             <End Role="RolesEmployees" EntitySet="RolesEmployees" />
             <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
+          <AssociationSet Name="fk_StateAddress_ClientAddress" Association="Self.fk_StateAddress_ClientAddress">
+            <End Role="StatesAddresses" EntitySet="StatesAddresses" />
+            <End Role="ClientsAddresses" EntitySet="ClientsAddresses" />
+          </AssociationSet>
           <AssociationSet Name="fk_StateCredit_Credit" Association="Self.fk_StateCredit_Credit">
             <End Role="StatesCredits" EntitySet="StatesCredits" />
             <End Role="Credits" EntitySet="Credits" />
@@ -431,7 +460,8 @@
             <End Role="WorkAreas" EntitySet="WorkAreas" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FinanciaRedModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -449,8 +479,8 @@
           </Key>
           <Property Name="IdBankAccount" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IdNameBank" Type="Int32" Nullable="false" />
-          <Property Name="CardNumber" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CLABE" Type="String" MaxLength="18" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CardNumber" Type="String" MaxLength="19" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CLABE" Type="String" MaxLength="23" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="IdCardType" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Banks" Relationship="Self.fk_Bank_BankAccount" FromRole="BankAccounts" ToRole="Banks" />
           <NavigationProperty Name="Clients" Relationship="Self.fk_BankAccount1_Client" FromRole="BankAccounts" ToRole="Clients" />
@@ -496,6 +526,7 @@
           <Property Name="IdBankAccount2" Type="Int32" />
           <Property Name="IdAddress" Type="Int32" Nullable="false" />
           <Property Name="IdWorkArea" Type="Int32" Nullable="false" />
+          <Property Name="StatusActive" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="BankAccounts" Relationship="Self.fk_BankAccount1_Client" FromRole="Clients" ToRole="BankAccounts" />
           <NavigationProperty Name="BankAccounts1" Relationship="Self.fk_BankAccount2_Client" FromRole="Clients" ToRole="BankAccounts" />
           <NavigationProperty Name="ClientsAddresses" Relationship="Self.fk_AddressClient_Client" FromRole="Clients" ToRole="ClientsAddresses" />
@@ -504,7 +535,6 @@
           <NavigationProperty Name="ContactsReferencesClients1" Relationship="Self.fk_ContactReference2_Client" FromRole="Clients" ToRole="ContactsReferencesClients" />
           <NavigationProperty Name="MaritalStatuses" Relationship="Self.fk_MaritalStatus_Client" FromRole="Clients" ToRole="MaritalStatuses" />
           <NavigationProperty Name="WorkAreas" Relationship="Self.fk_WorkArea_Client" FromRole="Clients" ToRole="WorkAreas" />
-          <Property Name="StatusActive" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="ClientsAddresses">
           <Key>
@@ -516,10 +546,12 @@
           <Property Name="Street" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Colony" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PostalCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="State" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Municipality" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdState" Type="Int32" Nullable="false" />
           <Property Name="IdAddressType" Type="Int32" Nullable="false" />
           <NavigationProperty Name="AddressesTypes" Relationship="Self.fk_AddressType_ClientAddress" FromRole="ClientsAddresses" ToRole="AddressesTypes" />
           <NavigationProperty Name="Clients" Relationship="Self.fk_AddressClient_Client" FromRole="ClientsAddresses" ToRole="Clients" />
+          <NavigationProperty Name="StatesAddresses" Relationship="Self.fk_StateAddress_ClientAddress" FromRole="ClientsAddresses" ToRole="StatesAddresses" />
         </EntityType>
         <EntityType Name="ContactsReferencesClients">
           <Key>
@@ -562,6 +594,10 @@
           <Property Name="FirstName" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="MiddleName" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="LastName" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="CodeCURP" Type="String" MaxLength="18" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CodeRFC" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="ProfilePhoto" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="Email" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
@@ -592,6 +628,14 @@
           <Property Name="IdRoleEmployee" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Role" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Employees" Relationship="Self.fk_RolesEmployee_Employee" FromRole="RolesEmployees" ToRole="Employees" />
+        </EntityType>
+        <EntityType Name="StatesAddresses">
+          <Key>
+            <PropertyRef Name="IdStateAddress" />
+          </Key>
+          <Property Name="IdStateAddress" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ClientsAddresses" Relationship="Self.fk_StateAddress_ClientAddress" FromRole="StatesAddresses" ToRole="ClientsAddresses" />
         </EntityType>
         <EntityType Name="StatesCredits">
           <Key>
@@ -752,6 +796,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_StateAddress_ClientAddress">
+          <End Role="StatesAddresses" Type="Self.StatesAddresses" Multiplicity="1" />
+          <End Role="ClientsAddresses" Type="Self.ClientsAddresses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatesAddresses">
+              <PropertyRef Name="IdStateAddress" />
+            </Principal>
+            <Dependent Role="ClientsAddresses">
+              <PropertyRef Name="IdState" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_RelationshipClientType_ContactReferenceClient">
           <End Role="RelationshipsClientsTypes" Type="Self.RelationshipsClientsTypes" Multiplicity="1" />
           <End Role="ContactsReferencesClients" Type="Self.ContactsReferencesClients" Multiplicity="*" />
@@ -812,7 +868,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="FinanciaRedEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AddressesTypes" EntityType="Self.AddressesTypes" />
           <EntitySet Name="BankAccounts" EntityType="Self.BankAccounts" />
           <EntitySet Name="BankCardTypes" EntityType="Self.BankCardTypes" />
@@ -825,6 +881,7 @@
           <EntitySet Name="MaritalStatuses" EntityType="Self.MaritalStatuses" />
           <EntitySet Name="RelationshipsClientsTypes" EntityType="Self.RelationshipsClientsTypes" />
           <EntitySet Name="RolesEmployees" EntityType="Self.RolesEmployees" />
+          <EntitySet Name="StatesAddresses" EntityType="Self.StatesAddresses" />
           <EntitySet Name="StatesCredits" EntityType="Self.StatesCredits" />
           <EntitySet Name="WorkAreas" EntityType="Self.WorkAreas" />
           <EntitySet Name="WorkAreaTypes" EntityType="Self.WorkAreaTypes" />
@@ -872,6 +929,10 @@
             <End Role="WorkAreas" EntitySet="WorkAreas" />
             <End Role="Clients" EntitySet="Clients" />
           </AssociationSet>
+          <AssociationSet Name="fk_StateAddress_ClientAddress" Association="Self.fk_StateAddress_ClientAddress">
+            <End Role="StatesAddresses" EntitySet="StatesAddresses" />
+            <End Role="ClientsAddresses" EntitySet="ClientsAddresses" />
+          </AssociationSet>
           <AssociationSet Name="fk_RelationshipClientType_ContactReferenceClient" Association="Self.fk_RelationshipClientType_ContactReferenceClient">
             <End Role="RelationshipsClientsTypes" EntitySet="RelationshipsClientsTypes" />
             <End Role="ContactsReferencesClients" EntitySet="ContactsReferencesClients" />
@@ -898,7 +959,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="FinanciaRedModelStoreContainer" CdmEntityContainer="FinanciaRedEntities">
+        <EntityContainerMapping StorageEntityContainer="FinanciaRedModelStoreContainer" CdmEntityContainer="Entities">
           <EntitySetMapping Name="AddressesTypes">
             <EntityTypeMapping TypeName="FinanciaRedModel.AddressesTypes">
               <MappingFragment StoreEntitySet="AddressesTypes">
@@ -937,7 +998,6 @@
           <EntitySetMapping Name="Clients">
             <EntityTypeMapping TypeName="FinanciaRedModel.Clients">
               <MappingFragment StoreEntitySet="Clients">
-                <ScalarProperty Name="StatusActive" ColumnName="StatusActive" />
                 <ScalarProperty Name="IdClient" ColumnName="IdClient" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
@@ -957,6 +1017,7 @@
                 <ScalarProperty Name="IdBankAccount2" ColumnName="IdBankAccount2" />
                 <ScalarProperty Name="IdAddress" ColumnName="IdAddress" />
                 <ScalarProperty Name="IdWorkArea" ColumnName="IdWorkArea" />
+                <ScalarProperty Name="StatusActive" ColumnName="StatusActive" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -969,7 +1030,8 @@
                 <ScalarProperty Name="Street" ColumnName="Street" />
                 <ScalarProperty Name="Colony" ColumnName="Colony" />
                 <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
-                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Municipality" ColumnName="Municipality" />
+                <ScalarProperty Name="IdState" ColumnName="IdState" />
                 <ScalarProperty Name="IdAddressType" ColumnName="IdAddressType" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1010,6 +1072,10 @@
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="DateBirth" ColumnName="DateBirth" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="CodeCURP" ColumnName="CodeCURP" />
+                <ScalarProperty Name="CodeRFC" ColumnName="CodeRFC" />
                 <ScalarProperty Name="ProfilePhoto" ColumnName="ProfilePhoto" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
@@ -1038,6 +1104,14 @@
               <MappingFragment StoreEntitySet="RolesEmployees">
                 <ScalarProperty Name="IdRoleEmployee" ColumnName="IdRoleEmployee" />
                 <ScalarProperty Name="Role" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StatesAddresses">
+            <EntityTypeMapping TypeName="FinanciaRedModel.StatesAddresses">
+              <MappingFragment StoreEntitySet="StatesAddresses">
+                <ScalarProperty Name="IdStateAddress" ColumnName="IdStateAddress" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

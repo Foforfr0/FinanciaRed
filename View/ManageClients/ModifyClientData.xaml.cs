@@ -11,20 +11,19 @@ using System.Windows.Input;
 
 namespace FinanciaRed.View.ManageClients {
     /// <summary>
-    /// Interaction logic for RegisterClient.xaml
+    /// Interaction logic for ModifyClientData.xaml
     /// </summary>
-    public partial class RegisterClient : Window {
+    public partial class ModifyClientData : Window {
+        public DTO_Client_DetailsClient selectedClient = null;
         private bool[] _IsCorrectStage1 = new bool[14] { false, false, false, false, false, false, false, false, false, false, false, false, false, false };
         private bool[] _IsCorrectStage2 = new bool[7] { false, false, false, false, false, false, false };
         private bool[] _IsCorrectStage3 = new bool[12] { false, false, false, false, false, false, false, false, false, false, false, false };
         private bool[] _IsCorrectStage4 = new bool[9] { false, false, false, false, false, false, false, false, false };
 
-        public RegisterClient () {
+        public ModifyClientData (DTO_Client_DetailsClient selectedClient) {
             InitializeComponent ();
 
-            //textBox_CodeCURP.Text = "FERR031026HVZRDDA2";
-            //TODO
-
+            this.selectedClient = selectedClient;
             _ = LoadVariables ();
         }
 
@@ -104,12 +103,69 @@ namespace FinanciaRed.View.ManageClients {
                 comboBox_BankAccount1CardType.Items.Add (new ComboBoxItem { Content = type.Type });
                 comboBox_BankAccount2CardType.Items.Add (new ComboBoxItem { Content = type.Type });
             }
+            await Task.Delay (500);
+            ShowDataClient ();
+        }
+
+        private void ShowDataClient () {
+            //-----------------------------------------------Personal data
+            textBox_FirstName.Text = selectedClient.FirstName;
+            textBox_MiddleName.Text = selectedClient.MiddleName;
+            textBox_LastName.Text = selectedClient.LastName;
+            datePicker_DateBirth.SelectedDate = selectedClient.DateBirth;
+            comboBox_Gender.SelectedIndex = selectedClient.Gender.Equals ("M") ? 1 : 2;
+            comboBox_MaritalStatus.SelectedIndex = selectedClient.IdMaritalStatus;
+            textBox_CodeCurp.Text = selectedClient.CodeCURP;
+            //-----------------------------------------------Address data
+            comboBox_State.SelectedIndex = selectedClient.AddressClient.IdState;
+            textBox_Municipality.Text = selectedClient.AddressClient.Municipality;
+            textBox_PostalCode.Text = selectedClient.AddressClient.PostalCode;
+            textBox_Colony.Text = selectedClient.AddressClient.Colony;
+            textBox_Street.Text = selectedClient.AddressClient.Street;
+            textBox_ExteriorNumber.Text = selectedClient.AddressClient.ExteriorNumber;
+            textBox_InteriorNumber.Text = selectedClient.AddressClient.InteriorNumber;
+            comboBox_AddressType.SelectedIndex = selectedClient.AddressClient.IdAddressType;
+            //-----------------------------------------------Contact data
+            textBox_Email1.Text = selectedClient.Email1;
+            textBox_Email2.Text = selectedClient.Email2;
+            textBox_PhoneNumber1.Text = selectedClient.PhoneNumber1;
+            textBox_PhoneNumber2.Text = selectedClient.PhoneNumber2;
+            //-----------------------------------------------Work data
+            comboBox_WorkType.SelectedIndex = selectedClient.IdWorkType;
+            textBox_WorkArea.Text = selectedClient.WorkArea;
+            textBox_MonthlySalary.Text = string.Concat (selectedClient.MonthlySalary);
+            //-----------------------------------------------Reference contact 1 data
+            textBox_Reference1FirstName.Text = selectedClient.Reference2FirstName;
+            textBox_Reference1MiddleName.Text = selectedClient.Reference2MiddleName;
+            textBox_Reference1LastName.Text = selectedClient.Reference2LastName;
+            textBox_Reference1Email.Text = selectedClient.Reference1Email;
+            textBox_Reference1PhoneNumber.Text = selectedClient.Reference1PhoneNumber;
+            comboBox_Reference1RelationshipType.SelectedIndex = selectedClient.IdReference1RelationshipType;
+            //-----------------------------------------------Reference contact 2 data
+            textBox_Reference2FirstName.Text = selectedClient.Reference2FirstName;
+            textBox_Reference2MiddleName.Text = selectedClient.Reference2MiddleName;
+            textBox_Reference2LastName.Text = selectedClient.Reference2LastName;
+            textBox_Reference2Email.Text = selectedClient.Reference2Email;
+            textBox_Reference2PhoneNumber.Text = selectedClient.Reference2PhoneNumber;
+            comboBox_Reference2RelationshipType.SelectedIndex = selectedClient.IdReference2RelationshipType;
+            //-----------------------------------------------Financial data
+            textBox_CodeRFC.Text = selectedClient.CodeRFC;
+            //-----------------------------------------------Bank Account 1 data
+            comboBox_BankAccount1Name.SelectedIndex = selectedClient.IdBankAccount1Name;
+            textBox_BankAccount1CodeCLABE.Text = selectedClient.BankAccount1CLABE;
+            textBox_BankAccount1CardNumber.Text = selectedClient.BankAccount1CardNumber;
+            comboBox_BankAccount1CardType.SelectedIndex = selectedClient.IdBankAccount1CardType;
+            //-----------------------------------------------Bank Account 2 data
+            comboBox_BankAccount2Name.SelectedIndex = selectedClient.IdBankAccount2Name;
+            textBox_BankAccount2CodeCLABE.Text = selectedClient.BankAccount2CLABE;
+            textBox_BankAccount2CardNumber.Text = selectedClient.BankAccount2CardNumber;
+            comboBox_BankAccount2CardType.SelectedIndex = selectedClient.IdBankAccount2CardType;
         }
 
         private void ClickCancel (object sender, RoutedEventArgs e) {
             MessageBoxResult result = MessageBox.Show (
                 "¿Está seguro de cancelar?\nNo se podrán recuperar los datos.",
-                "Cancelar registro.",
+                "Cancelar modificación.",
                 MessageBoxButton.YesNo
             );
             if (result == MessageBoxResult.Yes)
@@ -132,22 +188,30 @@ namespace FinanciaRed.View.ManageClients {
 
         private async void ClickContinueStage2 (object sender, RoutedEventArgs e) {
             VerifyStage1 ();
-            bool existsCURP = await DAO_Client.VerifyExistenceCURP (textBox_CodeCURP.Text);
-            await Task.Delay (500);
-
+           
             if (_IsCorrectStage1.All (x => x == true)) {
-                if (existsCURP) {
-                    label_ErrorCodeCURP.Content = "CURP ya existente en la base de datos.";
-                    label_ErrorCodeCURP.Visibility = Visibility.Visible;
-                    _IsCorrectStage1[6] = false;
-                } else {
-                    label_ErrorCodeCURP.Content = "";
-                    label_ErrorCodeCURP.Visibility = Visibility.Collapsed;
-                    _IsCorrectStage1[6] = true;
+                if (textBox_CodeCurp.Text.Equals (selectedClient.CodeCURP)) {
                     stackPanel_Stage1.Visibility = Visibility.Collapsed;
                     stackPanel_Stage2.Visibility = Visibility.Visible;
                     stackPanel_Stage3.Visibility = Visibility.Collapsed;
                     stackPanel_Stage4.Visibility = Visibility.Collapsed;
+                } else {
+                    bool existsCURP = await DAO_Client.VerifyExistenceCURP (textBox_CodeCurp.Text);
+                    await Task.Delay (500);
+
+                    if (existsCURP) {
+                        label_ErrorCodeCurp.Content = "CURP ya existente en la base de datos.";
+                        label_ErrorCodeCurp.Visibility = Visibility.Visible;
+                        _IsCorrectStage1[6] = false;
+                    } else {
+                        label_ErrorCodeCurp.Content = "";
+                        label_ErrorCodeCurp.Visibility = Visibility.Collapsed;
+                        _IsCorrectStage1[6] = true;
+                        stackPanel_Stage1.Visibility = Visibility.Collapsed;
+                        stackPanel_Stage2.Visibility = Visibility.Visible;
+                        stackPanel_Stage3.Visibility = Visibility.Collapsed;
+                        stackPanel_Stage4.Visibility = Visibility.Collapsed;
+                    }
                 }
             } else {
                 MessageBox.Show ("Faltan datos por ingresar o algunos datos están incorrectos.", "Formulario incompleto.");
@@ -165,17 +229,32 @@ namespace FinanciaRed.View.ManageClients {
             VerifyStage2 ();
 
             if (_IsCorrectStage2.All (x => x == true)) {
-                bool existsEmail1 = await DAO_Client.VerifyExistenceEmail (textBox_Email1.Text);
+                bool existsEmail1;
+                if (textBox_Email1.Text.Equals (selectedClient.Email1)) {
+                    existsEmail1 = false;
+                } else {
+                    existsEmail1 = await DAO_Client.VerifyExistenceEmail (textBox_Email1.Text);
+                }
                 bool existsEmail2 = false;
                 if (!string.IsNullOrEmpty (textBox_Email2.Text)) {
                     existsEmail2 = await DAO_Client.VerifyExistenceEmail (textBox_Email2.Text);
                 }
-                bool existsPhoneNumber1 = await DAO_Client.VerifyExistencePhoneNumber (textBox_PhoneNumber1.Text);
+                if (textBox_Email2.Text.Equals (selectedClient.Email2)) {
+                    existsEmail2 = false;
+                }
+                bool existsPhoneNumber1;
+                if (textBox_PhoneNumber1.Text.Equals (selectedClient.PhoneNumber1)) {
+                    existsPhoneNumber1 = false;
+                } else {
+                    existsPhoneNumber1 = await DAO_Client.VerifyExistencePhoneNumber (textBox_PhoneNumber1.Text);
+                }
                 bool existsPhoneNumber2 = false;
                 if (!string.IsNullOrEmpty (textBox_PhoneNumber2.Text)) {
                     existsPhoneNumber2 = await DAO_Client.VerifyExistencePhoneNumber (textBox_PhoneNumber2.Text);
                 }
-                await Task.Delay (500);
+                if (textBox_PhoneNumber2.Text.Equals (selectedClient.PhoneNumber2)) {
+                    existsPhoneNumber2 = false;
+                }
                 if (existsEmail1) {
                     label_ErrorEmail1.Content = "Correo existente en la base de datos.";
                     label_ErrorEmail1.Visibility = Visibility.Visible;
@@ -229,60 +308,39 @@ namespace FinanciaRed.View.ManageClients {
             }
         }
 
-        private async void ClickFinishRegistry (object sender, RoutedEventArgs e) {
+        private async void ClickFinishModification (object sender, RoutedEventArgs e) {
             VerifyStage4 ();
-            bool existsRFC = await DAO_Client.VerifyExistenceRFC (textBox_CodeRFC.Text);
-            bool existsCLABE1 = await DAO_Client.VerifyExistenceCLABE (textBox_BankAccount1CodeCLABE.Text);
-            bool existsCardNumber1 = await DAO_Client.VerifyExistenceCardNumber (textBox_BankAccount1CardNumber.Text);
-            bool existsCLABE2;
-            bool existsCardNumber2;
-            if ((bool)!checkBox_SameAccount.IsChecked) {
-                existsCLABE2 = await DAO_Client.VerifyExistenceCLABE (textBox_BankAccount2CodeCLABE.Text);
-                existsCardNumber2 = await DAO_Client.VerifyExistenceCardNumber (textBox_BankAccount2CardNumber.Text);
-            } else {
-                existsCLABE2 = false;
-                existsCardNumber2 = false;
-            }
-            await Task.Delay (500);
 
             if (_IsCorrectStage4.All (x => x == true)) {
-                if (existsRFC) {
-                    label_ErrorCodeRFC.Content = "RFC ya existente en la base de datos.";
-                    label_ErrorCodeRFC.Visibility = Visibility.Visible;
-                }
-                if (existsCLABE1) {
-                    label_ErrorBankAccount1CodeCLABE.Content = "CLABE ya existente en la base de datos.";
-                    label_ErrorBankAccount1CodeCLABE.Visibility = Visibility.Visible;
-                }
-                if (existsCardNumber1) {
-                    label_ErrorBankAccount1CardNumber.Content = "CLABE ya existente en la base de datos.";
-                    label_ErrorBankAccount1CardNumber.Visibility = Visibility.Visible;
-                }
-                if (existsCLABE2) {
-                    label_ErrorBankAccount2CodeCLABE.Content = "CLABE ya existente en la base de datos.";
-                    label_ErrorBankAccount2CodeCLABE.Visibility = Visibility.Visible;
-                }
-                if (existsCardNumber2) {
-                    label_ErrorBankAccount2CardNumber.Content = "CLABE ya existente en la base de datos.";
-                    label_ErrorBankAccount2CardNumber.Visibility = Visibility.Visible;
-                }
-                if (!existsRFC && !existsCLABE1 && !existsCardNumber1 && !existsCLABE2 && !existsCardNumber2) {
-                    await SaveDataInDatabase ();
+                bool existsRFC = await DAO_Client.VerifyExistenceRFC (textBox_CodeRFC.Text);
+                await Task.Delay (500);
+
+                if (textBox_CodeCurp.Text.Equals (selectedClient.CodeCURP)) {
+                    SaveDataInDatabase ();
+                } else {
+                    if (existsRFC) {
+                        label_ErrorCodeRFC.Content = "RFC ya existente en la base de datos.";
+                        label_ErrorCodeRFC.Visibility = Visibility.Visible;
+                        _IsCorrectStage4[6] = false;
+                    } else {
+                        SaveDataInDatabase ();
+                    }
                 }
             } else {
-                MessageBox.Show ("Faltan datos por ingresar o algunos datos están incorrectos4.", "Formulario incompleto.");
+                MessageBox.Show ("Faltan datos por ingresar o algunos datos están incorrectos.", "Formulario incompleto.");
             }
         }
 
-        private async Task SaveDataInDatabase () {
+        private void SaveDataInDatabase () {
             DTO_Client_DetailsClient newClient = new DTO_Client_DetailsClient {
-                FirstName = textBox_Name.Text,
+                IdClient = selectedClient.IdClient,
+                FirstName = textBox_FirstName.Text,
                 MiddleName = textBox_MiddleName.Text,
                 LastName = textBox_LastName.Text,
                 DateBirth = DateTime.Parse (datePicker_DateBirth.Text),
                 Gender = comboBox_Gender.SelectedIndex == 1 ? "M" : "F",
                 IdMaritalStatus = comboBox_MaritalStatus.SelectedIndex,
-                CodeCURP = textBox_CodeCURP.Text,
+                CodeCURP = textBox_CodeCurp.Text,
                 AddressClient = new DTO_AddressClient {
                     IdState = comboBox_State.SelectedIndex,
                     Municipality = textBox_Municipality.Text,
@@ -316,7 +374,8 @@ namespace FinanciaRed.View.ManageClients {
                 IdBankAccount1Name = comboBox_BankAccount1Name.SelectedIndex,
                 BankAccount1CLABE = textBox_BankAccount1CodeCLABE.Text,
                 BankAccount1CardNumber = textBox_BankAccount1CardNumber.Text,
-                IdBankAccount1CardType = comboBox_BankAccount1CardType.SelectedIndex
+                IdBankAccount1CardType = comboBox_BankAccount1CardType.SelectedIndex,
+                StatusActive = this.selectedClient.StatusActive
             };
             if ((bool)checkBox_SameAccount.IsChecked) {
                 newClient.IdBankAccount2Name = newClient.IdBankAccount1Name;
@@ -330,18 +389,18 @@ namespace FinanciaRed.View.ManageClients {
                 newClient.IdBankAccount2CardType = comboBox_BankAccount2CardType.SelectedIndex;
             }
 
-            MessageResponse<bool> responseRegistryClient = await DAO_Client.RegistryNewClient (newClient);
-            if (responseRegistryClient.IsError) {
+            MessageResponse<bool> responseModifyClient = DAO_Client.SaveChangesDataClient (newClient);
+            if (responseModifyClient.IsError) {
                 MessageBox.Show ("Ha ocurrido un error inesperado.\nIntente más tarde.", "Error inesperado.");
             } else {
-                MessageBox.Show ($"Se ha registrado correctamente al\nCLIENTE: \"{newClient.FirstName} {newClient.MiddleName} {newClient.LastName}\"", "Registro completo.");
+                MessageBox.Show ($"Se ha modificado correctamente al\nCLIENTE: \"{newClient.FirstName} {newClient.MiddleName} {newClient.LastName}\"", "Modificación completa.");
                 this.Close ();
             }
         }
 
         //Stage 1 validations---------------------------------------------------------------------------
         private void TextChanged_Name (object sender, TextChangedEventArgs e) {
-            if (!CheckFormat.IsValidWord (textBox_Name.Text, true, false)) {
+            if (!CheckFormat.IsValidWord (textBox_FirstName.Text, true, false)) {
                 label_ErrorName.Content = "Nombre no válido.";
                 label_ErrorName.Visibility = Visibility.Visible;
                 _IsCorrectStage1[0] = false;
@@ -376,19 +435,19 @@ namespace FinanciaRed.View.ManageClients {
             }
         }
 
-        private void TextChanged_CodeCURP (object sender, TextChangedEventArgs e) {
+        private void TextChanged_CodeCurp (object sender, TextChangedEventArgs e) {
             TextBox textbox = sender as TextBox;
             if (textbox.Text.Length > 18) {
                 textbox.Text = textbox.Text.Substring (0, 18);
             }
 
-            if (!CheckFormat.IsValidCURP (textBox_CodeCURP.Text)) {
-                label_ErrorCodeCURP.Content = "CURP no válido.";
-                label_ErrorCodeCURP.Visibility = Visibility.Visible;
+            if (!CheckFormat.IsValidCURP (textBox_CodeCurp.Text)) {
+                label_ErrorCodeCurp.Content = "CURP no válido.";
+                label_ErrorCodeCurp.Visibility = Visibility.Visible;
                 _IsCorrectStage1[6] = false;
             } else {
-                label_ErrorCodeCURP.Content = "";
-                label_ErrorCodeCURP.Visibility = Visibility.Collapsed;
+                label_ErrorCodeCurp.Content = "";
+                label_ErrorCodeCurp.Visibility = Visibility.Collapsed;
                 _IsCorrectStage1[6] = true;
             }
         }
@@ -447,7 +506,7 @@ namespace FinanciaRed.View.ManageClients {
         }
 
         private void VerifyStage1 () {
-            if (string.IsNullOrEmpty (textBox_Name.Text)) {
+            if (string.IsNullOrEmpty (textBox_FirstName.Text)) {
                 label_ErrorName.Content = "Campo necesario.";
                 label_ErrorName.Visibility = Visibility.Visible;
                 _IsCorrectStage1[0] = false;
@@ -495,9 +554,9 @@ namespace FinanciaRed.View.ManageClients {
                 _IsCorrectStage1[5] = true;
             }
 
-            if (string.IsNullOrEmpty (textBox_CodeCURP.Text)) {
-                label_ErrorCodeCURP.Content = "Campo necesario.";
-                label_ErrorCodeCURP.Visibility = Visibility.Visible;
+            if (string.IsNullOrEmpty (textBox_CodeCurp.Text)) {
+                label_ErrorCodeCurp.Content = "Campo necesario.";
+                label_ErrorCodeCurp.Visibility = Visibility.Visible;
                 _IsCorrectStage1[6] = false;
             }
 
@@ -630,7 +689,7 @@ namespace FinanciaRed.View.ManageClients {
         private void TextChanged_WorkArea (object sender, TextChangedEventArgs e) {
             if (!string.IsNullOrEmpty (textBox_WorkArea.Text)) {
                 label_ErrorWorkArea.Content = "";
-                label_ErrorWorkArea.Visibility = Visibility.Collapsed;
+                label_ErrorWorkArea.Visibility = Visibility.Visible;
                 _IsCorrectStage2[5] = true;
             }
         }
@@ -922,10 +981,10 @@ namespace FinanciaRed.View.ManageClients {
         private void TextChanged_CodeRFC (object sender, TextChangedEventArgs e) {
             TextBox textbox = sender as TextBox;
             if (textbox.Text.Length > 13) {
-                textbox.Text = textbox.Text.Substring (0, 18);
+                textbox.Text = textbox.Text.Substring (0, 13);
             }
 
-            if (!CheckFormat.IsValidRFC (textBox_CodeCURP.Text, textBox_CodeRFC.Text)) {
+            if (!CheckFormat.IsValidRFC (textBox_CodeCurp.Text, textBox_CodeRFC.Text)) {
                 label_ErrorCodeRFC.Content = "RFC no válido o no coincide con el CURP.";
                 label_ErrorCodeRFC.Visibility = Visibility.Visible;
                 _IsCorrectStage4[0] = false;
@@ -1032,22 +1091,12 @@ namespace FinanciaRed.View.ManageClients {
                 _IsCorrectStage4[1] = true;
             }
 
-            if (textBox_BankAccount1CodeCLABE.Text.Equals(textBox_BankAccount2CodeCLABE.Text)) {
-                label_ErrorBankAccount1CodeCLABE.Content = "CLABE igual al otro.";
-                label_ErrorBankAccount1CodeCLABE.Visibility = Visibility.Visible;
-                _IsCorrectStage4[2] = false;
-            }
             if (string.IsNullOrEmpty (textBox_BankAccount1CodeCLABE.Text)) {
                 label_ErrorBankAccount1CodeCLABE.Content = "Campo necesario.";
                 label_ErrorBankAccount1CodeCLABE.Visibility = Visibility.Visible;
                 _IsCorrectStage4[2] = false;
             }
 
-            if (textBox_BankAccount1CardNumber.Text.Equals (textBox_BankAccount2CardNumber.Text)) {
-                label_ErrorBankAccount1CardNumber.Content = "Número de tarjeta igual al otro.";
-                label_ErrorBankAccount1CardNumber.Visibility = Visibility.Visible;
-                _IsCorrectStage4[3] = false;
-            }
             if (string.IsNullOrEmpty (textBox_BankAccount1CardNumber.Text)) {
                 label_ErrorBankAccount1CardNumber.Content = "Campo necesario.";
                 label_ErrorBankAccount1CardNumber.Visibility = Visibility.Visible;
@@ -1075,22 +1124,12 @@ namespace FinanciaRed.View.ManageClients {
                     _IsCorrectStage4[5] = true;
                 }
 
-                if (textBox_BankAccount2CodeCLABE.Text.Equals (textBox_BankAccount1CodeCLABE.Text)) {
-                    label_ErrorBankAccount2CodeCLABE.Content = "CLABE igual al otro.";
-                    label_ErrorBankAccount2CodeCLABE.Visibility = Visibility.Visible;
-                    _IsCorrectStage4[6] = false;
-                }
                 if (string.IsNullOrEmpty (textBox_BankAccount2CodeCLABE.Text)) {
                     label_ErrorBankAccount2CodeCLABE.Content = "Campo necesario.";
                     label_ErrorBankAccount2CodeCLABE.Visibility = Visibility.Visible;
                     _IsCorrectStage4[6] = false;
                 }
 
-                if (textBox_BankAccount2CardNumber.Text.Equals (textBox_BankAccount1CardNumber.Text)) {
-                    label_ErrorBankAccount2CardNumber.Content = "Número de tarjeta igual al otro.";
-                    label_ErrorBankAccount2CardNumber.Visibility = Visibility.Visible;
-                    _IsCorrectStage4[7] = false;
-                }
                 if (string.IsNullOrEmpty (textBox_BankAccount2CardNumber.Text)) {
                     label_ErrorBankAccount2CardNumber.Content = "Campo necesario.";
                     label_ErrorBankAccount2CardNumber.Visibility = Visibility.Visible;
