@@ -1,6 +1,7 @@
 ﻿using FinanciaRed.Model.DTO;
 using FinanciaRed.Utils;
 using FinanciaRed.View.ManageClients;
+using FinanciaRed.View.ManageCreditRequests;
 using FinanciaRed.View.ManageCredits;
 using FinanciaRed.View.ManageEmployees;
 using FinanciaRed.View.ManageUsers;
@@ -40,6 +41,8 @@ namespace FinanciaRed.View {
             ShowAvailableOptionsUser ();
         }
 
+        //TODO
+        //Refinar los accesos de cada tipo de usuario
         private void ShowAvailableOptionsUser () {
             if (currentEmployee.IdRol == 1) {       //Ases@r de crédito
                 label_GlobalOptionClients.Visibility = Visibility.Visible;
@@ -66,6 +69,10 @@ namespace FinanciaRed.View {
         }
         private void ClickShowManagementCreditsFrame (object sender, RoutedEventArgs e) {
             innerFrameContainer.Navigate (new ViewCredits ());
+        }
+
+        private void ClickShowManagementCreditRequestsFrame (object sender, RoutedEventArgs e) {
+            innerFrameContainer.Navigate (new ViewCreditRequests ());
         }
 
         private void ClickShowManagementEmployeesFrame (object sender, RoutedEventArgs e) {

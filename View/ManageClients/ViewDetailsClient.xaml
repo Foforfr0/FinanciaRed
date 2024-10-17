@@ -31,7 +31,7 @@
                             </Grid.ColumnDefinitions>
 
                             <StackPanel Grid.Column="0" Margin="0 0 15 5">
-                                <Label Content="Datos personales" FontSize="18" FontWeight="Bold" />
+                                <Label Content="Datos personales" Style="{StaticResource HeaderText2}"/>
                                 <StackPanel x:Name="stackPanel_PersonalData" Margin="10 0 0 0">
                                     <Label Content="-Nombre(s):" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
                                     <Label x:Name="label_FirstName" Padding="8 0 0 4"/>
@@ -49,7 +49,7 @@
                                     <Label x:Name="label_CodeCURP" Padding="8 0 0 4"/>
                                 </StackPanel>
 
-                                <Label Content="Datos de domicilio" FontSize="18" FontWeight="Bold" />
+                                <Label Content="Datos de domicilio" Style="{StaticResource HeaderText2}"/>
                                 <StackPanel x:Name="stackPanel_AddressData" Margin="10 0 0 0">
                                     <Label Content="-Estado:"  Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
                                     <Label x:Name="label_State" Padding="8 0 0 4"/>
@@ -67,7 +67,7 @@
                                     <Label x:Name="label_AddressType" Padding="8 0 0 4"/>
                                 </StackPanel>
 
-                                <Label Content="Datos de contacto" FontSize="18" FontWeight="Bold" />
+                                <Label Content="Datos de contacto" Style="{StaticResource HeaderText2}"/>
                                 <StackPanel x:Name="stackPanel_ContactData" Margin="10 0 0 0">
                                     <Label Content="-Correo electrónico (1):"  Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
                                     <Label x:Name="label_Email1" Padding="8 0 0 4"/>
@@ -79,7 +79,7 @@
                                     <Label x:Name="label_PhoneNumber2" Padding="8 0 0 4"/>
                                 </StackPanel>
 
-                                <Label Content="Lugar de trabajo" FontSize="18" FontWeight="Bold" />
+                                <Label Content="Lugar de trabajo" Style="{StaticResource HeaderText2}"/>
                                 <StackPanel x:Name="stackPanel_WorkAreaData" Margin="10 0 0 0">
                                     <Label Content="-Tipo:"  Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
                                     <Label x:Name="label_WorkType" Padding="8 0 0 4"/>
@@ -90,9 +90,9 @@
                                 </StackPanel>
                             </StackPanel>
                             <StackPanel Grid.Column="1" Margin="15 0 0 5">
-                                <Label Content="Contactos de referencia:" FontSize="18" FontWeight="Bold" />
+                                <Label Content="Contactos de referencia:" Style="{StaticResource HeaderText2}"/>
                                 <StackPanel x:Name="stackPanel_ContactReference1" Margin="10 0 0 0">
-                                    <Label Content="Referencia (1):" FontSize="14" FontWeight="Bold" />
+                                    <Label Content="Referencia (1):" Style="{StaticResource HeaderText3}"/>
                                     <StackPanel Margin="10 0 0 0">
                                         <Label Content="-Nombre(s):"  Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
                                         <Label x:Name="label_Reference1FirstName" Padding="8 0 0 4"/>
@@ -110,7 +110,7 @@
                                 </StackPanel>
 
                                 <StackPanel x:Name="stackPanel_ContactReference2" Margin="10 0 0 0">
-                                    <Label Content="Referencia (2):" FontSize="14" FontWeight="Bold" />
+                                    <Label Content="Referencia (2):" Style="{StaticResource HeaderText3}"/>
                                     <StackPanel Margin="10 0 0 0">
                                         <Label Content="-Nombre(s):"  Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
                                         <Label x:Name="label_Reference2FirstName" Padding="8 0 0 4"/>
@@ -126,11 +126,11 @@
                                         <Label x:Name="label_Reference2RelationshipType" Padding="8 0 0 4"/>
                                     </StackPanel>
 
-                                    <Label Content="Datos bancarios" FontSize="18" FontWeight="Bold" />
+                                    <Label Content="Datos bancarios" Style="{StaticResource HeaderText2}"/>
                                     <StackPanel x:Name="stackPanel_DataBank" Margin="10 0 0 0">
                                         <Label Content="-Registro Federal del Contribuyente:"  Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
                                         <Label x:Name="label_CodeRFC" Padding="8 0 0 4"/>
-                                        <Label Content="Cuenta de depósito" FontSize="14" FontWeight="Bold" />
+                                        <Label Content="Cuenta de depósito" Style="{StaticResource HeaderText3}"/>
                                         <StackPanel x:Name="stackPanel_BankAccount1" Margin="10 0 0 0">
                                             <Label Content="-Nombre del banco:"  Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
                                             <Label x:Name="label_BankAccount1Name" Padding="8 0 0 4"/>
@@ -142,7 +142,7 @@
                                             <Label x:Name="label_BankAccount1CardType" Padding="8 0 0 4"/>
                                         </StackPanel>
 
-                                        <Label Content="Cuenta de cobro" FontSize="14" FontWeight="Bold" />
+                                        <Label Content="Cuenta de cobro" Style="{StaticResource HeaderText3}"/>
                                         <StackPanel x:Name="stackPanel_BankAccount2" Margin="10 0 0 0">
                                             <Label Content="-Nombre del banco:"  Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
                                             <Label x:Name="label_BankAccount2Name" Padding="8 0 0 4"/>

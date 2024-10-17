@@ -33,8 +33,7 @@ namespace FinanciaRed.View.ManageCredits {
         }
 
         private void ClickRegisterCredit (object sender, RoutedEventArgs e) {
-            RegistrerCredit registerCreditWindow = new RegistrerCredit ();
-            registerCreditWindow.ShowDialog ();
+
         }
 
         private void ClicShowDetailsCredit (object sender, RoutedEventArgs e) {
@@ -43,8 +42,8 @@ namespace FinanciaRed.View.ManageCredits {
             // Obtener los datos de la fila a través del DataContext del botón
             //DTO_Credit_Consult rowData = button.DataContext as DTO_Credit_Consult;
             if (button.DataContext is DTO_Credit_Consult rowData) {
-                ViewDetailsClient detailsClientWindow = new ViewDetailsClient (rowData.IdCredit);
-                detailsClientWindow.ShowDialog ();
+                ViewDetailsCredit detailsCreditWindow = new ViewDetailsCredit (rowData.IdCredit);
+                detailsCreditWindow.ShowDialog ();
             }
         }
     }

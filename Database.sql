@@ -247,3 +247,5 @@ INSERT INTO Credits (Amount, AmountLeft, IdClient, IdStateCredit, SignedDocument
             VALUES (100000, 100000, 1, 1, NULL, 10.0, '2024-11-12 11:50:00', '2025-11-12 11:50:00', 1);
 
 SELECT * FROM Clients;
+
+--INSERT INTO TimeLapsesCredit VALUES ('1 Mes', '3 Meses', '6 Meses', '9 Meses', '12 Meses', '15 Meses');

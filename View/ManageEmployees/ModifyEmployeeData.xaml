@@ -34,7 +34,7 @@
                     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" d:Height="725" Height="525" Width="740">
                         <StackPanel Margin="20 10">
                             <Label Content="Modificación de datos del empleado" Margin="0" Style="{StaticResource HeaderText}"/>
-                            <Label Content="Ingrese los datos necesarios (*)" FontSize="17" Padding="0" HorizontalAlignment="Left"/>
+                            <Label Style="{StaticResource InstructionPage}"/>
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>
@@ -57,29 +57,29 @@
 
                                 <StackPanel Grid.Column="1" Margin="0 0 15 5">
                                     <Label Content="Datos de perfil" FontSize="18" FontWeight="Bold" Padding="0" Margin="0 0 0 5"/>
-                                    <Label Content="Nombre:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    <Label Content="Nombre:" Style="{StaticResource FieldTag}"/>
                                     <TextBlock x:Name="label_Name" Text="" Foreground="Black" VerticalAlignment="Center" Width="275" TextWrapping="Wrap"/>
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                        <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
-                                        <Label Content="Correo electrónico" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                        <Label Style="{StaticResource RequiredFieldTag}"/>
+                                        <Label Content="Correo electrónico" Style="{StaticResource FieldTag}"/>
                                     </StackPanel>
                                     <TextBox x:Name="textBox_Email" TextChanged="TextChanged_Email" Height="22"/>
                                     <Label x:Name="label_ErrorEmail" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                        <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
-                                        <Label Content="Contraseña:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                        <Label Style="{StaticResource RequiredFieldTag}"/>
+                                        <Label Content="Contraseña:" Style="{StaticResource FieldTag}"/>
                                     </StackPanel>
                                     <TextBox x:Name="textBox_Pasword" TextChanged="TextChanged_Password" Height="22"/>
                                     <TextBlock x:Name="label_ErrorPasword" d:Text="Message Error" d:Visibility="Visible" Visibility="Collapsed" Foreground="Red" TextWrapping="Wrap" Margin="0" Padding="5 0 0 5" Width="274"/>
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                        <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
-                                        <Label Content="Repita la contraseña:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                        <Label Style="{StaticResource RequiredFieldTag}"/>
+                                        <Label Content="Repita la contraseña:" Style="{StaticResource FieldTag}"/>
                                     </StackPanel>
                                     <TextBox x:Name="textBox_PaswordConfirmation" TextChanged="TextChanged_PasswordConfirmation" Height="22"/>
                                     <Label x:Name="label_ErrorPaswordConfirmation" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                        <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
-                                        <Label Content="Cargo a asignar:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                        <Label Style="{StaticResource RequiredFieldTag}"/>
+                                        <Label Content="Cargo a asignar:" Style="{StaticResource FieldTag}"/>
                                     </StackPanel>
                                     <ComboBox x:Name="comboBox_Rol"/>
                                     <Label x:Name="label_ErrorRol" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>

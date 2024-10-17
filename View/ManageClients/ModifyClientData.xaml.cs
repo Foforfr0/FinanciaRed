@@ -131,35 +131,35 @@ namespace FinanciaRed.View.ManageClients {
             textBox_PhoneNumber1.Text = selectedClient.PhoneNumber1;
             textBox_PhoneNumber2.Text = selectedClient.PhoneNumber2;
             //-----------------------------------------------Work data
-            comboBox_WorkType.SelectedIndex = selectedClient.IdWorkType;
-            textBox_WorkArea.Text = selectedClient.WorkArea;
-            textBox_MonthlySalary.Text = string.Concat (selectedClient.MonthlySalary);
+            comboBox_WorkType.SelectedIndex = selectedClient.Work.IdWorkType;
+            textBox_WorkArea.Text = selectedClient.Work.WorkArea;
+            textBox_MonthlySalary.Text = string.Concat (selectedClient.Work.MonthlySalary);
             //-----------------------------------------------Reference contact 1 data
-            textBox_Reference1FirstName.Text = selectedClient.Reference2FirstName;
-            textBox_Reference1MiddleName.Text = selectedClient.Reference2MiddleName;
-            textBox_Reference1LastName.Text = selectedClient.Reference2LastName;
-            textBox_Reference1Email.Text = selectedClient.Reference1Email;
-            textBox_Reference1PhoneNumber.Text = selectedClient.Reference1PhoneNumber;
-            comboBox_Reference1RelationshipType.SelectedIndex = selectedClient.IdReference1RelationshipType;
+            textBox_Reference1FirstName.Text = selectedClient.Reference2.FirstName;
+            textBox_Reference1MiddleName.Text = selectedClient.Reference2.MiddleName;
+            textBox_Reference1LastName.Text = selectedClient.Reference2.LastName;
+            textBox_Reference1Email.Text = selectedClient.Reference1.Email;
+            textBox_Reference1PhoneNumber.Text = selectedClient.Reference1.PhoneNumber;
+            comboBox_Reference1RelationshipType.SelectedIndex = selectedClient.Reference1.IdRelationshipType;
             //-----------------------------------------------Reference contact 2 data
-            textBox_Reference2FirstName.Text = selectedClient.Reference2FirstName;
-            textBox_Reference2MiddleName.Text = selectedClient.Reference2MiddleName;
-            textBox_Reference2LastName.Text = selectedClient.Reference2LastName;
-            textBox_Reference2Email.Text = selectedClient.Reference2Email;
-            textBox_Reference2PhoneNumber.Text = selectedClient.Reference2PhoneNumber;
-            comboBox_Reference2RelationshipType.SelectedIndex = selectedClient.IdReference2RelationshipType;
+            textBox_Reference2FirstName.Text = selectedClient.Reference2.FirstName;
+            textBox_Reference2MiddleName.Text = selectedClient.Reference2.MiddleName;
+            textBox_Reference2LastName.Text = selectedClient.Reference2.LastName;
+            textBox_Reference2Email.Text = selectedClient.Reference2.Email;
+            textBox_Reference2PhoneNumber.Text = selectedClient.Reference2.PhoneNumber;
+            comboBox_Reference2RelationshipType.SelectedIndex = selectedClient.Reference2.IdRelationshipType;
             //-----------------------------------------------Financial data
             textBox_CodeRFC.Text = selectedClient.CodeRFC;
             //-----------------------------------------------Bank Account 1 data
-            comboBox_BankAccount1Name.SelectedIndex = selectedClient.IdBankAccount1Name;
-            textBox_BankAccount1CodeCLABE.Text = selectedClient.BankAccount1CLABE;
-            textBox_BankAccount1CardNumber.Text = selectedClient.BankAccount1CardNumber;
-            comboBox_BankAccount1CardType.SelectedIndex = selectedClient.IdBankAccount1CardType;
+            comboBox_BankAccount1Name.SelectedIndex = selectedClient.BankAccount1.IdBankName;
+            textBox_BankAccount1CodeCLABE.Text = selectedClient.BankAccount1.CLABE;
+            textBox_BankAccount1CardNumber.Text = selectedClient.BankAccount1.CardNumber;
+            comboBox_BankAccount1CardType.SelectedIndex = selectedClient.BankAccount1.IdCardType;
             //-----------------------------------------------Bank Account 2 data
-            comboBox_BankAccount2Name.SelectedIndex = selectedClient.IdBankAccount2Name;
-            textBox_BankAccount2CodeCLABE.Text = selectedClient.BankAccount2CLABE;
-            textBox_BankAccount2CardNumber.Text = selectedClient.BankAccount2CardNumber;
-            comboBox_BankAccount2CardType.SelectedIndex = selectedClient.IdBankAccount2CardType;
+            comboBox_BankAccount2Name.SelectedIndex = selectedClient.BankAccount2.IdBankName;
+            textBox_BankAccount2CodeCLABE.Text = selectedClient.BankAccount2.CLABE;
+            textBox_BankAccount2CardNumber.Text = selectedClient.BankAccount2.CardNumber;
+            comboBox_BankAccount2CardType.SelectedIndex = selectedClient.BankAccount2.IdCardType;
         }
 
         private void ClickCancel (object sender, RoutedEventArgs e) {
@@ -355,38 +355,46 @@ namespace FinanciaRed.View.ManageClients {
                 Email2 = textBox_Email2.Text,
                 PhoneNumber1 = textBox_PhoneNumber1.Text,
                 PhoneNumber2 = textBox_PhoneNumber2.Text,
-                IdWorkType = comboBox_WorkType.SelectedIndex,
-                WorkArea = textBox_WorkArea.Text,
-                MonthlySalary = float.Parse (textBox_MonthlySalary.Text),
-                Reference1FirstName = textBox_Reference1FirstName.Text,
-                Reference1MiddleName = textBox_Reference1MiddleName.Text,
-                Reference1LastName = textBox_Reference1LastName.Text,
-                Reference1Email = textBox_Reference1Email.Text,
-                Reference1PhoneNumber = textBox_Reference1PhoneNumber.Text,
-                IdReference1RelationshipType = comboBox_Reference1RelationshipType.SelectedIndex,
-                Reference2FirstName = textBox_Reference2FirstName.Text,
-                Reference2MiddleName = textBox_Reference2MiddleName.Text,
-                Reference2LastName = textBox_Reference2LastName.Text,
-                Reference2Email = textBox_Reference2Email.Text,
-                Reference2PhoneNumber = textBox_Reference2PhoneNumber.Text,
-                IdReference2RelationshipType = comboBox_Reference2RelationshipType.SelectedIndex,
+                Work = new DTO_WorkInfo {
+                    IdWorkType = comboBox_WorkType.SelectedIndex,
+                    WorkArea = textBox_WorkArea.Text,
+                    MonthlySalary = float.Parse (textBox_MonthlySalary.Text),
+                },
+                Reference1 = new DTO_ReferenceClient {
+                    FirstName = textBox_Reference1FirstName.Text,
+                    MiddleName = textBox_Reference1MiddleName.Text,
+                    LastName = textBox_Reference1LastName.Text,
+                    Email = textBox_Reference1Email.Text,
+                    PhoneNumber = textBox_Reference1PhoneNumber.Text,
+                    IdRelationshipType = comboBox_Reference1RelationshipType.SelectedIndex,
+                },
+                Reference2 = new DTO_ReferenceClient {
+                    FirstName = textBox_Reference2FirstName.Text,
+                    MiddleName = textBox_Reference2MiddleName.Text,
+                    LastName = textBox_Reference2LastName.Text,
+                    Email = textBox_Reference2Email.Text,
+                    PhoneNumber = textBox_Reference2PhoneNumber.Text,
+                    IdRelationshipType = comboBox_Reference2RelationshipType.SelectedIndex,
+                },
                 CodeRFC = textBox_CodeRFC.Text,
-                IdBankAccount1Name = comboBox_BankAccount1Name.SelectedIndex,
-                BankAccount1CLABE = textBox_BankAccount1CodeCLABE.Text,
-                BankAccount1CardNumber = textBox_BankAccount1CardNumber.Text,
-                IdBankAccount1CardType = comboBox_BankAccount1CardType.SelectedIndex,
+                BankAccount1 = new DTO_BankAccountClient {
+                    IdBankName = comboBox_BankAccount1Name.SelectedIndex,
+                    CLABE = textBox_BankAccount1CodeCLABE.Text,
+                    CardNumber = textBox_BankAccount1CardNumber.Text,
+                    IdCardType = comboBox_BankAccount1CardType.SelectedIndex,
+                },
                 StatusActive = this.selectedClient.StatusActive
             };
             if ((bool)checkBox_SameAccount.IsChecked) {
-                newClient.IdBankAccount2Name = newClient.IdBankAccount1Name;
-                newClient.BankAccount2CLABE = newClient.BankAccount1CLABE;
-                newClient.BankAccount2CardNumber = newClient.BankAccount1CardNumber;
-                newClient.IdBankAccount2CardType = newClient.IdBankAccount1CardType;
+                newClient.BankAccount2.IdBankName = newClient.BankAccount1.IdBankName;
+                newClient.BankAccount2.CLABE = newClient.BankAccount1.CLABE;
+                newClient.BankAccount2.CardNumber = newClient.BankAccount1.CardNumber;
+                newClient.BankAccount2.IdCardType = newClient.BankAccount1.IdCardType;
             } else {
-                newClient.IdBankAccount2Name = comboBox_BankAccount2Name.SelectedIndex;
-                newClient.BankAccount2CLABE = textBox_BankAccount2CodeCLABE.Text;
-                newClient.BankAccount2CardNumber = textBox_BankAccount2CardNumber.Text;
-                newClient.IdBankAccount2CardType = comboBox_BankAccount2CardType.SelectedIndex;
+                newClient.BankAccount2.IdBankName= comboBox_BankAccount2Name.SelectedIndex;
+                newClient.BankAccount2.CLABE = textBox_BankAccount2CodeCLABE.Text;
+                newClient.BankAccount2.CardNumber = textBox_BankAccount2CardNumber.Text;
+                newClient.BankAccount2.IdCardType = comboBox_BankAccount2CardType.SelectedIndex;
             }
 
             MessageResponse<bool> responseModifyClient = DAO_Client.SaveChangesDataClient (newClient);

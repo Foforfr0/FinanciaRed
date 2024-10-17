@@ -90,9 +90,12 @@
     <Compile Include="Model\DTO\DTO_AddressState.cs" />
     <Compile Include="Model\DTO\DTO_AddressType.cs" />
     <Compile Include="Model\DTO\DTO_Bank.cs" />
+    <Compile Include="Model\DTO\DTO_BankAccountClient.cs" />
     <Compile Include="Model\DTO\DTO_CardType.cs" />
     <Compile Include="Model\DTO\DTO_Client_Consult.cs" />
     <Compile Include="Model\DTO\DTO_Client_DetailsClient.cs" />
+    <Compile Include="Model\DTO\DTO_CreditRequest_Consult.cs" />
+    <Compile Include="Model\DTO\DTO_CreditRequest_Details.cs" />
     <Compile Include="Model\DTO\DTO_Credit_Consult.cs" />
     <Compile Include="Model\DTO\DTO_EmployeeRol.cs" />
     <Compile Include="Model\DTO\DTO_Employee_Consult.cs" />
@@ -100,7 +103,9 @@
     <Compile Include="Model\DTO\DTO_Employee_Login.cs" />
     <Compile Include="Model\DTO\DTO_Employee_ModifyData.cs" />
     <Compile Include="Model\DTO\DTO_MaritalStatus.cs" />
+    <Compile Include="Model\DTO\DTO_ReferenceClient.cs" />
     <Compile Include="Model\DTO\DTO_RelationshipType.cs" />
+    <Compile Include="Model\DTO\DTO_WorkInfo.cs" />
     <Compile Include="Model\DTO\MessageResponse.cs" />
     <Compile Include="Model\DTO\DTO_WorkType.cs" />
     <Compile Include="Model\Model_Entity\AddressesTypes.cs">
@@ -185,8 +190,14 @@
     <Compile Include="View\ManageCreditRequests\ViewCreditRequests.xaml.cs">
       <DependentUpon>ViewCreditRequests.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ManageCredits\RegistrerCredit.xaml.cs">
-      <DependentUpon>RegistrerCredit.xaml</DependentUpon>
+    <Compile Include="View\ManageCreditRequests\RegistrerCreditRequest.xaml.cs">
+      <DependentUpon>RegistrerCreditRequest.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManageCreditRequests\ViewDetailsCreditRequest.xaml.cs">
+      <DependentUpon>ViewDetailsCreditRequest.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManageCredits\ViewDetailsCredit.xaml.cs">
+      <DependentUpon>ViewDetailsCredit.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ManageEmployees\CheckProfile.xaml.cs">
       <DependentUpon>CheckProfile.xaml</DependentUpon>
@@ -238,7 +249,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ManageCredits\RegistrerCredit.xaml">
+    <Page Include="View\ManageCreditRequests\RegistrerCreditRequest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ManageCreditRequests\ViewDetailsCreditRequest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ManageCredits\ViewDetailsCredit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

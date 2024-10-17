@@ -34,7 +34,7 @@
                     <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" d:Height="725" Height="525" Width="740">
                         <StackPanel Margin="20 10">
                             <Label Content="Registro de nuevo empleado" Margin="0" Style="{StaticResource HeaderText}"/>
-                            <Label Content="Ingrese los datos necesarios (*)" FontSize="17" Padding="0" HorizontalAlignment="Left"/>
+                            <Label Content="Ingrese los datos necesarios (*)" Style="{StaticResource InstructionPage}"/>
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition/>

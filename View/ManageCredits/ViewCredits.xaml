@@ -44,9 +44,9 @@
                     <DataGridTextColumn Header="RFC" Binding="{Binding CodeRFC}" Width="*" />
                     <DataGridTextColumn Header="Monto total" Binding="{Binding Amount}" Width="*" />
                     <DataGridTextColumn Header="Monto restante" Binding="{Binding AmountLeft}" Width="*" />
-                    <DataGridTextColumn Header="Estado del crédito" Binding="{Binding StateCredit}" Width="*" />
-                    <DataGridTextColumn Header="Fecha inicio" Binding="{Binding StartDate}" Width="*" />
-                    <DataGridTextColumn Header="Fecha fin" Binding="{Binding EndDate}" Width="*" />
+                    <DataGridTextColumn Header="Estado del crédito" Binding="{Binding StatusCredit}" Width="*" />
+                    <DataGridTextColumn Header="Fecha inicio" Binding="{Binding StartDate, StringFormat={}{0:dd/MM/yyyy}}" Width="*" />
+                    <DataGridTextColumn Header="Fecha fin" Binding="{Binding EndDate, StringFormat={}{0:dd/MM/yyyy}}" Width="*" />
 
                     <!-- Columna con botón de detalles -->
                     <DataGridTemplateColumn Header="Detalles">

@@ -5,31 +5,25 @@ namespace FinanciaRed.Model.DTO {
         public int IdCredit {
             get; set;
         }
+        public string CodeRFC {
+            get; set;
+        }
         public long Amount {
             get; set;
         }
         public long? AmountLeft {
             get; set;
         }
-        public int IdClient {
+        public int IdStatusCredit {
             get; set;
         }
-        public int IdStateCredit {
-            get; set;
-        }
-        public byte[] SignedDocument {
-            get; set;
-        }
-        public double InterestRate {
+        public string StatusCredit {
             get; set;
         }
         public DateTime StartDate {
             get; set;
         }
         public DateTime EndDate {
-            get; set;
-        }
-        public int IdEmployee {
             get; set;
         }
     }

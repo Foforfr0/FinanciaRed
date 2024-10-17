@@ -17,15 +17,13 @@ namespace FinanciaRed.Model.DAO {
                         context.Credits.
                         Select (crdt => new DTO_Credit_Consult {
                             IdCredit = crdt.IdCredit,
+                            CodeRFC = crdt.Clients.CodeRFC,
                             Amount = crdt.Amount,
                             AmountLeft = crdt.AmountLeft,
-                            IdClient = crdt.IdClient,
-                            IdStateCredit = crdt.IdStateCredit,
-                            //SignedDocument = (byte[]) crdt.SignedDocument
-                            InterestRate = crdt.InterestRate,
                             StartDate = crdt.StartDate,
                             EndDate = crdt.EndDate,
-                            IdEmployee = crdt.IdEmployee
+                            IdStatusCredit = crdt.IdStateCredit,
+                            StatusCredit = crdt.StatesCredits.State
                         }).
                         ToListAsync ();
 

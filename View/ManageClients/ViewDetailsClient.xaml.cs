@@ -50,35 +50,35 @@ namespace FinanciaRed.View.ManageClients {
             label_PhoneNumber1.Content = selectedClient.PhoneNumber1;
             label_PhoneNumber2.Content = selectedClient.PhoneNumber2;
             //-----------------------------------------------Work data
-            label_WorkType.Content = selectedClient.WorkType;
-            label_WorkArea.Content = selectedClient.WorkArea;
-            label_MonthlySalary.Content = selectedClient.MonthlySalary.ToString ();
+            label_WorkType.Content = selectedClient.Work.WorkType;
+            label_WorkArea.Content = selectedClient.Work.WorkArea;
+            label_MonthlySalary.Content = selectedClient.Work.MonthlySalary.ToString ();
             //-----------------------------------------------Reference conatact 1 data
-            label_Reference1FirstName.Content = selectedClient.Reference1FirstName;
-            label_Reference1MiddleName.Content = selectedClient.Reference1MiddleName;
-            label_Reference1LastName.Content = selectedClient.Reference1LastName;
-            label_Reference1Email.Content = selectedClient.Reference1Email;
-            label_Reference1PhoneNumber.Content = selectedClient.Reference1PhoneNumber;
-            label_Reference1RelationshipType.Content = selectedClient.Reference1RelationshipType;
+            label_Reference1FirstName.Content = selectedClient.Reference1.FirstName;
+            label_Reference1MiddleName.Content = selectedClient.Reference1.MiddleName;
+            label_Reference1LastName.Content = selectedClient.Reference1.LastName;
+            label_Reference1Email.Content = selectedClient.Reference1.Email;
+            label_Reference1PhoneNumber.Content = selectedClient.Reference1.PhoneNumber;
+            label_Reference1RelationshipType.Content = selectedClient.Reference1.RelationshipType;
             //-----------------------------------------------Reference contact 2 data
-            label_Reference2FirstName.Content = selectedClient.Reference2FirstName;
-            label_Reference2MiddleName.Content = selectedClient.Reference2MiddleName;
-            label_Reference2LastName.Content = selectedClient.Reference2LastName;
-            label_Reference2Email.Content = selectedClient.Reference2Email;
-            label_Reference2PhoneNumber.Content = selectedClient.Reference2PhoneNumber;
-            label_Reference2RelationshipType.Content = selectedClient.Reference2RelationshipType;
+            label_Reference2FirstName.Content = selectedClient.Reference2.FirstName;
+            label_Reference2MiddleName.Content = selectedClient.Reference2.MiddleName;
+            label_Reference2LastName.Content = selectedClient.Reference2.LastName;
+            label_Reference2Email.Content = selectedClient.Reference2.Email;
+            label_Reference2PhoneNumber.Content = selectedClient.Reference2.PhoneNumber;
+            label_Reference2RelationshipType.Content = selectedClient.Reference2.RelationshipType;
             //-----------------------------------------------Financial data
             label_CodeRFC.Content = selectedClient.CodeRFC;
             //-----------------------------------------------Bank Account 1 data
-            label_BankAccount1Name.Content = selectedClient.BankAccount1Name;
-            label_BankAccount1CodeCLABE.Content = selectedClient.BankAccount1CLABE;
-            label_BankAccount1CardNumber.Content = selectedClient.BankAccount1CardNumber;
-            label_BankAccount1CardType.Content = selectedClient.BankAccount1CardType;
+            label_BankAccount1Name.Content = selectedClient.BankAccount1.BankName;
+            label_BankAccount1CodeCLABE.Content = selectedClient.BankAccount1.CLABE;
+            label_BankAccount1CardNumber.Content = selectedClient.BankAccount1.CardNumber;
+            label_BankAccount1CardType.Content = selectedClient.BankAccount1.CardType;
             //-----------------------------------------------Bank Account 2 data
-            label_BankAccount2Name.Content = selectedClient.BankAccount2Name;
-            label_BankAccount2CodeCLABE.Content = selectedClient.BankAccount2CLABE;
-            label_BankAccount2CardNumber.Content = selectedClient.BankAccount2CardNumber;
-            label_BankAccount2CardType.Content = selectedClient.BankAccount2CardType;
+            label_BankAccount2Name.Content = selectedClient.BankAccount2.BankName;
+            label_BankAccount2CodeCLABE.Content = selectedClient.BankAccount2.CLABE;
+            label_BankAccount2CardNumber.Content = selectedClient.BankAccount2.CardNumber;
+            label_BankAccount2CardType.Content = selectedClient.BankAccount2.CardType;
             //-----------------------------------------------Status client
             label_StatusClient.Content = selectedClient.StatusActive;
         }

@@ -30,6 +30,26 @@
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="Margin" Value="10 5 10 0"/>
         </Style>
+        <Style x:Key="HeaderText2" TargetType="Label">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Margin" Value="0"/>
+        </Style>
+        <Style x:Key="HeaderText3" TargetType="Label">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Margin" Value="0"/>
+        </Style>
+
+        <Style x:Key="InstructionPage" TargetType="Label">
+            <Setter Property="Content" Value="Ingrese los datos necesarios (*)"/>
+            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+
 
         <Style x:Key="LabelErrorForm" TargetType="Label">
             <Setter Property="Content" Value=""/>
@@ -37,6 +57,22 @@
             <Setter Property="Visibility" Value="Collapsed"/>
             <Setter Property="Margin" Value="0 0 0 0"/>
             <Setter Property="Padding" Value="5 0 0 5"/>
+        </Style>
+
+        <Style x:Key="RequiredFieldTag" TargetType="Label">
+            <Setter Property="Content" Value="*"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Foreground" Value="Red"/>
+            <Setter Property="FontWeight" Value="Heavy"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>            
+            <Setter Property="Padding" Value="0"/>            
+            <Setter Property="Margin" Value="0 -4"/>            
+        </Style>
+        <Style x:Key="FieldTag" TargetType="Label">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
     </Application.Resources>
 </Application>

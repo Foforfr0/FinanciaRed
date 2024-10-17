@@ -58,6 +58,11 @@
                                 <Run Text="Créditos"/>
                             </Hyperlink>
                         </Label>
+                        <TextBlock x:Name="label_GlobalOptionCreditRequests" Padding="0 0 0 8" TextWrapping="Wrap">
+                            <Hyperlink Click="ClickShowManagementCreditRequestsFrame">
+                                <Run Text="Solicitudes de crédito"/>
+                            </Hyperlink>
+                        </TextBlock>
                         <Label x:Name="label_GlobalOptionEmployees" Padding="0 0 0 8">
                             <Hyperlink Click="ClickShowManagementEmployeesFrame">
                                 <Run Text="Empleados"/>

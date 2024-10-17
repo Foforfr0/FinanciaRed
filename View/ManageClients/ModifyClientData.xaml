@@ -42,29 +42,29 @@
                                 </Grid.ColumnDefinitions>
 
                                 <StackPanel Grid.Column="0" Margin="0 0 15 5">
-                                    <Label Content="Datos personales" FontSize="18" FontWeight="Bold" Padding="0"/>
+                                    <Label Content="Datos personales" Style="{StaticResource HeaderText2}"/>
                                     <StackPanel x:Name="stackPanel_PersonalData" Margin="10 0 0 0">
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                            <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
-                                            <Label Content="Nombre(s):" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                            <Label Style="{StaticResource RequiredFieldTag}"/>
+                                            <Label Content="Nombre(s):" Style="{StaticResource FieldTag}"/>
                                         </StackPanel>
                                         <TextBox x:Name="textBox_FirstName" TextChanged="TextChanged_Name" Height="22"/>
                                         <Label x:Name="label_ErrorName" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                            <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
-                                            <Label Content="Apellido paterno:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                            <Label Style="{StaticResource RequiredFieldTag}"/>
+                                            <Label Content="Apellido paterno:" Style="{StaticResource FieldTag}"/>
                                         </StackPanel>
                                         <TextBox x:Name="textBox_MiddleName" TextChanged="TextChanged_MiddleName" Height="22"/>
                                         <Label x:Name="label_ErrorMiddleName" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                            <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
-                                            <Label Content="Apellido materno:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                            <Label Style="{StaticResource RequiredFieldTag}"/>
+                                            <Label Content="Apellido materno:" Style="{StaticResource FieldTag}"/>
                                         </StackPanel>
                                         <TextBox x:Name="textBox_LastName" TextChanged="TextChanged_LastName" Height="22"/>
                                         <Label x:Name="label_ErrorLastName" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                            <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
-                                            <Label Content="Fecha de nacimiento:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                            <Label Style="{StaticResource RequiredFieldTag}"/>
+                                            <Label Content="Fecha de nacimiento:" Style="{StaticResource FieldTag}"/>
                                         </StackPanel>
                                         <DatePicker x:Name="datePicker_DateBirth">
                                             <DatePicker.Resources>
@@ -75,20 +75,20 @@
                                         </DatePicker>
                                         <Label x:Name="label_ErrorDateBirth" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                            <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
-                                            <Label Content="Género:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                            <Label Style="{StaticResource RequiredFieldTag}"/>
+                                            <Label Content="Género:" Style="{StaticResource FieldTag}"/>
                                         </StackPanel>
                                         <ComboBox x:Name="comboBox_Gender"/>
                                         <Label x:Name="label_ErrorGender" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                            <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
-                                            <Label Content="Estado civil:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                            <Label Style="{StaticResource RequiredFieldTag}"/>
+                                            <Label Content="Estado civil:" Style="{StaticResource FieldTag}"/>
                                         </StackPanel>
                                         <ComboBox x:Name="comboBox_MaritalStatus"/>
                                         <Label x:Name="label_ErrorMaritalStatus" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                            <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
-                                            <Label Content="Código Único de Modificación de datos de Población:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                            <Label Style="{StaticResource RequiredFieldTag}"/>
+                                            <Label Content="Código Único de Modificación de datos de Población:" Style="{StaticResource FieldTag}"/>
                                         </StackPanel>
                                         <TextBox x:Name="textBox_CodeCurp" TextChanged="TextChanged_CodeCurp" Height="22"/>
                                         <Label x:Name="label_ErrorCodeCurp" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
@@ -96,50 +96,50 @@
                                 </StackPanel>
 
                                 <StackPanel Grid.Column="1" Margin="0 0 15 5">
-                                    <Label Content="Datos de domicilio" FontSize="18" FontWeight="Bold" Padding="0"/>
+                                    <Label Content="Datos de domicilio" Style="{StaticResource HeaderText2}"/>
                                     <StackPanel x:Name="stackPanel_AddressData" Margin="10 0 0 0">
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                            <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
-                                            <Label Content="Estado:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                            <Label Style="{StaticResource RequiredFieldTag}"/>
+                                            <Label Content="Estado:" Style="{StaticResource FieldTag}"/>
                                         </StackPanel>
                                         <ComboBox x:Name="comboBox_State"/>
                                         <Label x:Name="label_ErrorState" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                            <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
-                                            <Label Content="Municipio:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                            <Label Style="{StaticResource RequiredFieldTag}"/>
+                                            <Label Content="Municipio:" Style="{StaticResource FieldTag}"/>
                                         </StackPanel>
                                         <TextBox x:Name="textBox_Municipality" TextChanged="TextChanged_Municipality" Height="22"/>
                                         <Label x:Name="label_ErrorMunicipality" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                            <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
-                                            <Label Content="Código postal:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                            <Label Style="{StaticResource RequiredFieldTag}"/>
+                                            <Label Content="Código postal:" Style="{StaticResource FieldTag}"/>
                                         </StackPanel>
                                         <TextBox x:Name="textBox_PostalCode" TextChanged="TextChanged_PostalCode" Height="22"/>
                                         <Label x:Name="label_ErrorPostalCode" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                            <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
-                                            <Label Content="Nombre de colonia:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                            <Label Style="{StaticResource RequiredFieldTag}"/>
+                                            <Label Content="Nombre de colonia:" Style="{StaticResource FieldTag}"/>
                                         </StackPanel>
                                         <TextBox x:Name="textBox_Colony" TextChanged="TextChanged_Colony" Height="22"/>
                                         <Label x:Name="label_ErrorColony" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                            <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
-                                            <Label Content="Nombre de la calle:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                            <Label Style="{StaticResource RequiredFieldTag}"/>
+                                            <Label Content="Nombre de la calle:" Style="{StaticResource FieldTag}"/>
                                         </StackPanel>
                                         <TextBox x:Name="textBox_Street" TextChanged="TextChanged_Street" Height="22"/>
                                         <Label x:Name="label_ErrorStreet" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                            <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
-                                            <Label Content="Número exterior:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                            <Label Style="{StaticResource RequiredFieldTag}"/>
+                                            <Label Content="Número exterior:" Style="{StaticResource FieldTag}"/>
                                         </StackPanel>
                                         <TextBox x:Name="textBox_ExteriorNumber" Height="22"/>
                                         <Label x:Name="label_ErrorExteriorNumber" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
-                                        <Label Content="Número interior:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                        <Label Content="Número interior:" Style="{StaticResource FieldTag}"/>
                                         <TextBox x:Name="textBox_InteriorNumber" Height="22"/>
                                         <Label x:Name="label_ErrorInteriorNumber" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                            <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
-                                            <Label Content="Tipo de vivienda:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                            <Label Style="{StaticResource RequiredFieldTag}"/>
+                                            <Label Content="Tipo de vivienda:" Style="{StaticResource FieldTag}"/>
                                         </StackPanel>
                                         <ComboBox x:Name="comboBox_AddressType"/>
                                         <Label x:Name="label_ErrorAddressType" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
@@ -174,47 +174,47 @@
                                 </Grid.ColumnDefinitions>
 
                                 <StackPanel Grid.Column="0" Margin="0 0 15 5">
-                                    <Label Content="Datos de contacto" FontSize="18" FontWeight="Bold" Padding="0"/>
+                                    <Label Content="Datos de contacto" Style="{StaticResource HeaderText2}"/>
                                     <StackPanel x:Name="stackPanel_ContactData" Margin="10 0 0 0">
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                            <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
-                                            <Label Content="Correo electrónico (1):" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                            <Label Style="{StaticResource RequiredFieldTag}"/>
+                                            <Label Content="Correo electrónico (1):" Style="{StaticResource FieldTag}"/>
                                         </StackPanel>
                                         <TextBox x:Name="textBox_Email1" TextChanged="TextChanged_Email1" Height="22"/>
                                         <Label x:Name="label_ErrorEmail1" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
-                                        <Label Content="Correo electrónico (2):" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                        <Label Content="Correo electrónico (2):" Style="{StaticResource FieldTag}"/>
                                         <TextBox x:Name="textBox_Email2" TextChanged="TextChanged_Email2" Height="22"/>
                                         <Label x:Name="label_ErrorEmail2" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                            <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
-                                            <Label Content="Número de contacto (1):" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                            <Label Style="{StaticResource RequiredFieldTag}"/>
+                                            <Label Content="Número de contacto (1):" Style="{StaticResource FieldTag}"/>
                                         </StackPanel>
                                         <TextBox x:Name="textBox_PhoneNumber1" TextChanged="TextChanged_PhoneNumber1" PreviewTextInput="PreviewTextInput_OnlyNumbers" Height="22"/>
                                         <Label x:Name="label_ErrorPhoneNumber1" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
-                                        <Label Content="Número de contacto (2):" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                        <Label Content="Número de contacto (2):" Style="{StaticResource FieldTag}"/>
                                         <TextBox x:Name="textBox_PhoneNumber2" TextChanged="TextChanged_PhoneNumber2" PreviewTextInput="PreviewTextInput_OnlyNumbers" Height="22"/>
                                         <Label x:Name="label_ErrorPhoneNumber2" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
                                     </StackPanel>
                                 </StackPanel>
 
                                 <StackPanel Grid.Column="1" Margin="0 0 15 5">
-                                    <Label Content="Datos del area de trabajo" FontSize="18" FontWeight="Bold" Padding="0"/>
+                                    <Label Content="Datos del area de trabajo" Style="{StaticResource HeaderText2}"/>
                                     <StackPanel x:Name="stackPanel_WorkAreaData" Margin="10 0 0 0">
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                            <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
-                                            <Label Content="Tipo:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                            <Label Style="{StaticResource RequiredFieldTag}"/>
+                                            <Label Content="Tipo:" Style="{StaticResource FieldTag}"/>
                                         </StackPanel>
                                         <ComboBox x:Name="comboBox_WorkType"/>
                                         <Label x:Name="label_ErrorWorkType" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                            <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
-                                            <Label Content="Trabajo:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                            <Label Style="{StaticResource RequiredFieldTag}"/>
+                                            <Label Content="Trabajo:" Style="{StaticResource FieldTag}"/>
                                         </StackPanel>
                                         <TextBox x:Name="textBox_WorkArea" TextChanged="TextChanged_WorkArea" Height="22"/>
                                         <Label x:Name="label_ErrorWorkArea" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                            <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
-                                            <Label Content="Salario mensual:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                            <Label Style="{StaticResource RequiredFieldTag}"/>
+                                            <Label Content="Salario mensual:" Style="{StaticResource FieldTag}"/>
                                         </StackPanel>
                                         <TextBox x:Name="textBox_MonthlySalary" TextChanged="TextChanged_MonthlySalary" PreviewTextInput="PreviewTextInput_OnlyNumbers" Height="22"/>
                                         <Label x:Name="label_ErrorMonthly" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
@@ -251,41 +251,41 @@
                                 </Grid.ColumnDefinitions>
 
                                 <StackPanel Grid.Column="0" Margin="0 0 15 5">
-                                    <Label Content="Contactos de referencia (1):" FontSize="18" FontWeight="Bold" Padding="0"/>
+                                    <Label Content="Contactos de referencia (1):" Style="{StaticResource HeaderText2}"/>
                                     <StackPanel x:Name="stackPanel_ContactReference1" Margin="10 0 0 0">
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                            <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
-                                            <Label Content="Nombre(s):" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                            <Label Style="{StaticResource RequiredFieldTag}"/>
+                                            <Label Content="Nombre(s):" Style="{StaticResource FieldTag}"/>
                                         </StackPanel>
                                         <TextBox x:Name="textBox_Reference1FirstName" TextChanged="TextChanged_Reference1FirstName" Height="22"/>
                                         <Label x:Name="label_ErrorReference1FirstName" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                            <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
-                                            <Label Content="Apellido paterno:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                            <Label Style="{StaticResource RequiredFieldTag}"/>
+                                            <Label Content="Apellido paterno:" Style="{StaticResource FieldTag}"/>
                                         </StackPanel>
                                         <TextBox x:Name="textBox_Reference1MiddleName" TextChanged="TextChanged_Reference1MiddleName" Height="22"/>
                                         <Label x:Name="label_ErrorReference1MiddleName" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                            <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
-                                            <Label Content="Apellido materno:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                            <Label Style="{StaticResource RequiredFieldTag}"/>
+                                            <Label Content="Apellido materno:" Style="{StaticResource FieldTag}"/>
                                         </StackPanel>
                                         <TextBox x:Name="textBox_Reference1LastName" TextChanged="TextChanged_Reference1LastName" Height="22"/>
                                         <Label x:Name="label_ErrorReference1LastName" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                            <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
-                                            <Label Content="Correo electrónico:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                            <Label Style="{StaticResource RequiredFieldTag}"/>
+                                            <Label Content="Correo electrónico:" Style="{StaticResource FieldTag}"/>
                                         </StackPanel>
                                         <TextBox x:Name="textBox_Reference1Email" TextChanged="TextChanged_Reference1Email" Height="22"/>
                                         <Label x:Name="label_ErrorReference1Email" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                            <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
-                                            <Label Content="Número de teléfono:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                            <Label Style="{StaticResource RequiredFieldTag}"/>
+                                            <Label Content="Número de teléfono:" Style="{StaticResource FieldTag}"/>
                                         </StackPanel>
                                         <TextBox x:Name="textBox_Reference1PhoneNumber" TextChanged="TextChanged_Reference1PhoneNumber" Height="22"/>
                                         <Label x:Name="label_ErrorReference1PhoneNumber" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                            <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
-                                            <Label Content="Tipo de relación:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                            <Label Style="{StaticResource RequiredFieldTag}"/>
+                                            <Label Content="Tipo de relación:" Style="{StaticResource FieldTag}"/>
                                         </StackPanel>
                                         <ComboBox x:Name="comboBox_Reference1RelationshipType"/>
                                         <Label x:Name="label_ErrorReference1RelationshipType" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
@@ -293,41 +293,41 @@
                                 </StackPanel>
 
                                 <StackPanel Grid.Column="1" Margin="0 0 15 5">
-                                    <Label Content="Contactos de referencia (2):" FontSize="18" FontWeight="Bold" Padding="0"/>
+                                    <Label Content="Contactos de referencia (2):" Style="{StaticResource HeaderText2}"/>
                                     <StackPanel x:Name="stackPanel_ContactReference2" Margin="10 0 0 0">
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                            <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
-                                            <Label Content="Nombre(s):" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                            <Label Style="{StaticResource RequiredFieldTag}"/>
+                                            <Label Content="Nombre(s):" Style="{StaticResource FieldTag}"/>
                                         </StackPanel>
                                         <TextBox x:Name="textBox_Reference2FirstName" TextChanged="TextChanged_Reference2FirstName" Height="22"/>
                                         <Label x:Name="label_ErrorReference2FirstName" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                            <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
-                                            <Label Content="Apellido paterno:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                            <Label Style="{StaticResource RequiredFieldTag}"/>
+                                            <Label Content="Apellido paterno:" Style="{StaticResource FieldTag}"/>
                                         </StackPanel>
                                         <TextBox x:Name="textBox_Reference2MiddleName" TextChanged="TextChanged_Reference2MiddleName" Height="22"/>
                                         <Label x:Name="label_ErrorReference2MiddleName" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                            <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
-                                            <Label Content="Apellido materno:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                            <Label Style="{StaticResource RequiredFieldTag}"/>
+                                            <Label Content="Apellido materno:" Style="{StaticResource FieldTag}"/>
                                         </StackPanel>
                                         <TextBox x:Name="textBox_Reference2LastName" TextChanged="TextChanged_Reference2LastName" Height="22"/>
                                         <Label x:Name="label_ErrorReference2LastName" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                            <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
-                                            <Label Content="Correo electrónico:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                            <Label Style="{StaticResource RequiredFieldTag}"/>
+                                            <Label Content="Correo electrónico:" Style="{StaticResource FieldTag}"/>
                                         </StackPanel>
                                         <TextBox x:Name="textBox_Reference2Email" TextChanged="TextChanged_Reference2Email" Height="22"/>
                                         <Label x:Name="label_ErrorReference2Email" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                            <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
-                                            <Label Content="Número de teléfono:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                            <Label Style="{StaticResource RequiredFieldTag}"/>
+                                            <Label Content="Número de teléfono:" Style="{StaticResource FieldTag}"/>
                                         </StackPanel>
                                         <TextBox x:Name="textBox_Reference2PhoneNumber" TextChanged="TextChanged_Reference2PhoneNumber" Height="22"/>
                                         <Label x:Name="label_ErrorReference2PhoneNumber" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                            <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
-                                            <Label Content="Tipo de relación:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                            <Label Style="{StaticResource RequiredFieldTag}"/>
+                                            <Label Content="Tipo de relación:" Style="{StaticResource FieldTag}"/>
                                         </StackPanel>
                                         <ComboBox x:Name="comboBox_Reference2RelationshipType"/>
                                         <Label x:Name="label_ErrorReference2RelationshipType" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
@@ -359,8 +359,8 @@
                             <Label Content="Ingrese los datos necesarios (*)" FontSize="17" Padding="0" HorizontalAlignment="Left"/>
                             <StackPanel Margin="10 0 0 0">
                                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                    <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
-                                    <Label Content="Modificación de datos Federal del Contribuyente:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    <Label Style="{StaticResource RequiredFieldTag}"/>
+                                    <Label Content="Modificación de datos Federal del Contribuyente:" Style="{StaticResource FieldTag}"/>
                                 </StackPanel>
                                 <TextBox x:Name="textBox_CodeRFC" TextChanged="TextChanged_CodeRFC" Height="22" Width="325" HorizontalAlignment="Left"/>
                                 <Label x:Name="label_ErrorCodeRFC" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
@@ -372,29 +372,29 @@
                                 </Grid.ColumnDefinitions>
 
                                 <StackPanel Grid.Column="0" Margin="0 0 15 5">
-                                    <Label Content="Cuenta de depósito:" FontSize="18" FontWeight="Bold" Padding="0"/>
+                                    <Label Content="Cuenta de depósito:" Style="{StaticResource HeaderText2}"/>
                                     <StackPanel x:Name="stackPanel_BankAccount1" Margin="10 0 0 0">
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                            <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
-                                            <Label Content="Nombre del banco:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                            <Label Style="{StaticResource RequiredFieldTag}"/>
+                                            <Label Content="Nombre del banco:" Style="{StaticResource FieldTag}"/>
                                         </StackPanel>
                                         <ComboBox x:Name="comboBox_BankAccount1Name"/>
                                         <Label x:Name="label_ErrorBankAccount1Name" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                            <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
-                                            <Label Content="Clave Estandarizada Bancaria:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                            <Label Style="{StaticResource RequiredFieldTag}"/>
+                                            <Label Content="Clave Estandarizada Bancaria:" Style="{StaticResource FieldTag}"/>
                                         </StackPanel>
                                         <TextBox x:Name="textBox_BankAccount1CodeCLABE" TextChanged="TextChanged_BanckAccount1CodeCLABE" PreviewTextInput="PreviewTextInput_OnlyNumbers" Height="22"/>
                                         <Label x:Name="label_ErrorBankAccount1CodeCLABE" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                            <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
-                                            <Label Content="Número de tarjeta:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                            <Label Style="{StaticResource RequiredFieldTag}"/>
+                                            <Label Content="Número de tarjeta:" Style="{StaticResource FieldTag}"/>
                                         </StackPanel>
                                         <TextBox x:Name="textBox_BankAccount1CardNumber" TextChanged="TextChanged_BanckAccount1CardNumber" PreviewTextInput="PreviewTextInput_OnlyNumbers" Height="22"/>
                                         <Label x:Name="label_ErrorBankAccount1CardNumber" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                            <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
-                                            <Label Content="Tipo de tarjeta:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                            <Label Style="{StaticResource RequiredFieldTag}"/>
+                                            <Label Content="Tipo de tarjeta:" Style="{StaticResource FieldTag}"/>
                                         </StackPanel>
                                         <ComboBox x:Name="comboBox_BankAccount1CardType"/>
                                         <Label x:Name="label_ErrorBankAccount1CardType" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
@@ -406,29 +406,29 @@
                                 </StackPanel>
 
                                 <StackPanel Grid.Column="1" Margin="0 0 15 5">
-                                    <Label Content="Cuenta de cobro:" FontSize="18" FontWeight="Bold" Padding="0"/>
+                                    <Label Content="Cuenta de cobro:" Style="{StaticResource HeaderText2}"/>
                                     <StackPanel x:Name="stackPanel_BankAccount2" Margin="10 0 0 0">
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                            <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
-                                            <Label Content="Nombre del banco:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                            <Label Style="{StaticResource RequiredFieldTag}"/>
+                                            <Label Content="Nombre del banco:" Style="{StaticResource FieldTag}"/>
                                         </StackPanel>
                                         <ComboBox x:Name="comboBox_BankAccount2Name"/>
                                         <Label x:Name="label_ErrorBankAccount2Name" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                            <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
-                                            <Label Content="Clave Estandarizada Bancaria:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                            <Label Style="{StaticResource RequiredFieldTag}"/>
+                                            <Label Content="Clave Estandarizada Bancaria:" Style="{StaticResource FieldTag}"/>
                                         </StackPanel>
                                         <TextBox x:Name="textBox_BankAccount2CodeCLABE" TextChanged="TextChanged_BanckAccount2CodeCLABE" PreviewTextInput="PreviewTextInput_OnlyNumbers" Height="22"/>
                                         <Label x:Name="label_ErrorBankAccount2CodeCLABE" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                            <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
-                                            <Label Content="Número de tarjeta:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                            <Label Style="{StaticResource RequiredFieldTag}"/>
+                                            <Label Content="Número de tarjeta:" Style="{StaticResource FieldTag}"/>
                                         </StackPanel>
                                         <TextBox x:Name="textBox_BankAccount2CardNumber" TextChanged="TextChanged_BanckAccount2CardNumber" PreviewTextInput="PreviewTextInput_OnlyNumbers" Height="22"/>
                                         <Label x:Name="label_ErrorBankAccount2CardNumber" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                            <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
-                                            <Label Content="Tipo de tarjeta:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                            <Label Style="{StaticResource RequiredFieldTag}"/>
+                                            <Label Content="Tipo de tarjeta:" Style="{StaticResource FieldTag}"/>
                                         </StackPanel>
                                         <ComboBox x:Name="comboBox_BankAccount2CardType"/>
                                         <Label x:Name="label_ErrorBankAccount2CardType" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>

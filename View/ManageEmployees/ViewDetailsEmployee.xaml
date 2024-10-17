@@ -24,7 +24,7 @@
                 </StackPanel>
 
                 <StackPanel x:Name="stackPanel_Form" Grid.Column="1" Width="365" Margin="10 0 0 0">
-                    <Label Content="Datos de perfil" FontSize="18" FontWeight="Bold" Padding="0" Margin="0 0 0 5"/>
+                    <Label Content="Datos de perfil" Style="{StaticResource HeaderText2}"/>
                     <Label Content="Nombre(s):" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
                     <Label x:Name="label_FirstName" Background="White" Padding="5 0 0 0"/>
                     <Label Content="Apellido paterno:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center" Margin="0 8 0 0"/>
@@ -35,7 +35,7 @@
                     <Label x:Name="label_Email" Background="White" Padding="5 0 0 0"/>
                     <Label Content="Cargo actual:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center" Margin="0 8 0 0"/>
                     <Label x:Name="label_Rol" Background="White" Padding="5 0 0 0"/>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 25 0 0" Width="100">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 25 0 0" Width="80">
                         <Button x:Name="button_Modify" Click="ClickModifyEmployee" Content="Modificar" 
                             Width="80" Height="25" HorizontalAlignment="Center" Background="#FF0693C3" Foreground="#FFFFFF"/>
                     </StackPanel>

@@ -275,62 +275,71 @@ namespace FinanciaRed.View.ManageClients {
         }
 
         private async Task SaveDataInDatabase () {
-            DTO_Client_DetailsClient newClient = new DTO_Client_DetailsClient {
-                FirstName = textBox_Name.Text,
-                MiddleName = textBox_MiddleName.Text,
-                LastName = textBox_LastName.Text,
-                DateBirth = DateTime.Parse (datePicker_DateBirth.Text),
-                Gender = comboBox_Gender.SelectedIndex == 1 ? "M" : "F",
-                IdMaritalStatus = comboBox_MaritalStatus.SelectedIndex,
-                CodeCURP = textBox_CodeCURP.Text,
-                AddressClient = new DTO_AddressClient {
-                    IdState = comboBox_State.SelectedIndex,
-                    Municipality = textBox_Municipality.Text,
-                    PostalCode = textBox_PostalCode.Text,
-                    Colony = textBox_Colony.Text,
-                    Street = textBox_Street.Text,
-                    ExteriorNumber = textBox_ExteriorNumber.Text,
-                    InteriorNumber = textBox_InteriorNumber.Text,
-                    IdAddressType = comboBox_AddressType.SelectedIndex
-                },
-                Email1 = textBox_Email1.Text,
-                Email2 = textBox_Email2.Text,
-                PhoneNumber1 = textBox_PhoneNumber1.Text,
-                PhoneNumber2 = textBox_PhoneNumber2.Text,
-                IdWorkType = comboBox_WorkType.SelectedIndex,
-                WorkArea = textBox_WorkArea.Text,
-                MonthlySalary = float.Parse (textBox_MonthlySalary.Text),
-                Reference1FirstName = textBox_Reference1FirstName.Text,
-                Reference1MiddleName = textBox_Reference1MiddleName.Text,
-                Reference1LastName = textBox_Reference1LastName.Text,
-                Reference1Email = textBox_Reference1Email.Text,
-                Reference1PhoneNumber = textBox_Reference1PhoneNumber.Text,
-                IdReference1RelationshipType = comboBox_Reference1RelationshipType.SelectedIndex,
-                Reference2FirstName = textBox_Reference2FirstName.Text,
-                Reference2MiddleName = textBox_Reference2MiddleName.Text,
-                Reference2LastName = textBox_Reference2LastName.Text,
-                Reference2Email = textBox_Reference2Email.Text,
-                Reference2PhoneNumber = textBox_Reference2PhoneNumber.Text,
-                IdReference2RelationshipType = comboBox_Reference2RelationshipType.SelectedIndex,
-                CodeRFC = textBox_CodeRFC.Text,
-                IdBankAccount1Name = comboBox_BankAccount1Name.SelectedIndex,
-                BankAccount1CLABE = textBox_BankAccount1CodeCLABE.Text,
-                BankAccount1CardNumber = textBox_BankAccount1CardNumber.Text,
-                IdBankAccount1CardType = comboBox_BankAccount1CardType.SelectedIndex
-            };
-            if ((bool)checkBox_SameAccount.IsChecked) {
-                newClient.IdBankAccount2Name = newClient.IdBankAccount1Name;
-                newClient.BankAccount2CLABE = newClient.BankAccount1CLABE;
-                newClient.BankAccount2CardNumber = newClient.BankAccount1CardNumber;
-                newClient.IdBankAccount2CardType = newClient.IdBankAccount1CardType;
-            } else {
-                newClient.IdBankAccount2Name = comboBox_BankAccount2Name.SelectedIndex;
-                newClient.BankAccount2CLABE = textBox_BankAccount2CodeCLABE.Text;
-                newClient.BankAccount2CardNumber = textBox_BankAccount2CardNumber.Text;
-                newClient.IdBankAccount2CardType = comboBox_BankAccount2CardType.SelectedIndex;
-            }
+                DTO_Client_DetailsClient newClient = new DTO_Client_DetailsClient {
+                    FirstName = textBox_FirstName.Text,
+                    MiddleName = textBox_MiddleName.Text,
+                    LastName = textBox_LastName.Text,
+                    DateBirth = DateTime.Parse (datePicker_DateBirth.Text),
+                    Gender = comboBox_Gender.SelectedIndex == 1 ? "M" : "F",
+                    IdMaritalStatus = comboBox_MaritalStatus.SelectedIndex,
+                    CodeCURP = textBox_CodeCURP.Text,
+                    AddressClient = new DTO_AddressClient {
+                        IdState = comboBox_State.SelectedIndex,
+                        Municipality = textBox_Municipality.Text,
+                        PostalCode = textBox_PostalCode.Text,
+                        Colony = textBox_Colony.Text,
+                        Street = textBox_Street.Text,
+                        ExteriorNumber = textBox_ExteriorNumber.Text,
+                        InteriorNumber = textBox_InteriorNumber.Text,
+                        IdAddressType = comboBox_AddressType.SelectedIndex
+                    },
+                    Email1 = textBox_Email1.Text,
+                    Email2 = textBox_Email2.Text,
+                    PhoneNumber1 = textBox_PhoneNumber1.Text,
+                    PhoneNumber2 = textBox_PhoneNumber2.Text,
+                    Work = new DTO_WorkInfo {
+                        IdWorkType = comboBox_WorkType.SelectedIndex,
+                        WorkArea = textBox_WorkArea.Text,
+                        MonthlySalary = float.Parse (textBox_MonthlySalary.Text),
+                    },
+                    Reference1 = new DTO_ReferenceClient {
+                        FirstName = textBox_Reference1FirstName.Text,
+                        MiddleName = textBox_Reference1MiddleName.Text,
+                        LastName = textBox_Reference1LastName.Text,
+                        Email = textBox_Reference1Email.Text,
+                        PhoneNumber = textBox_Reference1PhoneNumber.Text,
+                        IdRelationshipType = comboBox_Reference1RelationshipType.SelectedIndex,
+                    },
+                    Reference2 = new DTO_ReferenceClient {
+                        FirstName = textBox_Reference2FirstName.Text,
+                        MiddleName = textBox_Reference2MiddleName.Text,
+                        LastName = textBox_Reference2LastName.Text,
+                        Email = textBox_Reference2Email.Text,
+                        PhoneNumber = textBox_Reference2PhoneNumber.Text,
+                        IdRelationshipType = comboBox_Reference2RelationshipType.SelectedIndex,
+                    },
+                    CodeRFC = textBox_CodeRFC.Text,
+                    BankAccount1 = new DTO_BankAccountClient {
+                        IdBankName = comboBox_BankAccount1Name.SelectedIndex,
+                        CLABE = textBox_BankAccount1CodeCLABE.Text,
+                        CardNumber = textBox_BankAccount1CardNumber.Text,
+                        IdCardType = comboBox_BankAccount1CardType.SelectedIndex,
+                    },
+                    StatusActive = true
+                };
+                if ((bool)checkBox_SameAccount.IsChecked) {
+                    newClient.BankAccount2.IdBankName = newClient.BankAccount1.IdBankName;
+                    newClient.BankAccount2.CLABE = newClient.BankAccount1.CLABE;
+                    newClient.BankAccount2.CardNumber = newClient.BankAccount1.CardNumber;
+                    newClient.BankAccount2.IdCardType = newClient.BankAccount1.IdCardType;
+                } else {
+                    newClient.BankAccount2.IdBankName = comboBox_BankAccount2Name.SelectedIndex;
+                    newClient.BankAccount2.CLABE = textBox_BankAccount2CodeCLABE.Text;
+                    newClient.BankAccount2.CardNumber = textBox_BankAccount2CardNumber.Text;
+                    newClient.BankAccount2.IdCardType = comboBox_BankAccount2CardType.SelectedIndex;
+                }
 
-            MessageResponse<bool> responseRegistryClient = await DAO_Client.RegistryNewClient (newClient);
+                MessageResponse<bool> responseRegistryClient = await DAO_Client.RegistryNewClient (newClient);
             if (responseRegistryClient.IsError) {
                 MessageBox.Show ("Ha ocurrido un error inesperado.\nIntente más tarde.", "Error inesperado.");
             } else {
@@ -341,13 +350,13 @@ namespace FinanciaRed.View.ManageClients {
 
         //Stage 1 validations---------------------------------------------------------------------------
         private void TextChanged_Name (object sender, TextChangedEventArgs e) {
-            if (!CheckFormat.IsValidWord (textBox_Name.Text, true, false)) {
-                label_ErrorName.Content = "Nombre no válido.";
-                label_ErrorName.Visibility = Visibility.Visible;
+            if (!CheckFormat.IsValidWord (textBox_FirstName.Text, true, false)) {
+                label_ErrorFirstName.Content = "Nombre no válido.";
+                label_ErrorFirstName.Visibility = Visibility.Visible;
                 _IsCorrectStage1[0] = false;
             } else {
-                label_ErrorName.Content = "";
-                label_ErrorName.Visibility = Visibility.Collapsed;
+                label_ErrorFirstName.Content = "";
+                label_ErrorFirstName.Visibility = Visibility.Collapsed;
                 _IsCorrectStage1[0] = true;
             }
         }
@@ -447,9 +456,9 @@ namespace FinanciaRed.View.ManageClients {
         }
 
         private void VerifyStage1 () {
-            if (string.IsNullOrEmpty (textBox_Name.Text)) {
-                label_ErrorName.Content = "Campo necesario.";
-                label_ErrorName.Visibility = Visibility.Visible;
+            if (string.IsNullOrEmpty (textBox_FirstName.Text)) {
+                label_ErrorFirstName.Content = "Campo necesario.";
+                label_ErrorFirstName.Visibility = Visibility.Visible;
                 _IsCorrectStage1[0] = false;
             }
 
