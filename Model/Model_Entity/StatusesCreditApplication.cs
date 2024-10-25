@@ -12,18 +12,18 @@ namespace FinanciaRed.Model.Model_Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class StatesCredits
+    public partial class StatusesCreditApplication
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public StatesCredits()
+        public StatusesCreditApplication()
         {
-            this.Credits = new HashSet<Credits>();
+            this.CreditApplications = new HashSet<CreditApplications>();
         }
     
-        public int IdStateCredit { get; set; }
-        public string State { get; set; }
+        public int StatusCreditApplication { get; set; }
+        public string Status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Credits> Credits { get; set; }
+        public virtual ICollection<CreditApplications> CreditApplications { get; set; }
     }
 }

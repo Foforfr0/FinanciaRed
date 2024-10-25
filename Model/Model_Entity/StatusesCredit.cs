@@ -12,26 +12,18 @@ namespace FinanciaRed.Model.Model_Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class BankAccounts
+    public partial class StatusesCredit
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public BankAccounts()
+        public StatusesCredit()
         {
-            this.Clients = new HashSet<Clients>();
-            this.Clients1 = new HashSet<Clients>();
+            this.Credits = new HashSet<Credits>();
         }
     
-        public int IdBankAccount { get; set; }
-        public int IdNameBank { get; set; }
-        public string CardNumber { get; set; }
-        public string CodeCLABE { get; set; }
-        public int IdCardType { get; set; }
+        public int IdStatusCredit { get; set; }
+        public string Status { get; set; }
     
-        public virtual Banks Banks { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Clients> Clients { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Clients> Clients1 { get; set; }
-        public virtual BankCardTypes BankCardTypes { get; set; }
+        public virtual ICollection<Credits> Credits { get; set; }
     }
 }

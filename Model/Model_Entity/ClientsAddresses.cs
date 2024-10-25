@@ -21,13 +21,13 @@ namespace FinanciaRed.Model.Model_Entity
         }
     
         public int IdClientAddress { get; set; }
+        public int IdState { get; set; }
+        public string Municipality { get; set; }
+        public string PostalCode { get; set; }
+        public string Colony { get; set; }
+        public string Street { get; set; }
         public string ExteriorNumber { get; set; }
         public string InteriorNumber { get; set; }
-        public string Street { get; set; }
-        public string Colony { get; set; }
-        public string PostalCode { get; set; }
-        public string Municipality { get; set; }
-        public int IdState { get; set; }
         public int IdAddressType { get; set; }
     
         public virtual AddressesTypes AddressesTypes { get; set; }

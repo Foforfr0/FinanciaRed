@@ -12,18 +12,13 @@ namespace FinanciaRed.Model.Model_Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class Credits
+    public partial class CreditApplications_Policies
     {
-        public int IdCredit { get; set; }
-        public Nullable<int> AmountLeft { get; set; }
-        public int IdStatusCredit { get; set; }
-        public byte[] SignedDocument { get; set; }
-        public byte[] PaymentLayout { get; set; }
-        public System.DateTime DateStart { get; set; }
-        public System.DateTime DateEnd { get; set; }
+        public int IdCreditApplication_Policy { get; set; }
         public int IdCreditApplication { get; set; }
+        public int IdPolicy { get; set; }
     
         public virtual CreditApplications CreditApplications { get; set; }
-        public virtual StatusesCredit StatusesCredit { get; set; }
+        public virtual Policies Policies { get; set; }
     }
 }

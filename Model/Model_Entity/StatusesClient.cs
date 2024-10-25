@@ -12,15 +12,15 @@ namespace FinanciaRed.Model.Model_Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class MaritalStatuses
+    public partial class StatusesClient
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public MaritalStatuses()
+        public StatusesClient()
         {
             this.Clients = new HashSet<Clients>();
         }
     
-        public int IdMaritalStatus { get; set; }
+        public int IdStatusClient { get; set; }
         public string Status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

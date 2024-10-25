@@ -129,13 +129,16 @@
     <Compile Include="Model\Model_Entity\ContactsReferencesClients.cs">
       <DependentUpon>Model_Entity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Model_Entity\CreditApplications.cs">
+      <DependentUpon>Model_Entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Model_Entity\CreditApplications_Policies.cs">
+      <DependentUpon>Model_Entity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Model_Entity\Credits.cs">
       <DependentUpon>Model_Entity.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Model_Entity\Employees.cs">
-      <DependentUpon>Model_Entity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\Model_Entity\MaritalStatuses.cs">
       <DependentUpon>Model_Entity.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Model_Entity\Model_Entity.Context.cs">
@@ -153,6 +156,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model_Entity.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Model\Model_Entity\Policies.cs">
+      <DependentUpon>Model_Entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Model_Entity\Promotions.cs">
+      <DependentUpon>Model_Entity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Model_Entity\RelationshipsClientsTypes.cs">
       <DependentUpon>Model_Entity.tt</DependentUpon>
     </Compile>
@@ -162,13 +171,22 @@
     <Compile Include="Model\Model_Entity\StatesAddresses.cs">
       <DependentUpon>Model_Entity.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Model_Entity\StatesCredits.cs">
+    <Compile Include="Model\Model_Entity\StatusesClient.cs">
       <DependentUpon>Model_Entity.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Model_Entity\WorkAreas.cs">
+    <Compile Include="Model\Model_Entity\StatusesCredit.cs">
       <DependentUpon>Model_Entity.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\Model_Entity\WorkAreaTypes.cs">
+    <Compile Include="Model\Model_Entity\StatusesCreditApplication.cs">
+      <DependentUpon>Model_Entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Model_Entity\StatusesMarital.cs">
+      <DependentUpon>Model_Entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Model_Entity\WorkClients.cs">
+      <DependentUpon>Model_Entity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Model_Entity\WorkTypes.cs">
       <DependentUpon>Model_Entity.tt</DependentUpon>
     </Compile>
     <Compile Include="Utils\CheckFormat.cs" />

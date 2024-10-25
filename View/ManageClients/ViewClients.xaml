@@ -12,12 +12,8 @@
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20 10 40 0">
                 <Label Content="Palabra clave: " Padding="0" VerticalContentAlignment="Center"/>
                 <TextBox x:Name="textBox_KeyWord" Margin="3 0 8 0" Padding="1" Width="240"/>
-                <Label Content="Créditos solicitados: " Padding="0" VerticalContentAlignment="Center"/>
-                <TextBox x:Name="textBox_SolicitedCredits" Margin="3 0 8 0" Padding="1" Width="60"/>
-                <Label Content="Crédito activo:" Padding="0" VerticalContentAlignment="Center"/>
-                <CheckBox x:Name="chekBox_ActiveCredit" Margin="3 0 8 0" VerticalAlignment="Center"/>
 
-                <Button Click="ClickSearchClients" BorderBrush="Transparent" Margin="20 0 43 0"  Height="30" Width="30">
+                <Button Click="ClickSearchClients" BorderBrush="Transparent" Margin="20 0 325 0"  Height="30" Width="30">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Grid>

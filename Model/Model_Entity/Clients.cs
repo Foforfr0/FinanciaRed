@@ -17,7 +17,7 @@ namespace FinanciaRed.Model.Model_Entity
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Clients()
         {
-            this.Credits = new HashSet<Credits>();
+            this.CreditApplications = new HashSet<CreditApplications>();
         }
     
         public int IdClient { get; set; }
@@ -26,7 +26,7 @@ namespace FinanciaRed.Model.Model_Entity
         public string LastName { get; set; }
         public System.DateTime DateBirth { get; set; }
         public string Gender { get; set; }
-        public int IdMaritalStatus { get; set; }
+        public int IdStatusMarital { get; set; }
         public string PhoneNumber1 { get; set; }
         public string PhoneNumber2 { get; set; }
         public string Email1 { get; set; }
@@ -38,17 +38,18 @@ namespace FinanciaRed.Model.Model_Entity
         public int IdBankAccount1 { get; set; }
         public Nullable<int> IdBankAccount2 { get; set; }
         public int IdAddress { get; set; }
-        public int IdWorkArea { get; set; }
-        public bool StatusActive { get; set; }
+        public int IdWorkClient { get; set; }
+        public int IdStatusClient { get; set; }
     
         public virtual BankAccounts BankAccounts { get; set; }
         public virtual BankAccounts BankAccounts1 { get; set; }
         public virtual ClientsAddresses ClientsAddresses { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Credits> Credits { get; set; }
+        public virtual ICollection<CreditApplications> CreditApplications { get; set; }
         public virtual ContactsReferencesClients ContactsReferencesClients { get; set; }
         public virtual ContactsReferencesClients ContactsReferencesClients1 { get; set; }
-        public virtual MaritalStatuses MaritalStatuses { get; set; }
-        public virtual WorkAreas WorkAreas { get; set; }
+        public virtual StatusesClient StatusesClient { get; set; }
+        public virtual StatusesMarital StatusesMarital { get; set; }
+        public virtual WorkClients WorkClients { get; set; }
     }
 }

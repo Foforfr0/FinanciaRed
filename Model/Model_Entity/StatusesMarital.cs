@@ -12,18 +12,18 @@ namespace FinanciaRed.Model.Model_Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class WorkAreaTypes
+    public partial class StatusesMarital
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public WorkAreaTypes()
+        public StatusesMarital()
         {
-            this.WorkAreas = new HashSet<WorkAreas>();
+            this.Clients = new HashSet<Clients>();
         }
     
-        public int IdWorkAreaType { get; set; }
-        public string Type { get; set; }
+        public int IdStatusMarital { get; set; }
+        public string Status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<WorkAreas> WorkAreas { get; set; }
+        public virtual ICollection<Clients> Clients { get; set; }
     }
 }

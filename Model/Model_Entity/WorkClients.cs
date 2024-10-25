@@ -12,21 +12,21 @@ namespace FinanciaRed.Model.Model_Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class WorkAreas
+    public partial class WorkClients
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public WorkAreas()
+        public WorkClients()
         {
             this.Clients = new HashSet<Clients>();
         }
     
-        public int IdWorkArea { get; set; }
+        public int IdWorkClient { get; set; }
         public string WorkArea { get; set; }
-        public int IdWorkAreaType { get; set; }
+        public int IdWorkType { get; set; }
         public double MonthlySalary { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Clients> Clients { get; set; }
-        public virtual WorkAreaTypes WorkAreaTypes { get; set; }
+        public virtual WorkTypes WorkTypes { get; set; }
     }
 }
