@@ -35,9 +35,9 @@ namespace FinanciaRed.View.ManageClients {
 
             comboBox_MaritalStatus.Items.Clear ();
             comboBox_MaritalStatus.Items.Add (new ComboBoxItem { Content = "Seleccione una opción", IsSelected = true, Tag = 0 });
-            MessageResponse<List<DTO_MaritalStatus>> messageResponseMS = await DAO_GeneralVariables.GetAllMaritalStatuses ();
-            List<DTO_MaritalStatus> listMS = messageResponseMS.DataRetrieved;
-            foreach (DTO_MaritalStatus status in listMS) {
+            MessageResponse<List<DTO_StatusesMarital>> messageResponseMS = await DAO_GeneralVariables.GetAllMaritalStatuses ();
+            List<DTO_StatusesMarital> listMS = messageResponseMS.DataRetrieved;
+            foreach (DTO_StatusesMarital status in listMS) {
                 comboBox_MaritalStatus.Items.Add (new ComboBoxItem { Content = status.Status });
             }
 
@@ -382,8 +382,7 @@ namespace FinanciaRed.View.ManageClients {
                     CLABE = textBox_BankAccount1CodeCLABE.Text,
                     CardNumber = textBox_BankAccount1CardNumber.Text,
                     IdCardType = comboBox_BankAccount1CardType.SelectedIndex,
-                },
-                StatusActive = this.selectedClient.StatusActive
+                }
             };
             if ((bool)checkBox_SameAccount.IsChecked) {
                 newClient.BankAccount2.IdBankName = newClient.BankAccount1.IdBankName;

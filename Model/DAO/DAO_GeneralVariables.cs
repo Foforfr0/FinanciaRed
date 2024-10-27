@@ -8,29 +8,29 @@ using System.Threading.Tasks;
 
 namespace FinanciaRed.Model.DAO {
     internal class DAO_GeneralVariables {
-        public static async Task<MessageResponse<List<DTO_MaritalStatus>>> GetAllMaritalStatuses () {
-            MessageResponse<List<DTO_MaritalStatus>> responseConsultMaritalStatuses = null;
+        public static async Task<MessageResponse<List<DTO_StatusesMarital>>> GetAllMaritalStatuses () {
+            MessageResponse<List<DTO_StatusesMarital>> responseConsultMaritalStatuses = null;
 
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
                 try {
-                    List<DTO_MaritalStatus> dataRetrieved = await
-                        context.MaritalStatuses.
-                        Select (ms => new DTO_MaritalStatus {
-                            IdMaritalStatus = ms.IdMaritalStatus,
+                    List<DTO_StatusesMarital> dataRetrieved = await
+                        context.StatusesMarital.
+                        Select (ms => new DTO_StatusesMarital {
+                            IdStatusMarital = ms.IdStatusMarital,
                             Status = ms.Status
                         }).
-                        OrderBy (ms => ms.IdMaritalStatus).
+                        OrderBy (ms => ms.IdStatusMarital).
                         ToListAsync ();
 
                     if (dataRetrieved != null) {
-                        responseConsultMaritalStatuses = MessageResponse<List<DTO_MaritalStatus>>.Success (
+                        responseConsultMaritalStatuses = MessageResponse<List<DTO_StatusesMarital>>.Success (
                             dataRetrieved.Count + " marital statuses retrieved.",
                             dataRetrieved);
                     } else {
-                        responseConsultMaritalStatuses = MessageResponse<List<DTO_MaritalStatus>>.Failure ("Marital statuses doesn´t retrieved.");
+                        responseConsultMaritalStatuses = MessageResponse<List<DTO_StatusesMarital>>.Failure ("Marital statuses doesn´t retrieved.");
                     }
                 } catch (Exception ex) {
-                    responseConsultMaritalStatuses = MessageResponse<List<DTO_MaritalStatus>>.Failure (ex.ToString ());
+                    responseConsultMaritalStatuses = MessageResponse<List<DTO_StatusesMarital>>.Failure (ex.ToString ());
                 }
             }
             return responseConsultMaritalStatuses;
@@ -70,9 +70,9 @@ namespace FinanciaRed.Model.DAO {
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
                 try {
                     List<DTO_WorkType> dataRetrieved = await
-                        context.WorkAreaTypes.
+                        context.WorkTypes.
                         Select (wt => new DTO_WorkType {
-                            IdWorkType = wt.IdWorkAreaType,
+                            IdWorkType = wt.IdWorkType,
                             Type = wt.Type
                         }).
                         OrderBy (wt => wt.IdWorkType).

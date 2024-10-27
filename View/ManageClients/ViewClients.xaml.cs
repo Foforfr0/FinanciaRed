@@ -39,18 +39,16 @@ namespace FinanciaRed.View.ManageClients {
             //TODO
             //Agregar funcionalidad de filtros
             string keyText = textBox_KeyWord.Text;
-            int numberCredits = int.Parse (textBox_SolicitedCredits.Text);
-            bool withActiveCredit = chekBox_ActiveCredit.IsChecked ?? false;
 
-            filteredClients = FilterData (retrievedClients, keyText, withActiveCredit);
+            filteredClients = FilterData (retrievedClients, keyText);
         }
 
-        private ObservableCollection<DTO_Client_Consult> FilterData (ObservableCollection<DTO_Client_Consult> filteredClients, string keyText, bool withActiveCredit) {
+        private ObservableCollection<DTO_Client_Consult> FilterData (ObservableCollection<DTO_Client_Consult> filteredClients, string keyText) {
             return new ObservableCollection<DTO_Client_Consult> (
                 retrievedClients.Where (
-                    x => FilterPredicate (
-                        x, keyText, withActiveCredit))
-                );
+                    x => x.FirstName.Contains(keyText)
+                )
+            );
         }
 
         private bool FilterPredicate (DTO_Client_Consult item, string filterText, bool isCaseSensitive) {

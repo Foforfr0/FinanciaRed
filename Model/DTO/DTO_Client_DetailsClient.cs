@@ -62,7 +62,10 @@ namespace FinanciaRed.Model.DTO {
         public DTO_BankAccountClient BankAccount2 {
             get; set;
         }
-        public bool StatusActive {
+        public int IdStatusClient {
+            get; set;
+        }
+        public string StatusClient {
             get; set;
         }
     }

@@ -18,7 +18,10 @@
         public string CodeCURP {
             get; set;
         }
-        public string StatusActive {
+        public int IdStatusClient {
+            get; set;
+        }
+        public string StatusClient {
             get; set;
         }
     }

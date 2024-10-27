@@ -80,7 +80,7 @@ namespace FinanciaRed.View.ManageClients {
             label_BankAccount2CardNumber.Content = selectedClient.BankAccount2.CardNumber;
             label_BankAccount2CardType.Content = selectedClient.BankAccount2.CardType;
             //-----------------------------------------------Status client
-            label_StatusClient.Content = selectedClient.StatusActive;
+            label_StatusClient.Content = selectedClient.StatusClient;
         }
 
         private void ClicModifyClient (object sender, EventArgs e) {

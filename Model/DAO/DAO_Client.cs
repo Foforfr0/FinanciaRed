@@ -24,7 +24,8 @@ namespace FinanciaRed.Model.DAO {
                             LastName = clnt.LastName,
                             CodeRFC = clnt.CodeRFC,
                             CodeCURP = clnt.CodeCURP,
-                            StatusActive = clnt.StatusActive ? "Activo" : "No activo"
+                            IdStatusClient = clnt.StatusesClient.IdStatusClient,
+                            StatusClient = clnt.StatusesClient.Status
                         }).
                         ToListAsync ();
 
@@ -50,7 +51,7 @@ namespace FinanciaRed.Model.DAO {
                     DTO_Client_DetailsClient dataRetrieved = await
                         context.Clients.
                         Where (clnt => clnt.IdClient == idClient).
-                        Include (ms => ms.MaritalStatuses).
+                        Include (ms => ms.StatusesMarital).
                         Include (addr => addr.ClientsAddresses).
                         Select (clnt => new DTO_Client_DetailsClient {
                             IdClient = clnt.IdClient,
@@ -59,8 +60,8 @@ namespace FinanciaRed.Model.DAO {
                             LastName = clnt.LastName,
                             DateBirth = clnt.DateBirth,
                             Gender = clnt.Gender,
-                            IdMaritalStatus = clnt.IdMaritalStatus,
-                            MaritalStatus = clnt.MaritalStatuses.Status,
+                            IdMaritalStatus = clnt.IdStatusMarital,
+                            MaritalStatus = clnt.StatusesMarital.Status,
                             CodeCURP = clnt.CodeCURP,
                             AddressClient = new DTO_AddressClient {
                                 IdAddressClient = clnt.ClientsAddresses.IdClientAddress,
@@ -80,10 +81,10 @@ namespace FinanciaRed.Model.DAO {
                             PhoneNumber1 = clnt.PhoneNumber1,
                             PhoneNumber2 = clnt.PhoneNumber2,
                             Work = new DTO_WorkInfo {
-                                IdWorkType = clnt.WorkAreas.WorkAreaTypes.IdWorkAreaType,
-                                WorkType = clnt.WorkAreas.WorkAreaTypes.Type,
-                                WorkArea = clnt.WorkAreas.WorkArea,
-                                MonthlySalary = (float)clnt.WorkAreas.MonthlySalary
+                                IdWorkType = clnt.WorkClients.WorkTypes.IdWorkType,
+                                WorkType = clnt.WorkClients.WorkTypes.Type,
+                                WorkArea = clnt.WorkClients.WorkArea,
+                                MonthlySalary = (float)clnt.WorkClients.MonthlySalary
                             },
                             Reference1 = new DTO_ReferenceClient {
                                 FirstName = clnt.ContactsReferencesClients.FirstName,
@@ -107,7 +108,7 @@ namespace FinanciaRed.Model.DAO {
                             BankAccount1 = new DTO_BankAccountClient {
                                 IdBankName = clnt.BankAccounts.Banks.IdBank,
                                 BankName = clnt.BankAccounts.Banks.Name,
-                                CLABE = clnt.BankAccounts.CLABE,
+                                CLABE = clnt.BankAccounts.CodeCLABE,
                                 CardNumber = clnt.BankAccounts.CardNumber,
                                 IdCardType = clnt.BankAccounts.BankCardTypes.IdBankCardType,
                                 CardType = clnt.BankAccounts.BankCardTypes.Type,
@@ -115,12 +116,14 @@ namespace FinanciaRed.Model.DAO {
                             BankAccount2 = new DTO_BankAccountClient {
                                 IdBankName = clnt.BankAccounts1.Banks.IdBank,
                                 BankName = clnt.BankAccounts1.Banks.Name,
-                                CLABE = clnt.BankAccounts1.CLABE,
+                                CLABE = clnt.BankAccounts1.CodeCLABE,
                                 CardNumber = clnt.BankAccounts1.CardNumber,
                                 IdCardType = clnt.BankAccounts1.BankCardTypes.IdBankCardType,
                                 CardType = clnt.BankAccounts1.BankCardTypes.Type,
                             },
-                            StatusActive = clnt.StatusActive
+                            IdStatusClient = clnt.StatusesClient.IdStatusClient,
+                            StatusClient = clnt.StatusesClient.Status
+                            
                         }).
                         FirstOrDefaultAsync ();
 
@@ -149,7 +152,7 @@ namespace FinanciaRed.Model.DAO {
                         LastName = newClient.LastName,
                         DateBirth = newClient.DateBirth,
                         Gender = newClient.Gender,
-                        IdMaritalStatus = newClient.IdMaritalStatus,
+                        IdStatusMarital = newClient.IdMaritalStatus,
                         CodeCURP = newClient.CodeCURP,
                         ClientsAddresses = new ClientsAddresses {
                             IdState = newClient.AddressClient.IdState,
@@ -165,9 +168,9 @@ namespace FinanciaRed.Model.DAO {
                         Email2 = newClient.Email2,
                         PhoneNumber1 = newClient.PhoneNumber1,
                         PhoneNumber2 = newClient.PhoneNumber2,
-                        WorkAreas = new WorkAreas {
+                        WorkClients = new WorkClients{
                             WorkArea = newClient.Work.WorkArea,
-                            IdWorkAreaType = newClient.Work.IdWorkType,
+                            IdWorkType = newClient.Work.IdWorkType,
                             MonthlySalary = newClient.Work.MonthlySalary
                         },
                         ContactsReferencesClients = new ContactsReferencesClients {
@@ -189,17 +192,17 @@ namespace FinanciaRed.Model.DAO {
                         CodeRFC = newClient.CodeRFC,
                         BankAccounts = new BankAccounts {
                             IdNameBank = newClient.BankAccount1.IdBankName,
-                            CLABE = newClient.BankAccount1.CLABE,
+                            CodeCLABE = newClient.BankAccount1.CLABE,
                             CardNumber = newClient.BankAccount1.CardNumber,
                             IdCardType = newClient.BankAccount1.IdCardType
                         },
                         BankAccounts1 = new BankAccounts {
                             IdNameBank = newClient.BankAccount2.IdBankName,
-                            CLABE = newClient.BankAccount2.CLABE,
+                            CodeCLABE = newClient.BankAccount2.CLABE,
                             CardNumber = newClient.BankAccount2.CardNumber,
                             IdCardType = newClient.BankAccount2.IdCardType
                         },
-                        StatusActive = true
+                        IdStatusClient = newClient.IdStatusClient
                     };
 
                     context.Clients.Add (createdClient);
@@ -225,14 +228,14 @@ namespace FinanciaRed.Model.DAO {
                         context.Clients.Attach (currentClient);
 
                         currentClient.Gender = newDataClient.Gender;
-                        currentClient.IdMaritalStatus = newDataClient.IdMaritalStatus;
+                        currentClient.IdStatusMarital= newDataClient.IdMaritalStatus;
                         currentClient.Email1 = newDataClient.Email1;
                         currentClient.Email2 = newDataClient.Email2;
                         currentClient.PhoneNumber1 = newDataClient.PhoneNumber1;
                         currentClient.PhoneNumber2 = newDataClient.PhoneNumber2;
-                        currentClient.WorkAreas.IdWorkAreaType = newDataClient.Work.IdWorkType;
-                        currentClient.WorkAreas.WorkArea = newDataClient.Work.WorkArea;
-                        currentClient.WorkAreas.MonthlySalary = newDataClient.Work.MonthlySalary;
+                        currentClient.WorkClients.IdWorkType = newDataClient.Work.IdWorkType;
+                        currentClient.WorkClients.WorkArea = newDataClient.Work.WorkArea;
+                        currentClient.WorkClients.MonthlySalary = newDataClient.Work.MonthlySalary;
                         currentClient.ContactsReferencesClients.FirstName = newDataClient.Reference1.FirstName;
                         currentClient.ContactsReferencesClients.MiddleName = newDataClient.Reference1.MiddleName;
                         currentClient.ContactsReferencesClients.LastName = newDataClient.Reference1.LastName;
@@ -246,14 +249,14 @@ namespace FinanciaRed.Model.DAO {
                         currentClient.ContactsReferencesClients1.PhoneNumber = newDataClient.Reference2.PhoneNumber;
                         currentClient.ContactsReferencesClients1.IdRelationshipType = newDataClient.Reference2.IdRelationshipType;
                         currentClient.BankAccounts.IdNameBank = newDataClient.BankAccount1.IdBankName;
-                        currentClient.BankAccounts.CLABE = newDataClient.BankAccount1.CLABE;
+                        currentClient.BankAccounts.CodeCLABE = newDataClient.BankAccount1.CLABE;
                         currentClient.BankAccounts.CardNumber = newDataClient.BankAccount1.CardNumber;
                         currentClient.BankAccounts.IdCardType = newDataClient.BankAccount1.IdCardType;
                         currentClient.BankAccounts1.IdNameBank = newDataClient.BankAccount2.IdBankName;
-                        currentClient.BankAccounts1.CLABE = newDataClient.BankAccount2.CLABE;
+                        currentClient.BankAccounts1.CodeCLABE = newDataClient.BankAccount2.CLABE;
                         currentClient.BankAccounts1.CardNumber = newDataClient.BankAccount2.CardNumber;
                         currentClient.BankAccounts1.IdCardType = newDataClient.BankAccount2.IdCardType;
-                        currentClient.StatusActive = newDataClient.StatusActive;
+                        currentClient.IdStatusClient = newDataClient.IdStatusClient;
 
                         bool SaveFailed = false;
                         do {
@@ -422,9 +425,9 @@ namespace FinanciaRed.Model.DAO {
                 try {
                     string dataRetrieved = await
                         context.Clients.
-                        Where (clnt => clnt.BankAccounts.CLABE.Equals (clabe) || 
-                                                      clnt.BankAccounts1.CLABE.Equals (clabe)).
-                        Select (clnt => clnt.BankAccounts.CLABE).
+                        Where (clnt => clnt.BankAccounts.CodeCLABE.Equals (clabe) || 
+                                                      clnt.BankAccounts1.CodeCLABE.Equals (clabe)).
+                        Select (clnt => clnt.BankAccounts.CodeCLABE).
                         FirstOrDefaultAsync ();
 
                     if (!string.IsNullOrEmpty (dataRetrieved)) {

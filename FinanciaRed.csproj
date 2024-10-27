@@ -102,7 +102,7 @@
     <Compile Include="Model\DTO\DTO_Employee_DetailsEmployee.cs" />
     <Compile Include="Model\DTO\DTO_Employee_Login.cs" />
     <Compile Include="Model\DTO\DTO_Employee_ModifyData.cs" />
-    <Compile Include="Model\DTO\DTO_MaritalStatus.cs" />
+    <Compile Include="Model\DTO\DTO_StatusesMarital.cs" />
     <Compile Include="Model\DTO\DTO_ReferenceClient.cs" />
     <Compile Include="Model\DTO\DTO_RelationshipType.cs" />
     <Compile Include="Model\DTO\DTO_WorkInfo.cs" />
