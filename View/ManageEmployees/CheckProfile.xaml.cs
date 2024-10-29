@@ -101,11 +101,14 @@ namespace FinanciaRed.View.ManageEmployees {
                     FirstName = currentEmployee.FirstName,
                     MiddleName = currentEmployee.MiddleName,
                     LastName = currentEmployee.LastName,
+                    Gender = currentEmployee.Gender,
+                    CodeCURP = currentEmployee.CodeCURP,
+                    CodeRFC = currentEmployee.CodeRFC,
                     Email = textBox_Email.Text,
                     Password = textBox_PasswordConfirmation.Text,
-                    ProfilePhoto = TEMP_profileImageSelected,
                     IdRol = currentEmployee.IdRol,
-                    Rol = currentEmployee.Rol
+                    Rol = currentEmployee.Rol,
+                    ProfilePhoto = TEMP_profileImageSelected
                 };
 
                 MessageResponse<bool> responseModify;
@@ -121,6 +124,11 @@ namespace FinanciaRed.View.ManageEmployees {
                         "Error inesperado"
                     );
                 } else {
+                    CurrentUser.Instance.ProfilePhoto = TEMP_profileImageSelected;
+                    Frame parentFrame = Utils.GetElementVisualTree.GetParent<Frame> (this);
+                    MainWindow mainWindow = Utils.GetElementVisualTree.GetParent<Page> (parentFrame) as MainWindow;
+                    mainWindow.InitializeDataEmployee ();
+
                     await SetFormNoEditable ();
                 }
             }

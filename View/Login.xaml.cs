@@ -87,7 +87,16 @@ namespace FinanciaRed.View {
                     );
                 } else {
                     NavigationService navService = NavigationService.GetNavigationService (this);
-                    navService.Navigate (new MainWindow (messageResponseLogin.DataRetrieved));
+                    {
+                        CurrentUser.Instance.IdEmployee = messageResponseLogin.DataRetrieved.IdEmployee;
+                        CurrentUser.Instance.FirstName = messageResponseLogin.DataRetrieved.FirstName;
+                        CurrentUser.Instance.MiddleName = messageResponseLogin.DataRetrieved.MiddleName;
+                        CurrentUser.Instance.LastName = messageResponseLogin.DataRetrieved.LastName;
+                        CurrentUser.Instance.ProfilePhoto = messageResponseLogin.DataRetrieved.ProfilePhoto;
+                        CurrentUser.Instance.IdRol = messageResponseLogin.DataRetrieved.IdRol;
+                        CurrentUser.Instance.Rol = messageResponseLogin.DataRetrieved.Rol;
+                    }
+                    navService.Navigate (new MainWindow ());
                 }
             }
         }

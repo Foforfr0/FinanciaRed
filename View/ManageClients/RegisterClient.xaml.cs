@@ -22,9 +22,6 @@ namespace FinanciaRed.View.ManageClients {
         public RegisterClient () {
             InitializeComponent ();
 
-            //textBox_CodeCURP.Text = "FERR031026HVZRDDA2";
-            //TODO
-
             _ = LoadVariables ();
         }
 

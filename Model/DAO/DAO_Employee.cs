@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -156,12 +157,13 @@ namespace FinanciaRed.Model.DAO {
                     if (currentEmployee != null) {
                         context.Employees.Attach (currentEmployee);
 
-                        currentEmployee.ProfilePhoto = newDataEmployee.ProfilePhoto;
+                        currentEmployee.Gender = newDataEmployee.Gender;
                         currentEmployee.CodeCURP = newDataEmployee.CodeCURP;
                         currentEmployee.CodeRFC = newDataEmployee.CodeRFC;
                         currentEmployee.Email = newDataEmployee.Email;
                         if (changePassword)
                             currentEmployee.Password = newDataEmployee.Password;
+                        currentEmployee.ProfilePhoto = newDataEmployee.ProfilePhoto;
 
                         bool failedSave = false;
                         do {
@@ -194,8 +196,10 @@ namespace FinanciaRed.Model.DAO {
                     } else {
                         responseUpdateDataEmployee = MessageResponse<bool>.Failure ("Modification no realized.");
                     }
+                } catch (DbEntityValidationException ex) {
+                    responseUpdateDataEmployee = MessageResponse<bool>.Failure (ex.StackTrace);
                 } catch (Exception ex) {
-                    responseUpdateDataEmployee = MessageResponse<bool>.Failure (ex.ToString ());
+                    responseUpdateDataEmployee = MessageResponse<bool>.Failure (ex.Message);
                 }
             }
             return responseUpdateDataEmployee;

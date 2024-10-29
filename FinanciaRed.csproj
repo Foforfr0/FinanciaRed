@@ -82,6 +82,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\DAO\CurrentUser.cs" />
     <Compile Include="Model\DAO\DAO_Client.cs" />
     <Compile Include="Model\DAO\DAO_Credit.cs" />
     <Compile Include="Model\DAO\DAO_Employee.cs" />
@@ -191,6 +192,7 @@
     </Compile>
     <Compile Include="Utils\CheckFormat.cs" />
     <Compile Include="Utils\Converters.cs" />
+    <Compile Include="Utils\GetElementVisualTree.cs" />
     <Compile Include="Utils\ManageLabelsError.cs" />
     <Compile Include="Utils\RetrieveDataVariables.cs" />
     <Compile Include="View\Components\Header.xaml.cs">
