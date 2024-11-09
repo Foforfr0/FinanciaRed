@@ -109,9 +109,9 @@ CREATE TABLE Clients (
     Gender CHAR NOT NULL,
     IdStatusMarital INT NOT NULL,
     PhoneNumber1 VARCHAR(15) NOT NULL UNIQUE,
-    PhoneNumber2 VARCHAR(15) UNIQUE,
+    PhoneNumber2 VARCHAR(15),
     Email1 VARCHAR(80) NOT NULL UNIQUE,
-    Email2 VARCHAR(80) UNIQUE,
+    Email2 VARCHAR(80),
     CodeRFC VARCHAR(13) NOT NULL UNIQUE,
     CodeCURP VARCHAR(18) NOT NULL UNIQUE,
     IdContactReference1 INT NOT NULL,
@@ -137,6 +137,11 @@ CREATE TABLE RolesEmployees (
     Role VARCHAR(30) NOT NULL
 );
 
+CREATE TABLE StatusesEmployee (
+    IdStatusEmployee INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+    Status VARCHAR(20) NOT NULL UNIQUE,
+);
+
 CREATE TABLE Employees (
     IdEmployee INT NOT NULL PRIMARY KEY IDENTITY(1,1),
     FirstName VARCHAR(80) NOT NULL,
@@ -150,8 +155,10 @@ CREATE TABLE Employees (
     Email VARCHAR(80) NOT NULL,
     Password VARCHAR(80) NOT NULL,
     IdRole INT NOT NULL,
+    IdStatusEmployee INT NOT NULL,
 
-	CONSTRAINT fk_RolesEmployee_Employee FOREIGN KEY (IdRole) REFERENCES RolesEmployees (IdRoleEmployee)
+	CONSTRAINT fk_RolesEmployee_Employee FOREIGN KEY (IdRole) REFERENCES RolesEmployees (IdRoleEmployee),
+    CONSTRAINT fk_StatusEmployee_Employee FOREIGN KEY (IdStatusEmployee) REFERENCES StatusesEmployee (IdStatusEmployee)
 );
 
 CREATE TABLE StatusesCreditApplication (
@@ -234,7 +241,12 @@ INSERT INTO StatusesMarital (Status)
 
 INSERT INTO StatusesClient (Status) 
             VALUES ('Activo'),
-                   ('Baja'),
+                   ('Inactivo'),
+                   ('Muerto');
+
+INSERT INTO StatusesEmployee (Status) 
+            VALUES ('Activo'),
+                   ('Inactivo'),
                    ('Muerto');
 
 INSERT INTO Banks (Name) 
@@ -272,12 +284,13 @@ INSERT INTO StatusesCreditApplication VALUES ('Aplicado'), ('Aceptado'), ('Recha
 
 INSERT INTO StatusesCredit (Status) VALUES ('Cobrable'), ('Incobrale');
 
-INSERT INTO RolesEmployees (Role) VALUES ('Asesor de crédito'), ('Analista de crédito'), ('Gestor de cobranza'), ('Administrador');
+INSERT INTO RolesEmployees (Role) VALUES ('Administrador'), ('Gestor de cobranza'), ('Analista de crédito'), ('Asesor de crédito');
 --INSERTIONS----------------------------------------------------------
 INSERT INTO BankAccounts (IdNameBank, CardNumber, CodeCLABE, IdCardType)
             VALUES (1, '4152-3139-1162-1724', '123-456-789-012-345-678', 1),
                    (2, '4152-3139-0028-1625', '876-543-210-987-654-321', 2),
-                   (3, '4152-9182-0182-1882', '182-922-252-864-992-283', 1);
+                   (3, '4152-9182-0182-1882', '182-922-252-864-992-283', 1),
+                   (4, '4152-1234-5678-9012', '345-678-901-234-567-890', 2);
 
 INSERT INTO ContactsReferencesClients (FirstName, MiddleName, LastName, Email, PhoneNumber, IdRelationshipType) 
             VALUES ('César', 'Basilio', 'Gómez', 'basilios@gmail.com', '922-191-4346', 1),
@@ -300,13 +313,16 @@ INSERT INTO Clients (FirstName, MiddleName, LastName, DateBirth, Gender, IdStatu
 					 'PIPP031026TGK', 'PIPP031026HVZRDDA2', 1, 2, 1, 2, 1, 1, 1),
                     ('Erick', 'Utrera', 'Cornejo', '2002-09-25', 'M', 1, 
 					 '228-132-1324', NULL, 'eutrera@gmail.com', NULL, 
-					 'UTCE0209359DJ', 'UTCE020935HVZRDGA1', 3, 4, 3, NULL, 2, 2, 1);
+					 'UTCE0209359DJ', 'UTCE020935HVZRDGA1', 3, 4, 3, NULL, 2, 2, 1),
+                    ('Ana', 'Jácome', 'Gómez', '1995-05-15', 'F', 2, 
+                     '228-555-5555', '228-666-6666', 'ana.gomez@example.com', NULL, 
+                     'GOMA950515MDF', 'GOMA950515HDFGNA01', 4, NULL, 4, NULL, 1, 2, 1);
 
-INSERT INTO Employees (FirstName, MiddleName, LastName, DateBirth, Gender, CodeRFC, CodeCURP, Email, Password, IdRole)
-            VALUES ('Rodolfo', 'Fernández', 'Rodríguez', '2003-10-26', 'M', 'FERR031026TG6', 'FERR031026HVZRDDA2', 'foforfr007@gmail.com', '1234', 1),
-                   ('Martin Emmanuel', 'Cruz', 'Carmona', '2004-11-27', 'M', 'CRCM041127X4G', 'CACM041127HVZGEHE7', 'lecape_27@gmail.com', '1234', 2),
-                   ('Sara', 'Hernández', 'Roldán', '2004-08-03', 'M', 'HERS040803HAI', 'HERS040803MVZGJKF9', 'lecape_27@gmail.com', '1234', 3),
-                   ('Mario Alberto', 'Hernández', 'Pérez', '1990-05-13', 'M', 'HEPM900513KJS', 'HEPM900513HVZHDHG0', 'mariohernandez2@gmail.com', 'admin', 4);
+INSERT INTO Employees (FirstName, MiddleName, LastName, DateBirth, Gender, CodeRFC, CodeCURP, Email, Password, IdRole, IdStatusEmployee)
+            VALUES ('Rodolfo', 'Fernández', 'Rodríguez', '2003-10-26', 'M', 'FERR031026TG6', 'FERR031026HVZRDDA2', 'foforfr007@gmail.com', '1234', 1, 1),
+                   ('Martin Emmanuel', 'Cruz', 'Carmona', '2004-11-27', 'M', 'CRCM041127X4G', 'CACM041127HVZGEHE7', 'lecape_27@gmail.com', '1234', 2, 1),
+                   ('Sara', 'Hernández', 'Roldán', '2004-08-03', 'M', 'HERS040803HAI', 'HERS040803MVZGJKF9', 'lecape_27@gmail.com', '1234', 3, 1),
+                   ('Mario Alberto', 'Hernández', 'Pérez', '1990-05-13', 'M', 'HEPM900513KJS', 'HEPM900513HVZHDHG0', 'mariohernandez2@gmail.com', 'admin', 4, 1);
 
 INSERT INTO Promotions (Name, InterestRate, NumberFortnights, DateStart, DateEnd)
             VALUES ('Plazoz chiquitoz', 0.05, 2, '2024-06-01', '2024-12-31'),
@@ -314,8 +330,8 @@ INSERT INTO Promotions (Name, InterestRate, NumberFortnights, DateStart, DateEnd
 
 INSERT INTO CreditApplications (DateApplication, DateAcepted, AmountTotal, InteresRate, NumberFortnights, IdPromotion,
                                IdEmployeeApplication, IdStatusCreditApplication, IdClient)
-            VALUES ('2024-10-23', '2024-10-25', 10000, 0.20, 6,     NULL,   1, 1, 1),
-                   ('2024-10-24', '2024-10-25', 35000, NULL, NULL,  1,      1, 1, 2);
+            VALUES ('2024-10-23', '2024-10-25', 10000, 0.20, 6,     NULL,   4, 1, 1),
+                   ('2024-10-24', '2024-10-25', 35000, NULL, NULL,  1,      4, 1, 2);
 
 INSERT INTO Policies (Name, Description, DateStart, DateEnd)
             VALUES ('Crédito máximo', 'El monto total de un crédito que solicita un cliente no debe superar el 30% de su salario mensual total.', '2000-01-01', NULL),
@@ -329,6 +345,14 @@ INSERT INTO Credits (AmountLeft, IdStatusCredit, SignedDocument, PaymentLayout, 
 INSERT INTO CreditApplications_Policies 
             VALUES (1, 1), (1, 2), (1, 3),
                    (2, 1), (2, 2), (2, 3);
+--TESTS---------------------------------------------------------------
+SELECT * FROM Credits 
+RIGHT JOIN CreditApplications ON Credits.IdCreditApplication = CreditApplications.IdCreditApplication
+RIGHT JOIN Clients ON CreditApplications.IdClient = Clients.IdClient
+WHERE Clients.IdClient = 1;
 
+SELECT * FROM Policies;
 
-SELECT * FROM Employees;
+SELECT * FROM Credits;
+
+SELECT * FROM CreditApplications;

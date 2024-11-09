@@ -12,14 +12,19 @@
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20 10 40 0">
                 <Label Content="Palabra clave: " Padding="0" VerticalContentAlignment="Center"/>
                 <TextBox x:Name="textBox_KeyWord" Margin="3 0 8 0" Padding="1" Width="240"/>
+
+                <!-- TODO
                 <Label Content="Asesor:" Padding="0" VerticalContentAlignment="Center"/>
                 <CheckBox x:Name="checkBox_WithAdviser" Margin="3 0 8 0" VerticalAlignment="Center"/>
-                <Label Content="Analista de crédito:" Padding="0" VerticalContentAlignment="Center"/>
+                <Label Content="Analista:" Padding="0" VerticalContentAlignment="Center"/>
                 <CheckBox x:Name="checkBox_WithCreditAnalyst" Margin="3 0 8 0" VerticalAlignment="Center"/>
+                <Label Content="Cobrador:" Padding="0" VerticalContentAlignment="Center"/>
+                <CheckBox x:Name="checkBox_WithCollector" Margin="3 0 8 0" VerticalAlignment="Center"/>
                 <Label Content="Administrador:" Padding="0" VerticalContentAlignment="Center"/>
                 <CheckBox x:Name="checkBox_WithAdministrator" Margin="3 0 8 0" VerticalAlignment="Center"/>
-
-                <Button Click="ClickSearchEmployees" BorderBrush="Transparent" Margin="0 0 36 0"  Height="30" Width="30">
+                -->
+                
+                <Button Click="ClickSearchEmployees" BorderBrush="Transparent" Margin="20 0 209 0"  Height="30" Width="30">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Grid>
@@ -31,6 +36,7 @@
                     <Image Source="/View/Images/icon-search.png" Width="18"/>
                 </Button>
 
+                <Button Click="ClickChangeState" Content="Cambiar estado" Padding="10 4" Margin="5 0"  BorderBrush="Transparent"/>
                 <Button Click="ClickRegisterEmployee" Content="Registrar" Padding="10 4" BorderBrush="Transparent"/>
             </StackPanel>
             <DataGrid x:Name="dataGridEmployees" AutoGenerateColumns="False" Height="430" Width="770" 

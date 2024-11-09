@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:FinanciaRed.View"
+      mc:Ignorable="d"
       Height="700" Width="1000" Title="Menú principal">
 
     <Grid>
@@ -48,27 +49,37 @@
             <StackPanel Orientation="Horizontal" Height="630" VerticalAlignment="Center">
                 <StackPanel Orientation="Vertical" Width="130" Height="630" Background="#FFFFFF">
                     <StackPanel Margin="10 5">
-                        <Label x:Name="label_GlobalOptionClients" Padding="0 0 0 8">
+                        <Label x:Name="label_GlobalOptionClients" Padding="0 0 0 8" Visibility="Collapsed" d:Visibility="Visible">
                             <Hyperlink Click="ClickShowManagementClientsFrame">
                                 <Run Text="Clientes"/>
                             </Hyperlink>
                         </Label>
-                        <Label x:Name="label_GlobalOptionCredits" Padding="0 0 0 8">
+                        <Label x:Name="label_GlobalOptionCredits" Padding="0 0 0 8" Visibility="Collapsed" d:Visibility="Visible">
                             <Hyperlink Click="ClickShowManagementCreditsFrame">
                                 <Run Text="Créditos"/>
                             </Hyperlink>
                         </Label>
-                        <TextBlock x:Name="label_GlobalOptionCreditRequests" Padding="0 0 0 8" TextWrapping="Wrap">
+                        <TextBlock x:Name="label_GlobalOptionCreditApplications" Padding="0 0 0 8" TextWrapping="Wrap" Visibility="Collapsed" d:Visibility="Visible">
                             <Hyperlink Click="ClickShowManagementCreditRequestsFrame">
                                 <Run Text="Solicitudes de crédito"/>
                             </Hyperlink>
                         </TextBlock>
-                        <Label x:Name="label_GlobalOptionEmployees" Padding="0 0 0 8">
+                        <Label x:Name="label_GlobalOptionEmployees" Padding="0 0 0 8" Visibility="Collapsed" d:Visibility="Visible">
                             <Hyperlink Click="ClickShowManagementEmployeesFrame">
                                 <Run Text="Empleados"/>
                             </Hyperlink>
                         </Label>
-                        <Label>
+                        <Label x:Name="label_GlobalOptionCreditPolicies" Padding="0 0 0 8" Visibility="Collapsed" d:Visibility="Visible">
+                            <Hyperlink Click="ClickShowManagementEmployeesFrame">
+                                <Run Text="Políticas"/>
+                            </Hyperlink>
+                        </Label>
+                        <TextBlock x:Name="label_GlobalOptionMonthlyEfficiencies" Padding="0 0 0 8" TextWrapping="Wrap" Visibility="Collapsed" d:Visibility="Visible">
+                            <Hyperlink Click="ClickShowManagementEmployeesFrame">
+                                <Run Text="Eficiencias mensuales"/>
+                            </Hyperlink>
+                        </TextBlock>
+                        <Label Margin="0 428 0 0">
                             <Hyperlink Click="ClickLogOut">
                                 <Run Text="Cerrar sesión"/>
                             </Hyperlink>

@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace FinanciaRed.Utils {
@@ -14,5 +15,13 @@ namespace FinanciaRed.Utils {
             return null; // Retorna null si no se encuentra un padre del tipo T en la jerarquía
         }
 
+        public static RadioButton GetSelectedRadioButton (Panel panel) {
+            foreach (var child in panel.Children) {
+                if (child is RadioButton radioButton && radioButton.IsChecked == true) {
+                    return radioButton;
+                }
+            }
+            return null; // Ningún RadioButton está seleccionado
+        }
     }
 }

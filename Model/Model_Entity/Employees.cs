@@ -32,9 +32,11 @@ namespace FinanciaRed.Model.Model_Entity
         public string Email { get; set; }
         public string Password { get; set; }
         public int IdRole { get; set; }
+        public int IdStatusEmployee { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CreditApplications> CreditApplications { get; set; }
         public virtual RolesEmployees RolesEmployees { get; set; }
+        public virtual StatusesEmployee StatusesEmployee { get; set; }
     }
 }

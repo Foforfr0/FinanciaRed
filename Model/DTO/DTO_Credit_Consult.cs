@@ -8,7 +8,7 @@ namespace FinanciaRed.Model.DTO {
         public string CodeRFC {
             get; set;
         }
-        public long Amount {
+        public long AmountTotal {
             get; set;
         }
         public long? AmountLeft {

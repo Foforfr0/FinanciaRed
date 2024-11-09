@@ -1,19 +1,17 @@
-﻿using FinanciaRed.Model.DAO;
-using FinanciaRed.Model.DTO;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
-namespace FinanciaRed.View.ManageCreditRequests {
+namespace FinanciaRed.View.ManageCreditApplications {
     /// <summary>
-    /// Interaction logic for RegistrerCreditRequest.xaml
+    /// Interaction logic for RegistrerCreditApplication.xaml
     /// </summary>
-    public partial class RegistrerCreditRequest : Window {
+    public partial class RegistrerCreditApplication : Window {
         private bool[] _IsCorrectStage1 = new bool[2] { false, false };
         private bool[] _IsCorrectStage2 = new bool[3] { false, false, false };
 
-        public RegistrerCreditRequest () {
+        public RegistrerCreditApplication () {
             InitializeComponent ();
         }
 

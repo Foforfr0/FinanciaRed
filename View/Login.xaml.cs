@@ -88,13 +88,13 @@ namespace FinanciaRed.View {
                 } else {
                     NavigationService navService = NavigationService.GetNavigationService (this);
                     {
-                        CurrentUser.Instance.IdEmployee = messageResponseLogin.DataRetrieved.IdEmployee;
-                        CurrentUser.Instance.FirstName = messageResponseLogin.DataRetrieved.FirstName;
-                        CurrentUser.Instance.MiddleName = messageResponseLogin.DataRetrieved.MiddleName;
-                        CurrentUser.Instance.LastName = messageResponseLogin.DataRetrieved.LastName;
-                        CurrentUser.Instance.ProfilePhoto = messageResponseLogin.DataRetrieved.ProfilePhoto;
-                        CurrentUser.Instance.IdRol = messageResponseLogin.DataRetrieved.IdRol;
-                        CurrentUser.Instance.Rol = messageResponseLogin.DataRetrieved.Rol;
+                        CURRENT_USER.Instance.IdEmployee = messageResponseLogin.DataRetrieved.IdEmployee;
+                        CURRENT_USER.Instance.FirstName = messageResponseLogin.DataRetrieved.FirstName;
+                        CURRENT_USER.Instance.MiddleName = messageResponseLogin.DataRetrieved.MiddleName;
+                        CURRENT_USER.Instance.LastName = messageResponseLogin.DataRetrieved.LastName;
+                        CURRENT_USER.Instance.ProfilePhoto = messageResponseLogin.DataRetrieved.ProfilePhoto;
+                        CURRENT_USER.Instance.IdRol = messageResponseLogin.DataRetrieved.IdRol;
+                        CURRENT_USER.Instance.Rol = messageResponseLogin.DataRetrieved.Rol;
                     }
                     navService.Navigate (new MainWindow ());
                 }

@@ -316,14 +316,14 @@ namespace FinanciaRed.View.ManageClients {
                 await Task.Delay (500);
 
                 if (textBox_CodeCurp.Text.Equals (selectedClient.CodeCURP)) {
-                    SaveDataInDatabase ();
+                    await SaveDataInDatabase ();
                 } else {
                     if (existsRFC) {
                         label_ErrorCodeRFC.Content = "RFC ya existente en la base de datos.";
                         label_ErrorCodeRFC.Visibility = Visibility.Visible;
                         _IsCorrectStage4[6] = false;
                     } else {
-                        SaveDataInDatabase ();
+                        await SaveDataInDatabase ();
                     }
                 }
             } else {
@@ -331,7 +331,7 @@ namespace FinanciaRed.View.ManageClients {
             }
         }
 
-        private void SaveDataInDatabase () {
+        private async Task SaveDataInDatabase () {
             DTO_Client_DetailsClient newClient = new DTO_Client_DetailsClient {
                 IdClient = selectedClient.IdClient,
                 FirstName = textBox_FirstName.Text,
@@ -396,7 +396,7 @@ namespace FinanciaRed.View.ManageClients {
                 newClient.BankAccount2.IdCardType = comboBox_BankAccount2CardType.SelectedIndex;
             }
 
-            MessageResponse<bool> responseModifyClient = DAO_Client.SaveChangesDataClient (newClient);
+            MessageResponse<bool> responseModifyClient = await DAO_Client.SaveChangesDataClient (newClient);
             if (responseModifyClient.IsError) {
                 MessageBox.Show ("Ha ocurrido un error inesperado.\nIntente más tarde.", "Error inesperado.");
             } else {

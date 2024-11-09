@@ -124,7 +124,7 @@ namespace FinanciaRed.View.ManageEmployees {
                         "Error inesperado"
                     );
                 } else {
-                    CurrentUser.Instance.ProfilePhoto = TEMP_profileImageSelected;
+                    CURRENT_USER.Instance.ProfilePhoto = TEMP_profileImageSelected;
                     Frame parentFrame = Utils.GetElementVisualTree.GetParent<Frame> (this);
                     MainWindow mainWindow = Utils.GetElementVisualTree.GetParent<Page> (parentFrame) as MainWindow;
                     mainWindow.InitializeDataEmployee ();

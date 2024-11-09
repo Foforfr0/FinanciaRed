@@ -1,13 +1,10 @@
-﻿using System;
-using System.Data.Entity.Infrastructure.DependencyResolution;
+﻿namespace FinanciaRed.Model.DAO {
+    public class CURRENT_USER {
+        private static CURRENT_USER _instance = new CURRENT_USER();
 
-namespace FinanciaRed.Model.DAO {
-    public class CurrentUser {
-        private static CurrentUser _instance = new CurrentUser();
+        public static CURRENT_USER Instance => _instance;
 
-        public static CurrentUser Instance => _instance;
-
-        private CurrentUser() { }
+        private CURRENT_USER() { }
 
         public int IdEmployee {
             get; set;

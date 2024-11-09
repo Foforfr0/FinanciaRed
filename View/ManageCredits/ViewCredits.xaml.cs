@@ -24,12 +24,16 @@ namespace FinanciaRed.View.ManageCredits {
             MessageResponse<List<DTO_Credit_Consult>> messageResponseConsultClients =
                  await DAO_Credit.GetAllCredits ();
             this.retrievedCredits = new ObservableCollection<DTO_Credit_Consult> (messageResponseConsultClients.DataRetrieved);
-            dataGrid_Credits.ItemsSource = null;
-            dataGrid_Credits.ItemsSource = retrievedCredits;
+            dataGridCredits.ItemsSource = null;
+            dataGridCredits.ItemsSource = retrievedCredits;
         }
 
         private void ClickSearchCredits (object sender, RoutedEventArgs e) {
         
+        }
+
+        private async void ClickChangeState (object sender, RoutedEventArgs e) {
+            
         }
 
         private void ClickRegisterCredit (object sender, RoutedEventArgs e) {

@@ -3,7 +3,6 @@ using FinanciaRed.Model.DTO;
 using FinanciaRed.View.ManageEmployees;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -30,35 +29,29 @@ namespace FinanciaRed.View.ManageUsers {
             dataGridEmployees.ItemsSource = retrievedEmployees;
         }
 
-        private void ClickSearchEmployees (object sender, RoutedEventArgs e) {
-            //TODO
-            //Agregar funcionalidad de filtros
+        private async void ClickSearchEmployees (object sender, RoutedEventArgs e) {
             string keyText = textBox_KeyWord.Text;
-            bool WithAdviser = checkBox_WithAdviser.IsChecked ?? false;
-            bool WithAnalyst = checkBox_WithCreditAnalyst.IsChecked ?? false;
-            bool WithAdministrator = checkBox_WithAdministrator.IsChecked ?? false;
 
-            filteredEmployees = FilterData (retrievedEmployees, keyText, WithAdviser, WithAnalyst, WithAdministrator);
+            MessageResponse<List<DTO_Employee_Consult>> messageResponseFilterEmployees =
+                await DAO_Employee.GetFilteredEmployees (keyText);
         }
 
-        private ObservableCollection<DTO_Employee_Consult> FilterData (ObservableCollection<DTO_Employee_Consult> filteredEmployees, string keyText, bool WithAdviser, bool WithAnalyst, bool WithAdministrator) {
-            return new ObservableCollection<DTO_Employee_Consult> (
-                retrievedEmployees.Where (
-                    x => FilterPredicate (
-                        x, keyText, false))
-                );
-        }
+        private async void ClickChangeState (object sender, RoutedEventArgs e) {
+            DTO_Employee_Consult selectedEmployee = dataGridEmployees.SelectedItem as DTO_Employee_Consult;
 
-        private bool FilterPredicate (DTO_Employee_Consult item, string filterText, bool isCaseSensitive) {
-            if (string.IsNullOrEmpty (filterText))
-                return true;
-
-            string value = item.FirstName.ToString (); // Reemplaza con la propiedad que deseas filtrar
-
-            if (isCaseSensitive)
-                return value.Contains (filterText);
-
-            return true;
+            if (selectedEmployee == null) {
+                MessageBox.Show (
+                    "Seleccione un empleado primero de la tabla para poder continuar.",
+                    "Selección requerida.");
+            } else {
+                ConfirmationMessageChangeStatusEmployee.idEmployee = selectedEmployee.IdEmployee;
+                bool? result = await ConfirmationMessageChangeStatusEmployee.Show (
+                    selectedEmployee.FirstName + " " + selectedEmployee.MiddleName);
+                ConfirmationMessageChangeStatusEmployee.idEmployee = 0;
+                if (result == true) {
+                    MessageBox.Show ("Se ha modificado correctamente el estado del empleado.", "Modificación completa.");
+                }
+            }
         }
 
         private void ClickRegisterEmployee (object sender, RoutedEventArgs e) {

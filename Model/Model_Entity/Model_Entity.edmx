@@ -141,6 +141,7 @@
           <Property Name="Email" Type="varchar" MaxLength="80" Nullable="false" />
           <Property Name="Password" Type="varchar" MaxLength="80" Nullable="false" />
           <Property Name="IdRole" Type="int" Nullable="false" />
+          <Property Name="IdStatusEmployee" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Policies">
           <Key>
@@ -203,6 +204,13 @@
             <PropertyRef Name="StatusCreditApplication" />
           </Key>
           <Property Name="StatusCreditApplication" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StatusesEmployee">
+          <Key>
+            <PropertyRef Name="IdStatusEmployee" />
+          </Key>
+          <Property Name="IdStatusEmployee" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="StatusesMarital">
@@ -468,6 +476,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_StatusEmployee_Employee">
+          <End Role="StatusesEmployee" Type="Self.StatusesEmployee" Multiplicity="1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusesEmployee">
+              <PropertyRef Name="IdStatusEmployee" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="IdStatusEmployee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_StatusMarital_Client">
           <End Role="StatusesMarital" Type="Self.StatusesMarital" Multiplicity="1" />
           <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
@@ -524,6 +544,7 @@
           <EntitySet Name="StatusesClient" EntityType="Self.StatusesClient" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StatusesCredit" EntityType="Self.StatusesCredit" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StatusesCreditApplication" EntityType="Self.StatusesCreditApplication" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StatusesEmployee" EntityType="Self.StatusesEmployee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StatusesMarital" EntityType="Self.StatusesMarital" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkClients" EntityType="Self.WorkClients" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkTypes" EntityType="Self.WorkTypes" Schema="dbo" store:Type="Tables" />
@@ -606,6 +627,10 @@
           <AssociationSet Name="fk_StatusCreditApplication_CreditApplication" Association="Self.fk_StatusCreditApplication_CreditApplication">
             <End Role="StatusesCreditApplication" EntitySet="StatusesCreditApplication" />
             <End Role="CreditApplications" EntitySet="CreditApplications" />
+          </AssociationSet>
+          <AssociationSet Name="fk_StatusEmployee_Employee" Association="Self.fk_StatusEmployee_Employee">
+            <End Role="StatusesEmployee" EntitySet="StatusesEmployee" />
+            <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
           <AssociationSet Name="fk_StatusMarital_Client" Association="Self.fk_StatusMarital_Client">
             <End Role="StatusesMarital" EntitySet="StatusesMarital" />
@@ -793,8 +818,10 @@
           <Property Name="Email" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="IdRole" Type="Int32" Nullable="false" />
+          <Property Name="IdStatusEmployee" Type="Int32" Nullable="false" />
           <NavigationProperty Name="CreditApplications" Relationship="Self.fk_Employee_CreditApplication" FromRole="Employees" ToRole="CreditApplications" />
           <NavigationProperty Name="RolesEmployees" Relationship="Self.fk_RolesEmployee_Employee" FromRole="Employees" ToRole="RolesEmployees" />
+          <NavigationProperty Name="StatusesEmployee" Relationship="Self.fk_StatusEmployee_Employee" FromRole="Employees" ToRole="StatusesEmployee" />
         </EntityType>
         <EntityType Name="Policies">
           <Key>
@@ -866,6 +893,14 @@
           <Property Name="StatusCreditApplication" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="CreditApplications" Relationship="Self.fk_StatusCreditApplication_CreditApplication" FromRole="StatusesCreditApplication" ToRole="CreditApplications" />
+        </EntityType>
+        <EntityType Name="StatusesEmployee">
+          <Key>
+            <PropertyRef Name="IdStatusEmployee" />
+          </Key>
+          <Property Name="IdStatusEmployee" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Employees" Relationship="Self.fk_StatusEmployee_Employee" FromRole="StatusesEmployee" ToRole="Employees" />
         </EntityType>
         <EntityType Name="StatusesMarital">
           <Key>
@@ -1158,6 +1193,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_StatusEmployee_Employee">
+          <End Role="StatusesEmployee" Type="Self.StatusesEmployee" Multiplicity="1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StatusesEmployee">
+              <PropertyRef Name="IdStatusEmployee" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="IdStatusEmployee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_WorkType_WorkClient">
           <End Role="WorkTypes" Type="Self.WorkTypes" Multiplicity="1" />
           <End Role="WorkClients" Type="Self.WorkClients" Multiplicity="*" />
@@ -1190,6 +1237,7 @@
           <EntitySet Name="StatusesClient" EntityType="Self.StatusesClient" />
           <EntitySet Name="StatusesCredit" EntityType="Self.StatusesCredit" />
           <EntitySet Name="StatusesCreditApplication" EntityType="Self.StatusesCreditApplication" />
+          <EntitySet Name="StatusesEmployee" EntityType="Self.StatusesEmployee" />
           <EntitySet Name="StatusesMarital" EntityType="Self.StatusesMarital" />
           <EntitySet Name="WorkClients" EntityType="Self.WorkClients" />
           <EntitySet Name="WorkTypes" EntityType="Self.WorkTypes" />
@@ -1279,6 +1327,10 @@
           </AssociationSet>
           <AssociationSet Name="fk_RolesEmployee_Employee" Association="Self.fk_RolesEmployee_Employee">
             <End Role="RolesEmployees" EntitySet="RolesEmployees" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="fk_StatusEmployee_Employee" Association="Self.fk_StatusEmployee_Employee">
+            <End Role="StatusesEmployee" EntitySet="StatusesEmployee" />
             <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
           <AssociationSet Name="fk_WorkType_WorkClient" Association="Self.fk_WorkType_WorkClient">
@@ -1437,6 +1489,7 @@
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="IdRole" ColumnName="IdRole" />
+                <ScalarProperty Name="IdStatusEmployee" ColumnName="IdStatusEmployee" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1507,6 +1560,14 @@
             <EntityTypeMapping TypeName="FinanciaRedModel.StatusesCreditApplication">
               <MappingFragment StoreEntitySet="StatusesCreditApplication">
                 <ScalarProperty Name="StatusCreditApplication" ColumnName="StatusCreditApplication" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StatusesEmployee">
+            <EntityTypeMapping TypeName="FinanciaRedModel.StatusesEmployee">
+              <MappingFragment StoreEntitySet="StatusesEmployee">
+                <ScalarProperty Name="IdStatusEmployee" ColumnName="IdStatusEmployee" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
               </MappingFragment>
             </EntityTypeMapping>

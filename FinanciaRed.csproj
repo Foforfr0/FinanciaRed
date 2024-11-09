@@ -82,9 +82,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\DAO\CurrentUser.cs" />
+    <Compile Include="Model\DAO\CURRENT_USER.cs" />
     <Compile Include="Model\DAO\DAO_Client.cs" />
     <Compile Include="Model\DAO\DAO_Credit.cs" />
+    <Compile Include="Model\DAO\DAO_CreditPolicies.cs" />
     <Compile Include="Model\DAO\DAO_Employee.cs" />
     <Compile Include="Model\DAO\DAO_GeneralVariables.cs" />
     <Compile Include="Model\DTO\DTO_AddressClient.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="Model\DTO\DTO_CardType.cs" />
     <Compile Include="Model\DTO\DTO_Client_Consult.cs" />
     <Compile Include="Model\DTO\DTO_Client_DetailsClient.cs" />
+    <Compile Include="Model\DTO\DTO_CreditPolicy_Consult.cs" />
     <Compile Include="Model\DTO\DTO_CreditRequest_Consult.cs" />
     <Compile Include="Model\DTO\DTO_CreditRequest_Details.cs" />
     <Compile Include="Model\DTO\DTO_Credit_Consult.cs" />
@@ -181,6 +183,9 @@
     <Compile Include="Model\Model_Entity\StatusesCreditApplication.cs">
       <DependentUpon>Model_Entity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Model_Entity\StatusesEmployee.cs">
+      <DependentUpon>Model_Entity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Model_Entity\StatusesMarital.cs">
       <DependentUpon>Model_Entity.tt</DependentUpon>
     </Compile>
@@ -198,6 +203,9 @@
     <Compile Include="View\Components\Header.xaml.cs">
       <DependentUpon>Header.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ManageClients\ConfirmationMessageChangeStatusClient.xaml.cs">
+      <DependentUpon>ConfirmationMessageChangeStatusClient.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ManageClients\ModifyClientData.xaml.cs">
       <DependentUpon>ModifyClientData.xaml</DependentUpon>
     </Compile>
@@ -207,14 +215,17 @@
     <Compile Include="View\ManageClients\RegisterClient.xaml.cs">
       <DependentUpon>RegisterClient.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ManageCreditRequests\ViewCreditRequests.xaml.cs">
+    <Compile Include="View\ManageCreditPolicies\ViewCreditPolicies.xaml.cs">
+      <DependentUpon>ViewCreditPolicies.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManageCreditApplications\ViewCreditRequests.xaml.cs">
       <DependentUpon>ViewCreditRequests.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ManageCreditRequests\RegistrerCreditRequest.xaml.cs">
-      <DependentUpon>RegistrerCreditRequest.xaml</DependentUpon>
+    <Compile Include="View\ManageCreditApplications\RegistrerCreditApplication.xaml.cs">
+      <DependentUpon>RegistrerCreditApplication.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ManageCreditRequests\ViewDetailsCreditRequest.xaml.cs">
-      <DependentUpon>ViewDetailsCreditRequest.xaml</DependentUpon>
+    <Compile Include="View\ManageCreditApplications\ViewDetailsCreditApplication.xaml.cs">
+      <DependentUpon>ViewDetailsCreditApplication.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ManageCredits\ViewDetailsCredit.xaml.cs">
       <DependentUpon>ViewDetailsCredit.xaml</DependentUpon>
@@ -234,6 +245,9 @@
     <Compile Include="View\ManageCredits\ViewCredits.xaml.cs">
       <DependentUpon>ViewCredits.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ManageEmployees\ConfirmationMessageChangeStatusEmployee.xaml.cs">
+      <DependentUpon>ConfirmationMessageChangeStatusEmployee.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ManageEmployees\ModifyEmployeeData.xaml.cs">
       <DependentUpon>ModifyEmployeeData.xaml</DependentUpon>
     </Compile>
@@ -246,10 +260,17 @@
     <Compile Include="View\ManageEmployees\ViewEmployees.xaml.cs">
       <DependentUpon>ViewEmployees.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ManageMonthlyEfficiencies\ViewMonthlyEfficiencies.xaml.cs">
+      <DependentUpon>ViewMonthlyEfficiencies.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\WindowContainer.xaml.cs">
       <DependentUpon>WindowContainer.xaml</DependentUpon>
     </Compile>
     <Page Include="View\Components\Header.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ManageClients\ConfirmationMessageChangeStatusClient.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -265,15 +286,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ManageCreditRequests\ViewCreditRequests.xaml">
+    <Page Include="View\ManageCreditPolicies\ViewCreditPolicies.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ManageCreditRequests\RegistrerCreditRequest.xaml">
+    <Page Include="View\ManageCreditApplications\ViewCreditRequests.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ManageCreditRequests\ViewDetailsCreditRequest.xaml">
+    <Page Include="View\ManageCreditApplications\RegistrerCreditApplication.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ManageCreditApplications\ViewDetailsCreditApplication.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -305,6 +330,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\ManageEmployees\ConfirmationMessageChangeStatusEmployee.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ManageEmployees\ModifyEmployeeData.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -318,6 +347,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ManageEmployees\ViewEmployees.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ManageMonthlyEfficiencies\ViewMonthlyEfficiencies.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

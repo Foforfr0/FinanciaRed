@@ -2,7 +2,6 @@
 using FinanciaRed.Model.DTO;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -35,32 +34,33 @@ namespace FinanciaRed.View.ManageClients {
             dataGridClients.ItemsSource = retrievedClients;
         }
 
-        private void ClickSearchClients (object sender, RoutedEventArgs e) {
-            //TODO
-            //Agregar funcionalidad de filtros
-            string keyText = textBox_KeyWord.Text;
+        private async void ClickSearchClients (object sender, RoutedEventArgs e) {
+            string keyText = textBoxKeyWord.Text;
 
-            filteredClients = FilterData (retrievedClients, keyText);
+            MessageResponse<List<DTO_Client_Consult>> messageResponseFilterClients =
+                await DAO_Client.GetFilteredClients (keyText);
+
+            this.filteredClients = new ObservableCollection<DTO_Client_Consult> (messageResponseFilterClients.DataRetrieved);
+            dataGridClients.ItemsSource = null;
+            dataGridClients.ItemsSource = retrievedClients;
         }
 
-        private ObservableCollection<DTO_Client_Consult> FilterData (ObservableCollection<DTO_Client_Consult> filteredClients, string keyText) {
-            return new ObservableCollection<DTO_Client_Consult> (
-                retrievedClients.Where (
-                    x => x.FirstName.Contains(keyText)
-                )
-            );
-        }
+        private async void ClickChangeState (object sender, RoutedEventArgs e) {
+            DTO_Client_Consult selectedClient = dataGridClients.SelectedItem as DTO_Client_Consult;
 
-        private bool FilterPredicate (DTO_Client_Consult item, string filterText, bool isCaseSensitive) {
-            if (string.IsNullOrEmpty (filterText))
-                return true;
-
-            string value = item.FirstName.ToString (); // Reemplaza con la propiedad que deseas filtrar
-
-            if (isCaseSensitive)
-                return value.Contains (filterText);
-
-            return true;
+            if (selectedClient == null) {
+                MessageBox.Show (
+                    "Seleccione un cliente primero de la tabla para poder continuar.",
+                    "Selección requerida");
+            } else {
+                ConfirmationMessageChangeStatusClient.idClient = selectedClient.IdClient;
+                bool? result = await ConfirmationMessageChangeStatusClient.Show (
+                    selectedClient.FirstName + " " + selectedClient.MiddleName);
+                ConfirmationMessageChangeStatusClient.idClient = 0;
+                if (result == true) {
+                    MessageBox.Show ("Se ha modificado correctamente el estado del cliente.", "Modificación completa.");
+                }
+            }
         }
 
         private void ClickRegisterClient (object sender, RoutedEventArgs e) {

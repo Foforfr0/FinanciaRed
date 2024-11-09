@@ -34,13 +34,125 @@ namespace FinanciaRed.Model.DAO {
                             dataRetrieved.Count + " clients retrieved.",
                             dataRetrieved);
                     } else {
-                        responseConsultClients = MessageResponse<List<DTO_Client_Consult>>.Failure ("Wrong credentials.");
+                        responseConsultClients = MessageResponse<List<DTO_Client_Consult>>.Failure ("Cannot retrieved clients.");
                     }
                 } catch (Exception ex) {
                     responseConsultClients = MessageResponse<List<DTO_Client_Consult>>.Failure (ex.ToString ());
                 }
             }
             return responseConsultClients;
+        }
+
+        public static async Task<MessageResponse<List<DTO_Client_Consult>>> GetFilteredClients (string keyWord) {
+            MessageResponse<List<DTO_Client_Consult>> responseFilteredClients = null;
+
+            using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                try {
+                    List<DTO_Client_Consult> dataRetrieved = await
+                        context.Clients.
+                        Where (clnt =>
+                            clnt.FirstName.Equals (keyWord) ||
+                            clnt.MiddleName.Equals (keyWord) ||
+                            clnt.LastName.Equals (keyWord) ||
+                            clnt.CodeCURP.Equals (keyWord) ||
+                            clnt.CodeRFC.Equals (keyWord)).
+                        Select (clnt => new DTO_Client_Consult {
+                            IdClient = clnt.IdClient,
+                            FirstName = clnt.FirstName,
+                            MiddleName = clnt.MiddleName,
+                            LastName = clnt.LastName,
+                            CodeRFC = clnt.CodeRFC,
+                            CodeCURP = clnt.CodeCURP,
+                            IdStatusClient = clnt.StatusesClient.IdStatusClient,
+                            StatusClient = clnt.StatusesClient.Status
+                        }).
+                        ToListAsync ();
+
+                    if (dataRetrieved != null) {
+                        responseFilteredClients = MessageResponse<List<DTO_Client_Consult>>.Success (
+                            dataRetrieved.Count + " clients retrieved.",
+                            dataRetrieved);
+                    } else {
+                        responseFilteredClients = MessageResponse<List<DTO_Client_Consult>>.Failure ("Cannot retrieved filtered clients..");
+                    }
+                } catch (Exception ex) {
+                    responseFilteredClients = MessageResponse<List<DTO_Client_Consult>>.Failure (ex.ToString ());
+                }
+            }
+            return responseFilteredClients;
+        }
+
+        public static async Task<MessageResponse<string>> GetStatusClient (int idClient) {
+            MessageResponse<string> responseStatus = null;
+
+            using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                try {
+                    string dataRetrieved = await context.Clients.
+                        Where (clnt => clnt.IdClient == idClient).
+                        Select (clnt => clnt.StatusesClient.Status).
+                        FirstOrDefaultAsync ();
+
+                    if (dataRetrieved != null) {
+                        responseStatus = MessageResponse<string>.Success (
+                            dataRetrieved,
+                            dataRetrieved);
+                    } else {
+                        responseStatus = MessageResponse<string>.Failure ($"Client ID {idClient} without status.");
+                    }
+                } catch (Exception ex) {
+                    responseStatus = MessageResponse<string>.Failure (ex.ToString ());
+                }
+            }
+            return responseStatus;
+        }
+
+        public static async Task<MessageResponse<bool>> ChangeStatusClient (int idClient, int idStatus) {
+            MessageResponse<bool> responseUpdateStatusClient = null;
+
+            using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                try {
+                    Clients currentClient = context.Clients.Find (idClient);
+
+                    if (currentClient != null) {
+                        context.Clients.Attach (currentClient);
+
+                        currentClient.IdStatusClient = idStatus;
+
+                        bool SaveFailed = false;
+                        do {
+                            try {
+                                context.Entry (currentClient).State = EntityState.Modified;
+                                await context.SaveChangesAsync ();
+
+                            } catch (DbUpdateConcurrencyException ex) {
+                                SaveFailed = true;
+                                foreach (var entry in ex.Entries) {
+                                    if (entry.Entity is Match) {
+                                        var proposedValues = entry.CurrentValues;
+                                        var databaseValues = entry.GetDatabaseValues ();
+
+                                        if (databaseValues != null) {
+                                            var databaseEntity = (Clients)databaseValues.ToObject ();
+                                            // Actualiza los valores originales con los valores actuales de la base de datos.
+                                            entry.OriginalValues.SetValues (databaseValues);
+                                            // Decide qué hacer con los valores propuestos.
+                                            entry.CurrentValues.SetValues (proposedValues);
+                                        }
+                                    }
+                                }
+                            }
+                        } while (SaveFailed);
+
+                        responseUpdateStatusClient = MessageResponse<bool>.Success (
+                            $"Client ID {currentClient.IdClient} updated", true);
+                    } else {
+                        responseUpdateStatusClient = MessageResponse<bool>.Failure ($"Client ID {currentClient.IdClient} doesn´t exists.");
+                    }
+                } catch (Exception ex) {
+                    responseUpdateStatusClient = MessageResponse<bool>.Failure ("Exception" + ex.Message);
+                }
+            }
+            return responseUpdateStatusClient;
         }
 
         public static async Task<MessageResponse<DTO_Client_DetailsClient>> GetDetailsClient (int idClient) {
@@ -123,7 +235,7 @@ namespace FinanciaRed.Model.DAO {
                             },
                             IdStatusClient = clnt.StatusesClient.IdStatusClient,
                             StatusClient = clnt.StatusesClient.Status
-                            
+
                         }).
                         FirstOrDefaultAsync ();
 
@@ -132,7 +244,7 @@ namespace FinanciaRed.Model.DAO {
                             $"Client name \"{dataRetrieved.FirstName}\" retrieved.",
                             dataRetrieved);
                     } else {
-                        responseDetails = MessageResponse<DTO_Client_DetailsClient>.Failure ("Clients doesn't retrieved");
+                        responseDetails = MessageResponse<DTO_Client_DetailsClient>.Failure ("Clients doesn't retrieved.");
                     }
                 } catch (Exception ex) {
                     responseDetails = MessageResponse<DTO_Client_DetailsClient>.Failure (ex.ToString ());
@@ -168,7 +280,7 @@ namespace FinanciaRed.Model.DAO {
                         Email2 = newClient.Email2,
                         PhoneNumber1 = newClient.PhoneNumber1,
                         PhoneNumber2 = newClient.PhoneNumber2,
-                        WorkClients = new WorkClients{
+                        WorkClients = new WorkClients {
                             WorkArea = newClient.Work.WorkArea,
                             IdWorkType = newClient.Work.IdWorkType,
                             MonthlySalary = newClient.Work.MonthlySalary
@@ -209,7 +321,7 @@ namespace FinanciaRed.Model.DAO {
                     await context.SaveChangesAsync ();
 
                     responseCreateClient = MessageResponse<bool>.Success (
-                        $"Client {createdClient.FirstName} created", true);
+                        $"Client {createdClient.FirstName} created.", true);
                 } catch (Exception ex) {
                     responseCreateClient = MessageResponse<bool>.Failure ("Exception" + ex.Message);
                 }
@@ -217,7 +329,7 @@ namespace FinanciaRed.Model.DAO {
             return responseCreateClient;
         }
 
-        public static MessageResponse<bool> SaveChangesDataClient (DTO_Client_DetailsClient newDataClient) {
+        public static async Task<MessageResponse<bool>> SaveChangesDataClient (DTO_Client_DetailsClient newDataClient) {
             MessageResponse<bool> responseUpdateDataClient = null;
 
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
@@ -228,7 +340,7 @@ namespace FinanciaRed.Model.DAO {
                         context.Clients.Attach (currentClient);
 
                         currentClient.Gender = newDataClient.Gender;
-                        currentClient.IdStatusMarital= newDataClient.IdMaritalStatus;
+                        currentClient.IdStatusMarital = newDataClient.IdMaritalStatus;
                         currentClient.Email1 = newDataClient.Email1;
                         currentClient.Email2 = newDataClient.Email2;
                         currentClient.PhoneNumber1 = newDataClient.PhoneNumber1;
@@ -262,7 +374,7 @@ namespace FinanciaRed.Model.DAO {
                         do {
                             try {
                                 context.Entry (currentClient).State = EntityState.Modified;
-                                context.SaveChanges ();
+                                await context.SaveChangesAsync ();
 
                             } catch (DbUpdateConcurrencyException ex) {
                                 SaveFailed = true;
@@ -286,7 +398,7 @@ namespace FinanciaRed.Model.DAO {
                         responseUpdateDataClient = MessageResponse<bool>.Success (
                             $"Client ID {currentClient.IdClient} updated", true);
                     } else {
-                        responseUpdateDataClient = MessageResponse<bool>.Failure ($"Client ID {currentClient.IdClient} doesn´t exists");
+                        responseUpdateDataClient = MessageResponse<bool>.Failure ($"Client ID {currentClient.IdClient} doesn´t exists.");
                     }
                 } catch (Exception ex) {
                     responseUpdateDataClient = MessageResponse<bool>.Failure ("Exception" + ex.Message);
@@ -311,7 +423,7 @@ namespace FinanciaRed.Model.DAO {
                             $"cardNumber code \"{responseConsultRFC}\" retrieved.",
                             dataRetrieved);
                     } else {
-                        responseConsultRFC = MessageResponse<string>.Failure ("cardNumber doesn´t retrieved");
+                        responseConsultRFC = MessageResponse<string>.Failure ("cardNumber doesn´t retrieved.");
                     }
                 } catch (Exception ex) {
                     responseConsultRFC = MessageResponse<string>.Failure (ex.ToString ());
@@ -425,7 +537,7 @@ namespace FinanciaRed.Model.DAO {
                 try {
                     string dataRetrieved = await
                         context.Clients.
-                        Where (clnt => clnt.BankAccounts.CodeCLABE.Equals (clabe) || 
+                        Where (clnt => clnt.BankAccounts.CodeCLABE.Equals (clabe) ||
                                                       clnt.BankAccounts1.CodeCLABE.Equals (clabe)).
                         Select (clnt => clnt.BankAccounts.CodeCLABE).
                         FirstOrDefaultAsync ();

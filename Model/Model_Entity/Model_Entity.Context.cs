@@ -44,6 +44,7 @@ namespace FinanciaRed.Model.Model_Entity
         public virtual DbSet<StatusesClient> StatusesClient { get; set; }
         public virtual DbSet<StatusesCredit> StatusesCredit { get; set; }
         public virtual DbSet<StatusesCreditApplication> StatusesCreditApplication { get; set; }
+        public virtual DbSet<StatusesEmployee> StatusesEmployee { get; set; }
         public virtual DbSet<StatusesMarital> StatusesMarital { get; set; }
         public virtual DbSet<WorkClients> WorkClients { get; set; }
         public virtual DbSet<WorkTypes> WorkTypes { get; set; }
