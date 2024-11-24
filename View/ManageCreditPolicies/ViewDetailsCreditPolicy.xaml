@@ -1,0 +1,100 @@
+﻿<Window x:Class="FinanciaRed.View.ManageCreditPolicies.ViewDetailsCreditPolicy"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FinanciaRed.View.ManageCreditPolicies"
+        mc:Ignorable="d"
+        Title="Detalles de política de crédito" d:Height="850" Height="650" Width="800" 
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#EADDD9" Offset="0"/>
+                <GradientStop Color="#E9E7D7" Offset="0.5"/>
+                <GradientStop Color="#DFE2DD" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <StackPanel Orientation="Vertical" Width="800" HorizontalAlignment="Left">
+            <Grid Background="#FFFEEA" Width="800" Height="50">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="FinanciaRed" VerticalAlignment="Center" FontWeight="Bold" FontSize="20" Padding="0" Margin="10"/>
+            </Grid>
+            <Grid>
+                <!--Data credit policy-->
+                <StackPanel x:Name="stackPanel_Stage1" d:Height="725"  Height="525" Width="740" Margin="20" Background="#FFFFFF">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" d:Height="725" Height="525" Width="740">
+                        <StackPanel Margin="20 10">
+                            <Label Content="Detalles de política de crédito" Margin="0" Style="{StaticResource HeaderText}"/>
+                            <Label Content="" Style="{StaticResource InstructionPage}"/>
+                            <Grid Margin="25 0">
+                                <StackPanel Margin="0 0 15 5">
+                                    <Label Content="Datos de la política de crédito" FontSize="18" FontWeight="Bold" Padding="0" Margin="0 0 0 10"/>
+                                    <Label Content="Nombre:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center" Margin="0 5 0 0"/>
+                                    <TextBox x:Name="textBox_Name" 
+                                         AcceptsReturn="True"
+                                         VerticalScrollBarVisibility="Auto"
+                                         HorizontalScrollBarVisibility="Auto"
+                                         TextWrapping="Wrap"
+                                         IsReadOnly="True"
+                                         Height="35"/>
+                                    <Label Content="Descripción:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center" Margin="0 15 0 0"/>
+                                    <TextBox x:Name="textBox_Description" 
+                                         AcceptsReturn="True"
+                                         VerticalScrollBarVisibility="Auto"
+                                         HorizontalScrollBarVisibility="Auto"
+                                         TextWrapping="Wrap"
+                                         IsReadOnly="True"
+                                         Height="55"/>
+                                    <StackPanel x:Name="stackPanel_DatesData">
+                                        <StackPanel Width="200">
+                                            <Label Content="Fecha de inicio:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center" Margin="0 15 0 0"/>
+                                            <DatePicker x:Name="datePicker_DateStart">
+                                                <DatePicker.Resources>
+                                                    <Style TargetType="DatePickerTextBox">
+                                                        <Setter Property="IsReadOnly" Value="True"/>
+                                                    </Style>
+                                                </DatePicker.Resources>
+                                            </DatePicker>
+                                        </StackPanel>
+                                        <StackPanel Width="200">
+                                            <Label Content="Fecha de término:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center" Margin="0 15 0 0"/>
+                                            <DatePicker x:Name="datePicker_DateEnd">
+                                                <DatePicker.Resources>
+                                                    <Style TargetType="DatePickerTextBox">
+                                                        <Setter Property="IsReadOnly" Value="True"/>
+                                                    </Style>
+                                                </DatePicker.Resources>
+                                            </DatePicker>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                            <Button x:Name="button_Modify" Click="ClickModifyCreditPolicy" Content="Modificar" Margin="0 70 0 0"
+                                    Width="80" Height="25" HorizontalAlignment="Center" Background="#FF0693C3" Foreground="#FFFFFF"/>
+                            <Grid x:Name="grid_ButtonsActions" Height="27" Margin="0 70 0 0" d:Visibility="Visible" Visibility="Collapsed">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Button Click="ClickCancel" Content="Cancelar" Grid.Column="1" 
+                                        Width="80" Background="#FFDE2323" Foreground="#FFFFFF"/>
+                                <Button Click="ClickFinishModification" Content="Modificar" Grid.Column="2" 
+                                        Width="80" Background="#FF06C32B" Foreground="#FFFFFF"/>
+                            </Grid>
+                        </StackPanel>
+                    </ScrollViewer>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Window>

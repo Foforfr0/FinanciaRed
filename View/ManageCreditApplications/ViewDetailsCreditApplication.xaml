@@ -5,7 +5,169 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FinanciaRed.View.ManageCreditApplications"
         mc:Ignorable="d"
-        Title="ViewDetailsCreditRequest" Height="450" Width="800">
+        xmlns:utils="clr-namespace:FinanciaRed.Utils"
+        Title="Detalles de política de crédito" d:Height="1000" Height="650" Width="800" 
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+
+    <Window.Resources>
+        <utils:RemoveNewLineConverter x:Key="RemoveNewLineConverter" />
+        <utils:BoolToNullableConverter x:Key="BoolToNullableConverter" />
+    </Window.Resources>
+
     <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#EADDD9" Offset="0"/>
+                <GradientStop Color="#E9E7D7" Offset="0.5"/>
+                <GradientStop Color="#DFE2DD" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <StackPanel Orientation="Vertical" Width="800" HorizontalAlignment="Left">
+            <Grid Background="#FFFEEA" Width="800" Height="50">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="FinanciaRed" VerticalAlignment="Center" FontWeight="Bold" FontSize="20" Padding="0" Margin="10"/>
+            </Grid>
+            <Grid>
+                <StackPanel x:Name="stackPanel_Stage1" d:Height="895"  Height="525" Width="740" Margin="20" Background="#FFFFFF">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" d:Height="895" Height="525" Width="740">
+                        <StackPanel Margin="20 10">
+                            <Label Content="Detalles de política de crédito" Margin="0" Style="{StaticResource HeaderText}"/>
+                            <Label Content="" Style="{StaticResource InstructionPage}"/>
+                            <!--Data client -->
+                            <StackPanel Grid.Row="0" Margin="20 10" Background="#FFEAEAEA">
+                                <Label Content="Datos del cliente" Margin="8 5" Style="{StaticResource HeaderText2}"/>
+                                <StackPanel Orientation="Vertical" Margin="20 0 20 10">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="Nombre: " Style="{StaticResource FieldTag}"/>
+                                        <Label x:Name="label_ClientName" Content="" Style="{StaticResource FieldTag}"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="RFC: " Style="{StaticResource FieldTag}"/>
+                                        <Label x:Name="label_ClientRFC" Content="" Style="{StaticResource FieldTag}"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="CURP: " Style="{StaticResource FieldTag}"/>
+                                        <Label x:Name="label_ClientCURP" Content="" Style="{StaticResource FieldTag}"/>
+                                    </StackPanel>
+                                    <Button x:Name="button_ShowDetailsClient" Click="ClickShowDetailsClient" Content="Consultar cliente"
+                                            Padding="5" HorizontalAlignment="Center" Background="#FF0693C3" Foreground="#FFFFFF"/>
+                                </StackPanel>
+                            </StackPanel>
+                            <!--Data credit application-->
+                            <StackPanel Grid.Row="0" Margin="20 10" Background="#FFEAEAEA">
+                                <Label Content="Detalles de la solicitud de crédito" Margin="8 5" Style="{StaticResource HeaderText2}"/>
+                                <StackPanel Orientation="Vertical" Margin="0 0 0 8" HorizontalAlignment="Center">
+                                    <Label Content="Asesor de crédito: " Style="{StaticResource FieldTag}"/>
+                                    <Label x:Name="label_NameAdviser" Content="-Asesor-" HorizontalAlignment="Center"/>
+                                </StackPanel>
+                                <Grid Margin="20 0 20 8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="0">
+                                        <Label Content="Monto solicitado:" Style="{StaticResource FieldTag}"/>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                            <Label Content="$" Padding="0"/>
+                                            <Label x:Name="label_AmountSolicited" Content="-Monto-" Padding="0"/>
+                                            <Label Content=" MXN" Padding="0"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="1">
+                                        <Label Content="Total a pagar:" Style="{StaticResource FieldTag}"/>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                            <Label Content="$" Padding="0"/>
+                                            <Label x:Name="label_Amountotal" Content="-Monto-" Padding="0"/>
+                                            <Label Content=" MXN" Padding="0"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Grid>
+                                <Grid Margin="20 0 20 8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="0">
+                                        <Label Content="Taza de interés:" Style="{StaticResource FieldTag}"/>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                            <Label x:Name="label_InterestRate" Content="-int-" Padding="0"/>
+                                            <Label Content=" %" Padding="0"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="1">
+                                        <Label Content="Plazo solicitado:" Style="{StaticResource FieldTag}"/>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                            <Label x:Name="label_NumberFortNigths" Content="-Quin-" Padding="0"/>
+                                            <Label Content=" quincenas" Padding="0"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="2">
+                                        <Label Content="Fecha solicitada:" Style="{StaticResource FieldTag}"/>
+                                        <Label x:Name="label_DateApplied" Content="-Fecha-" Padding="0" HorizontalAlignment="Center"/>
+                                    </StackPanel>
+                                </Grid>
+                                <StackPanel Orientation="Vertical" Margin="0 0 0 8" HorizontalAlignment="Center">
+                                    <Label Content="Estado de la aplicación de crédito: " Style="{StaticResource FieldTag}"/>
+                                    <Label x:Name="label_StatusCreditApplcation" Content="-Status-" HorizontalAlignment="Center"/>
+                                </StackPanel>
+                                <Label Content="Políticas de crédito" Margin="14 0 14 0" Style="{StaticResource HeaderText2}"/>
+                                <DataGrid x:Name="dataGrid_CreditPolicies" AutoGenerateColumns="False" Height="150" Width="630"
+                                          HorizontalAlignment="Center" VerticalAlignment="Top" Margin="15 5 15 5" 
+                                          ScrollViewer.CanContentScroll="True"
+                                          ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                          ItemsSource="{Binding retrievedCreditPolicies}" IsReadOnly="true" SelectionMode="Single" >
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Nombre" Binding="{Binding NameCreditPolicy, Converter={StaticResource RemoveNewLineConverter}}" Width="*" />
+                                        <!-- Columna con botón de detalles -->
+                                        <DataGridTemplateColumn Header="Detalles">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button Click="ClicShowDetailsCreditPolicy" BorderBrush="Transparent" Height="20" Width="20">
+                                                        <Button.Background>
+                                                            <ImageBrush ImageSource="/View/Images/icon-search.png"/>
+                                                        </Button.Background>
+                                                    </Button>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <!-- Columna con dos RadioButtons -->
+                                        <DataGridTemplateColumn Header="¿Cumple?" Width="100">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                                        <!-- RadioButton para "Sí" -->
+                                                        <RadioButton Content="Sí" 
+                                                             GroupName="{Binding NameCreditPolicy}"
+                                                             IsEnabled="False"
+                                                             IsChecked="{Binding IsApplied, Converter={StaticResource BoolToNullableConverter}, ConverterParameter=True}" />
+                                                        <!-- RadioButton para "No" -->
+                                                        <RadioButton Content="No" 
+                                                             GroupName="{Binding NameCreditPolicy}"
+                                                             IsEnabled="False"
+                                                             IsChecked="{Binding IsApplied, Converter={StaticResource BoolToNullableConverter}, ConverterParameter=False}" />
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <Label Content="Valoración" Margin="14 0 14 0" Style="{StaticResource HeaderText2}"/>
+                                <TextBox x:Name="textBox_Valoration" Margin="14 5 14 20" Height="150" TextWrapping="Wrap" AcceptsReturn="True" 
+                                        VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </ScrollViewer>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
     </Grid>
 </Window>

@@ -92,9 +92,9 @@
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
                                 <Button Click="ClickCancel" Content="Cancelar" Grid.Column="1" 
-                        Width="80" Background="#FFDE2323" Foreground="#FFFFFF"/>
-                                <Button Click="ClickFinishModification" Content="Registrar" Grid.Column="2" 
-                        Width="80" Background="#FF06C32B" Foreground="#FFFFFF"/>
+                                        Width="80" Background="#FFDE2323" Foreground="#FFFFFF"/>
+                                <Button Click="ClickFinishModification" Content="Modificar" Grid.Column="2" 
+                                        Width="80" Background="#FF06C32B" Foreground="#FFFFFF"/>
                             </Grid>
                         </StackPanel>
                     </ScrollViewer>

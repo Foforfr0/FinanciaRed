@@ -51,9 +51,9 @@ namespace FinanciaRed.Model.DAO {
                     List<DTO_Client_Consult> dataRetrieved = await
                         context.Clients.
                         Where (clnt =>
-                            clnt.FirstName.Equals (keyWord) ||
-                            clnt.MiddleName.Equals (keyWord) ||
-                            clnt.LastName.Equals (keyWord) ||
+                            clnt.FirstName.Contains (keyWord) ||
+                            clnt.MiddleName.Contains(keyWord) ||
+                            clnt.LastName.Contains (keyWord) ||
                             clnt.CodeCURP.Equals (keyWord) ||
                             clnt.CodeRFC.Equals (keyWord)).
                         Select (clnt => new DTO_Client_Consult {
@@ -155,17 +155,17 @@ namespace FinanciaRed.Model.DAO {
             return responseUpdateStatusClient;
         }
 
-        public static async Task<MessageResponse<DTO_Client_DetailsClient>> GetDetailsClient (int idClient) {
-            MessageResponse<DTO_Client_DetailsClient> responseDetails = null;
+        public static async Task<MessageResponse<DTO_Client_Details>> GetDetailsClient (int idClient) {
+            MessageResponse<DTO_Client_Details> responseDetails = null;
 
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
                 try {
-                    DTO_Client_DetailsClient dataRetrieved = await
+                    DTO_Client_Details dataRetrieved = await
                         context.Clients.
                         Where (clnt => clnt.IdClient == idClient).
                         Include (ms => ms.StatusesMarital).
                         Include (addr => addr.ClientsAddresses).
-                        Select (clnt => new DTO_Client_DetailsClient {
+                        Select (clnt => new DTO_Client_Details {
                             IdClient = clnt.IdClient,
                             FirstName = clnt.FirstName,
                             MiddleName = clnt.MiddleName,
@@ -175,7 +175,7 @@ namespace FinanciaRed.Model.DAO {
                             IdMaritalStatus = clnt.IdStatusMarital,
                             MaritalStatus = clnt.StatusesMarital.Status,
                             CodeCURP = clnt.CodeCURP,
-                            AddressClient = new DTO_AddressClient {
+                            AddressClient = new DTO_ClientAddress {
                                 IdAddressClient = clnt.ClientsAddresses.IdClientAddress,
                                 ExteriorNumber = clnt.ClientsAddresses.ExteriorNumber,
                                 InteriorNumber = clnt.ClientsAddresses.InteriorNumber,
@@ -198,7 +198,7 @@ namespace FinanciaRed.Model.DAO {
                                 WorkArea = clnt.WorkClients.WorkArea,
                                 MonthlySalary = (float)clnt.WorkClients.MonthlySalary
                             },
-                            Reference1 = new DTO_ReferenceClient {
+                            Reference1 = new DTO_ClientReference {
                                 FirstName = clnt.ContactsReferencesClients.FirstName,
                                 MiddleName = clnt.ContactsReferencesClients.MiddleName,
                                 LastName = clnt.ContactsReferencesClients.LastName,
@@ -207,7 +207,7 @@ namespace FinanciaRed.Model.DAO {
                                 IdRelationshipType = clnt.ContactsReferencesClients.IdRelationshipType,
                                 RelationshipType = clnt.ContactsReferencesClients.RelationshipsClientsTypes.Type,
                             },
-                            Reference2 = new DTO_ReferenceClient {
+                            Reference2 = new DTO_ClientReference {
                                 FirstName = clnt.ContactsReferencesClients1.FirstName,
                                 MiddleName = clnt.ContactsReferencesClients1.MiddleName,
                                 LastName = clnt.ContactsReferencesClients1.LastName,
@@ -240,20 +240,20 @@ namespace FinanciaRed.Model.DAO {
                         FirstOrDefaultAsync ();
 
                     if (dataRetrieved != null) {
-                        responseDetails = MessageResponse<DTO_Client_DetailsClient>.Success (
+                        responseDetails = MessageResponse<DTO_Client_Details>.Success (
                             $"Client name \"{dataRetrieved.FirstName}\" retrieved.",
                             dataRetrieved);
                     } else {
-                        responseDetails = MessageResponse<DTO_Client_DetailsClient>.Failure ("Clients doesn't retrieved.");
+                        responseDetails = MessageResponse<DTO_Client_Details>.Failure ("Clients doesn't retrieved.");
                     }
                 } catch (Exception ex) {
-                    responseDetails = MessageResponse<DTO_Client_DetailsClient>.Failure (ex.ToString ());
+                    responseDetails = MessageResponse<DTO_Client_Details>.Failure (ex.ToString ());
                 }
             }
             return responseDetails;
         }
 
-        public static async Task<MessageResponse<bool>> RegistryNewClient (DTO_Client_DetailsClient newClient) {
+        public static async Task<MessageResponse<bool>> RegistryNewClient (DTO_Client_Details newClient) {
             MessageResponse<bool> responseCreateClient = null;
 
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
@@ -329,7 +329,7 @@ namespace FinanciaRed.Model.DAO {
             return responseCreateClient;
         }
 
-        public static async Task<MessageResponse<bool>> SaveChangesDataClient (DTO_Client_DetailsClient newDataClient) {
+        public static async Task<MessageResponse<bool>> SaveChangesDataClient (DTO_Client_Details newDataClient) {
             MessageResponse<bool> responseUpdateDataClient = null;
 
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {

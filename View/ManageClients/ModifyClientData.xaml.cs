@@ -14,13 +14,13 @@ namespace FinanciaRed.View.ManageClients {
     /// Interaction logic for ModifyClientData.xaml
     /// </summary>
     public partial class ModifyClientData : Window {
-        public DTO_Client_DetailsClient selectedClient = null;
+        public DTO_Client_Details selectedClient = null;
         private bool[] _IsCorrectStage1 = new bool[14] { false, false, false, false, false, false, false, false, false, false, false, false, false, false };
         private bool[] _IsCorrectStage2 = new bool[7] { false, false, false, false, false, false, false };
         private bool[] _IsCorrectStage3 = new bool[12] { false, false, false, false, false, false, false, false, false, false, false, false };
         private bool[] _IsCorrectStage4 = new bool[9] { false, false, false, false, false, false, false, false, false };
 
-        public ModifyClientData (DTO_Client_DetailsClient selectedClient) {
+        public ModifyClientData (DTO_Client_Details selectedClient) {
             InitializeComponent ();
 
             this.selectedClient = selectedClient;
@@ -332,7 +332,7 @@ namespace FinanciaRed.View.ManageClients {
         }
 
         private async Task SaveDataInDatabase () {
-            DTO_Client_DetailsClient newClient = new DTO_Client_DetailsClient {
+            DTO_Client_Details newClient = new DTO_Client_Details {
                 IdClient = selectedClient.IdClient,
                 FirstName = textBox_FirstName.Text,
                 MiddleName = textBox_MiddleName.Text,
@@ -341,7 +341,7 @@ namespace FinanciaRed.View.ManageClients {
                 Gender = comboBox_Gender.SelectedIndex == 1 ? "M" : "F",
                 IdMaritalStatus = comboBox_MaritalStatus.SelectedIndex,
                 CodeCURP = textBox_CodeCurp.Text,
-                AddressClient = new DTO_AddressClient {
+                AddressClient = new DTO_ClientAddress {
                     IdState = comboBox_State.SelectedIndex,
                     Municipality = textBox_Municipality.Text,
                     PostalCode = textBox_PostalCode.Text,
@@ -360,7 +360,7 @@ namespace FinanciaRed.View.ManageClients {
                     WorkArea = textBox_WorkArea.Text,
                     MonthlySalary = float.Parse (textBox_MonthlySalary.Text),
                 },
-                Reference1 = new DTO_ReferenceClient {
+                Reference1 = new DTO_ClientReference {
                     FirstName = textBox_Reference1FirstName.Text,
                     MiddleName = textBox_Reference1MiddleName.Text,
                     LastName = textBox_Reference1LastName.Text,
@@ -368,7 +368,7 @@ namespace FinanciaRed.View.ManageClients {
                     PhoneNumber = textBox_Reference1PhoneNumber.Text,
                     IdRelationshipType = comboBox_Reference1RelationshipType.SelectedIndex,
                 },
-                Reference2 = new DTO_ReferenceClient {
+                Reference2 = new DTO_ClientReference {
                     FirstName = textBox_Reference2FirstName.Text,
                     MiddleName = textBox_Reference2MiddleName.Text,
                     LastName = textBox_Reference2LastName.Text,

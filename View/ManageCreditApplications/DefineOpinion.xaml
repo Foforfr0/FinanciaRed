@@ -1,0 +1,457 @@
+﻿<Window x:Class="FinanciaRed.View.ManageCreditApplications.DefineOpinion"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FinanciaRed.View.ManageCreditApplications"
+        xmlns:utils="clr-namespace:FinanciaRed.Utils"
+        mc:Ignorable="d"
+        Title="Definir dictámen de solicitud de crédito" Height="650" Width="800" 
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+
+    <Window.Resources>
+        <utils:RemoveNewLineConverter x:Key="RemoveNewLineConverter" />
+        <utils:BoolToNullableConverter x:Key="BoolToNullableConverter" />
+    </Window.Resources>
+
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#EADDD9" Offset="0"/>
+                <GradientStop Color="#E9E7D7" Offset="0.5"/>
+                <GradientStop Color="#DFE2DD" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <StackPanel Orientation="Vertical" Width="800" HorizontalAlignment="Left">
+            <Grid Background="#FFFEEA" Width="800" Height="50">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="FinanciaRed" VerticalAlignment="Center" FontWeight="Bold" FontSize="20" Padding="0" Margin="10"/>
+            </Grid>
+            <Grid Height="525" Width="740" Margin="20" Background="#FFFFFF">
+                <StackPanel Orientation="Horizontal">
+                    <!-- Global options -->
+                    <StackPanel Margin="10 5" Orientation="Vertical" Width="80">
+                        <Label x:Name="label_GlobalOptionApplication" Padding="2 8">
+                            <Hyperlink Click="ClickShowDataApplication">
+                                <Run Text="Solictud"/>
+                            </Hyperlink>
+                        </Label>
+                        <TextBlock x:Name="label_GlobalOptionClientData" TextWrapping="Wrap" Padding="2 8">
+                            <Hyperlink Click="ClickShowDataClient">
+                                <Run Text="Datos personales"/>
+                            </Hyperlink>
+                        </TextBlock>
+                        <TextBlock x:Name="label_GlobalOptionClientReferences" TextWrapping="Wrap" Padding="2 8">
+                            <Hyperlink Click="ClickShowClientReferences">
+                                <Run Text="Referencias cliente"/>
+                            </Hyperlink>
+                        </TextBlock>
+                        <TextBlock x:Name="label_GlobalOptionBackAccounts" TextWrapping="Wrap" Padding="2 8">
+                            <Hyperlink Click="ClickShowBankAccounts">
+                                <Run Text="Cuentas bancarias"/>
+                            </Hyperlink>
+                        </TextBlock>
+                        <TextBlock x:Name="label_GlobalOptionDocs" TextWrapping="Wrap" Padding="2 8">
+                            <Hyperlink Click="ClickShowDocs">
+                                <Run Text="Documentos"/>
+                            </Hyperlink>
+                        </TextBlock>
+                        <TextBlock x:Name="label_GlobalOptionOpinion" TextWrapping="Wrap" Padding="2 8">
+                            <Hyperlink Click="ClickShowDefineOpinion">
+                                <Run Text="Definir dictámen"/>
+                            </Hyperlink>
+                        </TextBlock>
+                    </StackPanel>
+                    <Grid>
+                        <Border BorderBrush="Black" BorderThickness="2,0,0,0" Margin="0 10 0 10">
+                            <Grid>
+                                <!-- Aplication credit data -->
+                                <StackPanel x:Name="stackPanel_Stage1" Grid.Column="1" Width="619" Margin="10 0 0 0" Background="#FFFFFF" Visibility="Visible">
+                                    <Label Content="Datos de solicitud de crédito" Style="{StaticResource HeaderText}"/>
+                                    <StackPanel Orientation="Vertical" Margin="15 0 0 10" HorizontalAlignment="Center">
+                                        <Label Content="Asesor de crédito: " Style="{StaticResource FieldTag}"/>
+                                        <Label x:Name="label_NameAdviser" Content="-Asesor-" HorizontalAlignment="Center"/>
+                                    </StackPanel>
+                                    <Grid Margin="10">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="0">
+                                            <Label Content="Monto solicitado:" Style="{StaticResource FieldTag}"/>
+                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                                <Label Content="$" Padding="0"/>
+                                                <Label x:Name="label_AmountSolicited" Content="-Monto-" Padding="0"/>
+                                                <Label Content=" MXN" Padding="0"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="1">
+                                            <Label Content="Total a pagar:" Style="{StaticResource FieldTag}"/>
+                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                                <Label Content="$" Padding="0"/>
+                                                <Label x:Name="label_Amountotal" Content="-Monto-" Padding="0"/>
+                                                <Label Content=" MXN" Padding="0"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid Margin="10">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="0">
+                                            <Label Content="Taza de interés:" Style="{StaticResource FieldTag}"/>
+                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                                <Label x:Name="label_InterestRate" Content="-int-" Padding="0"/>
+                                                <Label Content=" %" Padding="0"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="1">
+                                            <Label Content="Plazo solicitado:" Style="{StaticResource FieldTag}"/>
+                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                                <Label x:Name="label_NumberFortNigths" Content="-Quin-" Padding="0"/>
+                                                <Label Content=" quincenas" Padding="0"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="2">
+                                            <Label Content="Fecha solicitada:" Style="{StaticResource FieldTag}"/>
+                                            <Label x:Name="label_DateApplied" Content="-Fecha-" Padding="0" HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </StackPanel>
+                                <!-- Client data -->
+                                <StackPanel x:Name="stackPanel_Stage2" Grid.Column="1" Width="619" Margin="10 0 0 0" Background="#FFFFFF" Visibility="Collapsed">
+                                    <Label Content="Datos de personales del cliente" Style="{StaticResource HeaderText}"/>
+                                    <Grid Margin="5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="0">
+                                            <Label Content="Nombre(s):" Style="{StaticResource FieldTag}" HorizontalAlignment="Center"/>
+                                            <Label x:Name="label_ClientFirstName" Content="-Nombre(s)-" Padding="0" HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="1">
+                                            <Label Content="Apellido paterno:" Style="{StaticResource FieldTag}" HorizontalAlignment="Center"/>
+                                            <Label x:Name="label_ClientMiddleName" Content="-Apellido paterno-" Padding="0" HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="2">
+                                            <Label Content="Apellido paterno:" Style="{StaticResource FieldTag}" HorizontalAlignment="Center"/>
+                                            <Label x:Name="label_ClientLastName" Content="-Apellido paterno-" Padding="0" HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid Margin="5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="0">
+                                            <Label Content="Fecha de nacimiento:" Style="{StaticResource FieldTag}" HorizontalAlignment="Center"/>
+                                            <Label x:Name="label_DateBirth" Content="-Fecha-" Padding="0" HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="1">
+                                            <Label Content="Género:" Style="{StaticResource FieldTag}" HorizontalAlignment="Center"/>
+                                            <Label x:Name="label_ClientGender" Content="-Género-" Padding="0" HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid Margin="5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="0">
+                                            <Label Content="Correo electrónico (1):" Style="{StaticResource FieldTag}" HorizontalAlignment="Center"/>
+                                            <Label x:Name="label_ClientEmail1" Content="-Correo-" Padding="0" HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="1">
+                                            <Label Content="Correo electrónico (2):" Style="{StaticResource FieldTag}" HorizontalAlignment="Center"/>
+                                            <Label x:Name="label_ClientEmail2" Content="-Correo-" Padding="0" HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid Margin="5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="0">
+                                            <Label Content="Número de telefono (1):" Style="{StaticResource FieldTag}" HorizontalAlignment="Center"/>
+                                            <Label x:Name="label_ClientPhoneNumber1" Content="-Número-" Padding="0" HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="1">
+                                            <Label Content="Número de telefono (1):" Style="{StaticResource FieldTag}" HorizontalAlignment="Center"/>
+                                            <Label x:Name="label_ClientPhoneNumber2" Content="-Número-" Padding="0" HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid Margin="5">
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="0">
+                                            <Label Content="Domicilio:" Style="{StaticResource FieldTag}" HorizontalAlignment="Center"/>
+                                            <TextBlock x:Name="label_ClientAddress" Text="-Domicilio-" Padding="0" HorizontalAlignment="Center" TextWrapping="Wrap"/>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid Margin="5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="0">
+                                            <Label Content="Tipo de trabajo:" Style="{StaticResource FieldTag}" HorizontalAlignment="Center"/>
+                                            <Label x:Name="label_WorkType" Content="-Tipo trabajo-" Padding="0" HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="1">
+                                            <Label Content="Trabajo:" Style="{StaticResource FieldTag}" HorizontalAlignment="Center"/>
+                                            <Label x:Name="label_Work" Content="-Trabajo-" Padding="0" HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="2">
+                                            <Label Content="Sueldo mensual (MXN):" Style="{StaticResource FieldTag}" HorizontalAlignment="Center"/>
+                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                                <Label Content="$" Padding="0"/>
+                                                <Label x:Name="label_MonthlySalary" Content="-Sueldo-" Padding="0"/>
+                                                <Label Content=" MXN" Padding="0"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Grid>
+                                </StackPanel>
+                                <!-- Cliente references -->
+                                <StackPanel x:Name="stackPanel_Stage3" Grid.Column="1" Width="619" Margin="10 0 0 0" Background="#FFFFFF" Visibility="Collapsed">
+                                    <Label Content="Referencias del cliente" Style="{StaticResource HeaderText}"/>
+                                    <Label Content="Referencia (1)" Margin="15 0 0 0" Style="{StaticResource HeaderText2}"/>
+                                    <Grid Margin="5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="0">
+                                            <Label Content="Nombre(s):" Style="{StaticResource FieldTag}" HorizontalAlignment="Center"/>
+                                            <Label x:Name="label_Reference1FirstName" Content="-Nombre(s)-" Padding="0" HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="1">
+                                            <Label Content="Apellido paterno:" Style="{StaticResource FieldTag}" HorizontalAlignment="Center"/>
+                                            <Label x:Name="label_Reference1MiddleName" Content="-Apellido paterno-" Padding="0" HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="2">
+                                            <Label Content="Apellido paterno:" Style="{StaticResource FieldTag}" HorizontalAlignment="Center"/>
+                                            <Label x:Name="label_Reference1LastName" Content="-Apellido paterno-" Padding="0" HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid Margin="5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="0">
+                                            <Label Content="Correo electrónico:" Style="{StaticResource FieldTag}" HorizontalAlignment="Center"/>
+                                            <Label x:Name="label_Reference1Email" Content="-Correo-" Padding="0" HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="1">
+                                            <Label Content="Número de telefono:" Style="{StaticResource FieldTag}" HorizontalAlignment="Center"/>
+                                            <Label x:Name="label_Reference1PhoneNumber" Content="-Número-" Padding="0" HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="2">
+                                            <Label Content="Tipo relación:" Style="{StaticResource FieldTag}" HorizontalAlignment="Center"/>
+                                            <Label x:Name="label_Reference1Relation" Content="-Relación-" Padding="0" HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Label Content="Referencia (2)" Margin="15 5 0 0" Style="{StaticResource HeaderText2}"/>
+                                    <Grid Margin="5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="0">
+                                            <Label Content="Nombre(s):" Style="{StaticResource FieldTag}" HorizontalAlignment="Center"/>
+                                            <Label x:Name="label_Reference2FirstName" Content="-Nombre(s)-" Padding="0" HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="1">
+                                            <Label Content="Apellido paterno:" Style="{StaticResource FieldTag}" HorizontalAlignment="Center"/>
+                                            <Label x:Name="label_Reference2MiddleName" Content="-Apellido paterno-" Padding="0" HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="2">
+                                            <Label Content="Apellido paterno:" Style="{StaticResource FieldTag}" HorizontalAlignment="Center"/>
+                                            <Label x:Name="label_Reference2LastName" Content="-Apellido paterno-" Padding="0" HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid Margin="5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="0">
+                                            <Label Content="Correo electrónico:" Style="{StaticResource FieldTag}" HorizontalAlignment="Center"/>
+                                            <Label x:Name="label_Reference2Email" Content="-Correo-" Padding="0" HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="1">
+                                            <Label Content="Número de telefono:" Style="{StaticResource FieldTag}" HorizontalAlignment="Center"/>
+                                            <Label x:Name="label_Reference2PhoneNumber" Content="-Número-" Padding="0" HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="2">
+                                            <Label Content="Tipo relación:" Style="{StaticResource FieldTag}" HorizontalAlignment="Center"/>
+                                            <Label x:Name="label_Reference2Relation" Content="-Relación-" Padding="0" HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </StackPanel>
+                                <!-- Bank accounts -->
+                                <StackPanel x:Name="stackPanel_Stage4" Grid.Column="1" Width="619" Margin="10 0 0 0" Background="#FFFFFF" Visibility="Collapsed">
+                                    <Label Content="Cuentas de banco del cliente" Style="{StaticResource HeaderText}"/>
+                                    <Label Content="Cuenta de depósito" Margin="15 0 0 0" Style="{StaticResource HeaderText2}"/>
+                                    <Grid Margin="5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="0">
+                                            <Label Content="Banco:" Style="{StaticResource FieldTag}" HorizontalAlignment="Center"/>
+                                            <Label x:Name="label_BankAccount1Bank" Content="-Banco-" Padding="0" HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="1">
+                                            <Label Content="Tipo tarjeta:" Style="{StaticResource FieldTag}" HorizontalAlignment="Center"/>
+                                            <Label x:Name="label_BankAccount1Type" Content="-Tipo-" Padding="0" HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid Margin="5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="0">
+                                            <Label Content="CLABE:" Style="{StaticResource FieldTag}" HorizontalAlignment="Center"/>
+                                            <Label x:Name="label_BankAccount1CLABE" Content="-CLABE-" Padding="0" HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="1">
+                                            <Label Content="Número tarjeta:" Style="{StaticResource FieldTag}" HorizontalAlignment="Center"/>
+                                            <Label x:Name="label_BankAccount1CardNumber" Content="-Número-" Padding="0" HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Label Content="Cuenta de cobro" Margin="15 0 0 0" Style="{StaticResource HeaderText2}"/>
+                                    <Grid Margin="5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="0">
+                                            <Label Content="Banco:" Style="{StaticResource FieldTag}" HorizontalAlignment="Center"/>
+                                            <Label x:Name="label_BankAccount2Bank" Content="-Banco-" Padding="0" HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="1">
+                                            <Label Content="Tipo tarjeta:" Style="{StaticResource FieldTag}" HorizontalAlignment="Center"/>
+                                            <Label x:Name="label_BankAccount2Type" Content="-Tipo-" Padding="0" HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid Margin="5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="0">
+                                            <Label Content="CLABE:" Style="{StaticResource FieldTag}" HorizontalAlignment="Center"/>
+                                            <Label x:Name="label_BankAccount2CLABE" Content="-CLABE-" Padding="0" HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="1">
+                                            <Label Content="Número tarjeta:" Style="{StaticResource FieldTag}" HorizontalAlignment="Center"/>
+                                            <Label x:Name="label_BankAccount2CardNumber" Content="-Número-" Padding="0" HorizontalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </StackPanel>
+                                <!-- Documentation -->
+                                <StackPanel x:Name="stackPanel_Stage5" Grid.Column="1" Width="619" Margin="10 0 0 0" Background="#FFFFFF" Visibility="Collapsed">
+                                    <Label Content="Comprobantes" Style="{StaticResource HeaderText}"/>
+                                    <Grid Margin="5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="0">
+                                            <Label Content="INE:" Style="{StaticResource FieldTag}" HorizontalAlignment="Center"/>
+                                            <Image Source="/View/Images/pdf-icon.png" Height="100"/>
+                                            <Button Click="ClickShowProofINE" Content="Visualizar"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="2">
+                                            <Label Content="Comprobante de domicilio:" Style="{StaticResource FieldTag}" HorizontalAlignment="Center"/>
+                                            <Image Source="/View/Images/pdf-icon.png" Height="100"/>
+                                            <Button Click="ClickShowProofAddress" Content="Visualizar"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="1">
+                                            <Label Content="Último talón de pago:" Style="{StaticResource FieldTag}" HorizontalAlignment="Center"/>
+                                            <Image Source="/View/Images/pdf-icon.png" Height="100"/>
+                                            <Button Click="ClickShowProofLastPayStub" Content="Visualizar"/>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid>
+                                        <WebBrowser x:Name="PdfViewer" Height="300"/>
+                                    </Grid>
+                                </StackPanel>
+                                <!-- Apply opinion -->
+                                <StackPanel x:Name="stackPanel_Stage6" Grid.Column="1" Width="619" Margin="10 0 0 0" Background="#FFFFFF" Visibility="Collapsed">
+                                    <Label Content="Definición de dictámen" Style="{StaticResource HeaderText}"/>
+                                    <Label Content="Políticas de crédito" Margin="14 0 0 0" Style="{StaticResource HeaderText2}"/>
+                                    <DataGrid x:Name="dataGrid_CreditPolicies" AutoGenerateColumns="False" Height="150"
+                                              HorizontalAlignment="Center" VerticalAlignment="Top" Margin="15 5 15 5" 
+                                              ScrollViewer.CanContentScroll="True"
+                                              ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                              ItemsSource="{Binding retrievedCreditPolicies}" IsReadOnly="true" SelectionMode="Single" >
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn Header="Nombre" Binding="{Binding NameCreditPolicy, Converter={StaticResource RemoveNewLineConverter}}" Width="*" />
+                                            <!-- Columna con botón de detalles -->
+                                            <DataGridTemplateColumn Header="Detalles">
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <Button Click="ClicShowDetailsCreditPolicy" BorderBrush="Transparent" Height="20" Width="20">
+                                                            <Button.Background>
+                                                                <ImageBrush ImageSource="/View/Images/icon-search.png"/>
+                                                            </Button.Background>
+                                                        </Button>
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                            </DataGridTemplateColumn>
+                                            <!-- Columna con dos RadioButtons -->
+                                            <DataGridTemplateColumn Header="¿Cumple?" Width="100">
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                                            <!-- RadioButton para "Sí" -->
+                                                            <RadioButton Content="Sí" 
+                                                                 GroupName="{Binding NameCreditPolicy}"
+                                                                 Checked="CheckedYesOption"
+                                                                 IsChecked="{Binding IsApplied, Converter={StaticResource BoolToNullableConverter}, ConverterParameter=True}" />
+                                                            <!-- RadioButton para "No" -->
+                                                            <RadioButton Content="No" 
+                                                                 GroupName="{Binding NameCreditPolicy}"
+                                                                 Checked="CheckedNoOption"
+                                                                 IsChecked="{Binding IsApplied, Converter={StaticResource BoolToNullableConverter}, ConverterParameter=False}" />
+                                                        </StackPanel>
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                            </DataGridTemplateColumn>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                    <Label x:Name="label_ErrorCheckList" d:Content="Message error" d:Visibility="Visible" Margin="9 0" Style="{StaticResource LabelErrorForm}"/>
+                                    <Label Content="Valoración" Margin="14 0 14 0" Style="{StaticResource HeaderText2}"/>
+                                    <TextBox x:Name="textBox_Valoration" Margin="14 5" Height="150" TextWrapping="Wrap" AcceptsReturn="True" 
+                                             VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"/>
+                                    <Label x:Name="label_ErrorValoration" d:Content="Message error" d:Visibility="Visible" Margin="9 0" Style="{StaticResource LabelErrorForm}"/>
+                                    <Button Click="ClickFinishOpinion" Content="Emitir dictamen" Grid.Column="3" Margin="0 5 0 0" 
+                                            Width="95" Background="#FF06C32B" Foreground="#FFFFFF"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Window>

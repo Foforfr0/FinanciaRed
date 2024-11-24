@@ -15,7 +15,7 @@ namespace FinanciaRed.View.ManageEmployees {
     /// Interaction logic for CheckProfile.xaml
     /// </summary>
     public partial class CheckProfile : Page {
-        private DTO_Employee_DetailsEmployee currentEmployee = null;
+        private DTO_Employee_Details currentEmployee = null;
         private byte[] TEMP_profileImageSelected = null;
 
         public CheckProfile (int idEmployee) {
@@ -25,7 +25,7 @@ namespace FinanciaRed.View.ManageEmployees {
         }
 
         private async Task RetrieveDetailsAccount (int idEmployee, bool withPassword) {
-            MessageResponse<DTO_Employee_DetailsEmployee> messageResponseDetailsAccountEmployee =
+            MessageResponse<DTO_Employee_Details> messageResponseDetailsAccountEmployee =
                 await DAO_Employee.GetDetailsEmployee (idEmployee, withPassword);
 
             if (!messageResponseDetailsAccountEmployee.IsError) {
@@ -96,7 +96,7 @@ namespace FinanciaRed.View.ManageEmployees {
 
         private async void ClickAcceptModification (object sender, RoutedEventArgs e) {
             if (VerifyForm ()) {
-                DTO_Employee_DetailsEmployee newDataEmployee = new DTO_Employee_DetailsEmployee {
+                DTO_Employee_Details newDataEmployee = new DTO_Employee_Details {
                     IdEmployee = currentEmployee.IdEmployee,
                     FirstName = currentEmployee.FirstName,
                     MiddleName = currentEmployee.MiddleName,

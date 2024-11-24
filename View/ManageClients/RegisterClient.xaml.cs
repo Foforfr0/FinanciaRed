@@ -272,7 +272,7 @@ namespace FinanciaRed.View.ManageClients {
         }
 
         private async Task SaveDataInDatabase () {
-                DTO_Client_DetailsClient newClient = new DTO_Client_DetailsClient {
+                DTO_Client_Details newClient = new DTO_Client_Details {
                     FirstName = textBox_FirstName.Text,
                     MiddleName = textBox_MiddleName.Text,
                     LastName = textBox_LastName.Text,
@@ -280,7 +280,7 @@ namespace FinanciaRed.View.ManageClients {
                     Gender = comboBox_Gender.SelectedIndex == 1 ? "M" : "F",
                     IdMaritalStatus = comboBox_MaritalStatus.SelectedIndex,
                     CodeCURP = textBox_CodeCURP.Text,
-                    AddressClient = new DTO_AddressClient {
+                    AddressClient = new DTO_ClientAddress {
                         IdState = comboBox_State.SelectedIndex,
                         Municipality = textBox_Municipality.Text,
                         PostalCode = textBox_PostalCode.Text,
@@ -299,7 +299,7 @@ namespace FinanciaRed.View.ManageClients {
                         WorkArea = textBox_WorkArea.Text,
                         MonthlySalary = float.Parse (textBox_MonthlySalary.Text),
                     },
-                    Reference1 = new DTO_ReferenceClient {
+                    Reference1 = new DTO_ClientReference {
                         FirstName = textBox_Reference1FirstName.Text,
                         MiddleName = textBox_Reference1MiddleName.Text,
                         LastName = textBox_Reference1LastName.Text,
@@ -307,7 +307,7 @@ namespace FinanciaRed.View.ManageClients {
                         PhoneNumber = textBox_Reference1PhoneNumber.Text,
                         IdRelationshipType = comboBox_Reference1RelationshipType.SelectedIndex,
                     },
-                    Reference2 = new DTO_ReferenceClient {
+                    Reference2 = new DTO_ClientReference {
                         FirstName = textBox_Reference2FirstName.Text,
                         MiddleName = textBox_Reference2MiddleName.Text,
                         LastName = textBox_Reference2LastName.Text,

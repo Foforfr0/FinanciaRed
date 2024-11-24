@@ -4,8 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FinanciaRed.View.ManageCredits"
-        mc:Ignorable="d"
-        Title="ViewDetailsCredit" Height="450" Width="800">
+        mc:Ignorable="d" d:Height="850"
+        Title="Detalles del cliente" Height="550" Width="800" 
+        WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    
     <Grid>
         
     </Grid>

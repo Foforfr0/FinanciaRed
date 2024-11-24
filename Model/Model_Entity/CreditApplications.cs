@@ -29,10 +29,12 @@ namespace FinanciaRed.Model.Model_Entity
         public Nullable<int> NumberFortnights { get; set; }
         public byte[] ProofAddress { get; set; }
         public byte[] ProofINE { get; set; }
+        public byte[] ProofLastPayStub { get; set; }
         public int IdEmployeeApplication { get; set; }
         public int IdStatusCreditApplication { get; set; }
         public Nullable<int> IdPromotion { get; set; }
         public int IdClient { get; set; }
+        public string ValorationOpinion { get; set; }
     
         public virtual Clients Clients { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

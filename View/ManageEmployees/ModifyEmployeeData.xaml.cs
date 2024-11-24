@@ -16,11 +16,11 @@ namespace FinanciaRed.View.ManageEmployees {
     /// Interaction logic for ModifyEmployeeData.xaml
     /// </summary>
     public partial class ModifyEmployeeData : Window {
-        private DTO_Employee_DetailsEmployee selectedEmployee = null;
+        private DTO_Employee_Details selectedEmployee = null;
         private byte[] TEMP_profileImageSelected = null;
         private bool[] _IsCorrectStage1 = new bool[4] { false, false, false, false };
 
-        public ModifyEmployeeData (DTO_Employee_DetailsEmployee selectedEmployee) {
+        public ModifyEmployeeData (DTO_Employee_Details selectedEmployee) {
             InitializeComponent ();
 
             this.selectedEmployee = selectedEmployee;
@@ -60,7 +60,7 @@ namespace FinanciaRed.View.ManageEmployees {
             VerifyStage1 ();
 
             if (_IsCorrectStage1.All (x => x == true)) {
-                bool existsEmail = await DAO_Client.VerifyExistenceEmail(textBox_Email.Text);
+                bool existsEmail = await DAO_Client.VerifyExistenceEmail (textBox_Email.Text);
                 await Task.Delay (500);
 
                 if (textBox_Email.Text.Equals (selectedEmployee.Email)) {
@@ -80,7 +80,7 @@ namespace FinanciaRed.View.ManageEmployees {
         }
 
         private void SaveDataInDatabase () {
-            DTO_Employee_DetailsEmployee newDataEmployee = new DTO_Employee_DetailsEmployee () {
+            DTO_Employee_Details newDataEmployee = new DTO_Employee_Details () {
                 Email = textBox_Email.Text,
                 Password = textBox_Pasword.Text,
                 IdRol = comboBox_Rol.SelectedIndex,
@@ -166,13 +166,13 @@ namespace FinanciaRed.View.ManageEmployees {
             }
 
             if (string.IsNullOrEmpty (textBox_Pasword.Text)) {
-                label_ErrorPasword.Text= "Campo necesario.";
+                label_ErrorPasword.Text = "Campo necesario.";
                 label_ErrorPasword.Visibility = Visibility.Visible;
                 _IsCorrectStage1[1] = false;
             }
 
             if (string.IsNullOrEmpty (textBox_PaswordConfirmation.Text)) {
-                label_ErrorPaswordConfirmation.Content= "Campo necesario.";
+                label_ErrorPaswordConfirmation.Content = "Campo necesario.";
                 label_ErrorPaswordConfirmation.Visibility = Visibility.Visible;
                 _IsCorrectStage1[2] = false;
             }

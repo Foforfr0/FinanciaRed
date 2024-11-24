@@ -17,13 +17,12 @@ namespace FinanciaRed.Model.DAO {
                         context.Credits.
                         Select (crdt => new DTO_Credit_Consult {
                             IdCredit = crdt.IdCredit,
-                            CodeRFC = crdt.CreditApplications.Clients.CodeRFC,
                             AmountTotal = crdt.CreditApplications.AmountTotal,
                             AmountLeft = crdt.AmountLeft,
-                            StartDate = crdt.DateStart,
-                            EndDate = crdt.DateEnd,
-                            IdStatusCredit = crdt.StatusesCredit.IdStatusCredit,
-                            StatusCredit = crdt.StatusesCredit.Status
+                            DateStart = crdt.DateStart,
+                            DateEnd = crdt.DateEnd,
+                            InteresRate = crdt.CreditApplications.InteresRate ?? 0,
+                            NumberFortnigths = crdt.CreditApplications.NumberFortnights ?? 0
                         }).
                         ToListAsync ();
 
@@ -64,7 +63,7 @@ namespace FinanciaRed.Model.DAO {
 
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
                 try {
-                    // Filtra los créditos relacionados con el cliente por su `idClient`
+                    // Filtra los créditos relacionados con el cliente por su `idPromotion`
                     List<Credits> relatedCredits = await context.Credits.
                         Where (credit => credit.CreditApplications.Clients.IdClient == idClient).
                         ToListAsync ();

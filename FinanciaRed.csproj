@@ -85,32 +85,38 @@
     <Compile Include="Model\DAO\CURRENT_USER.cs" />
     <Compile Include="Model\DAO\DAO_Client.cs" />
     <Compile Include="Model\DAO\DAO_Credit.cs" />
-    <Compile Include="Model\DAO\DAO_CreditPolicies.cs" />
+    <Compile Include="Model\DAO\DAO_CreditApplication.cs" />
+    <Compile Include="Model\DAO\DAO_CreditPolicy.cs" />
+    <Compile Include="Model\DAO\DAO_CreditPromotion.cs" />
     <Compile Include="Model\DAO\DAO_Employee.cs" />
     <Compile Include="Model\DAO\DAO_GeneralVariables.cs" />
-    <Compile Include="Model\DTO\DTO_AddressClient.cs" />
-    <Compile Include="Model\DTO\DTO_AddressState.cs" />
-    <Compile Include="Model\DTO\DTO_AddressType.cs" />
-    <Compile Include="Model\DTO\DTO_Bank.cs" />
-    <Compile Include="Model\DTO\DTO_BankAccountClient.cs" />
-    <Compile Include="Model\DTO\DTO_CardType.cs" />
-    <Compile Include="Model\DTO\DTO_Client_Consult.cs" />
-    <Compile Include="Model\DTO\DTO_Client_DetailsClient.cs" />
-    <Compile Include="Model\DTO\DTO_CreditPolicy_Consult.cs" />
-    <Compile Include="Model\DTO\DTO_CreditRequest_Consult.cs" />
-    <Compile Include="Model\DTO\DTO_CreditRequest_Details.cs" />
-    <Compile Include="Model\DTO\DTO_Credit_Consult.cs" />
-    <Compile Include="Model\DTO\DTO_EmployeeRol.cs" />
-    <Compile Include="Model\DTO\DTO_Employee_Consult.cs" />
-    <Compile Include="Model\DTO\DTO_Employee_DetailsEmployee.cs" />
-    <Compile Include="Model\DTO\DTO_Employee_Login.cs" />
-    <Compile Include="Model\DTO\DTO_Employee_ModifyData.cs" />
-    <Compile Include="Model\DTO\DTO_StatusesMarital.cs" />
-    <Compile Include="Model\DTO\DTO_ReferenceClient.cs" />
-    <Compile Include="Model\DTO\DTO_RelationshipType.cs" />
-    <Compile Include="Model\DTO\DTO_WorkInfo.cs" />
+    <Compile Include="Model\DTO\Client\DTO_ClientAddress.cs" />
+    <Compile Include="Model\DTO\Addres\DTO_AddressState.cs" />
+    <Compile Include="Model\DTO\Addres\DTO_AddressType.cs" />
+    <Compile Include="Model\DTO\Bank\DTO_Bank.cs" />
+    <Compile Include="Model\DTO\Bank\DTO_BankAccountClient.cs" />
+    <Compile Include="Model\DTO\Bank\DTO_CardType.cs" />
+    <Compile Include="Model\DTO\Client\DTO_Client_Consult.cs" />
+    <Compile Include="Model\DTO\Client\DTO_Client_Details.cs" />
+    <Compile Include="Model\DTO\CreditApplication\DTO_CreditApplication-CreditPolicies.cs" />
+    <Compile Include="Model\DTO\CreditPolicy\DTO_CreditPolicy_Consult.cs" />
+    <Compile Include="Model\DTO\CreditPolicy\DTO_CreditPolicy_Opinion.cs" />
+    <Compile Include="Model\DTO\CreditPromotion\DTO_CreditPromotion_Details.cs" />
+    <Compile Include="Model\DTO\CreditPromotion\DTO_CreditPromotion_Consult.cs" />
+    <Compile Include="Model\DTO\CreditApplication\DTO_CreditApplication_Consult.cs" />
+    <Compile Include="Model\DTO\CreditApplication\DTO_CreditApplication_Details.cs" />
+    <Compile Include="Model\DTO\Credit\DTO_Credit_Consult.cs" />
+    <Compile Include="Model\DTO\Employee\DTO_EmployeeRol.cs" />
+    <Compile Include="Model\DTO\Employee\DTO_Employee_Consult.cs" />
+    <Compile Include="Model\DTO\Employee\DTO_Employee_Details.cs" />
+    <Compile Include="Model\DTO\Employee\DTO_Employee_Login.cs" />
+    <Compile Include="Model\DTO\Employee\DTO_Employee_ModifyData.cs" />
+    <Compile Include="Model\DTO\Client\DTO_StatusesMarital.cs" />
+    <Compile Include="Model\DTO\Client\DTO_ClientReference.cs" />
+    <Compile Include="Model\DTO\Client\DTO_RelationshipType.cs" />
+    <Compile Include="Model\DTO\WorkArea\DTO_WorkInfo.cs" />
     <Compile Include="Model\DTO\MessageResponse.cs" />
-    <Compile Include="Model\DTO\DTO_WorkType.cs" />
+    <Compile Include="Model\DTO\WorkArea\DTO_WorkType.cs" />
     <Compile Include="Model\Model_Entity\AddressesTypes.cs">
       <DependentUpon>Model_Entity.tt</DependentUpon>
     </Compile>
@@ -195,14 +201,15 @@
     <Compile Include="Model\Model_Entity\WorkTypes.cs">
       <DependentUpon>Model_Entity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Utils\BoolToNullableConverter.cs" />
     <Compile Include="Utils\CheckFormat.cs" />
     <Compile Include="Utils\Converters.cs" />
     <Compile Include="Utils\GetElementVisualTree.cs" />
     <Compile Include="Utils\ManageLabelsError.cs" />
+    <Compile Include="Utils\RemoveNewLineConverter.cs" />
     <Compile Include="Utils\RetrieveDataVariables.cs" />
-    <Compile Include="View\Components\Header.xaml.cs">
-      <DependentUpon>Header.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Utils\ShowPDFWebBrowser.cs" />
+    <Compile Include="View\Components\Header.xaml.cs" />
     <Compile Include="View\ManageClients\ConfirmationMessageChangeStatusClient.xaml.cs">
       <DependentUpon>ConfirmationMessageChangeStatusClient.xaml</DependentUpon>
     </Compile>
@@ -215,17 +222,44 @@
     <Compile Include="View\ManageClients\RegisterClient.xaml.cs">
       <DependentUpon>RegisterClient.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ManageCreditApplications\DefineOpinion.xaml.cs">
+      <DependentUpon>DefineOpinion.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManageCreditPolicies\ConfirmationMessageChangeStatusCreditPolicy.xaml.cs">
+      <DependentUpon>ConfirmationMessageChangeStatusCreditPolicy.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManageCreditPolicies\RegisterCreditPolicy.xaml.cs">
+      <DependentUpon>RegisterCreditPolicy.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ManageCreditPolicies\ViewCreditPolicies.xaml.cs">
       <DependentUpon>ViewCreditPolicies.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ManageCreditApplications\ViewCreditRequests.xaml.cs">
-      <DependentUpon>ViewCreditRequests.xaml</DependentUpon>
+    <Compile Include="View\ManageCreditApplications\ViewCreditApplications.xaml.cs">
+      <DependentUpon>ViewCreditApplications.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ManageCreditApplications\RegistrerCreditApplication.xaml.cs">
       <DependentUpon>RegistrerCreditApplication.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ManageCreditApplications\ViewDetailsCreditApplication.xaml.cs">
       <DependentUpon>ViewDetailsCreditApplication.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManageCreditPolicies\ViewDetailsCreditPolicy.xaml.cs">
+      <DependentUpon>ViewDetailsCreditPolicy.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManageCreditPromotions\ConfirmationMessageChangeStateCreditPromotion.xaml.cs">
+      <DependentUpon>ConfirmationMessageChangeStateCreditPromotion.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManageCreditPromotions\ModifyCreditPromotionData.xaml.cs">
+      <DependentUpon>ModifyCreditPromotionData.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManageCreditPromotions\RegisterCreditPromotion.xaml.cs">
+      <DependentUpon>RegisterCreditPromotion.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManageCreditPromotions\ViewCreditPromotions.xaml.cs">
+      <DependentUpon>ViewCreditPromotions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManageCreditPromotions\ViewDetailsCreditPromotion.xaml.cs">
+      <DependentUpon>ViewDetailsCreditPromotion.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ManageCredits\ViewDetailsCredit.xaml.cs">
       <DependentUpon>ViewDetailsCredit.xaml</DependentUpon>
@@ -267,8 +301,8 @@
       <DependentUpon>WindowContainer.xaml</DependentUpon>
     </Compile>
     <Page Include="View\Components\Header.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\ManageClients\ConfirmationMessageChangeStatusClient.xaml">
       <SubType>Designer</SubType>
@@ -286,11 +320,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\ManageCreditApplications\DefineOpinion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ManageCreditPolicies\ConfirmationMessageChangeStatusCreditPolicy.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ManageCreditPolicies\RegisterCreditPolicy.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ManageCreditPolicies\ViewCreditPolicies.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ManageCreditApplications\ViewCreditRequests.xaml">
+    <Page Include="View\ManageCreditApplications\ViewCreditApplications.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -299,6 +345,30 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ManageCreditApplications\ViewDetailsCreditApplication.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ManageCreditPolicies\ViewDetailsCreditPolicy.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ManageCreditPromotions\ConfirmationMessageChangeStateCreditPromotion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ManageCreditPromotions\ModifyCreditPromotionData.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ManageCreditPromotions\RegisterCreditPromotion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ManageCreditPromotions\ViewCreditPromotions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ManageCreditPromotions\ViewDetailsCreditPromotion.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -434,9 +504,11 @@
       <DependentUpon>Model_Entity.edmx</DependentUpon>
       <LastGenOutput>Model_Entity.cs</LastGenOutput>
     </Content>
+    <Resource Include="View\Images\pdf-icon.png" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

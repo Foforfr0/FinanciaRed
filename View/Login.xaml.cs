@@ -1,6 +1,5 @@
 ﻿using FinanciaRed.Model.DAO;
 using FinanciaRed.Model.DTO;
-using FinanciaRed.Utils;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,7 +16,11 @@ namespace FinanciaRed.View {
         public Login () {
             InitializeComponent ();
 
-            textBox_Email.Text = "foforfr007@gmail.com";
+            textBox_Email.Text = "administrador@gmail.com";         //Administrador
+            //textBox_Email.Text = "cobrador@gmail.com";            //Gestor de cobranza
+            //textBox_Email.Text = "analista@gmail.com";            //Analista de crédito
+            textBox_Email.Text = "asesor@gmail.com";                //Asesor de cobranza
+
             passwordBox_Password.Password = "1234";
         }
 
@@ -32,42 +35,26 @@ namespace FinanciaRed.View {
             }
         }
 
-        private void ClickRecoverPassword (Object sender, RoutedEventArgs e) {
-            MessageBox.Show ("Funcionalidad no disponible");
-        }
-
         private bool VerifyFormLogin () {
             bool isFormCorrect = true;
 
             if (string.IsNullOrEmpty (textBox_Email.Text)) {
                 isFormCorrect = false;
-                if (ManageLabelsError.ExistsLabelInStack (stackPanel_FormLogIn, "errorEmailLabel") == false) {
-                    stackPanel_FormLogIn.Children.Insert (
-                        stackPanel_FormLogIn.Children.IndexOf (textBox_Email) + 1,
-                        ManageLabelsError.CreateNewLabel ("errorEmailLabel", "Ingrese su correo.", 11, 55)
-                    );
-                    stackPanel_MainContainer.Height += 20;
-                }
+                label_ErrorEmailLogin.Content = "Ingrese su correo.";
+                label_ErrorEmailLogin.Visibility = Visibility.Visible;
             } else {
-                if (ManageLabelsError.ExistsLabelInStack (stackPanel_FormLogIn, "errorEmailLabel")) {
-                    ManageLabelsError.RemoveLabel (stackPanel_FormLogIn, "errorEmailLabel");
-                    stackPanel_MainContainer.Height -= 20;
-                }
+                isFormCorrect = true;
+                label_ErrorEmailLogin.Content = "";
+                label_ErrorEmailLogin.Visibility = Visibility.Collapsed;
             }
             if (string.IsNullOrEmpty (passwordBox_Password.Password)) {
                 isFormCorrect = false;
-                if (ManageLabelsError.ExistsLabelInStack (stackPanel_FormLogIn, "errorPasswordLabel") == false) {
-                    stackPanel_FormLogIn.Children.Insert (
-                        stackPanel_FormLogIn.Children.IndexOf (passwordBox_Password) + 1,
-                        ManageLabelsError.CreateNewLabel ("errorPasswordLabel", "Ingrese su contraseña.", 11, 55)
-                    );
-                    stackPanel_MainContainer.Height += 20;
-                }
+                label_ErrorPasswordLogin.Content = "Ingrese su contraseña.";
+                label_ErrorPasswordLogin.Visibility = Visibility.Visible;
             } else {
-                if (ManageLabelsError.ExistsLabelInStack (stackPanel_FormLogIn, "errorPasswordLabel")) {
-                    ManageLabelsError.RemoveLabel (stackPanel_FormLogIn, "errorPasswordLabel");
-                    stackPanel_MainContainer.Height -= 20;
-                }
+                isFormCorrect = true;
+                label_ErrorPasswordLogin.Content = "";
+                label_ErrorPasswordLogin.Visibility = Visibility.Collapsed;
             }
 
             return isFormCorrect;

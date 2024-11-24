@@ -4,7 +4,13 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:FinanciaRed.View.ManageCreditPolicies"
+      xmlns:utils="clr-namespace:FinanciaRed.Utils"
       Title="Gestión de créditos" Height="590" Width="830">
+
+    <Page.Resources>
+        <utils:RemoveNewLineConverter x:Key="RemoveNewLineConverter" />
+        <utils:BoolToNullableConverter x:Key="BoolToNullableConverter" />
+    </Page.Resources>
 
     <Grid Background="#FFFFFF">
         <StackPanel>
@@ -25,21 +31,20 @@
                     <Image Source="/View/Images/icon-search.png" Width="18"/>
                 </Button>
 
-                <Button Click="ClickDefineOpinion" Content="Cambiar estado" Padding="10 4" Margin="5 0"  BorderBrush="Transparent"/>
+                <Button Click="ClickChangeState" Content="Cambiar estado" Padding="10 4" Margin="5 0"  BorderBrush="Transparent"/>
                 <Button Click="ClickRegisterCreditPolicy" Content="Registrar" Padding="10 4" BorderBrush="Transparent"/>
             </StackPanel>
-            <DataGrid x:Name="dataGridClients" AutoGenerateColumns="False" Height="430" Width="770" 
+            <DataGrid x:Name="dataGrid_CreditPolicies" AutoGenerateColumns="False" Height="430" Width="770" 
                       HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20 20 40 50" 
                       ScrollViewer.CanContentScroll="True"
                       ScrollViewer.VerticalScrollBarVisibility="Auto"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                      ItemsSource="{Binding retrievedClients}" IsReadOnly="true" SelectionMode="Single">
+                      ItemsSource="{Binding retrievedCreditPolicies}" IsReadOnly="true" SelectionMode="Single" >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Nombre(s)" Binding="{Binding FirstName}" Width="*" />
-                    <DataGridTextColumn Header="Apellido paterno" Binding="{Binding MiddleName}" Width="*" />
-                    <DataGridTextColumn Header="Apellido materno" Binding="{Binding LastName}" Width="*" />
-                    <DataGridTextColumn Header="RFC" Binding="{Binding CodeRFC}" Width="*" />
-                    <DataGridTextColumn Header="CURP" Binding="{Binding CodeCURP}" Width="*" />
+                    <DataGridTextColumn Header="Nombre" Binding="{Binding Name, Converter={StaticResource RemoveNewLineConverter}}" Width="*" />
+                    <DataGridTextColumn Header="Descripción" Binding="{Binding Description, Converter={StaticResource RemoveNewLineConverter}}" Width="2*" />
+                    <DataGridTextColumn Header="Fecha inicio" Binding="{Binding DateStart, StringFormat='dd/MM/yyyy'}" Width="90" />
+                    <DataGridTextColumn Header="Fecha fin" Binding="{Binding DateEnd, StringFormat='dd/MM/yyyy'}" Width="90" />
 
                     <!-- Columna con botón de detalles -->
                     <DataGridTemplateColumn Header="Detalles">

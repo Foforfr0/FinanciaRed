@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 
 namespace FinanciaRed.View {
     /// <summary>
@@ -8,7 +7,7 @@ namespace FinanciaRed.View {
     public partial class WindowContainer : Window {
         public WindowContainer () {
             InitializeComponent ();
-            mainFrame.Navigate (new Login());
+            mainFrame.Navigate (new Login ());
         }
     }
 }

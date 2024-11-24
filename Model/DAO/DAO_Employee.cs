@@ -187,15 +187,15 @@ namespace FinanciaRed.Model.DAO {
             return responseUpdateStatusEmployee;
         }
 
-        public static async Task<MessageResponse<DTO_Employee_DetailsEmployee>> GetDetailsEmployee (int idEmployee, bool withPassword) {
-            MessageResponse<DTO_Employee_DetailsEmployee> responseDetailsEmployee = null;
+        public static async Task<MessageResponse<DTO_Employee_Details>> GetDetailsEmployee (int idEmployee, bool withPassword) {
+            MessageResponse<DTO_Employee_Details> responseDetailsEmployee = null;
 
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
                 try {
-                    DTO_Employee_DetailsEmployee retrievedData = await
+                    DTO_Employee_Details retrievedData = await
                         context.Employees.
                         Where (empl => empl.IdEmployee == idEmployee).
-                        Select (empl => new DTO_Employee_DetailsEmployee {
+                        Select (empl => new DTO_Employee_Details {
                             IdEmployee = empl.IdEmployee,
                             ProfilePhoto = empl.ProfilePhoto,
                             FirstName = empl.FirstName,
@@ -213,21 +213,21 @@ namespace FinanciaRed.Model.DAO {
                         FirstOrDefaultAsync ();
 
                     if (retrievedData != null) {
-                        responseDetailsEmployee = MessageResponse<DTO_Employee_DetailsEmployee>.Success (
+                        responseDetailsEmployee = MessageResponse<DTO_Employee_Details>.Success (
                             $"Details of ID {retrievedData.IdEmployee} retrieved.",
                             retrievedData
                         );
                     } else {
-                        responseDetailsEmployee = MessageResponse<DTO_Employee_DetailsEmployee>.Failure ("Details doesn't retrieved.");
+                        responseDetailsEmployee = MessageResponse<DTO_Employee_Details>.Failure ("Details doesn't retrieved.");
                     }
                 } catch (Exception ex) {
-                    responseDetailsEmployee = MessageResponse<DTO_Employee_DetailsEmployee>.Failure (ex.ToString ());
+                    responseDetailsEmployee = MessageResponse<DTO_Employee_Details>.Failure (ex.ToString ());
                 }
             }
             return responseDetailsEmployee;
         }
 
-        public static async Task<MessageResponse<bool>> RegistryNewEmployee (DTO_Employee_DetailsEmployee newEmployee) {
+        public static async Task<MessageResponse<bool>> RegistryNewEmployee (DTO_Employee_Details newEmployee) {
             MessageResponse<bool> responseCreateEmployee = null;
 
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
@@ -258,7 +258,7 @@ namespace FinanciaRed.Model.DAO {
             return responseCreateEmployee;
         }
 
-        public static MessageResponse<bool> SaveChangesDataEmployee (DTO_Employee_DetailsEmployee newDataEmployee, bool changePassword) {
+        public static MessageResponse<bool> SaveChangesDataEmployee (DTO_Employee_Details newDataEmployee, bool changePassword) {
             MessageResponse<bool> responseUpdateDataEmployee = null;
 
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {

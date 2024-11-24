@@ -42,7 +42,7 @@ namespace FinanciaRed.View.ManageClients {
 
             this.filteredClients = new ObservableCollection<DTO_Client_Consult> (messageResponseFilterClients.DataRetrieved);
             dataGridClients.ItemsSource = null;
-            dataGridClients.ItemsSource = retrievedClients;
+            dataGridClients.ItemsSource = filteredClients;
         }
 
         private async void ClickChangeState (object sender, RoutedEventArgs e) {
@@ -71,10 +71,8 @@ namespace FinanciaRed.View.ManageClients {
         }
 
         private void ClicShowDetailsClient (object sender, RoutedEventArgs e) {
-            // Obtener el botón que fue clicado
             Button button = sender as Button;
-            // Obtener los datos de la fila a través del DataContext del botón
-            //DTO_Client_Consult rowData = button.DataContext as DTO_Client_Consult;
+            
             if (button.DataContext is DTO_Client_Consult rowData) {
                 ViewDetailsClient viewDetailsClientWindow = new ViewDetailsClient (rowData.IdClient);
                 viewDetailsClientWindow.ShowDialog ();

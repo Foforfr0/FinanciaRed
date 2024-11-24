@@ -54,28 +54,33 @@
                                 <Run Text="Clientes"/>
                             </Hyperlink>
                         </Label>
+                        <Label x:Name="label_GlobalOptionEmployees" Padding="0 0 0 8" Visibility="Collapsed" d:Visibility="Visible">
+                            <Hyperlink Click="ClickShowManagementEmployeesFrame">
+                                <Run Text="Empleados"/>
+                            </Hyperlink>
+                        </Label>
                         <Label x:Name="label_GlobalOptionCredits" Padding="0 0 0 8" Visibility="Collapsed" d:Visibility="Visible">
                             <Hyperlink Click="ClickShowManagementCreditsFrame">
                                 <Run Text="Créditos"/>
                             </Hyperlink>
                         </Label>
                         <TextBlock x:Name="label_GlobalOptionCreditApplications" Padding="0 0 0 8" TextWrapping="Wrap" Visibility="Collapsed" d:Visibility="Visible">
-                            <Hyperlink Click="ClickShowManagementCreditRequestsFrame">
+                            <Hyperlink Click="ClickShowManagementCreditApplicationsFrame">
                                 <Run Text="Solicitudes de crédito"/>
                             </Hyperlink>
                         </TextBlock>
-                        <Label x:Name="label_GlobalOptionEmployees" Padding="0 0 0 8" Visibility="Collapsed" d:Visibility="Visible">
-                            <Hyperlink Click="ClickShowManagementEmployeesFrame">
-                                <Run Text="Empleados"/>
+                        <Label x:Name="label_GlobalOptionPromotions" Padding="0 0 0 8" Visibility="Collapsed" d:Visibility="Visible">
+                            <Hyperlink Click="ClickShowManagementPromotionsFrame">
+                                <Run Text="Promociones"/>
                             </Hyperlink>
                         </Label>
                         <Label x:Name="label_GlobalOptionCreditPolicies" Padding="0 0 0 8" Visibility="Collapsed" d:Visibility="Visible">
-                            <Hyperlink Click="ClickShowManagementEmployeesFrame">
+                            <Hyperlink Click="ClickShowManagementCreditPoliciesFrame">
                                 <Run Text="Políticas"/>
                             </Hyperlink>
                         </Label>
                         <TextBlock x:Name="label_GlobalOptionMonthlyEfficiencies" Padding="0 0 0 8" TextWrapping="Wrap" Visibility="Collapsed" d:Visibility="Visible">
-                            <Hyperlink Click="ClickShowManagementEmployeesFrame">
+                            <Hyperlink Click="ClickShowManagementMonthlyEfficienciesFrame">
                                 <Run Text="Eficiencias mensuales"/>
                             </Hyperlink>
                         </TextBlock>

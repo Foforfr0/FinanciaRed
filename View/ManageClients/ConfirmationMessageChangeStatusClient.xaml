@@ -10,37 +10,38 @@
         SizeToContent="WidthAndHeight"
         WindowStyle="None"
         ResizeMode="NoResize">
+    
     <Border BorderBrush="Black" BorderThickness="1" CornerRadius="10" Padding="10">
         <StackPanel>
             <!-- Title message -->
-            <TextBlock x:Name="textBlockTitleText" Text="¿Está seguro de cambiar el estado del cliente '{nameClient}'?" 
+            <TextBlock x:Name="textBlock_TitleText" Text="¿Está seguro de cambiar el estado del cliente '{nameClient}'?" 
                        FontWeight="Bold" FontSize="16" HorizontalAlignment="Center" Margin="8"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="4">
                 <!-- Main message -->
-                <TextBlock x:Name="textBlockMessageText" Text="El cliente actualmente tiene el estado: " FontSize="14" HorizontalAlignment="Center"/>
+                <TextBlock x:Name="textBlock_MessageText" Text="El cliente actualmente tiene el estado: " FontSize="14" HorizontalAlignment="Center"/>
                 <!-- Status client -->
-                <TextBlock x:Name="textBlockStatusClient" Text="Estado_cliente" FontWeight="Bold" FontSize="14" HorizontalAlignment="Center"/>
+                <TextBlock x:Name="textBlock_StatusClient" Text="Estado_cliente" FontWeight="Bold" FontSize="14" HorizontalAlignment="Center"/>
                 <TextBlock Text="." FontSize="14"/>
             </StackPanel>
             <StackPanel x:Name="stackPanelActiveCredit" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="4">
                 <!-- Status credit -->
                 <TextBlock Text="El cliente " FontSize="14"/>
-                <TextBlock x:Name="textBlockHaveDontHaveCredit" Text="NO TIENE / TIENE " FontSize="14" FontWeight="Bold"/>
+                <TextBlock x:Name="textBlock_HaveDontHaveCredit" Text="NO TIENE / TIENE " FontSize="14" FontWeight="Bold"/>
                 <TextBlock Text="un crédito activo." FontSize="14"/>
             </StackPanel>
 
-            <StackPanel x:Name="stackPanelNewStatus" Margin="4">
+            <StackPanel x:Name="stackPanel_NewStatus" Margin="4">
                 <TextBlock Text="¿Cuál será el nuevo estado del cliente?" HorizontalAlignment="Center" FontSize="14"/>
                 <StackPanel x:Name="stackPanelRadioButtons" Orientation="Horizontal" HorizontalAlignment="Center">
-                    <RadioButton x:Name="radioButtonOption1" Content="" GroupName="RadioButtonGroup" FontSize="14"/>
+                    <RadioButton x:Name="radioButton_Option1" Content="" GroupName="RadioButtonGroup" FontSize="14"/>
                     <RadioButton x:Name="radioButtonOption2" Content="" GroupName="RadioButtonGroup" FontSize="14"/>
                 </StackPanel>
             </StackPanel>
             
             <!-- Reply buttons -->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
-                <Button x:Name="buttonAccept" Content="Aceptar" Width="75" Margin="5" Click="OkButton_Click"/>
-                <Button x:Name="buttonCancel" Content="Cancelar" Width="75" Margin="5" Click="CancelButton_Click"/>
+                <Button x:Name="button_Accept" Content="Aceptar" Width="75" Margin="5" Click="OkButton_Click"/>
+                <Button x:Name="button_Cancel" Content="Cancelar" Width="75" Margin="5" Click="CancelButton_Click"/>
             </StackPanel>
         </StackPanel>
     </Border>

@@ -60,11 +60,6 @@ namespace FinanciaRed.View.ManageEmployees {
         private async void ClickFinishRegistration (object sender, RoutedEventArgs e) {
             VerifyStage1 ();
 
-            MessageBox.Show (string.Concat (_IsCorrectStage1[0]) + " " + string.Concat (_IsCorrectStage1[1]) + " " + string.Concat (_IsCorrectStage1[2]) + " " +
-                             string.Concat (_IsCorrectStage1[3]) + " " + string.Concat (_IsCorrectStage1[4]) + " " + string.Concat (_IsCorrectStage1[5]) + " " +
-                             string.Concat (_IsCorrectStage1[6]) + " " + string.Concat (_IsCorrectStage1[7]) + " " + string.Concat (_IsCorrectStage1[8]) + " " +
-                             string.Concat (_IsCorrectStage1[9]) + " " + string.Concat (_IsCorrectStage1[10]));
-
             if (_IsCorrectStage1.All (x => x == true)) {
                 bool existsEmail = await DAO_Employee.VerifyExistenceEmail (textBox_Email.Text);
                 bool existsCodeCURP = await DAO_Employee.VerifyExistenceCURP (textBox_CodeCURP.Text);
@@ -92,7 +87,7 @@ namespace FinanciaRed.View.ManageEmployees {
         }
 
         private async Task SaveDataInDatabase () {
-            DTO_Employee_DetailsEmployee newDataEmployee = new DTO_Employee_DetailsEmployee () {
+            DTO_Employee_Details newDataEmployee = new DTO_Employee_Details () {
                 FirstName = textBox_FirstName.Text,
                 MiddleName = textBox_MiddleName.Text,
                 LastName = textBox_LastName.Text,
@@ -106,11 +101,11 @@ namespace FinanciaRed.View.ManageEmployees {
                 ProfilePhoto = TEMP_profileImageSelected ?? null
             };
 
-            MessageResponse<bool> responseModifyEmployee = await DAO_Employee.RegistryNewEmployee (newDataEmployee);
-            if (responseModifyEmployee.IsError) {
+            MessageResponse<bool> responseRegisterEmployee = await DAO_Employee.RegistryNewEmployee (newDataEmployee);
+            if (responseRegisterEmployee.IsError) {
                 MessageBox.Show ("Ha ocurrido un error inesperado.\nIntente más tarde.", "Error inesperado.");
             } else {
-                MessageBox.Show ($"Se ha modificado correctamente al\nEMPLEADO: \"{newDataEmployee.FirstName} {newDataEmployee.MiddleName} {newDataEmployee.LastName}\"", "Modificación completa.");
+                MessageBox.Show ($"Se ha registrado correctamente al\nEMPLEADO: \"{newDataEmployee.FirstName} {newDataEmployee.MiddleName} {newDataEmployee.LastName}\"", "Modificación completa.");
                 this.Close ();
             }
         }

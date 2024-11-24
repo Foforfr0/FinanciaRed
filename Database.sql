@@ -9,7 +9,10 @@ CREATE DATABASE FinanciaRed;
 GO
 USE FinanciaRed;
 GO
-
+EXEC sp_configure 'show advanced options', 1;
+RECONFIGURE;
+EXEC sp_configure 'Ad Hoc Distributed Queries', 1;
+RECONFIGURE;
 
 
 --CREATION DATABASE
@@ -152,7 +155,7 @@ CREATE TABLE Employees (
     CodeCURP VARCHAR(18) UNIQUE NOT NULL,
     CodeRFC VARCHAR(13) UNIQUE NOT NULL,
     ProfilePhoto VARBINARY(MAX),
-    Email VARCHAR(80) NOT NULL,
+    Email VARCHAR(80) NOT NULL UNIQUE,
     Password VARCHAR(80) NOT NULL,
     IdRole INT NOT NULL,
     IdStatusEmployee INT NOT NULL,
@@ -172,7 +175,8 @@ CREATE TABLE Promotions (
     InterestRate REAL NOT NULL,
     NumberFortnights INT NOT NULL,
     DateStart DATE NOT NULL,
-    DateEnd DATE NOT NULL
+    DateEnd DATE NOT NULL,
+    IsActive BIT NOT NULL
 );
 
 CREATE TABLE CreditApplications (
@@ -184,10 +188,12 @@ CREATE TABLE CreditApplications (
     NumberFortnights INT,
     ProofAddress VARBINARY(MAX),
     ProofINE VARBINARY(MAX),
+    ProofLastPayStub VARBINARY(MAX),
     IdEmployeeApplication INT NOT NULL,
     IdStatusCreditApplication INT NOT NULL,
     IdPromotion INT,
-    IdClient INT NOT NULL,
+    IdClient INT NOT NULL,  
+    ValorationOpinion TEXT,
 
     CONSTRAINT fk_Employee_CreditApplication FOREIGN KEY (IdEmployeeApplication) REFERENCES Employees (IdEmployee),
     CONSTRAINT fk_StatusCreditApplication_CreditApplication FOREIGN KEY (IdStatusCreditApplication) REFERENCES StatusesCreditApplication (StatusCreditApplication),
@@ -200,13 +206,15 @@ CREATE TABLE Policies (
     Name VARCHAR(40) NOT NULL,
     Description TEXT NOT NULL,
     DateStart DATE NOT NULL,
-    DateEnd DATE
+    DateEnd DATE,
+    IsActive BIT NOT NULL,
 );
 
 CREATE TABLE CreditApplications_Policies (
     IdCreditApplication_Policy INT NOT NULL PRIMARY KEY IDENTITY(1,1),
     IdCreditApplication INT NOT NULL,
     IdPolicy INT NOT NULL,
+    IsAprobed BIT,
 
     CONSTRAINT fk_CreditApplication_CreditPolicy FOREIGN KEY (IdCreditApplication) REFERENCES CreditApplications (IdCreditApplication),
     CONSTRAINT fk_Policy_CreditPolicy FOREIGN KEY (IdPolicy) REFERENCES Policies (IdPolicy)
@@ -319,40 +327,38 @@ INSERT INTO Clients (FirstName, MiddleName, LastName, DateBirth, Gender, IdStatu
                      'GOMA950515MDF', 'GOMA950515HDFGNA01', 4, NULL, 4, NULL, 1, 2, 1);
 
 INSERT INTO Employees (FirstName, MiddleName, LastName, DateBirth, Gender, CodeRFC, CodeCURP, Email, Password, IdRole, IdStatusEmployee)
-            VALUES ('Rodolfo', 'Fernández', 'Rodríguez', '2003-10-26', 'M', 'FERR031026TG6', 'FERR031026HVZRDDA2', 'foforfr007@gmail.com', '1234', 1, 1),
-                   ('Martin Emmanuel', 'Cruz', 'Carmona', '2004-11-27', 'M', 'CRCM041127X4G', 'CACM041127HVZGEHE7', 'lecape_27@gmail.com', '1234', 2, 1),
-                   ('Sara', 'Hernández', 'Roldán', '2004-08-03', 'M', 'HERS040803HAI', 'HERS040803MVZGJKF9', 'lecape_27@gmail.com', '1234', 3, 1),
-                   ('Mario Alberto', 'Hernández', 'Pérez', '1990-05-13', 'M', 'HEPM900513KJS', 'HEPM900513HVZHDHG0', 'mariohernandez2@gmail.com', 'admin', 4, 1);
+            VALUES ('Rodolfo', 'Fernández', 'Rodríguez', '2003-10-26', 'M', 'FERR031026TG6', 'FERR031026HVZRDDA2', 'administrador@gmail.com', '1234', 1, 1),
+                   ('Martin Emmanuel', 'Cruz', 'Carmona', '2004-11-27', 'M', 'CRCM041127X4G', 'CACM041127HVZGEHE7', 'cobrador@gmail.com', '1234', 2, 1),
+                   ('Sara', 'Hernández', 'Roldán', '2004-08-03', 'M', 'HERS040803HAI', 'HERS040803MVZGJKF9', 'analista@gmail.com', '1234', 3, 1),
+                   ('Mario Alberto', 'Hernández', 'Pérez', '1990-05-13', 'M', 'HEPM900513KJS', 'HEPM900513HVZHDHG0', 'asesor@gmail.com', '1234', 4, 1);
 
-INSERT INTO Promotions (Name, InterestRate, NumberFortnights, DateStart, DateEnd)
-            VALUES ('Plazoz chiquitoz', 0.05, 2, '2024-06-01', '2024-12-31'),
-                   ('Para pacientes', 0.15, 4, '2024-06-01', '2024-12-31');
+INSERT INTO Promotions (Name, InterestRate, NumberFortnights, DateStart, DateEnd, IsActive)
+            VALUES ('Plazoz chiquitoz', 0.05, 2, '2024-06-01', '2024-12-31', 1),
+                   ('Para pacientes', 0.15, 4, '2024-06-01', '2024-12-31', 1);
 
-INSERT INTO CreditApplications (DateApplication, DateAcepted, AmountTotal, InteresRate, NumberFortnights, IdPromotion,
-                               IdEmployeeApplication, IdStatusCreditApplication, IdClient)
-            VALUES ('2024-10-23', '2024-10-25', 10000, 0.20, 6,     NULL,   4, 1, 1),
-                   ('2024-10-24', '2024-10-25', 35000, NULL, NULL,  1,      4, 1, 2);
+INSERT INTO CreditApplications (DateApplication, DateAcepted, AmountTotal, InteresRate, NumberFortnights, IdStatusCreditApplication,
+            IdPromotion,IdEmployeeApplication, IdClient, ProofINE, ProofAddress, ProofLastPayStub)
+VALUES  ('2024-10-23', '2024-10-29', 10000, 0.20, 6, 2, NULL, 1, 1,
+        (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Users\fofor\Desktop\Escuela\Desarrollo de software\ProofINE.pdf', SINGLE_BLOB) AS ProofINE),
+        (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Users\fofor\Desktop\Escuela\Desarrollo de software\ProofAddress.pdf', SINGLE_BLOB) AS ProofAddress),
+        (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Users\fofor\Desktop\Escuela\Desarrollo de software\ProofLastPayStub.pdf', SINGLE_BLOB) AS ProofLastPayStub)),
+        ('2024-10-24', NULL, 35000, 0.10, 10, 1, NULL, 1, 2,
+        (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Users\fofor\Desktop\Escuela\Desarrollo de software\ProofINE.pdf', SINGLE_BLOB) AS ProofINE),
+        (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Users\fofor\Desktop\Escuela\Desarrollo de software\ProofAddress.pdf', SINGLE_BLOB) AS ProofAddress),
+        (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Users\fofor\Desktop\Escuela\Desarrollo de software\ProofLastPayStub.pdf', SINGLE_BLOB) AS ProofLastPayStub));
 
-INSERT INTO Policies (Name, Description, DateStart, DateEnd)
-            VALUES ('Crédito máximo', 'El monto total de un crédito que solicita un cliente no debe superar el 30% de su salario mensual total.', '2000-01-01', NULL),
-                   ('Crédito mínimo', 'El monto minimo de un crédito que solicita un cliente es de $5,000 MXN.', '2000-01-01', NULL),
-                   ('Credito superior', 'En créditos mayores de $100,000 MXN, se debe tener en cuenta la zona y tipo de vivienda del cliente.', '2000-01-01', NULL);
+INSERT INTO Policies (Name, Description, DateStart, DateEnd, IsActive)
+            VALUES ('Crédito máximo', 'El monto total de un crédito que solicita un cliente no debe superar el 30% de su salario mensual total.', '2000-01-01', NULL, 1),
+                   ('Crédito mínimo', 'El monto minimo de un crédito que solicita un cliente es de $5,000 MXN.', '2000-01-01', NULL, 0),
+                   ('Credito superior', 'En créditos mayores de $100,000 MXN, se debe tener en cuenta la zona y tipo de vivienda del cliente.', '2000-01-01', NULL, 1);
 
 INSERT INTO Credits (AmountLeft, IdStatusCredit, SignedDocument, PaymentLayout, DateStart, DateEnd, IdCreditApplication) 
-            VALUES (10000, 1, NULL, NULL, '2024-10-26 11:50:00', '2025-01-18 11:50:00', 1),
-                   (35000, 1, NULL, NULL, '2024-10-26 18:30:00', '2025-12-21 18:30:00', 2);
+            VALUES (10000, 1, NULL, NULL, '2024-10-26 11:50:00', '2025-01-18 11:50:00', 1);
 
-INSERT INTO CreditApplications_Policies 
-            VALUES (1, 1), (1, 2), (1, 3),
-                   (2, 1), (2, 2), (2, 3);
+INSERT INTO CreditApplications_Policies (IdCreditApplication, IdPolicy, IsAprobed)
+            VALUES (1, 1, 1), (1, 2, 1), (1, 3, 1),
+                   (2, 1, NULL), (2, 2, NULL), (2, 3, NULL);
 --TESTS---------------------------------------------------------------
-SELECT * FROM Credits 
-RIGHT JOIN CreditApplications ON Credits.IdCreditApplication = CreditApplications.IdCreditApplication
-RIGHT JOIN Clients ON CreditApplications.IdClient = Clients.IdClient
-WHERE Clients.IdClient = 1;
-
-SELECT * FROM Policies;
-
-SELECT * FROM Credits;
-
-SELECT * FROM CreditApplications;
+SELECT * FROM CreditApplications 
+RIGHT JOIN Clients ON CreditApplications.IdClient = Clients.IdClient;
+SELECT * FROM CreditApplications_Policies;

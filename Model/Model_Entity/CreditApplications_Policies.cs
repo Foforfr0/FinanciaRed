@@ -17,6 +17,7 @@ namespace FinanciaRed.Model.Model_Entity
         public int IdCreditApplication_Policy { get; set; }
         public int IdCreditApplication { get; set; }
         public int IdPolicy { get; set; }
+        public Nullable<bool> IsAprobed { get; set; }
     
         public virtual CreditApplications CreditApplications { get; set; }
         public virtual Policies Policies { get; set; }

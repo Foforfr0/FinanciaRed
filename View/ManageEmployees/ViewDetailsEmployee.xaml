@@ -4,43 +4,91 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FinanciaRed.View.ManageEmployees"
-        xmlns:components="clr-namespace:FinanciaRed.View.Components"
         mc:Ignorable="d"
-        Title="Registro de nuevo empleado" Height="650" Width="800" 
+        Title="Detalles de empleado" d:Height="850" Height="650" Width="800" 
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
 
-    <Grid Background="#FFFFFF">
-        <StackPanel Margin="0">
-            <Label Content="Detalles de empleado" Style="{StaticResource HeaderText}" Margin="8 8 8 10"/>
-            <StackPanel Margin="20 0" Orientation="Horizontal">
-                <StackPanel Grid.Column="0" Width="385" Margin="0 0 10 0">
-                    <Label Content="Foto de perfil" FontSize="15" Foreground="Black" FontWeight="Bold" HorizontalAlignment="Center" Margin="0 0 0 10"/>
-                    <Image x:Name="image_ImageProfile" Width="100" Height="100" Source="/View/Images/icon-user.png" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform">
-                        <Image.Clip>
-                            <EllipseGeometry Center="50,50" RadiusX="50" RadiusY="50" />
-                        </Image.Clip>
-                    </Image>
-                    <Label x:Name="label_PhotoStatus" Content="Sin foto" HorizontalAlignment="Center" Margin="0 5"/>
-                </StackPanel>
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#EADDD9" Offset="0"/>
+                <GradientStop Color="#E9E7D7" Offset="0.5"/>
+                <GradientStop Color="#DFE2DD" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
 
-                <StackPanel x:Name="stackPanel_Form" Grid.Column="1" Width="365" Margin="10 0 0 0">
-                    <Label Content="Datos de perfil" Style="{StaticResource HeaderText2}"/>
-                    <Label Content="Nombre(s):" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
-                    <Label x:Name="label_FirstName" Background="White" Padding="5 0 0 0"/>
-                    <Label Content="Apellido paterno:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center" Margin="0 8 0 0"/>
-                    <Label x:Name="label_MiddleName" Background="White" Padding="5 0 0 0"/>
-                    <Label Content="Apellido materno:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center" Margin="0 8 0 0"/>
-                    <Label x:Name="label_LastName" Background="White" Padding="5 0 0 0"/>
-                    <Label Content="Correo electrónico:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center" Margin="0 8 0 0"/>
-                    <Label x:Name="label_Email" Background="White" Padding="5 0 0 0"/>
-                    <Label Content="Cargo actual:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center" Margin="0 8 0 0"/>
-                    <Label x:Name="label_Rol" Background="White" Padding="5 0 0 0"/>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 25 0 0" Width="80">
-                        <Button x:Name="button_Modify" Click="ClickModifyEmployee" Content="Modificar" 
-                            Width="80" Height="25" HorizontalAlignment="Center" Background="#FF0693C3" Foreground="#FFFFFF"/>
-                    </StackPanel>
+        <StackPanel Orientation="Vertical" Width="800" HorizontalAlignment="Left">
+            <Grid Background="#FFFEEA" Width="800" Height="50">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="FinanciaRed" VerticalAlignment="Center" FontWeight="Bold" FontSize="20" Padding="0" Margin="10"/>
+            </Grid>
+
+            <Grid>
+                <!--Data employee-->
+                <StackPanel x:Name="stackPanel_Stage1" d:Height="725"  Height="525" Width="740" Margin="20" Background="#FFFFFF">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" d:Height="725" Height="525" Width="740">
+                        <StackPanel Margin="20 10">
+                            <Label Content="Detalles de empleado" Margin="0" Style="{StaticResource HeaderText}"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Margin="0 0 15 5">
+                                    <Label Content="Datos del empleado" FontSize="18" FontWeight="Bold" Padding="0" Margin="0 0 0 5"/>
+                                    <Label Content="Nombre(s):" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    <Label x:Name="label_FirstName" Style="{StaticResource FieldTag}" Margin="0 0 0 5"/>
+                                    <Label Content="Apellido paterno:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    <Label x:Name="label_MiddleName" Style="{StaticResource FieldTag}" Margin="0 0 0 5"/>
+                                    <Label Content="Apellido materno:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    <Label x:Name="label_LastName" Style="{StaticResource FieldTag}" Margin="0 0 0 5"/>
+                                    <Label Content="Fecha de nacimiento:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    <DatePicker x:Name="datePicker_DateBirth" Margin="0 0 0 5" IsEnabled="False">
+                                        <DatePicker.Resources>
+                                            <Style TargetType="DatePickerTextBox">
+                                                <Setter Property="IsReadOnly" Value="True"/>
+                                            </Style>
+                                        </DatePicker.Resources>
+                                    </DatePicker>
+                                    <Label Content="Género:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    <Label x:Name="label_Gender" Style="{StaticResource FieldTag}" Margin="0 0 0 5"/>
+                                    <Label Content="Código Único de Registro de Población:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    <Label x:Name="label_CodeCurp" Style="{StaticResource FieldTag}" Margin="0 0 0 5"/>
+                                    <Label Content="Código Único de Registro de Población:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                    <Label x:Name="label_CodeRFC" Style="{StaticResource FieldTag}" Margin="0 0 0 5"/>
+                                </StackPanel>
+
+                                <StackPanel Grid.Column="1" Margin="0 0 15 5">
+                                    <StackPanel Grid.Column="0" Width="385" Margin="0 0 10 0">
+                                        <Label Content="Foto de perfil" FontSize="15" Foreground="Black" FontWeight="Bold" HorizontalAlignment="Center" Margin="0 0 0 10"/>
+                                        <Image x:Name="image_ImageProfile" Width="100" Height="100" Source="/View/Images/icon-user.png" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform">
+                                            <Image.Clip>
+                                                <EllipseGeometry Center="50,50" RadiusX="50" RadiusY="50" />
+                                            </Image.Clip>
+                                        </Image>
+                                        <Label x:Name="label_PhotoStatus" Content="Sin foto" HorizontalAlignment="Center" Margin="0 5"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Column="0" Margin="0 17 15 5">
+                                        <Label Content="Datos de perfil" FontSize="18" FontWeight="Bold" Padding="0" Margin="0 0 0 5"/>
+                                        <Label Content="Correo electrónico" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                        <Label x:Name="label_Email" Style="{StaticResource FieldTag}" Margin="0 0 0 5"/>
+                                        <Label Content="Cargo asignado:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
+                                        <Label x:Name="label_Role" Style="{StaticResource FieldTag}" Margin="0 0 0 5"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
+                            <Button x:Name="button_Modify" Click="ClickModifyEmployee" Content="Modificar"
+                                    Width="80" Height="25" HorizontalAlignment="Center" Background="#FF0693C3" Foreground="#FFFFFF"/>
+                        </StackPanel>
+                    </ScrollViewer>
                 </StackPanel>
-            </StackPanel>
+            </Grid>
         </StackPanel>
     </Grid>
 </Window>

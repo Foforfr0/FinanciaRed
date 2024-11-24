@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FinanciaRed.View.ManageCreditApplications"
         mc:Ignorable="d"
-        Title="Registro de nuevo crédito" d:Height="850" Height="650" Width="800" 
+        Title="Registro de solicitud de crédito" d:Height="850" Height="650" Width="800" 
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
 
     <Grid>

@@ -28,6 +28,7 @@
                 </Grid.ColumnDefinitions>
                 <Label Content="FinanciaRed" VerticalAlignment="Center" FontWeight="Bold" FontSize="20" Padding="0" Margin="10"/>
             </Grid>
+            
             <Grid>
                 <!--Data employee-->
                 <StackPanel x:Name="stackPanel_Stage1" d:Height="725"  Height="525" Width="740" Margin="20" Background="#FFFFFF">
@@ -37,8 +38,9 @@
                             <Label Content="Ingrese los datos necesarios (*)" Style="{StaticResource InstructionPage}"/>
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="320"/>
+                                    <ColumnDefinition Width="40"/>
+                                    <ColumnDefinition Width="320"/>
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Grid.Column="0" Margin="0 0 15 5">
                                     <Label Content="Datos del empleado" FontSize="18" FontWeight="Bold" Padding="0" Margin="0 0 0 5"/>
@@ -92,8 +94,8 @@
                                     <Label x:Name="label_ErrorCodeRFC" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
                                 </StackPanel>
 
-                                <StackPanel Grid.Column="1" Margin="0 0 15 5">
-                                    <StackPanel Grid.Column="0" Width="385" Margin="0 0 10 0">
+                                <StackPanel Grid.Column="2" Margin="0 0 15 5">
+                                    <StackPanel Grid.Column="0" Margin="0 0 0 0">
                                         <Label Content="Foto de perfil" FontSize="15" Foreground="Black" FontWeight="Bold" HorizontalAlignment="Center" Margin="0 0 0 10"/>
                                         <Image x:Name="image_ImageProfile" Width="100" Height="100" Source="/View/Images/icon-user.png" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Uniform">
                                             <Image.Clip>
@@ -104,7 +106,7 @@
                                         <Button x:Name="button_UploadImage" Click="ClickSelectPhoto" Content="Seleccionar foto de perfil" 
                                             Width="150" d:Visibility="Visible" Visibility="Visible" Background="#FF0693C3" Foreground="#FFFFFF" Padding="4 3"/>
                                     </StackPanel>
-                                    <StackPanel Grid.Column="0" Margin="0 17 15 5">
+                                    <StackPanel Grid.Column="0" Margin="0 17 0 5">
                                         <Label Content="Datos de perfil" FontSize="18" FontWeight="Bold" Padding="0" Margin="0 0 0 5"/>
                                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                                             <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>

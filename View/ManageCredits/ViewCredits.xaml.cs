@@ -1,6 +1,5 @@
 ﻿using FinanciaRed.Model.DAO;
 using FinanciaRed.Model.DTO;
-using FinanciaRed.View.ManageClients;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -41,10 +40,8 @@ namespace FinanciaRed.View.ManageCredits {
         }
 
         private void ClicShowDetailsCredit (object sender, RoutedEventArgs e) {
-            // Obtener el botón que fue clicado
             Button button = sender as Button;
-            // Obtener los datos de la fila a través del DataContext del botón
-            //DTO_Credit_Consult rowData = button.DataContext as DTO_Credit_Consult;
+
             if (button.DataContext is DTO_Credit_Consult rowData) {
                 ViewDetailsCredit detailsCreditWindow = new ViewDetailsCredit (rowData.IdCredit);
                 detailsCreditWindow.ShowDialog ();

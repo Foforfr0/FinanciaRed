@@ -9,7 +9,7 @@ namespace FinanciaRed.View.ManageClients {
     /// Interaction logic for ViewDetailsClient.xaml
     /// </summary>
     public partial class ViewDetailsClient : Window {
-        private DTO_Client_DetailsClient selectedClient = null;
+        private DTO_Client_Details selectedClient = null;
 
         public ViewDetailsClient (int idClient) {
             InitializeComponent ();
@@ -17,14 +17,14 @@ namespace FinanciaRed.View.ManageClients {
             _ = LoadDetailsClient (idClient);
         }
 
-        private async Task RetrieveDataClientDB (int idClient) {
-            MessageResponse<DTO_Client_DetailsClient> messageResponseDetailsClient = await DAO_Client.GetDetailsClient (idClient);
-            selectedClient = messageResponseDetailsClient.DataRetrieved;
-        }
-
         private async Task LoadDetailsClient (int idClient) {
             await RetrieveDataClientDB (idClient);
             ShowDataClientOverFields ();
+        }
+
+        private async Task RetrieveDataClientDB (int idClient) {
+            MessageResponse<DTO_Client_Details> messageResponseDetailsClient = await DAO_Client.GetDetailsClient (idClient);
+            selectedClient = messageResponseDetailsClient.DataRetrieved;
         }
 
         private void ShowDataClientOverFields () {

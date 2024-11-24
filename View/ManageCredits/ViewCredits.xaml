@@ -36,8 +36,10 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Monto total" Binding="{Binding AmountTotal}" Width="*" />
                     <DataGridTextColumn Header="Monto faltante" Binding="{Binding AmountLeft}" Width="*" />
-                    <DataGridTextColumn Header="Fecha inicio" Binding="{Binding DateStart}" Width="*" />
-                    <DataGridTextColumn Header="Fecha fin" Binding="{Binding DateEnd}" Width="*" />
+                    <DataGridTextColumn Header="Interés" Binding="{Binding InteresRate, StringFormat=G29}" Width="*" />
+                    <DataGridTextColumn Header="Quincenas" Binding="{Binding NumberFortnigths}" Width="*" />
+                    <DataGridTextColumn Header="Fecha inicio" Binding="{Binding DateStart, StringFormat='dd/MM/yyyy'}" Width="*" />
+                    <DataGridTextColumn Header="Fecha fin" Binding="{Binding DateEnd, StringFormat='dd/MM/yyyy'}" Width="*" />
 
                     <!-- Columna con botón de detalles -->
                     <DataGridTemplateColumn Header="Detalles">

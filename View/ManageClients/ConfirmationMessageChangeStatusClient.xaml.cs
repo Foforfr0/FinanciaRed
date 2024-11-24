@@ -17,9 +17,9 @@ namespace FinanciaRed.View.ManageClients {
         public ConfirmationMessageChangeStatusClient (string title, string message) {
             InitializeComponent ();
 
-            textBlockTitleText.Text = title;
-            textBlockMessageText.Text = message;
-            textBlockHaveDontHaveCredit.Text = haveDontHaveCredit;
+            textBlock_TitleText.Text = title;
+            textBlock_MessageText.Text = message;
+            textBlock_HaveDontHaveCredit.Text = haveDontHaveCredit;
 
             InitializeStatuses ();
         }
@@ -51,23 +51,23 @@ namespace FinanciaRed.View.ManageClients {
         private void InitializeStatuses () {
             switch (statusClient) {
                 case "Activo":
-                    textBlockStatusClient.Text = "Activo";
-                    radioButtonOption1.Content = "Inactivo";
+                    textBlock_StatusClient.Text = "Activo";
+                    radioButton_Option1.Content = "Inactivo";
                     radioButtonOption2.Content = "Muerto";
                     break;
                 case "Inactivo":
-                    textBlockStatusClient.Text = "Inactivo";
-                    radioButtonOption1.Content = "Activo";
+                    textBlock_StatusClient.Text = "Inactivo";
+                    radioButton_Option1.Content = "Activo";
                     radioButtonOption2.Content = "Muerto";
                     break;
                 case "Muerto":
-                    textBlockStatusClient.Text = "Muerto";
-                    stackPanelNewStatus.Visibility = Visibility.Collapsed;
-                    buttonAccept.Visibility = Visibility.Collapsed;
-                    buttonCancel.Content = "Aceptar";
+                    textBlock_StatusClient.Text = "Muerto";
+                    stackPanel_NewStatus.Visibility = Visibility.Collapsed;
+                    button_Accept.Visibility = Visibility.Collapsed;
+                    button_Cancel.Content = "Aceptar";
                     break;
                 default:
-                    textBlockStatusClient.Text = "---";
+                    textBlock_StatusClient.Text = "---";
                     break;
             }
         }

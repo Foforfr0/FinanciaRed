@@ -26,6 +26,7 @@ namespace FinanciaRed.Model.Model_Entity
         public int NumberFortnights { get; set; }
         public System.DateTime DateStart { get; set; }
         public System.DateTime DateEnd { get; set; }
+        public bool IsActive { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CreditApplications> CreditApplications { get; set; }

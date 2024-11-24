@@ -4,7 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FinanciaRed"
+        mc:Ignorable="d"
         Title="Inicio de sesión">
+    
     <Grid>
         <Grid.Background>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
@@ -27,6 +29,7 @@
                 <Label Content="Iniciar sesión" FontSize="24" FontWeight="Bold" Margin="25 0 0 10"/>
                 <Label Content="Usuario:" FontSize="15" Margin="50 0"/>
                 <TextBox x:Name="textBox_Email" Margin="20 0" Padding="2" Width="300"/>
+                <Label x:Name="label_ErrorEmailLogin" d:Content="Message Error" d:Visibility="Visible" Margin="53 0" Style="{StaticResource LabelErrorForm}"/>
                 <Label Content="Contraseña:" FontSize="15" Margin="50 9 0 0"/>
                 <StackPanel Orientation="Horizontal" Margin="20 0" Width="300">
                     <Grid>
@@ -37,8 +40,9 @@
                         <Image x:Name="iconEyePassword" Source="/View/Images/icon-eye-close.png" />
                     </Button>
                 </StackPanel>
+                <Label x:Name="label_ErrorPasswordLogin" d:Content="Message Error" d:Visibility="Visible" Margin="53 0" Style="{StaticResource LabelErrorForm}"/>
 
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 25 0 0">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 15 0 0">
                     <Button Click="ClickLogin" Content="Iniciar sesión" Width="108" 
                             Height="32" Margin="0 0 0 0" Padding="4 4" FontSize="12" 
                             Background="#0067B8" Foreground="#FFFFFF" IsDefault="True"/>

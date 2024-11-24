@@ -1,0 +1,41 @@
+﻿<Window x:Class="FinanciaRed.View.ManageCreditPromotions.ConfirmationMessageChangeStateCreditPromotion"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FinanciaRed.View.ManageCreditPromotions"
+        mc:Ignorable="d"
+        Title="¿Cambiar estado de cliente?" 
+        WindowStartupLocation="CenterScreen"
+        SizeToContent="WidthAndHeight"
+        WindowStyle="None"
+        ResizeMode="NoResize">
+    
+    <Border BorderBrush="Black" BorderThickness="1" CornerRadius="10" Padding="10">
+        <StackPanel>
+            <!-- Title message -->
+            <TextBlock x:Name="textBlock_TitleText" Text="¿Está seguro de cambiar el estado de la promoción '{namePromotion}'?" 
+                       FontWeight="Bold" FontSize="16" HorizontalAlignment="Center" Margin="8"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="4">
+                <!-- Main message -->
+                <TextBlock x:Name="textBlock_MessageText" Text="La promoción actualmente tiene el estado: " FontSize="14" HorizontalAlignment="Center"/>
+                <!-- Status client -->
+                <TextBlock x:Name="textBlock_StatusPromotion" Text="StatusPromotion" FontWeight="Bold" FontSize="14" HorizontalAlignment="Center"/>
+                <TextBlock Text="." FontSize="14"/>
+            </StackPanel>
+            
+            <StackPanel x:Name="stackPanel_NewStatus" Margin="4">
+                <TextBlock Text="¿Cuál será el nuevo estado de la promoción?" HorizontalAlignment="Center" FontSize="14"/>
+                <StackPanel x:Name="stackPanelRadioButtons" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <RadioButton x:Name="radioButton_Option1" Content="" GroupName="RadioButtonGroup" FontSize="14"/>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Reply buttons -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+                <Button x:Name="button_Accept" Content="Aceptar" Width="75" Margin="5" Click="ClickAccept"/>
+                <Button x:Name="button_Cancel" Content="Cancelar" Width="75" Margin="5" Click="ClickCancel"/>
+            </StackPanel>
+        </StackPanel>
+    </Border>
+</Window>

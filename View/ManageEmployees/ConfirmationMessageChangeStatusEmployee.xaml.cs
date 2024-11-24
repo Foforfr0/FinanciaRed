@@ -1,6 +1,5 @@
 ﻿using FinanciaRed.Model.DAO;
 using FinanciaRed.Model.DTO;
-using FinanciaRed.View.ManageClients;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;

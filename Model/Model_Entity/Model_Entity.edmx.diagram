@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="839fe4f24adc4b98bbd64e1c4853be5d" Name="Diagram1">
+      <Diagram DiagramId="43553ed0eedb4dfebc0ec88db4237452" Name="Diagram1" ZoomLevel="82">
         <EntityTypeShape EntityType="FinanciaRedModel.AddressesTypes" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
         <EntityTypeShape EntityType="FinanciaRedModel.BankAccounts" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
         <EntityTypeShape EntityType="FinanciaRedModel.BankCardTypes" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
@@ -12,18 +12,18 @@
         <EntityTypeShape EntityType="FinanciaRedModel.Clients" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="FinanciaRedModel.ClientsAddresses" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
         <EntityTypeShape EntityType="FinanciaRedModel.ContactsReferencesClients" Width="1.5" PointX="3" PointY="13.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="FinanciaRedModel.CreditApplications" Width="1.5" PointX="7.5" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinanciaRedModel.CreditApplications" Width="1.5" PointX="7.5" PointY="2.125" IsExpanded="true" />
         <EntityTypeShape EntityType="FinanciaRedModel.CreditApplications_Policies" Width="1.5" PointX="9.75" PointY="3.5" IsExpanded="true" />
         <EntityTypeShape EntityType="FinanciaRedModel.Credits" Width="1.5" PointX="12.75" PointY="3.125" IsExpanded="true" />
         <EntityTypeShape EntityType="FinanciaRedModel.Employees" Width="1.5" PointX="5.25" PointY="25.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="FinanciaRedModel.Policies" Width="1.5" PointX="7.5" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinanciaRedModel.Policies" Width="1.5" PointX="7.5" PointY="9.375" IsExpanded="true" />
         <EntityTypeShape EntityType="FinanciaRedModel.Promotions" Width="1.5" PointX="5.25" PointY="14.25" IsExpanded="true" />
         <EntityTypeShape EntityType="FinanciaRedModel.RelationshipsClientsTypes" Width="1.5" PointX="0.75" PointY="14" IsExpanded="true" />
         <EntityTypeShape EntityType="FinanciaRedModel.RolesEmployees" Width="1.5" PointX="3" PointY="25.5" IsExpanded="true" />
         <EntityTypeShape EntityType="FinanciaRedModel.StatesAddresses" Width="1.5" PointX="0.75" PointY="11" IsExpanded="true" />
         <EntityTypeShape EntityType="FinanciaRedModel.StatusesClient" Width="1.5" PointX="3" PointY="17" IsExpanded="true" />
         <EntityTypeShape EntityType="FinanciaRedModel.StatusesCredit" Width="1.5" PointX="10.5" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FinanciaRedModel.StatusesCreditApplication" Width="1.5" PointX="5.25" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinanciaRedModel.StatusesCreditApplication" Width="1.5" PointX="5.25" PointY="17.5" IsExpanded="true" />
         <EntityTypeShape EntityType="FinanciaRedModel.StatusesEmployee" Width="1.5" PointX="3" PointY="27.875" IsExpanded="true" />
         <EntityTypeShape EntityType="FinanciaRedModel.StatusesMarital" Width="1.5" PointX="3" PointY="19.375" IsExpanded="true" />
         <EntityTypeShape EntityType="FinanciaRedModel.WorkClients" Width="1.5" PointX="3" PointY="21.75" IsExpanded="true" />

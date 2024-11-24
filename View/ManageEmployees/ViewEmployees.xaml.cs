@@ -30,10 +30,14 @@ namespace FinanciaRed.View.ManageUsers {
         }
 
         private async void ClickSearchEmployees (object sender, RoutedEventArgs e) {
-            string keyText = textBox_KeyWord.Text;
+            string keyText = textBoxKeyWord.Text;
 
             MessageResponse<List<DTO_Employee_Consult>> messageResponseFilterEmployees =
                 await DAO_Employee.GetFilteredEmployees (keyText);
+
+            this.filteredEmployees = new ObservableCollection<DTO_Employee_Consult> (messageResponseFilterEmployees.DataRetrieved);
+            dataGridEmployees.ItemsSource = null;
+            dataGridEmployees.ItemsSource = this.filteredEmployees;
         }
 
         private async void ClickChangeState (object sender, RoutedEventArgs e) {
@@ -62,10 +66,8 @@ namespace FinanciaRed.View.ManageUsers {
         }
 
         private void ClicShowDetailsEmployee (object sender, RoutedEventArgs e) {
-            // Obtener el botón que fue clicado
             Button button = sender as Button;
-            // Obtener los datos de la fila a través del DataContext del botón
-            //DTO_Employee_Consult rowData = button.DataContext as DTO_Employee_Consult;
+
             if (button.DataContext is DTO_Employee_Consult rowData) {
                 ViewDetailsEmployee viewDetailsEmployeeWindow = new ViewDetailsEmployee (rowData.IdEmployee);
                 viewDetailsEmployeeWindow.ShowDialog ();

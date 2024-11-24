@@ -3,6 +3,7 @@ using FinanciaRed.Utils;
 using FinanciaRed.View.ManageClients;
 using FinanciaRed.View.ManageCreditApplications;
 using FinanciaRed.View.ManageCreditPolicies;
+using FinanciaRed.View.ManageCreditPromotions;
 using FinanciaRed.View.ManageCredits;
 using FinanciaRed.View.ManageEmployees;
 using FinanciaRed.View.ManageMonthlyEfficiencies;
@@ -38,6 +39,7 @@ namespace FinanciaRed.View {
         private void ShowAvailableOptionsUser () {
             if (CURRENT_USER.Instance.IdRol == 1) {       //Administrador
                 label_GlobalOptionEmployees.Visibility = Visibility.Visible;
+                label_GlobalOptionPromotions.Visibility = Visibility.Visible;
                 label_GlobalOptionCreditPolicies.Visibility = Visibility.Visible;
                 label_GlobalOptionMonthlyEfficiencies.Visibility = Visibility.Visible;
             }
@@ -58,22 +60,28 @@ namespace FinanciaRed.View {
         private void ClickCheckAccount (object sender, RoutedEventArgs e) {
             innerFrameContainer.Navigate (new CheckProfile (CURRENT_USER.Instance.IdEmployee));
         }
+
         private void ClickShowManagementClientsFrame (object sender, RoutedEventArgs e) {
             innerFrameContainer.Navigate (new ViewClients ());
-        }
-        private void ClickShowManagementCreditsFrame (object sender, RoutedEventArgs e) {
-            innerFrameContainer.Navigate (new ViewCredits ());
-        }
-
-        private void ClickShowManagementCreditRequestsFrame (object sender, RoutedEventArgs e) {
-            innerFrameContainer.Navigate (new ViewCreditApplications ());
         }
 
         private void ClickShowManagementEmployeesFrame (object sender, RoutedEventArgs e) {
             innerFrameContainer.Navigate (new ViewEmployees ());
         }
 
-        private void ClickShowManagementPoliciesFrame (object sender, RoutedEventArgs e) {
+        private void ClickShowManagementCreditsFrame (object sender, RoutedEventArgs e) {
+            innerFrameContainer.Navigate (new ViewCredits ());
+        }
+
+        private void ClickShowManagementCreditApplicationsFrame (object sender, RoutedEventArgs e) {
+            innerFrameContainer.Navigate (new ViewCreditApplications ());
+        }
+
+        private void ClickShowManagementPromotionsFrame (object sender, RoutedEventArgs e) {
+            innerFrameContainer.Navigate (new ViewCreditPromotions ());
+        }
+
+        private void ClickShowManagementCreditPoliciesFrame (object sender, RoutedEventArgs e) {
             innerFrameContainer.Navigate (new ViewCreditPolicies ());
         }
 
