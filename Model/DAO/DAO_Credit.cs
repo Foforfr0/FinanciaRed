@@ -21,8 +21,8 @@ namespace FinanciaRed.Model.DAO {
                             AmountLeft = crdt.AmountLeft,
                             DateStart = crdt.DateStart,
                             DateEnd = crdt.DateEnd,
-                            InteresRate = crdt.CreditApplications.InteresRate ?? 0,
-                            NumberFortnigths = crdt.CreditApplications.NumberFortnights ?? 0
+                            InteresRate = crdt.CreditApplications.Promotions.InterestRate,
+                            NumberFortnigths = crdt.CreditApplications.Promotions.NumberFortnights
                         }).
                         ToListAsync ();
 
@@ -63,7 +63,7 @@ namespace FinanciaRed.Model.DAO {
 
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
                 try {
-                    // Filtra los créditos relacionados con el cliente por su `idPromotion`
+                    // Filtra los créditos relacionados con el cliente por su `IdPromotion`
                     List<Credits> relatedCredits = await context.Credits.
                         Where (credit => credit.CreditApplications.Clients.IdClient == idClient).
                         ToListAsync ();

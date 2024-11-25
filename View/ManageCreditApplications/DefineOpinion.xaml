@@ -375,17 +375,17 @@
                                             <ColumnDefinition/>
                                         </Grid.ColumnDefinitions>
                                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="0">
-                                            <Label Content="INE:" Style="{StaticResource FieldTag}" HorizontalAlignment="Center"/>
+                                            <Label Content="INE" Style="{StaticResource FieldTag}" HorizontalAlignment="Center"/>
                                             <Image Source="/View/Images/pdf-icon.png" Height="100"/>
                                             <Button Click="ClickShowProofINE" Content="Visualizar"/>
                                         </StackPanel>
                                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="2">
-                                            <Label Content="Comprobante de domicilio:" Style="{StaticResource FieldTag}" HorizontalAlignment="Center"/>
+                                            <Label Content="Comprobante de domicilio" Style="{StaticResource FieldTag}" HorizontalAlignment="Center"/>
                                             <Image Source="/View/Images/pdf-icon.png" Height="100"/>
                                             <Button Click="ClickShowProofAddress" Content="Visualizar"/>
                                         </StackPanel>
                                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="1">
-                                            <Label Content="Último talón de pago:" Style="{StaticResource FieldTag}" HorizontalAlignment="Center"/>
+                                            <Label Content="Último talón de pago" Style="{StaticResource FieldTag}" HorizontalAlignment="Center"/>
                                             <Image Source="/View/Images/pdf-icon.png" Height="100"/>
                                             <Button Click="ClickShowProofLastPayStub" Content="Visualizar"/>
                                         </StackPanel>

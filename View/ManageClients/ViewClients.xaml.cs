@@ -74,7 +74,7 @@ namespace FinanciaRed.View.ManageClients {
             Button button = sender as Button;
             
             if (button.DataContext is DTO_Client_Consult rowData) {
-                ViewDetailsClient viewDetailsClientWindow = new ViewDetailsClient (rowData.IdClient);
+                ViewDetailsClient viewDetailsClientWindow = new ViewDetailsClient (rowData.IdClient, true);
                 viewDetailsClientWindow.ShowDialog ();
             }
         }

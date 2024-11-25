@@ -23,6 +23,9 @@ namespace FinanciaRed.Model.DTO {
         public DateTime DateSolicited {
             get; set;
         }
+        public int IdClient {
+            get; set;
+        }
         public string ClientFirstName {
             get; set;
         }

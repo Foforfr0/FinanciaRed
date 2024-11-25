@@ -184,14 +184,12 @@ CREATE TABLE CreditApplications (
     DateApplication DATE NOT NULL,
     DateAcepted DATE,
     AmountTotal INT NOT NULL,
-    InteresRate REAL,
-    NumberFortnights INT,
     ProofAddress VARBINARY(MAX),
     ProofINE VARBINARY(MAX),
     ProofLastPayStub VARBINARY(MAX),
     IdEmployeeApplication INT NOT NULL,
     IdStatusCreditApplication INT NOT NULL,
-    IdPromotion INT,
+    IdPromotion INT NOT NULL,
     IdClient INT NOT NULL,  
     ValorationOpinion TEXT,
 
@@ -336,13 +334,13 @@ INSERT INTO Promotions (Name, InterestRate, NumberFortnights, DateStart, DateEnd
             VALUES ('Plazoz chiquitoz', 0.05, 2, '2024-06-01', '2024-12-31', 1),
                    ('Para pacientes', 0.15, 4, '2024-06-01', '2024-12-31', 1);
 
-INSERT INTO CreditApplications (DateApplication, DateAcepted, AmountTotal, InteresRate, NumberFortnights, IdStatusCreditApplication,
+INSERT INTO CreditApplications (DateApplication, DateAcepted, AmountTotal, IdStatusCreditApplication, ValorationOpinion,
             IdPromotion,IdEmployeeApplication, IdClient, ProofINE, ProofAddress, ProofLastPayStub)
-VALUES  ('2024-10-23', '2024-10-29', 10000, 0.20, 6, 2, NULL, 1, 1,
+VALUES  ('2024-10-23', '2024-10-29', 10000, 2, 'Ejemplo de valoración 1', 1, 1, 1,
         (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Users\fofor\Desktop\Escuela\Desarrollo de software\ProofINE.pdf', SINGLE_BLOB) AS ProofINE),
         (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Users\fofor\Desktop\Escuela\Desarrollo de software\ProofAddress.pdf', SINGLE_BLOB) AS ProofAddress),
         (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Users\fofor\Desktop\Escuela\Desarrollo de software\ProofLastPayStub.pdf', SINGLE_BLOB) AS ProofLastPayStub)),
-        ('2024-10-24', NULL, 35000, 0.10, 10, 1, NULL, 1, 2,
+        ('2024-10-24', NULL, 35000, 1, NULL, 2, 1, 2,
         (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Users\fofor\Desktop\Escuela\Desarrollo de software\ProofINE.pdf', SINGLE_BLOB) AS ProofINE),
         (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Users\fofor\Desktop\Escuela\Desarrollo de software\ProofAddress.pdf', SINGLE_BLOB) AS ProofAddress),
         (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Users\fofor\Desktop\Escuela\Desarrollo de software\ProofLastPayStub.pdf', SINGLE_BLOB) AS ProofLastPayStub));
@@ -359,6 +357,7 @@ INSERT INTO CreditApplications_Policies (IdCreditApplication, IdPolicy, IsAprobe
             VALUES (1, 1, 1), (1, 2, 1), (1, 3, 1),
                    (2, 1, NULL), (2, 2, NULL), (2, 3, NULL);
 --TESTS---------------------------------------------------------------
-SELECT * FROM CreditApplications 
-RIGHT JOIN Clients ON CreditApplications.IdClient = Clients.IdClient;
 SELECT * FROM CreditApplications_Policies;
+SELECT * FROM CreditApplications;
+SELECT * FROM CreditApplications_Policies;
+SELECT * FROM Clients;

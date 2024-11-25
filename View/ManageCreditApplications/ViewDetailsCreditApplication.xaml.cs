@@ -1,10 +1,13 @@
 ﻿using FinanciaRed.Model.DAO;
 using FinanciaRed.Model.DTO;
 using FinanciaRed.Model.DTO.CreditApplication;
+using FinanciaRed.View.ManageClients;
+using FinanciaRed.View.ManageCreditPolicies;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace FinanciaRed.View.ManageCreditApplications {
     /// <summary>
@@ -33,7 +36,7 @@ namespace FinanciaRed.View.ManageCreditApplications {
             MessageResponse<DTO_CreditApplication_Details> messageResponseCreditAppli = await DAO_CreditApplication.GetDetailsCreditApplication (idCreditApplication);
             this.selectedCreditApplication = messageResponseCreditAppli.DataRetrieved;
 
-            if (!messageResponseCreditAppli.IsError) {
+            if (messageResponseCreditAppli.IsError) {
                 MessageBox.Show ("No se logró recuperar los datos de la solicitud de crédito.\nIntente más tarde.", "Error inesperado");
             } else {
                 ShowDataCreditAppplication ();
@@ -51,14 +54,22 @@ namespace FinanciaRed.View.ManageCreditApplications {
             label_NumberFortNigths.Content = string.Concat (selectedCreditApplication.NumberFortNights);
             label_DateApplied.Content = selectedCreditApplication.DateSolicited;
             label_StatusCreditApplcation.Content = selectedCreditApplication.Status;
+            textBox_Valoration.Text = selectedCreditApplication.Valoration;
         }
 
         private void ClickShowDetailsClient (object sender, RoutedEventArgs e) {
-
+            ViewDetailsClient viewDetailsClientWindow = new ViewDetailsClient (selectedCreditApplication.IdClient, false);
+            viewDetailsClientWindow.ShowDialog ();
         }
 
         private void ClicShowDetailsCreditPolicy (object sender, RoutedEventArgs e) {
+            Button button = sender as Button;
 
+            if (button.DataContext is DTO_CreditApplication_CreditPolicies rowData) {
+                ViewDetailsCreditPolicy viewDetailsCreditPolicyWindow =
+                    new ViewDetailsCreditPolicy ((dataGrid_CreditPolicies.SelectedItem as DTO_CreditApplication_CreditPolicies).IdCreditPolicy, false);
+                viewDetailsCreditPolicyWindow.ShowDialog ();
+            }
         }
     }
 }

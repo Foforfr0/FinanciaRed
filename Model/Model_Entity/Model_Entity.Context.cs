@@ -7,88 +7,46 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FinanciaRed.Model.Model_Entity {
+namespace FinanciaRed.Model.Model_Entity
+{
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-
-    public partial class FinanciaRedEntities : DbContext {
-        public FinanciaRedEntities ()
-            : base ("name=FinanciaRedEntities") {
+    
+    public partial class FinanciaRedEntities : DbContext
+    {
+        public FinanciaRedEntities()
+            : base("name=FinanciaRedEntities")
+        {
         }
-
-        protected override void OnModelCreating (DbModelBuilder modelBuilder) {
-            throw new UnintentionalCodeFirstException ();
+    
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            throw new UnintentionalCodeFirstException();
         }
-
-        public virtual DbSet<AddressesTypes> AddressesTypes {
-            get; set;
-        }
-        public virtual DbSet<BankAccounts> BankAccounts {
-            get; set;
-        }
-        public virtual DbSet<BankCardTypes> BankCardTypes {
-            get; set;
-        }
-        public virtual DbSet<Banks> Banks {
-            get; set;
-        }
-        public virtual DbSet<Clients> Clients {
-            get; set;
-        }
-        public virtual DbSet<ClientsAddresses> ClientsAddresses {
-            get; set;
-        }
-        public virtual DbSet<ContactsReferencesClients> ContactsReferencesClients {
-            get; set;
-        }
-        public virtual DbSet<CreditApplications> CreditApplications {
-            get; set;
-        }
-        public virtual DbSet<CreditApplications_Policies> CreditApplications_Policies {
-            get; set;
-        }
-        public virtual DbSet<Credits> Credits {
-            get; set;
-        }
-        public virtual DbSet<Employees> Employees {
-            get; set;
-        }
-        public virtual DbSet<Policies> Policies {
-            get; set;
-        }
-        public virtual DbSet<Promotions> Promotions {
-            get; set;
-        }
-        public virtual DbSet<RelationshipsClientsTypes> RelationshipsClientsTypes {
-            get; set;
-        }
-        public virtual DbSet<RolesEmployees> RolesEmployees {
-            get; set;
-        }
-        public virtual DbSet<StatesAddresses> StatesAddresses {
-            get; set;
-        }
-        public virtual DbSet<StatusesClient> StatusesClient {
-            get; set;
-        }
-        public virtual DbSet<StatusesCredit> StatusesCredit {
-            get; set;
-        }
-        public virtual DbSet<StatusesCreditApplication> StatusesCreditApplication {
-            get; set;
-        }
-        public virtual DbSet<StatusesEmployee> StatusesEmployee {
-            get; set;
-        }
-        public virtual DbSet<StatusesMarital> StatusesMarital {
-            get; set;
-        }
-        public virtual DbSet<WorkClients> WorkClients {
-            get; set;
-        }
-        public virtual DbSet<WorkTypes> WorkTypes {
-            get; set;
-        }
+    
+        public virtual DbSet<AddressesTypes> AddressesTypes { get; set; }
+        public virtual DbSet<BankAccounts> BankAccounts { get; set; }
+        public virtual DbSet<BankCardTypes> BankCardTypes { get; set; }
+        public virtual DbSet<Banks> Banks { get; set; }
+        public virtual DbSet<Clients> Clients { get; set; }
+        public virtual DbSet<ClientsAddresses> ClientsAddresses { get; set; }
+        public virtual DbSet<ContactsReferencesClients> ContactsReferencesClients { get; set; }
+        public virtual DbSet<CreditApplications> CreditApplications { get; set; }
+        public virtual DbSet<CreditApplications_Policies> CreditApplications_Policies { get; set; }
+        public virtual DbSet<Credits> Credits { get; set; }
+        public virtual DbSet<Employees> Employees { get; set; }
+        public virtual DbSet<Policies> Policies { get; set; }
+        public virtual DbSet<Promotions> Promotions { get; set; }
+        public virtual DbSet<RelationshipsClientsTypes> RelationshipsClientsTypes { get; set; }
+        public virtual DbSet<RolesEmployees> RolesEmployees { get; set; }
+        public virtual DbSet<StatesAddresses> StatesAddresses { get; set; }
+        public virtual DbSet<StatusesClient> StatusesClient { get; set; }
+        public virtual DbSet<StatusesCredit> StatusesCredit { get; set; }
+        public virtual DbSet<StatusesCreditApplication> StatusesCreditApplication { get; set; }
+        public virtual DbSet<StatusesEmployee> StatusesEmployee { get; set; }
+        public virtual DbSet<StatusesMarital> StatusesMarital { get; set; }
+        public virtual DbSet<WorkClients> WorkClients { get; set; }
+        public virtual DbSet<WorkTypes> WorkTypes { get; set; }
     }
 }

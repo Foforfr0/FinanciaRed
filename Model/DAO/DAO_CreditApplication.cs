@@ -1,4 +1,5 @@
 ﻿using FinanciaRed.Model.DTO;
+using FinanciaRed.Model.DTO.Client;
 using FinanciaRed.Model.DTO.CreditApplication;
 using FinanciaRed.Model.Model_Entity;
 using System;
@@ -8,6 +9,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace FinanciaRed.Model.DAO {
     internal class DAO_CreditApplication {
@@ -21,8 +23,8 @@ namespace FinanciaRed.Model.DAO {
                         Select (ca => new DTO_CreditApplication_Consult {
                             IdCreditApplication = ca.IdCreditApplication,
                             AmountTotal = ca.AmountTotal,
-                            InteresRate = ca.InteresRate ?? 0,
-                            NumberFortNights = ca.NumberFortnights ?? 0,
+                            InteresRate = ca.Promotions.InterestRate,
+                            NumberFortNights = ca.Promotions.NumberFortnights,
                             DateRequest = ca.DateApplication,
                             IdStatus = ca.IdStatusCreditApplication,
                             Status = ca.StatusesCreditApplication.Status,
@@ -58,8 +60,8 @@ namespace FinanciaRed.Model.DAO {
                         Select (ca => new DTO_CreditApplication_Consult {
                             IdCreditApplication = ca.IdCreditApplication,
                             AmountTotal = ca.AmountTotal,
-                            InteresRate = ca.InteresRate ?? 0,
-                            NumberFortNights = ca.NumberFortnights ?? 0,
+                            InteresRate = ca.Promotions.InterestRate,
+                            NumberFortNights = ca.Promotions.NumberFortnights,
                             DateRequest = ca.DateApplication,
                             IdStatus = ca.IdStatusCreditApplication,
                             Status = ca.StatusesCreditApplication.Status,
@@ -81,6 +83,57 @@ namespace FinanciaRed.Model.DAO {
             return responseConsultCreditApplications;
         }
 
+        public static async Task<MessageResponse<bool>> RegistryNewCreditApplication (DTO_CreditApplication_Create newCreditApplication) {
+            if (newCreditApplication == null || newCreditApplication.IdClient <= 0) {
+                return MessageResponse<bool>.Failure ("Invalid credit application data.");
+            }
+
+            MessageResponse<bool> responseCreateCA = null;
+
+            using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                using (var transaction = context.Database.BeginTransaction ()) {
+                    try {
+                        CreditApplications createdCreditApplication = new CreditApplications {
+                            DateApplication = newCreditApplication.DateApplication,
+                            AmountTotal = newCreditApplication.AmountSolicited,
+                            IdStatusCreditApplication = 1,
+                            IdPromotion = newCreditApplication.IdPromotion,
+                            IdEmployeeApplication = newCreditApplication.IdEmployee,
+                            IdClient = newCreditApplication.IdClient,
+                            ProofINE = newCreditApplication.ProofINE,
+                            ProofAddress = newCreditApplication.ProofAddress,
+                            ProofLastPayStub = newCreditApplication.ProofLastPayStub,
+                        };
+                        context.CreditApplications.Add (createdCreditApplication);
+                        await context.SaveChangesAsync ();
+
+                        DateTime today = DateTime.Now;
+                        List<Policies> activePolicies = await context.Policies
+                            .Where (p => today >= p.DateStart && today <= (p.DateEnd ?? DateTime.Now))
+                            .ToListAsync ();
+
+                        foreach (Policies policy in activePolicies) {
+                            CreditApplications_Policies applicationPolicy = new CreditApplications_Policies {
+                                IdCreditApplication = createdCreditApplication.IdCreditApplication,
+                                IdPolicy = policy.IdPolicy,
+                                IsAprobed = null
+                            };
+                            context.CreditApplications_Policies.Add (applicationPolicy);
+                            await context.SaveChangesAsync ();
+                        }
+                        transaction.Commit ();
+
+                        responseCreateCA = MessageResponse<bool>.Success ("Credit application created successfully.", true);
+                    } catch (Exception ex) {
+                        transaction.Rollback ();
+                        responseCreateCA = MessageResponse<bool>.Failure ($"Transaction failed: {ex.Message}");
+                    }
+                }
+            }
+
+            return responseCreateCA;
+        }
+
         public static async Task<MessageResponse<DTO_CreditApplication_Details>> GetDetailsCreditApplication (int idCreditApplication) {
             MessageResponse<DTO_CreditApplication_Details> responseDetailsCreditApplications = null;
 
@@ -92,16 +145,17 @@ namespace FinanciaRed.Model.DAO {
                             IdCreditApplication = ca.IdCreditApplication,
                             NameAdviser = ca.Employees.FirstName + " " + ca.Employees.MiddleName + " " + ca.Employees.LastName,
                             AmountSolicited = ca.AmountTotal,
-                            AmountWithInteres = (int)(ca.AmountTotal + ca.AmountTotal * ca.InteresRate),
-                            InterestRate = ca.InteresRate ?? 0,
+                            AmountWithInteres = (int)(ca.AmountTotal + ca.AmountTotal * ca.Promotions.InterestRate),
+                            InterestRate = ca.Promotions.InterestRate,
                             DateSolicited = ca.DateApplication,
-                            NumberFortNights = ca.NumberFortnights ?? 0,
+                            NumberFortNights = ca.Promotions.NumberFortnights,
+                            IdClient = ca.Clients.IdClient,
                             ClientFirstName = ca.Clients.FirstName,
                             ClientMiddleName = ca.Clients.MiddleName,
                             ClientLastName = ca.Clients.LastName,
                             ClientDateBirth = ca.Clients.DateBirth,
                             CodeCURP = ca.Clients.CodeCURP,
-                            CodeRFC= ca.Clients.CodeRFC,
+                            CodeRFC = ca.Clients.CodeRFC,
                             ClientGender = ca.Clients.Gender.Equals ("M") ? "Masculino" : "Femenino",
                             ClientAddress = "Calle " + ca.Clients.ClientsAddresses.Street + ", " +
                                             "Interior " + ca.Clients.ClientsAddresses.InteriorNumber + ", " +
@@ -207,7 +261,6 @@ namespace FinanciaRed.Model.DAO {
                 return MessageResponse<bool>.Failure ($"Cannot save the changes: {ex.Message}");
             }
         }
-
 
         public static async Task<MessageResponse<bool>> DefineOpinion (int idCreditApplcation, string valoration) {
             MessageResponse<bool> responseUpdateValorationCrdApp = null;

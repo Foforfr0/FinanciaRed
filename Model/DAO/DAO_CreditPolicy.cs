@@ -8,7 +8,6 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace FinanciaRed.Model.DAO {
     internal class DAO_CreditPolicy {

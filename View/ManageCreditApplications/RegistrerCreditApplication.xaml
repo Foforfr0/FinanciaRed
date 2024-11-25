@@ -49,25 +49,48 @@
                                                 <RowDefinition/>
                                                 <RowDefinition/>
                                                 <RowDefinition/>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
                                             </Grid.RowDefinitions>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="2*"/>
+                                                <ColumnDefinition Width="3*"/>
                                             </Grid.ColumnDefinitions>
-                                            
-                                            <Label Content="Nombre completo:" Grid.Row="0" Style="{StaticResource FieldTag}"/>
-                                            <Label x:Name="label_CompleteName" Grid.Row="0" Grid.Column="1"/>
-                                            <Label x:Name="label_CodeCURP" Content="CURP:" Grid.Row="1" Style="{StaticResource FieldTag}"/>
-                                            <Label Grid.Row="1" Grid.Column="1"/>
-                                            <Label Content="RFC:" Grid.Row="2" Style="{StaticResource FieldTag}"/>
-                                            <Label x:Name="label_CodeRFC" Grid.Row="2" Grid.Column="1"/>
+
+                                            <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
+                                                <Label Style="{StaticResource RequiredFieldTag}"/>
+                                                <Label Content="Nombre completo:" Style="{StaticResource FieldTag}"/>
+                                            </StackPanel>
+                                            <TextBox x:Name="textBox_ClientName" Grid.Row="0" Grid.Column="1" Margin="0 1 0 1"/>
+                                            <Label x:Name="label_ErrorClientName" Grid.Row="1" Grid.Column="1" d:Content="Message error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
+                                            <StackPanel Orientation="Horizontal" Grid.Row="2">
+                                                <Label Style="{StaticResource RequiredFieldTag}"/>
+                                                <Label x:Name="label_CodeCURP" Content="CURP:" Style="{StaticResource FieldTag}"/>
+                                            </StackPanel>
+                                            <TextBox x:Name="textBox_CodeCURP" Grid.Row="2" Grid.Column="1" Margin="0 1 0 1"/>
+                                            <Label x:Name="label_ErrorCodeCURP" Grid.Row="3" Grid.Column="1" d:Content="Message error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
+                                            <StackPanel Orientation="Horizontal" Grid.Row="4">
+                                                <Label Style="{StaticResource RequiredFieldTag}"/>
+                                                <Label Content="RFC:" Style="{StaticResource FieldTag}"/>
+                                            </StackPanel>
+                                            <TextBox x:Name="textBox_CodeRFC" Grid.Row="4" Grid.Column="1" Margin="0 1 0 1"/>
+                                            <Label x:Name="label_ErrorCodeRFC" Grid.Row="5" Grid.Column="1" d:Content="Message error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
                                         </Grid>
-                                    </StackPanel>
+                                        <Label x:Name="label_StatusSearchClient" d:Content="status search client" Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
+                                        <Button x:Name="button_SearchClient" Click="ClickSearchClient" Content="Buscar" 
+                                            Width="80" Height="25" Margin="0 8" HorizontalAlignment="Center" Background="#FF0693C3" Foreground="#FFFFFF"/>
+                                        </StackPanel>
                                 </StackPanel>
 
                                 <StackPanel Grid.Row="1" Margin="0 0 15 5" Background="#FFEAEAEA">
                                     <StackPanel Margin="20 10">
                                         <Label Content="Condiciones de crédito" FontSize="18" FontWeight="Bold" Padding="0" HorizontalAlignment="Center"/>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 5">
+                                            <Label Content="Promociones vigentes: " Style="{StaticResource FieldTag}"/>
+                                            <ComboBox x:Name="comboBox_Promotions" SelectionChanged="SelectionChangedPromotion" DisplayMemberPath="Name" Width="300"/>
+                                        </StackPanel>
+                                        <Label x:Name="label_ErrorPromotion" d:Content="Message Error" d:Visibility="Visible" HorizontalAlignment="Center" Style="{StaticResource LabelErrorForm}"/>
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*"/>
@@ -77,7 +100,7 @@
                                                 <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
 
-                                            <StackPanel Grid.Column="0" >
+                                            <StackPanel Grid.Column="0">
                                                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                                                     <Label Style="{StaticResource RequiredFieldTag}"/>
                                                     <Label Content="Monto solicitado:" Style="{StaticResource FieldTag}"/>
@@ -91,13 +114,21 @@
                                                     <Label Style="{StaticResource RequiredFieldTag}"/>
                                                     <Label Content="Plazo:" Style="{StaticResource FieldTag}"/>
                                                 </StackPanel>
-                                                <ComboBox x:Name="comboBox_TimeLimit" Height="22"/>
-                                                <Label x:Name="label_ErrorTimeLimit" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
+                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                                    <Label x:Name="label_NumberFortNigths" Height="22"/>
+                                                    <Label Content=" Semanas"/>
+                                                </StackPanel>
                                             </StackPanel>
 
                                             <StackPanel Grid.Column="4">
-                                                <Label Content="Tasa de interés:" Foreground="Black" FontWeight="Bold" HorizontalAlignment="Center"/>
-                                                <Label Content="20%" Foreground="Black" FontWeight="Bold" HorizontalAlignment="Center" Margin="0 5"/>
+                                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                                    <Label Style="{StaticResource RequiredFieldTag}"/>
+                                                    <Label Content="Taza de interés:" Style="{StaticResource FieldTag}"/>
+                                                </StackPanel>
+                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                                    <Label x:Name="label_InterestRate" PreviewTextInput="PreviewTextInput_OnlyNumbers" Height="22"/>
+                                                    <Label Content=" %"/>
+                                                </StackPanel>
                                             </StackPanel>
                                         </Grid>
                                     </StackPanel>
@@ -108,10 +139,12 @@
                                     <ColumnDefinition/>
                                     <ColumnDefinition/>
                                     <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
                                 <Button Click="ClickCancel" Content="Cancelar" Grid.Column="1" 
                                     Width="80" Background="#FFDE2323" Foreground="#FFFFFF"/>
-                                <Button Click="ClickContinueStage2" Content="Continuar" Grid.Column="2" 
+                                <Button Click="ClickContinueStage2" Content="Continuar" Grid.Column="3" 
                                     Width="80" Background="#FF06C32B" Foreground="#FFFFFF"/>
                             </Grid>
                         </StackPanel>
@@ -161,19 +194,30 @@
                                 <StackPanel Grid.Row="1" Margin="0 0 15 5" Background="#FFEAEAEA">
                                     <StackPanel Margin="20 10">
                                         <Label Content="Subida de archivos" Style="{StaticResource HeaderText2}" HorizontalAlignment="Center"/>
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition/>
-                                                <RowDefinition/>
-                                                <RowDefinition/>
-                                            </Grid.RowDefinitions>
+                                        <Grid Margin="5">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition/>
                                                 <ColumnDefinition/>
+                                                <ColumnDefinition/>
                                             </Grid.ColumnDefinitions>
-
-                                            <Label Content="INE" Grid.Column="0" Style="{StaticResource HeaderText3}" HorizontalAlignment="Center"/>
-                                            <Label Content="Talón de pagos" Grid.Column="1" Style="{StaticResource HeaderText3}" HorizontalAlignment="Center"/>
+                                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="0">
+                                                <Label Content="INE:" Style="{StaticResource FieldTag}" HorizontalAlignment="Center"/>
+                                                <Image Source="/View/Images/pdf-icon.png" Height="100"/>
+                                                <Label x:Name="label_StatusProofINE"  d:Content="Subido" d:Visibility="Visible" Visibility="Collapsed" HorizontalAlignment="Center"/>
+                                                <Button Click="UploadProofINE" Content="Subir"/>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="2">
+                                                <Label Content="Comprobante de domicilio:" Style="{StaticResource FieldTag}" HorizontalAlignment="Center"/>
+                                                <Image Source="/View/Images/pdf-icon.png" Height="100"/>
+                                                <Label x:Name="label_StatusProofAddress" d:Content="Subido" d:Visibility="Visible" Visibility="Collapsed" HorizontalAlignment="Center"/>
+                                                <Button Click="UploadProofAddress" Content="Subir"/>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="1">
+                                                <Label Content="Último talón de pago:" Style="{StaticResource FieldTag}" HorizontalAlignment="Center"/>
+                                                <Image Source="/View/Images/pdf-icon.png" Height="100"/>
+                                                <Label x:Name="label_StatusProofLastPayStub" d:Content="Subido" d:Visibility="Visible" Visibility="Collapsed" HorizontalAlignment="Center"/>
+                                                <Button Click="UploadProofLastPayStub" Content="Subir"/>
+                                            </StackPanel>
                                         </Grid>
                                     </StackPanel>
                                 </StackPanel>

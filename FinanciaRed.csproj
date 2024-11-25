@@ -98,6 +98,8 @@
     <Compile Include="Model\DTO\Bank\DTO_CardType.cs" />
     <Compile Include="Model\DTO\Client\DTO_Client_Consult.cs" />
     <Compile Include="Model\DTO\Client\DTO_Client_Details.cs" />
+    <Compile Include="Model\DTO\Client\DTO_Client_Search.cs" />
+    <Compile Include="Model\DTO\Client\DTO_CreditApplication_Create.cs" />
     <Compile Include="Model\DTO\CreditApplication\DTO_CreditApplication-CreditPolicies.cs" />
     <Compile Include="Model\DTO\CreditPolicy\DTO_CreditPolicy_Consult.cs" />
     <Compile Include="Model\DTO\CreditPolicy\DTO_CreditPolicy_Opinion.cs" />

@@ -42,6 +42,37 @@ namespace FinanciaRed.Model.DAO {
             return responseConsultCreditPromotions;
         }
 
+        public static async Task<MessageResponse<List<DTO_CreditPromotion_Consult>>> GetCreditPromotionsAvailable (DateTime dateNow) {
+            MessageResponse<List<DTO_CreditPromotion_Consult>> responseConsultCreditPromotions = null;
+
+            using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                try {
+                    List<DTO_CreditPromotion_Consult> dataRetrieved = await context.Promotions.
+                        Select (cp => new DTO_CreditPromotion_Consult {
+                            IdCreditPromotion = cp.IdPromotion,
+                            Name = cp.Name,
+                            InterestRate = cp.InterestRate,
+                            NumberFortNigths = cp.NumberFortnights,
+                            DateStart = cp.DateStart,
+                            DateEnd = cp.DateEnd
+                        }).
+                        ToListAsync ();
+
+                    if (dataRetrieved != null) {
+                        responseConsultCreditPromotions = MessageResponse<List<DTO_CreditPromotion_Consult>>.Success (
+                            dataRetrieved.Count + " credit promotions retrieved.",
+                            dataRetrieved
+                        );
+                    } else {
+                        responseConsultCreditPromotions = MessageResponse<List<DTO_CreditPromotion_Consult>>.Failure ("Cannot retrieved credit promotions.");
+                    }
+                } catch (Exception e) {
+                    responseConsultCreditPromotions = MessageResponse<List<DTO_CreditPromotion_Consult>>.Failure ($"Exception: {e.Message}");
+                }
+            }
+            return responseConsultCreditPromotions;
+        }
+
         public static async Task<MessageResponse<List<DTO_CreditPromotion_Consult>>> GetFilteredCreditPromotions (string keyText) {
             MessageResponse<List<DTO_CreditPromotion_Consult>> responseConsultCreditPromotions = null;
 

@@ -95,14 +95,12 @@
           <Property Name="DateApplication" Type="date" Nullable="false" />
           <Property Name="DateAcepted" Type="date" />
           <Property Name="AmountTotal" Type="int" Nullable="false" />
-          <Property Name="InteresRate" Type="real" />
-          <Property Name="NumberFortnights" Type="int" />
           <Property Name="ProofAddress" Type="varbinary(max)" />
           <Property Name="ProofINE" Type="varbinary(max)" />
           <Property Name="ProofLastPayStub" Type="varbinary(max)" />
           <Property Name="IdEmployeeApplication" Type="int" Nullable="false" />
           <Property Name="IdStatusCreditApplication" Type="int" Nullable="false" />
-          <Property Name="IdPromotion" Type="int" />
+          <Property Name="IdPromotion" Type="int" Nullable="false" />
           <Property Name="IdClient" Type="int" Nullable="false" />
           <Property Name="ValorationOpinion" Type="text" />
         </EntityType>
@@ -398,7 +396,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_Promotion_CreditApplication">
-          <End Role="Promotions" Type="Self.Promotions" Multiplicity="0..1" />
+          <End Role="Promotions" Type="Self.Promotions" Multiplicity="1" />
           <End Role="CreditApplications" Type="Self.CreditApplications" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Promotions">
@@ -767,14 +765,12 @@
           <Property Name="DateApplication" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="DateAcepted" Type="DateTime" Precision="0" />
           <Property Name="AmountTotal" Type="Int32" Nullable="false" />
-          <Property Name="InteresRate" Type="Single" />
-          <Property Name="NumberFortnights" Type="Int32" />
           <Property Name="ProofAddress" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="ProofINE" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="ProofLastPayStub" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="IdEmployeeApplication" Type="Int32" Nullable="false" />
           <Property Name="IdStatusCreditApplication" Type="Int32" Nullable="false" />
-          <Property Name="IdPromotion" Type="Int32" />
+          <Property Name="IdPromotion" Type="Int32" Nullable="false" />
           <Property Name="IdClient" Type="Int32" Nullable="false" />
           <Property Name="ValorationOpinion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Clients" Relationship="Self.fk_Client_CreditApplication" FromRole="CreditApplications" ToRole="Clients" />
@@ -1144,7 +1140,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_Promotion_CreditApplication">
-          <End Role="Promotions" Type="Self.Promotions" Multiplicity="0..1" />
+          <End Role="Promotions" Type="Self.Promotions" Multiplicity="1" />
           <End Role="CreditApplications" Type="Self.CreditApplications" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Promotions">
@@ -1227,7 +1223,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="FinanciaRedEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AddressesTypes" EntityType="Self.AddressesTypes" />
           <EntitySet Name="BankAccounts" EntityType="Self.BankAccounts" />
           <EntitySet Name="BankCardTypes" EntityType="Self.BankCardTypes" />
@@ -1353,7 +1349,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="FinanciaRedModelStoreContainer" CdmEntityContainer="Entities">
+        <EntityContainerMapping StorageEntityContainer="FinanciaRedModelStoreContainer" CdmEntityContainer="FinanciaRedEntities">
           <EntitySetMapping Name="AddressesTypes">
             <EntityTypeMapping TypeName="FinanciaRedModel.AddressesTypes">
               <MappingFragment StoreEntitySet="AddressesTypes">
@@ -1450,8 +1446,6 @@
                 <ScalarProperty Name="DateApplication" ColumnName="DateApplication" />
                 <ScalarProperty Name="DateAcepted" ColumnName="DateAcepted" />
                 <ScalarProperty Name="AmountTotal" ColumnName="AmountTotal" />
-                <ScalarProperty Name="InteresRate" ColumnName="InteresRate" />
-                <ScalarProperty Name="NumberFortnights" ColumnName="NumberFortnights" />
                 <ScalarProperty Name="ProofAddress" ColumnName="ProofAddress" />
                 <ScalarProperty Name="ProofINE" ColumnName="ProofINE" />
                 <ScalarProperty Name="ProofLastPayStub" ColumnName="ProofLastPayStub" />

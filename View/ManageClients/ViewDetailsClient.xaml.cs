@@ -11,9 +11,10 @@ namespace FinanciaRed.View.ManageClients {
     public partial class ViewDetailsClient : Window {
         private DTO_Client_Details selectedClient = null;
 
-        public ViewDetailsClient (int idClient) {
+        public ViewDetailsClient (int idClient, bool canModificate) {
             InitializeComponent ();
 
+            button_Modify.Visibility = canModificate ? Visibility.Visible : Visibility.Collapsed;
             _ = LoadDetailsClient (idClient);
         }
 

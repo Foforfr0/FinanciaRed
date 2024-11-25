@@ -25,14 +25,12 @@ namespace FinanciaRed.Model.Model_Entity
         public System.DateTime DateApplication { get; set; }
         public Nullable<System.DateTime> DateAcepted { get; set; }
         public int AmountTotal { get; set; }
-        public Nullable<float> InteresRate { get; set; }
-        public Nullable<int> NumberFortnights { get; set; }
         public byte[] ProofAddress { get; set; }
         public byte[] ProofINE { get; set; }
         public byte[] ProofLastPayStub { get; set; }
         public int IdEmployeeApplication { get; set; }
         public int IdStatusCreditApplication { get; set; }
-        public Nullable<int> IdPromotion { get; set; }
+        public int IdPromotion { get; set; }
         public int IdClient { get; set; }
         public string ValorationOpinion { get; set; }
     

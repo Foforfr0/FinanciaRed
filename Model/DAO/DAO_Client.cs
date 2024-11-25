@@ -1,4 +1,5 @@
 ﻿using FinanciaRed.Model.DTO;
+using FinanciaRed.Model.DTO.Client;
 using FinanciaRed.Model.Model_Entity;
 using System;
 using System.Collections.Generic;
@@ -52,7 +53,7 @@ namespace FinanciaRed.Model.DAO {
                         context.Clients.
                         Where (clnt =>
                             clnt.FirstName.Contains (keyWord) ||
-                            clnt.MiddleName.Contains(keyWord) ||
+                            clnt.MiddleName.Contains (keyWord) ||
                             clnt.LastName.Contains (keyWord) ||
                             clnt.CodeCURP.Equals (keyWord) ||
                             clnt.CodeRFC.Equals (keyWord)).
@@ -160,12 +161,17 @@ namespace FinanciaRed.Model.DAO {
 
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
                 try {
-                    DTO_Client_Details dataRetrieved = await
-                        context.Clients.
-                        Where (clnt => clnt.IdClient == idClient).
-                        Include (ms => ms.StatusesMarital).
-                        Include (addr => addr.ClientsAddresses).
-                        Select (clnt => new DTO_Client_Details {
+                    DTO_Client_Details dataRetrieved = await context.Clients
+                        .Where (clnt => clnt.IdClient == idClient)
+                        .Include (clnt => clnt.StatusesMarital)
+                        .Include (clnt => clnt.ClientsAddresses)
+                        .Include (clnt => clnt.WorkClients)
+                        .Include (clnt => clnt.BankAccounts)
+                        .Include (clnt => clnt.BankAccounts1)
+                        .Include (clnt => clnt.ContactsReferencesClients)
+                        .Include (clnt => clnt.ContactsReferencesClients1)
+                        .Include (clnt => clnt.StatusesClient)
+                        .Select (clnt => new DTO_Client_Details {
                             IdClient = clnt.IdClient,
                             FirstName = clnt.FirstName,
                             MiddleName = clnt.MiddleName,
@@ -175,76 +181,75 @@ namespace FinanciaRed.Model.DAO {
                             IdMaritalStatus = clnt.IdStatusMarital,
                             MaritalStatus = clnt.StatusesMarital.Status,
                             CodeCURP = clnt.CodeCURP,
-                            AddressClient = new DTO_ClientAddress {
+                            AddressClient = clnt.ClientsAddresses == null ? null : new DTO_ClientAddress {
                                 IdAddressClient = clnt.ClientsAddresses.IdClientAddress,
-                                ExteriorNumber = clnt.ClientsAddresses.ExteriorNumber,
-                                InteriorNumber = clnt.ClientsAddresses.InteriorNumber,
-                                Street = clnt.ClientsAddresses.Street,
-                                Colony = clnt.ClientsAddresses.Colony,
-                                PostalCode = clnt.ClientsAddresses.PostalCode,
-                                Municipality = clnt.ClientsAddresses.Municipality,
+                                ExteriorNumber = clnt.ClientsAddresses.ExteriorNumber ?? string.Empty,
+                                InteriorNumber = clnt.ClientsAddresses.InteriorNumber ?? string.Empty,
+                                Street = clnt.ClientsAddresses.Street ?? string.Empty,
+                                Colony = clnt.ClientsAddresses.Colony ?? string.Empty,
+                                PostalCode = clnt.ClientsAddresses.PostalCode ?? string.Empty,
+                                Municipality = clnt.ClientsAddresses.Municipality ?? string.Empty,
                                 IdState = clnt.ClientsAddresses.StatesAddresses.IdStateAddress,
-                                State = clnt.ClientsAddresses.StatesAddresses.Name,
+                                State = clnt.ClientsAddresses.StatesAddresses.Name ?? string.Empty,
                                 IdAddressType = clnt.ClientsAddresses.AddressesTypes.IdAddressType,
-                                AddressType = clnt.ClientsAddresses.AddressesTypes.Type
+                                AddressType = clnt.ClientsAddresses.AddressesTypes.Type ?? string.Empty,
                             },
-                            Email1 = clnt.Email1,
-                            Email2 = clnt.Email2,
-                            PhoneNumber1 = clnt.PhoneNumber1,
-                            PhoneNumber2 = clnt.PhoneNumber2,
-                            Work = new DTO_WorkInfo {
+                            Email1 = clnt.Email1 ?? string.Empty,
+                            Email2 = clnt.Email2 ?? string.Empty,
+                            PhoneNumber1 = clnt.PhoneNumber1 ?? string.Empty,
+                            PhoneNumber2 = clnt.PhoneNumber2 ?? string.Empty,
+                            Work = clnt.WorkClients == null ? null : new DTO_WorkInfo {
                                 IdWorkType = clnt.WorkClients.WorkTypes.IdWorkType,
-                                WorkType = clnt.WorkClients.WorkTypes.Type,
-                                WorkArea = clnt.WorkClients.WorkArea,
-                                MonthlySalary = (float)clnt.WorkClients.MonthlySalary
+                                WorkType = clnt.WorkClients.WorkTypes.Type ?? string.Empty,
+                                WorkArea = clnt.WorkClients.WorkArea ?? string.Empty,
+                                MonthlySalary = (float?)clnt.WorkClients.MonthlySalary ?? 0,
                             },
-                            Reference1 = new DTO_ClientReference {
-                                FirstName = clnt.ContactsReferencesClients.FirstName,
-                                MiddleName = clnt.ContactsReferencesClients.MiddleName,
-                                LastName = clnt.ContactsReferencesClients.LastName,
-                                Email = clnt.ContactsReferencesClients.Email,
-                                PhoneNumber = clnt.ContactsReferencesClients.PhoneNumber,
+                            Reference1 = clnt.ContactsReferencesClients == null ? null : new DTO_ClientReference {
+                                FirstName = clnt.ContactsReferencesClients.FirstName ?? string.Empty,
+                                MiddleName = clnt.ContactsReferencesClients.MiddleName ?? string.Empty,
+                                LastName = clnt.ContactsReferencesClients.LastName ?? string.Empty,
+                                Email = clnt.ContactsReferencesClients.Email ?? string.Empty,
+                                PhoneNumber = clnt.ContactsReferencesClients.PhoneNumber ?? string.Empty,
                                 IdRelationshipType = clnt.ContactsReferencesClients.IdRelationshipType,
-                                RelationshipType = clnt.ContactsReferencesClients.RelationshipsClientsTypes.Type,
+                                RelationshipType = clnt.ContactsReferencesClients.RelationshipsClientsTypes.Type ?? string.Empty,
                             },
-                            Reference2 = new DTO_ClientReference {
-                                FirstName = clnt.ContactsReferencesClients1.FirstName,
-                                MiddleName = clnt.ContactsReferencesClients1.MiddleName,
-                                LastName = clnt.ContactsReferencesClients1.LastName,
-                                Email = clnt.ContactsReferencesClients1.Email,
-                                PhoneNumber = clnt.ContactsReferencesClients1.PhoneNumber,
+                            Reference2 = clnt.ContactsReferencesClients1 == null ? null : new DTO_ClientReference {
+                                FirstName = clnt.ContactsReferencesClients1.FirstName ?? string.Empty,
+                                MiddleName = clnt.ContactsReferencesClients1.MiddleName ?? string.Empty,
+                                LastName = clnt.ContactsReferencesClients1.LastName ?? string.Empty,
+                                Email = clnt.ContactsReferencesClients1.Email ?? string.Empty,
+                                PhoneNumber = clnt.ContactsReferencesClients1.PhoneNumber ?? string.Empty,
                                 IdRelationshipType = clnt.ContactsReferencesClients1.IdRelationshipType,
-                                RelationshipType = clnt.ContactsReferencesClients1.RelationshipsClientsTypes.Type,
+                                RelationshipType = clnt.ContactsReferencesClients1.RelationshipsClientsTypes.Type ?? string.Empty,
                             },
-                            CodeRFC = clnt.CodeRFC,
-                            BankAccount1 = new DTO_BankAccountClient {
+                            CodeRFC = clnt.CodeRFC ?? string.Empty,
+                            BankAccount1 = clnt.BankAccounts == null ? null : new DTO_BankAccountClient {
                                 IdBankName = clnt.BankAccounts.Banks.IdBank,
                                 BankName = clnt.BankAccounts.Banks.Name,
-                                CLABE = clnt.BankAccounts.CodeCLABE,
-                                CardNumber = clnt.BankAccounts.CardNumber,
+                                CLABE = clnt.BankAccounts.CodeCLABE ?? string.Empty,
+                                CardNumber = clnt.BankAccounts.CardNumber ?? string.Empty,
                                 IdCardType = clnt.BankAccounts.BankCardTypes.IdBankCardType,
-                                CardType = clnt.BankAccounts.BankCardTypes.Type,
+                                CardType = clnt.BankAccounts.BankCardTypes.Type ?? string.Empty,
                             },
-                            BankAccount2 = new DTO_BankAccountClient {
+                            BankAccount2 = clnt.BankAccounts1 == null ? null : new DTO_BankAccountClient {
                                 IdBankName = clnt.BankAccounts1.Banks.IdBank,
-                                BankName = clnt.BankAccounts1.Banks.Name,
-                                CLABE = clnt.BankAccounts1.CodeCLABE,
-                                CardNumber = clnt.BankAccounts1.CardNumber,
+                                BankName = clnt.BankAccounts1.Banks.Name ?? string.Empty,
+                                CLABE = clnt.BankAccounts1.CodeCLABE ?? string.Empty,
+                                CardNumber = clnt.BankAccounts1.CardNumber ?? string.Empty,
                                 IdCardType = clnt.BankAccounts1.BankCardTypes.IdBankCardType,
-                                CardType = clnt.BankAccounts1.BankCardTypes.Type,
+                                CardType = clnt.BankAccounts1.BankCardTypes.Type ?? string.Empty,
                             },
                             IdStatusClient = clnt.StatusesClient.IdStatusClient,
-                            StatusClient = clnt.StatusesClient.Status
-
-                        }).
-                        FirstOrDefaultAsync ();
+                            StatusClient = clnt.StatusesClient.Status,
+                        })
+                        .FirstOrDefaultAsync ();
 
                     if (dataRetrieved != null) {
                         responseDetails = MessageResponse<DTO_Client_Details>.Success (
                             $"Client name \"{dataRetrieved.FirstName}\" retrieved.",
                             dataRetrieved);
                     } else {
-                        responseDetails = MessageResponse<DTO_Client_Details>.Failure ("Clients doesn't retrieved.");
+                        responseDetails = MessageResponse<DTO_Client_Details>.Failure ("Client not retrieved.");
                     }
                 } catch (Exception ex) {
                     responseDetails = MessageResponse<DTO_Client_Details>.Failure (ex.ToString ());
@@ -252,6 +257,7 @@ namespace FinanciaRed.Model.DAO {
             }
             return responseDetails;
         }
+
 
         public static async Task<MessageResponse<bool>> RegistryNewClient (DTO_Client_Details newClient) {
             MessageResponse<bool> responseCreateClient = null;
@@ -551,6 +557,38 @@ namespace FinanciaRed.Model.DAO {
                     return false;
                 }
             }
+        }
+
+        public static async Task<MessageResponse<DTO_Client_Search>> SearchClientCreditApplication (string name, string codeCurp, string codeRFC) {
+            MessageResponse<DTO_Client_Search> responseSearch = null;
+
+            using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                try {
+                    DTO_Client_Search dataRetrieved = await context.Clients.
+                        Where (clnt =>
+                            (clnt.FirstName + " " + clnt.MiddleName + " " + clnt.LastName).Equals (name) &&
+                            clnt.CodeCURP.Equals (codeCurp) &&
+                            clnt.CodeRFC.Equals (codeRFC)).
+                        Select (clnt => new DTO_Client_Search {
+                            IdClient = clnt.IdClient,
+                            Name = clnt.FirstName + " " + clnt.MiddleName + " " + clnt.LastName,
+                            IdStatus = clnt.IdStatusClient,
+                            Status = clnt.StatusesClient.Status
+                        }).
+                        FirstOrDefaultAsync ();
+
+                    if (dataRetrieved != null) {
+                        responseSearch = MessageResponse<DTO_Client_Search>.Success (
+                            $"Client ID {dataRetrieved.IdClient} retrieved.",
+                            dataRetrieved);
+                    } else {
+                        responseSearch = MessageResponse<DTO_Client_Search>.Failure ($"Client doesn't retrieved.");
+                    }
+                } catch (Exception ex) {
+                    responseSearch = MessageResponse<DTO_Client_Search>.Failure (ex.ToString ());
+                }
+            }
+            return responseSearch;
         }
     }
 }
