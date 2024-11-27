@@ -1,0 +1,136 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Archivos\\Projects Programs\\C_Sharp\\FinanciaRed\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{0E50B886-FD12-43AA-8019-40AA285D7195}|FinanciaRed.csproj|c:\\archivos\\projects programs\\c_sharp\\financiared\\model\\dao\\dao_creditpolicy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0E50B886-FD12-43AA-8019-40AA285D7195}|FinanciaRed.csproj|solutionrelative:model\\dao\\dao_creditpolicy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0E50B886-FD12-43AA-8019-40AA285D7195}|FinanciaRed.csproj|c:\\archivos\\projects programs\\c_sharp\\financiared\\view\\managecreditpolicies\\viewcreditpolicies.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0E50B886-FD12-43AA-8019-40AA285D7195}|FinanciaRed.csproj|solutionrelative:view\\managecreditpolicies\\viewcreditpolicies.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0E50B886-FD12-43AA-8019-40AA285D7195}|FinanciaRed.csproj|c:\\archivos\\projects programs\\c_sharp\\financiared\\model\\dto\\creditpolicy\\dto_creditpolicy_consult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0E50B886-FD12-43AA-8019-40AA285D7195}|FinanciaRed.csproj|solutionrelative:model\\dto\\creditpolicy\\dto_creditpolicy_consult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0E50B886-FD12-43AA-8019-40AA285D7195}|FinanciaRed.csproj|c:\\archivos\\projects programs\\c_sharp\\financiared\\database.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}",
+      "RelativeMoniker": "D:0:0:{0E50B886-FD12-43AA-8019-40AA285D7195}|FinanciaRed.csproj|solutionrelative:database.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0E50B886-FD12-43AA-8019-40AA285D7195}|FinanciaRed.csproj|c:\\archivos\\projects programs\\c_sharp\\financiared\\view\\managecreditpolicies\\viewcreditpolicies.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{0E50B886-FD12-43AA-8019-40AA285D7195}|FinanciaRed.csproj|solutionrelative:view\\managecreditpolicies\\viewcreditpolicies.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0E50B886-FD12-43AA-8019-40AA285D7195}|FinanciaRed.csproj|c:\\archivos\\projects programs\\c_sharp\\financiared\\view\\manageclients\\registerclient.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0E50B886-FD12-43AA-8019-40AA285D7195}|FinanciaRed.csproj|solutionrelative:view\\manageclients\\registerclient.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0E50B886-FD12-43AA-8019-40AA285D7195}|FinanciaRed.csproj|c:\\archivos\\projects programs\\c_sharp\\financiared\\database.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|CodeFrame",
+      "RelativeMoniker": "D:0:0:{0E50B886-FD12-43AA-8019-40AA285D7195}|FinanciaRed.csproj|solutionrelative:database.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|CodeFrame"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0E50B886-FD12-43AA-8019-40AA285D7195}|FinanciaRed.csproj|c:\\archivos\\projects programs\\c_sharp\\financiared\\database.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|ResultFrame",
+      "RelativeMoniker": "D:0:0:{0E50B886-FD12-43AA-8019-40AA285D7195}|FinanciaRed.csproj|solutionrelative:database.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|ResultFrame"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DTO_CreditPolicy_Consult.cs",
+              "DocumentMoniker": "C:\\Archivos\\Projects Programs\\C_Sharp\\FinanciaRed\\Model\\DTO\\CreditPolicy\\DTO_CreditPolicy_Consult.cs",
+              "RelativeDocumentMoniker": "Model\\DTO\\CreditPolicy\\DTO_CreditPolicy_Consult.cs",
+              "ToolTip": "C:\\Archivos\\Projects Programs\\C_Sharp\\FinanciaRed\\Model\\DTO\\CreditPolicy\\DTO_CreditPolicy_Consult.cs",
+              "RelativeToolTip": "Model\\DTO\\CreditPolicy\\DTO_CreditPolicy_Consult.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAQAAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-26T00:18:55.333Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DAO_CreditPolicy.cs",
+              "DocumentMoniker": "C:\\Archivos\\Projects Programs\\C_Sharp\\FinanciaRed\\Model\\DAO\\DAO_CreditPolicy.cs",
+              "RelativeDocumentMoniker": "Model\\DAO\\DAO_CreditPolicy.cs",
+              "ToolTip": "C:\\Archivos\\Projects Programs\\C_Sharp\\FinanciaRed\\Model\\DAO\\DAO_CreditPolicy.cs",
+              "RelativeToolTip": "Model\\DAO\\DAO_CreditPolicy.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwA0AAABSAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-26T00:14:50.357Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ViewCreditPolicies.xaml.cs",
+              "DocumentMoniker": "C:\\Archivos\\Projects Programs\\C_Sharp\\FinanciaRed\\View\\ManageCreditPolicies\\ViewCreditPolicies.xaml.cs",
+              "RelativeDocumentMoniker": "View\\ManageCreditPolicies\\ViewCreditPolicies.xaml.cs",
+              "ToolTip": "C:\\Archivos\\Projects Programs\\C_Sharp\\FinanciaRed\\View\\ManageCreditPolicies\\ViewCreditPolicies.xaml.cs",
+              "RelativeToolTip": "View\\ManageCreditPolicies\\ViewCreditPolicies.xaml.cs",
+              "ViewState": "AQIAAA4AAAAAAAAAAAAQwBcAAAA/AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-26T00:13:20.713Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ViewCreditPolicies.xaml",
+              "DocumentMoniker": "C:\\Archivos\\Projects Programs\\C_Sharp\\FinanciaRed\\View\\ManageCreditPolicies\\ViewCreditPolicies.xaml",
+              "RelativeDocumentMoniker": "View\\ManageCreditPolicies\\ViewCreditPolicies.xaml",
+              "ToolTip": "C:\\Archivos\\Projects Programs\\C_Sharp\\FinanciaRed\\View\\ManageCreditPolicies\\ViewCreditPolicies.xaml",
+              "RelativeToolTip": "View\\ManageCreditPolicies\\ViewCreditPolicies.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-11-26T00:13:18.097Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "RegisterClient.xaml.cs",
+              "DocumentMoniker": "C:\\Archivos\\Projects Programs\\C_Sharp\\FinanciaRed\\View\\ManageClients\\RegisterClient.xaml.cs",
+              "RelativeDocumentMoniker": "View\\ManageClients\\RegisterClient.xaml.cs",
+              "ToolTip": "C:\\Archivos\\Projects Programs\\C_Sharp\\FinanciaRed\\View\\ManageClients\\RegisterClient.xaml.cs",
+              "RelativeToolTip": "View\\ManageClients\\RegisterClient.xaml.cs",
+              "ViewState": "AQIAAKYDAAAAAAAAAAAAwKwDAAArAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-25T23:09:26.134Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Database.sql ",
+              "DocumentMoniker": "C:\\Archivos\\Projects Programs\\C_Sharp\\FinanciaRed\\Database.sql",
+              "RelativeDocumentMoniker": "Database.sql",
+              "ToolTip": "C:\\Archivos\\Projects Programs\\C_Sharp\\FinanciaRed\\Database.sql",
+              "RelativeToolTip": "Database.sql",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
+              "WhenOpened": "2024-11-25T23:02:26.514Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

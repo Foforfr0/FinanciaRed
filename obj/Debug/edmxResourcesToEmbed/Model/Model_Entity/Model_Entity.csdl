@@ -1,0 +1,694 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FinanciaRedModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AddressesTypes">
+    <Key>
+      <PropertyRef Name="IdAddressType" />
+    </Key>
+    <Property Name="IdAddressType" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="ClientsAddresses" Relationship="Self.fk_AddressType_ClientAddress" FromRole="AddressesTypes" ToRole="ClientsAddresses" />
+  </EntityType>
+  <EntityType Name="BankAccounts">
+    <Key>
+      <PropertyRef Name="IdBankAccount" />
+    </Key>
+    <Property Name="IdBankAccount" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdNameBank" Type="Int32" Nullable="false" />
+    <Property Name="CardNumber" Type="String" MaxLength="19" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CodeCLABE" Type="String" MaxLength="23" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IdCardType" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Banks" Relationship="Self.fk_Bank_BankAccount" FromRole="BankAccounts" ToRole="Banks" />
+    <NavigationProperty Name="Clients" Relationship="Self.fk_BankAccount1_Client" FromRole="BankAccounts" ToRole="Clients" />
+    <NavigationProperty Name="Clients1" Relationship="Self.fk_BankAccount2_Client" FromRole="BankAccounts" ToRole="Clients" />
+    <NavigationProperty Name="BankCardTypes" Relationship="Self.fk_CardType_BankAccount" FromRole="BankAccounts" ToRole="BankCardTypes" />
+  </EntityType>
+  <EntityType Name="BankCardTypes">
+    <Key>
+      <PropertyRef Name="IdBankCardType" />
+    </Key>
+    <Property Name="IdBankCardType" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="BankAccounts" Relationship="Self.fk_CardType_BankAccount" FromRole="BankCardTypes" ToRole="BankAccounts" />
+  </EntityType>
+  <EntityType Name="Banks">
+    <Key>
+      <PropertyRef Name="IdBank" />
+    </Key>
+    <Property Name="IdBank" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="BankAccounts" Relationship="Self.fk_Bank_BankAccount" FromRole="Banks" ToRole="BankAccounts" />
+  </EntityType>
+  <EntityType Name="Clients">
+    <Key>
+      <PropertyRef Name="IdClient" />
+    </Key>
+    <Property Name="IdClient" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="MiddleName" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DateBirth" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="IdStatusMarital" Type="Int32" Nullable="false" />
+    <Property Name="PhoneNumber1" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PhoneNumber2" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Email1" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email2" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+    <Property Name="CodeRFC" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CodeCURP" Type="String" MaxLength="18" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IdContactReference1" Type="Int32" Nullable="false" />
+    <Property Name="IdContactReference2" Type="Int32" />
+    <Property Name="IdBankAccount1" Type="Int32" Nullable="false" />
+    <Property Name="IdBankAccount2" Type="Int32" />
+    <Property Name="IdAddress" Type="Int32" Nullable="false" />
+    <Property Name="IdWorkClient" Type="Int32" Nullable="false" />
+    <Property Name="IdStatusClient" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="BankAccounts" Relationship="Self.fk_BankAccount1_Client" FromRole="Clients" ToRole="BankAccounts" />
+    <NavigationProperty Name="BankAccounts1" Relationship="Self.fk_BankAccount2_Client" FromRole="Clients" ToRole="BankAccounts" />
+    <NavigationProperty Name="ClientsAddresses" Relationship="Self.fk_AddressClient_Client" FromRole="Clients" ToRole="ClientsAddresses" />
+    <NavigationProperty Name="CreditApplications" Relationship="Self.fk_Client_CreditApplication" FromRole="Clients" ToRole="CreditApplications" />
+    <NavigationProperty Name="ContactsReferencesClients" Relationship="Self.fk_ContactReference1_Client" FromRole="Clients" ToRole="ContactsReferencesClients" />
+    <NavigationProperty Name="ContactsReferencesClients1" Relationship="Self.fk_ContactReference2_Client" FromRole="Clients" ToRole="ContactsReferencesClients" />
+    <NavigationProperty Name="StatusesClient" Relationship="Self.fk_StatusClient_Client" FromRole="Clients" ToRole="StatusesClient" />
+    <NavigationProperty Name="StatusesMarital" Relationship="Self.fk_StatusMarital_Client" FromRole="Clients" ToRole="StatusesMarital" />
+    <NavigationProperty Name="WorkClients" Relationship="Self.fk_WorkClient_Client" FromRole="Clients" ToRole="WorkClients" />
+  </EntityType>
+  <EntityType Name="ClientsAddresses">
+    <Key>
+      <PropertyRef Name="IdClientAddress" />
+    </Key>
+    <Property Name="IdClientAddress" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdState" Type="Int32" Nullable="false" />
+    <Property Name="Municipality" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PostalCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Colony" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Street" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ExteriorNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="InteriorNumber" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="IdAddressType" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AddressesTypes" Relationship="Self.fk_AddressType_ClientAddress" FromRole="ClientsAddresses" ToRole="AddressesTypes" />
+    <NavigationProperty Name="Clients" Relationship="Self.fk_AddressClient_Client" FromRole="ClientsAddresses" ToRole="Clients" />
+    <NavigationProperty Name="StatesAddresses" Relationship="Self.fk_StateAddress_ClientAddress" FromRole="ClientsAddresses" ToRole="StatesAddresses" />
+  </EntityType>
+  <EntityType Name="ContactsReferencesClients">
+    <Key>
+      <PropertyRef Name="IdContactReference" />
+    </Key>
+    <Property Name="IdContactReference" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="MiddleName" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IdRelationshipType" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Clients" Relationship="Self.fk_ContactReference1_Client" FromRole="ContactsReferencesClients" ToRole="Clients" />
+    <NavigationProperty Name="Clients1" Relationship="Self.fk_ContactReference2_Client" FromRole="ContactsReferencesClients" ToRole="Clients" />
+    <NavigationProperty Name="RelationshipsClientsTypes" Relationship="Self.fk_RelationshipClientType_ContactReferenceClient" FromRole="ContactsReferencesClients" ToRole="RelationshipsClientsTypes" />
+  </EntityType>
+  <EntityType Name="CreditApplications">
+    <Key>
+      <PropertyRef Name="IdCreditApplication" />
+    </Key>
+    <Property Name="IdCreditApplication" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DateApplication" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="DateAcepted" Type="DateTime" Precision="0" />
+    <Property Name="AmountTotal" Type="Int32" Nullable="false" />
+    <Property Name="ProofAddress" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="ProofINE" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="ProofLastPayStub" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="IdEmployeeApplication" Type="Int32" Nullable="false" />
+    <Property Name="IdStatusCreditApplication" Type="Int32" Nullable="false" />
+    <Property Name="IdPromotion" Type="Int32" Nullable="false" />
+    <Property Name="IdClient" Type="Int32" Nullable="false" />
+    <Property Name="ValorationOpinion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Clients" Relationship="Self.fk_Client_CreditApplication" FromRole="CreditApplications" ToRole="Clients" />
+    <NavigationProperty Name="Credits" Relationship="Self.fk_CreditApplication_Credit" FromRole="CreditApplications" ToRole="Credits" />
+    <NavigationProperty Name="CreditApplications_Policies" Relationship="Self.fk_CreditApplication_CreditPolicy" FromRole="CreditApplications" ToRole="CreditApplications_Policies" />
+    <NavigationProperty Name="Employees" Relationship="Self.fk_Employee_CreditApplication" FromRole="CreditApplications" ToRole="Employees" />
+    <NavigationProperty Name="Promotions" Relationship="Self.fk_Promotion_CreditApplication" FromRole="CreditApplications" ToRole="Promotions" />
+    <NavigationProperty Name="StatusesCreditApplication" Relationship="Self.fk_StatusCreditApplication_CreditApplication" FromRole="CreditApplications" ToRole="StatusesCreditApplication" />
+  </EntityType>
+  <EntityType Name="CreditApplications_Policies">
+    <Key>
+      <PropertyRef Name="IdCreditApplication_Policy" />
+    </Key>
+    <Property Name="IdCreditApplication_Policy" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdCreditApplication" Type="Int32" Nullable="false" />
+    <Property Name="IdPolicy" Type="Int32" Nullable="false" />
+    <Property Name="IsAprobed" Type="Boolean" />
+    <NavigationProperty Name="CreditApplications" Relationship="Self.fk_CreditApplication_CreditPolicy" FromRole="CreditApplications_Policies" ToRole="CreditApplications" />
+    <NavigationProperty Name="Policies" Relationship="Self.fk_Policy_CreditPolicy" FromRole="CreditApplications_Policies" ToRole="Policies" />
+  </EntityType>
+  <EntityType Name="Credits">
+    <Key>
+      <PropertyRef Name="IdCredit" />
+    </Key>
+    <Property Name="IdCredit" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AmountLeft" Type="Int32" />
+    <Property Name="IdStatusCredit" Type="Int32" Nullable="false" />
+    <Property Name="SignedDocument" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="PaymentLayout" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="DateStart" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DateEnd" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IdCreditApplication" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CreditApplications" Relationship="Self.fk_CreditApplication_Credit" FromRole="Credits" ToRole="CreditApplications" />
+    <NavigationProperty Name="StatusesCredit" Relationship="Self.fk_StatusCredit_Credit" FromRole="Credits" ToRole="StatusesCredit" />
+  </EntityType>
+  <EntityType Name="Employees">
+    <Key>
+      <PropertyRef Name="IdEmployee" />
+    </Key>
+    <Property Name="IdEmployee" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="MiddleName" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DateBirth" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Gender" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="CodeCURP" Type="String" MaxLength="18" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CodeRFC" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ProfilePhoto" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Email" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IdRole" Type="Int32" Nullable="false" />
+    <Property Name="IdStatusEmployee" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CreditApplications" Relationship="Self.fk_Employee_CreditApplication" FromRole="Employees" ToRole="CreditApplications" />
+    <NavigationProperty Name="RolesEmployees" Relationship="Self.fk_RolesEmployee_Employee" FromRole="Employees" ToRole="RolesEmployees" />
+    <NavigationProperty Name="StatusesEmployee" Relationship="Self.fk_StatusEmployee_Employee" FromRole="Employees" ToRole="StatusesEmployee" />
+  </EntityType>
+  <EntityType Name="Policies">
+    <Key>
+      <PropertyRef Name="IdPolicy" />
+    </Key>
+    <Property Name="IdPolicy" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DateStart" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="DateEnd" Type="DateTime" Precision="0" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="CreditApplications_Policies" Relationship="Self.fk_Policy_CreditPolicy" FromRole="Policies" ToRole="CreditApplications_Policies" />
+  </EntityType>
+  <EntityType Name="Promotions">
+    <Key>
+      <PropertyRef Name="IdPromotion" />
+    </Key>
+    <Property Name="IdPromotion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="InterestRate" Type="Single" Nullable="false" />
+    <Property Name="NumberFortnights" Type="Int32" Nullable="false" />
+    <Property Name="DateStart" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="DateEnd" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="CreditApplications" Relationship="Self.fk_Promotion_CreditApplication" FromRole="Promotions" ToRole="CreditApplications" />
+  </EntityType>
+  <EntityType Name="RelationshipsClientsTypes">
+    <Key>
+      <PropertyRef Name="IdRelationshipClient" />
+    </Key>
+    <Property Name="IdRelationshipClient" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="ContactsReferencesClients" Relationship="Self.fk_RelationshipClientType_ContactReferenceClient" FromRole="RelationshipsClientsTypes" ToRole="ContactsReferencesClients" />
+  </EntityType>
+  <EntityType Name="RolesEmployees">
+    <Key>
+      <PropertyRef Name="IdRoleEmployee" />
+    </Key>
+    <Property Name="IdRoleEmployee" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Role" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Employees" Relationship="Self.fk_RolesEmployee_Employee" FromRole="RolesEmployees" ToRole="Employees" />
+  </EntityType>
+  <EntityType Name="StatesAddresses">
+    <Key>
+      <PropertyRef Name="IdStateAddress" />
+    </Key>
+    <Property Name="IdStateAddress" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="ClientsAddresses" Relationship="Self.fk_StateAddress_ClientAddress" FromRole="StatesAddresses" ToRole="ClientsAddresses" />
+  </EntityType>
+  <EntityType Name="StatusesClient">
+    <Key>
+      <PropertyRef Name="IdStatusClient" />
+    </Key>
+    <Property Name="IdStatusClient" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Clients" Relationship="Self.fk_StatusClient_Client" FromRole="StatusesClient" ToRole="Clients" />
+  </EntityType>
+  <EntityType Name="StatusesCredit">
+    <Key>
+      <PropertyRef Name="IdStatusCredit" />
+    </Key>
+    <Property Name="IdStatusCredit" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Status" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Credits" Relationship="Self.fk_StatusCredit_Credit" FromRole="StatusesCredit" ToRole="Credits" />
+  </EntityType>
+  <EntityType Name="StatusesCreditApplication">
+    <Key>
+      <PropertyRef Name="StatusCreditApplication" />
+    </Key>
+    <Property Name="StatusCreditApplication" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="CreditApplications" Relationship="Self.fk_StatusCreditApplication_CreditApplication" FromRole="StatusesCreditApplication" ToRole="CreditApplications" />
+  </EntityType>
+  <EntityType Name="StatusesEmployee">
+    <Key>
+      <PropertyRef Name="IdStatusEmployee" />
+    </Key>
+    <Property Name="IdStatusEmployee" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Employees" Relationship="Self.fk_StatusEmployee_Employee" FromRole="StatusesEmployee" ToRole="Employees" />
+  </EntityType>
+  <EntityType Name="StatusesMarital">
+    <Key>
+      <PropertyRef Name="IdStatusMarital" />
+    </Key>
+    <Property Name="IdStatusMarital" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Clients" Relationship="Self.fk_StatusMarital_Client" FromRole="StatusesMarital" ToRole="Clients" />
+  </EntityType>
+  <EntityType Name="WorkClients">
+    <Key>
+      <PropertyRef Name="IdWorkClient" />
+    </Key>
+    <Property Name="IdWorkClient" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="WorkArea" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IdWorkType" Type="Int32" Nullable="false" />
+    <Property Name="MonthlySalary" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Clients" Relationship="Self.fk_WorkClient_Client" FromRole="WorkClients" ToRole="Clients" />
+    <NavigationProperty Name="WorkTypes" Relationship="Self.fk_WorkType_WorkClient" FromRole="WorkClients" ToRole="WorkTypes" />
+  </EntityType>
+  <EntityType Name="WorkTypes">
+    <Key>
+      <PropertyRef Name="IdWorkType" />
+    </Key>
+    <Property Name="IdWorkType" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="WorkClients" Relationship="Self.fk_WorkType_WorkClient" FromRole="WorkTypes" ToRole="WorkClients" />
+  </EntityType>
+  <Association Name="fk_AddressType_ClientAddress">
+    <End Role="AddressesTypes" Type="Self.AddressesTypes" Multiplicity="1" />
+    <End Role="ClientsAddresses" Type="Self.ClientsAddresses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AddressesTypes">
+        <PropertyRef Name="IdAddressType" />
+      </Principal>
+      <Dependent Role="ClientsAddresses">
+        <PropertyRef Name="IdAddressType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Bank_BankAccount">
+    <End Role="Banks" Type="Self.Banks" Multiplicity="1" />
+    <End Role="BankAccounts" Type="Self.BankAccounts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Banks">
+        <PropertyRef Name="IdBank" />
+      </Principal>
+      <Dependent Role="BankAccounts">
+        <PropertyRef Name="IdNameBank" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_BankAccount1_Client">
+    <End Role="BankAccounts" Type="Self.BankAccounts" Multiplicity="1" />
+    <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BankAccounts">
+        <PropertyRef Name="IdBankAccount" />
+      </Principal>
+      <Dependent Role="Clients">
+        <PropertyRef Name="IdBankAccount1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_BankAccount2_Client">
+    <End Role="BankAccounts" Type="Self.BankAccounts" Multiplicity="0..1" />
+    <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BankAccounts">
+        <PropertyRef Name="IdBankAccount" />
+      </Principal>
+      <Dependent Role="Clients">
+        <PropertyRef Name="IdBankAccount2" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_CardType_BankAccount">
+    <End Role="BankCardTypes" Type="Self.BankCardTypes" Multiplicity="1" />
+    <End Role="BankAccounts" Type="Self.BankAccounts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BankCardTypes">
+        <PropertyRef Name="IdBankCardType" />
+      </Principal>
+      <Dependent Role="BankAccounts">
+        <PropertyRef Name="IdCardType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_AddressClient_Client">
+    <End Role="ClientsAddresses" Type="Self.ClientsAddresses" Multiplicity="1" />
+    <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ClientsAddresses">
+        <PropertyRef Name="IdClientAddress" />
+      </Principal>
+      <Dependent Role="Clients">
+        <PropertyRef Name="IdAddress" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Client_CreditApplication">
+    <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+    <End Role="CreditApplications" Type="Self.CreditApplications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clients">
+        <PropertyRef Name="IdClient" />
+      </Principal>
+      <Dependent Role="CreditApplications">
+        <PropertyRef Name="IdClient" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_ContactReference1_Client">
+    <End Role="ContactsReferencesClients" Type="Self.ContactsReferencesClients" Multiplicity="1" />
+    <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContactsReferencesClients">
+        <PropertyRef Name="IdContactReference" />
+      </Principal>
+      <Dependent Role="Clients">
+        <PropertyRef Name="IdContactReference1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_ContactReference2_Client">
+    <End Role="ContactsReferencesClients" Type="Self.ContactsReferencesClients" Multiplicity="0..1" />
+    <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ContactsReferencesClients">
+        <PropertyRef Name="IdContactReference" />
+      </Principal>
+      <Dependent Role="Clients">
+        <PropertyRef Name="IdContactReference2" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_StatusClient_Client">
+    <End Role="StatusesClient" Type="Self.StatusesClient" Multiplicity="1" />
+    <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StatusesClient">
+        <PropertyRef Name="IdStatusClient" />
+      </Principal>
+      <Dependent Role="Clients">
+        <PropertyRef Name="IdStatusClient" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_StatusMarital_Client">
+    <End Role="StatusesMarital" Type="Self.StatusesMarital" Multiplicity="1" />
+    <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StatusesMarital">
+        <PropertyRef Name="IdStatusMarital" />
+      </Principal>
+      <Dependent Role="Clients">
+        <PropertyRef Name="IdStatusMarital" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_WorkClient_Client">
+    <End Role="WorkClients" Type="Self.WorkClients" Multiplicity="1" />
+    <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WorkClients">
+        <PropertyRef Name="IdWorkClient" />
+      </Principal>
+      <Dependent Role="Clients">
+        <PropertyRef Name="IdWorkClient" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_StateAddress_ClientAddress">
+    <End Role="StatesAddresses" Type="Self.StatesAddresses" Multiplicity="1" />
+    <End Role="ClientsAddresses" Type="Self.ClientsAddresses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StatesAddresses">
+        <PropertyRef Name="IdStateAddress" />
+      </Principal>
+      <Dependent Role="ClientsAddresses">
+        <PropertyRef Name="IdState" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_RelationshipClientType_ContactReferenceClient">
+    <End Role="RelationshipsClientsTypes" Type="Self.RelationshipsClientsTypes" Multiplicity="1" />
+    <End Role="ContactsReferencesClients" Type="Self.ContactsReferencesClients" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RelationshipsClientsTypes">
+        <PropertyRef Name="IdRelationshipClient" />
+      </Principal>
+      <Dependent Role="ContactsReferencesClients">
+        <PropertyRef Name="IdRelationshipType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_CreditApplication_Credit">
+    <End Role="CreditApplications" Type="Self.CreditApplications" Multiplicity="1" />
+    <End Role="Credits" Type="Self.Credits" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CreditApplications">
+        <PropertyRef Name="IdCreditApplication" />
+      </Principal>
+      <Dependent Role="Credits">
+        <PropertyRef Name="IdCreditApplication" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_CreditApplication_CreditPolicy">
+    <End Role="CreditApplications" Type="Self.CreditApplications" Multiplicity="1" />
+    <End Role="CreditApplications_Policies" Type="Self.CreditApplications_Policies" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CreditApplications">
+        <PropertyRef Name="IdCreditApplication" />
+      </Principal>
+      <Dependent Role="CreditApplications_Policies">
+        <PropertyRef Name="IdCreditApplication" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Employee_CreditApplication">
+    <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+    <End Role="CreditApplications" Type="Self.CreditApplications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employees">
+        <PropertyRef Name="IdEmployee" />
+      </Principal>
+      <Dependent Role="CreditApplications">
+        <PropertyRef Name="IdEmployeeApplication" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Promotion_CreditApplication">
+    <End Role="Promotions" Type="Self.Promotions" Multiplicity="1" />
+    <End Role="CreditApplications" Type="Self.CreditApplications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Promotions">
+        <PropertyRef Name="IdPromotion" />
+      </Principal>
+      <Dependent Role="CreditApplications">
+        <PropertyRef Name="IdPromotion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_StatusCreditApplication_CreditApplication">
+    <End Role="StatusesCreditApplication" Type="Self.StatusesCreditApplication" Multiplicity="1" />
+    <End Role="CreditApplications" Type="Self.CreditApplications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StatusesCreditApplication">
+        <PropertyRef Name="StatusCreditApplication" />
+      </Principal>
+      <Dependent Role="CreditApplications">
+        <PropertyRef Name="IdStatusCreditApplication" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Policy_CreditPolicy">
+    <End Role="Policies" Type="Self.Policies" Multiplicity="1" />
+    <End Role="CreditApplications_Policies" Type="Self.CreditApplications_Policies" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Policies">
+        <PropertyRef Name="IdPolicy" />
+      </Principal>
+      <Dependent Role="CreditApplications_Policies">
+        <PropertyRef Name="IdPolicy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_StatusCredit_Credit">
+    <End Role="StatusesCredit" Type="Self.StatusesCredit" Multiplicity="1" />
+    <End Role="Credits" Type="Self.Credits" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StatusesCredit">
+        <PropertyRef Name="IdStatusCredit" />
+      </Principal>
+      <Dependent Role="Credits">
+        <PropertyRef Name="IdStatusCredit" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_RolesEmployee_Employee">
+    <End Role="RolesEmployees" Type="Self.RolesEmployees" Multiplicity="1" />
+    <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RolesEmployees">
+        <PropertyRef Name="IdRoleEmployee" />
+      </Principal>
+      <Dependent Role="Employees">
+        <PropertyRef Name="IdRole" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_StatusEmployee_Employee">
+    <End Role="StatusesEmployee" Type="Self.StatusesEmployee" Multiplicity="1" />
+    <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StatusesEmployee">
+        <PropertyRef Name="IdStatusEmployee" />
+      </Principal>
+      <Dependent Role="Employees">
+        <PropertyRef Name="IdStatusEmployee" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_WorkType_WorkClient">
+    <End Role="WorkTypes" Type="Self.WorkTypes" Multiplicity="1" />
+    <End Role="WorkClients" Type="Self.WorkClients" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WorkTypes">
+        <PropertyRef Name="IdWorkType" />
+      </Principal>
+      <Dependent Role="WorkClients">
+        <PropertyRef Name="IdWorkType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="FinanciaRedEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AddressesTypes" EntityType="Self.AddressesTypes" />
+    <EntitySet Name="BankAccounts" EntityType="Self.BankAccounts" />
+    <EntitySet Name="BankCardTypes" EntityType="Self.BankCardTypes" />
+    <EntitySet Name="Banks" EntityType="Self.Banks" />
+    <EntitySet Name="Clients" EntityType="Self.Clients" />
+    <EntitySet Name="ClientsAddresses" EntityType="Self.ClientsAddresses" />
+    <EntitySet Name="ContactsReferencesClients" EntityType="Self.ContactsReferencesClients" />
+    <EntitySet Name="CreditApplications" EntityType="Self.CreditApplications" />
+    <EntitySet Name="CreditApplications_Policies" EntityType="Self.CreditApplications_Policies" />
+    <EntitySet Name="Credits" EntityType="Self.Credits" />
+    <EntitySet Name="Employees" EntityType="Self.Employees" />
+    <EntitySet Name="Policies" EntityType="Self.Policies" />
+    <EntitySet Name="Promotions" EntityType="Self.Promotions" />
+    <EntitySet Name="RelationshipsClientsTypes" EntityType="Self.RelationshipsClientsTypes" />
+    <EntitySet Name="RolesEmployees" EntityType="Self.RolesEmployees" />
+    <EntitySet Name="StatesAddresses" EntityType="Self.StatesAddresses" />
+    <EntitySet Name="StatusesClient" EntityType="Self.StatusesClient" />
+    <EntitySet Name="StatusesCredit" EntityType="Self.StatusesCredit" />
+    <EntitySet Name="StatusesCreditApplication" EntityType="Self.StatusesCreditApplication" />
+    <EntitySet Name="StatusesEmployee" EntityType="Self.StatusesEmployee" />
+    <EntitySet Name="StatusesMarital" EntityType="Self.StatusesMarital" />
+    <EntitySet Name="WorkClients" EntityType="Self.WorkClients" />
+    <EntitySet Name="WorkTypes" EntityType="Self.WorkTypes" />
+    <AssociationSet Name="fk_AddressType_ClientAddress" Association="Self.fk_AddressType_ClientAddress">
+      <End Role="AddressesTypes" EntitySet="AddressesTypes" />
+      <End Role="ClientsAddresses" EntitySet="ClientsAddresses" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Bank_BankAccount" Association="Self.fk_Bank_BankAccount">
+      <End Role="Banks" EntitySet="Banks" />
+      <End Role="BankAccounts" EntitySet="BankAccounts" />
+    </AssociationSet>
+    <AssociationSet Name="fk_BankAccount1_Client" Association="Self.fk_BankAccount1_Client">
+      <End Role="BankAccounts" EntitySet="BankAccounts" />
+      <End Role="Clients" EntitySet="Clients" />
+    </AssociationSet>
+    <AssociationSet Name="fk_BankAccount2_Client" Association="Self.fk_BankAccount2_Client">
+      <End Role="BankAccounts" EntitySet="BankAccounts" />
+      <End Role="Clients" EntitySet="Clients" />
+    </AssociationSet>
+    <AssociationSet Name="fk_CardType_BankAccount" Association="Self.fk_CardType_BankAccount">
+      <End Role="BankCardTypes" EntitySet="BankCardTypes" />
+      <End Role="BankAccounts" EntitySet="BankAccounts" />
+    </AssociationSet>
+    <AssociationSet Name="fk_AddressClient_Client" Association="Self.fk_AddressClient_Client">
+      <End Role="ClientsAddresses" EntitySet="ClientsAddresses" />
+      <End Role="Clients" EntitySet="Clients" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Client_CreditApplication" Association="Self.fk_Client_CreditApplication">
+      <End Role="Clients" EntitySet="Clients" />
+      <End Role="CreditApplications" EntitySet="CreditApplications" />
+    </AssociationSet>
+    <AssociationSet Name="fk_ContactReference1_Client" Association="Self.fk_ContactReference1_Client">
+      <End Role="ContactsReferencesClients" EntitySet="ContactsReferencesClients" />
+      <End Role="Clients" EntitySet="Clients" />
+    </AssociationSet>
+    <AssociationSet Name="fk_ContactReference2_Client" Association="Self.fk_ContactReference2_Client">
+      <End Role="ContactsReferencesClients" EntitySet="ContactsReferencesClients" />
+      <End Role="Clients" EntitySet="Clients" />
+    </AssociationSet>
+    <AssociationSet Name="fk_StatusClient_Client" Association="Self.fk_StatusClient_Client">
+      <End Role="StatusesClient" EntitySet="StatusesClient" />
+      <End Role="Clients" EntitySet="Clients" />
+    </AssociationSet>
+    <AssociationSet Name="fk_StatusMarital_Client" Association="Self.fk_StatusMarital_Client">
+      <End Role="StatusesMarital" EntitySet="StatusesMarital" />
+      <End Role="Clients" EntitySet="Clients" />
+    </AssociationSet>
+    <AssociationSet Name="fk_WorkClient_Client" Association="Self.fk_WorkClient_Client">
+      <End Role="WorkClients" EntitySet="WorkClients" />
+      <End Role="Clients" EntitySet="Clients" />
+    </AssociationSet>
+    <AssociationSet Name="fk_StateAddress_ClientAddress" Association="Self.fk_StateAddress_ClientAddress">
+      <End Role="StatesAddresses" EntitySet="StatesAddresses" />
+      <End Role="ClientsAddresses" EntitySet="ClientsAddresses" />
+    </AssociationSet>
+    <AssociationSet Name="fk_RelationshipClientType_ContactReferenceClient" Association="Self.fk_RelationshipClientType_ContactReferenceClient">
+      <End Role="RelationshipsClientsTypes" EntitySet="RelationshipsClientsTypes" />
+      <End Role="ContactsReferencesClients" EntitySet="ContactsReferencesClients" />
+    </AssociationSet>
+    <AssociationSet Name="fk_CreditApplication_Credit" Association="Self.fk_CreditApplication_Credit">
+      <End Role="CreditApplications" EntitySet="CreditApplications" />
+      <End Role="Credits" EntitySet="Credits" />
+    </AssociationSet>
+    <AssociationSet Name="fk_CreditApplication_CreditPolicy" Association="Self.fk_CreditApplication_CreditPolicy">
+      <End Role="CreditApplications" EntitySet="CreditApplications" />
+      <End Role="CreditApplications_Policies" EntitySet="CreditApplications_Policies" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Employee_CreditApplication" Association="Self.fk_Employee_CreditApplication">
+      <End Role="Employees" EntitySet="Employees" />
+      <End Role="CreditApplications" EntitySet="CreditApplications" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Promotion_CreditApplication" Association="Self.fk_Promotion_CreditApplication">
+      <End Role="Promotions" EntitySet="Promotions" />
+      <End Role="CreditApplications" EntitySet="CreditApplications" />
+    </AssociationSet>
+    <AssociationSet Name="fk_StatusCreditApplication_CreditApplication" Association="Self.fk_StatusCreditApplication_CreditApplication">
+      <End Role="StatusesCreditApplication" EntitySet="StatusesCreditApplication" />
+      <End Role="CreditApplications" EntitySet="CreditApplications" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Policy_CreditPolicy" Association="Self.fk_Policy_CreditPolicy">
+      <End Role="Policies" EntitySet="Policies" />
+      <End Role="CreditApplications_Policies" EntitySet="CreditApplications_Policies" />
+    </AssociationSet>
+    <AssociationSet Name="fk_StatusCredit_Credit" Association="Self.fk_StatusCredit_Credit">
+      <End Role="StatusesCredit" EntitySet="StatusesCredit" />
+      <End Role="Credits" EntitySet="Credits" />
+    </AssociationSet>
+    <AssociationSet Name="fk_RolesEmployee_Employee" Association="Self.fk_RolesEmployee_Employee">
+      <End Role="RolesEmployees" EntitySet="RolesEmployees" />
+      <End Role="Employees" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="fk_StatusEmployee_Employee" Association="Self.fk_StatusEmployee_Employee">
+      <End Role="StatusesEmployee" EntitySet="StatusesEmployee" />
+      <End Role="Employees" EntitySet="Employees" />
+    </AssociationSet>
+    <AssociationSet Name="fk_WorkType_WorkClient" Association="Self.fk_WorkType_WorkClient">
+      <End Role="WorkTypes" EntitySet="WorkTypes" />
+      <End Role="WorkClients" EntitySet="WorkClients" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

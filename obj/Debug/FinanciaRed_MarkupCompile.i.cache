@@ -1,0 +1,20 @@
+﻿FinanciaRed
+
+
+winexe
+C#
+.cs
+C:\Archivos\Projects Programs\C_Sharp\FinanciaRed\obj\Debug\
+FinanciaRed
+none
+false
+DEBUG;TRACE
+C:\Archivos\Projects Programs\C_Sharp\FinanciaRed\App.xaml
+311200799075
+4-1156850202
+1071479307742
+18-854312697
+View\Components\Header.xaml;View\ManageClients\ConfirmationMessageChangeStatusClient.xaml;View\ManageClients\ModifyClientData.xaml;View\ManageClients\ViewDetailsClient.xaml;View\ManageClients\RegisterClient.xaml;View\ManageCreditApplications\DefineOpinion.xaml;View\ManageCreditPolicies\ConfirmationMessageChangeStatusCreditPolicy.xaml;View\ManageCreditPolicies\RegisterCreditPolicy.xaml;View\ManageCreditPolicies\ViewCreditPolicies.xaml;View\ManageCreditApplications\ViewCreditApplications.xaml;View\ManageCreditApplications\RegistrerCreditApplication.xaml;View\ManageCreditApplications\ViewDetailsCreditApplication.xaml;View\ManageCreditPolicies\ViewDetailsCreditPolicy.xaml;View\ManageCreditPromotions\ConfirmationMessageChangeStateCreditPromotion.xaml;View\ManageCreditPromotions\ModifyCreditPromotionData.xaml;View\ManageCreditPromotions\RegisterCreditPromotion.xaml;View\ManageCreditPromotions\ViewCreditPromotions.xaml;View\ManageCreditPromotions\ViewDetailsCreditPromotion.xaml;View\ManageCredits\ViewDetailsCredit.xaml;View\ManageEmployees\CheckProfile.xaml;View\Login.xaml;View\MainWindow.xaml;View\ManageClients\ViewClients.xaml;View\ManageCredits\ViewCredits.xaml;View\ManageEmployees\ConfirmationMessageChangeStatusEmployee.xaml;View\ManageEmployees\ModifyEmployeeData.xaml;View\ManageEmployees\RegisterEmployee.xaml;View\ManageEmployees\ViewDetailsEmployee.xaml;View\ManageEmployees\ViewEmployees.xaml;View\ManageMonthlyEfficiencies\ViewMonthlyEfficiencies.xaml;View\WindowContainer.xaml;
+
+True
+

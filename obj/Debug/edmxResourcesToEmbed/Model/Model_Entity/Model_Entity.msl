@@ -1,0 +1,262 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FinanciaRedModelStoreContainer" CdmEntityContainer="FinanciaRedEntities">
+    <EntitySetMapping Name="AddressesTypes">
+      <EntityTypeMapping TypeName="FinanciaRedModel.AddressesTypes">
+        <MappingFragment StoreEntitySet="AddressesTypes">
+          <ScalarProperty Name="IdAddressType" ColumnName="IdAddressType" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BankAccounts">
+      <EntityTypeMapping TypeName="FinanciaRedModel.BankAccounts">
+        <MappingFragment StoreEntitySet="BankAccounts">
+          <ScalarProperty Name="IdBankAccount" ColumnName="IdBankAccount" />
+          <ScalarProperty Name="IdNameBank" ColumnName="IdNameBank" />
+          <ScalarProperty Name="CardNumber" ColumnName="CardNumber" />
+          <ScalarProperty Name="CodeCLABE" ColumnName="CodeCLABE" />
+          <ScalarProperty Name="IdCardType" ColumnName="IdCardType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BankCardTypes">
+      <EntityTypeMapping TypeName="FinanciaRedModel.BankCardTypes">
+        <MappingFragment StoreEntitySet="BankCardTypes">
+          <ScalarProperty Name="IdBankCardType" ColumnName="IdBankCardType" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Banks">
+      <EntityTypeMapping TypeName="FinanciaRedModel.Banks">
+        <MappingFragment StoreEntitySet="Banks">
+          <ScalarProperty Name="IdBank" ColumnName="IdBank" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Clients">
+      <EntityTypeMapping TypeName="FinanciaRedModel.Clients">
+        <MappingFragment StoreEntitySet="Clients">
+          <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="DateBirth" ColumnName="DateBirth" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="IdStatusMarital" ColumnName="IdStatusMarital" />
+          <ScalarProperty Name="PhoneNumber1" ColumnName="PhoneNumber1" />
+          <ScalarProperty Name="PhoneNumber2" ColumnName="PhoneNumber2" />
+          <ScalarProperty Name="Email1" ColumnName="Email1" />
+          <ScalarProperty Name="Email2" ColumnName="Email2" />
+          <ScalarProperty Name="CodeRFC" ColumnName="CodeRFC" />
+          <ScalarProperty Name="CodeCURP" ColumnName="CodeCURP" />
+          <ScalarProperty Name="IdContactReference1" ColumnName="IdContactReference1" />
+          <ScalarProperty Name="IdContactReference2" ColumnName="IdContactReference2" />
+          <ScalarProperty Name="IdBankAccount1" ColumnName="IdBankAccount1" />
+          <ScalarProperty Name="IdBankAccount2" ColumnName="IdBankAccount2" />
+          <ScalarProperty Name="IdAddress" ColumnName="IdAddress" />
+          <ScalarProperty Name="IdWorkClient" ColumnName="IdWorkClient" />
+          <ScalarProperty Name="IdStatusClient" ColumnName="IdStatusClient" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClientsAddresses">
+      <EntityTypeMapping TypeName="FinanciaRedModel.ClientsAddresses">
+        <MappingFragment StoreEntitySet="ClientsAddresses">
+          <ScalarProperty Name="IdClientAddress" ColumnName="IdClientAddress" />
+          <ScalarProperty Name="IdState" ColumnName="IdState" />
+          <ScalarProperty Name="Municipality" ColumnName="Municipality" />
+          <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+          <ScalarProperty Name="Colony" ColumnName="Colony" />
+          <ScalarProperty Name="Street" ColumnName="Street" />
+          <ScalarProperty Name="ExteriorNumber" ColumnName="ExteriorNumber" />
+          <ScalarProperty Name="InteriorNumber" ColumnName="InteriorNumber" />
+          <ScalarProperty Name="IdAddressType" ColumnName="IdAddressType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ContactsReferencesClients">
+      <EntityTypeMapping TypeName="FinanciaRedModel.ContactsReferencesClients">
+        <MappingFragment StoreEntitySet="ContactsReferencesClients">
+          <ScalarProperty Name="IdContactReference" ColumnName="IdContactReference" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="IdRelationshipType" ColumnName="IdRelationshipType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CreditApplications">
+      <EntityTypeMapping TypeName="FinanciaRedModel.CreditApplications">
+        <MappingFragment StoreEntitySet="CreditApplications">
+          <ScalarProperty Name="IdCreditApplication" ColumnName="IdCreditApplication" />
+          <ScalarProperty Name="DateApplication" ColumnName="DateApplication" />
+          <ScalarProperty Name="DateAcepted" ColumnName="DateAcepted" />
+          <ScalarProperty Name="AmountTotal" ColumnName="AmountTotal" />
+          <ScalarProperty Name="ProofAddress" ColumnName="ProofAddress" />
+          <ScalarProperty Name="ProofINE" ColumnName="ProofINE" />
+          <ScalarProperty Name="ProofLastPayStub" ColumnName="ProofLastPayStub" />
+          <ScalarProperty Name="IdEmployeeApplication" ColumnName="IdEmployeeApplication" />
+          <ScalarProperty Name="IdStatusCreditApplication" ColumnName="IdStatusCreditApplication" />
+          <ScalarProperty Name="IdPromotion" ColumnName="IdPromotion" />
+          <ScalarProperty Name="IdClient" ColumnName="IdClient" />
+          <ScalarProperty Name="ValorationOpinion" ColumnName="ValorationOpinion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CreditApplications_Policies">
+      <EntityTypeMapping TypeName="FinanciaRedModel.CreditApplications_Policies">
+        <MappingFragment StoreEntitySet="CreditApplications_Policies">
+          <ScalarProperty Name="IdCreditApplication_Policy" ColumnName="IdCreditApplication_Policy" />
+          <ScalarProperty Name="IdCreditApplication" ColumnName="IdCreditApplication" />
+          <ScalarProperty Name="IdPolicy" ColumnName="IdPolicy" />
+          <ScalarProperty Name="IsAprobed" ColumnName="IsAprobed" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Credits">
+      <EntityTypeMapping TypeName="FinanciaRedModel.Credits">
+        <MappingFragment StoreEntitySet="Credits">
+          <ScalarProperty Name="IdCredit" ColumnName="IdCredit" />
+          <ScalarProperty Name="AmountLeft" ColumnName="AmountLeft" />
+          <ScalarProperty Name="IdStatusCredit" ColumnName="IdStatusCredit" />
+          <ScalarProperty Name="SignedDocument" ColumnName="SignedDocument" />
+          <ScalarProperty Name="PaymentLayout" ColumnName="PaymentLayout" />
+          <ScalarProperty Name="DateStart" ColumnName="DateStart" />
+          <ScalarProperty Name="DateEnd" ColumnName="DateEnd" />
+          <ScalarProperty Name="IdCreditApplication" ColumnName="IdCreditApplication" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employees">
+      <EntityTypeMapping TypeName="FinanciaRedModel.Employees">
+        <MappingFragment StoreEntitySet="Employees">
+          <ScalarProperty Name="IdEmployee" ColumnName="IdEmployee" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="DateBirth" ColumnName="DateBirth" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="CodeCURP" ColumnName="CodeCURP" />
+          <ScalarProperty Name="CodeRFC" ColumnName="CodeRFC" />
+          <ScalarProperty Name="ProfilePhoto" ColumnName="ProfilePhoto" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="IdRole" ColumnName="IdRole" />
+          <ScalarProperty Name="IdStatusEmployee" ColumnName="IdStatusEmployee" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Policies">
+      <EntityTypeMapping TypeName="FinanciaRedModel.Policies">
+        <MappingFragment StoreEntitySet="Policies">
+          <ScalarProperty Name="IdPolicy" ColumnName="IdPolicy" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="DateStart" ColumnName="DateStart" />
+          <ScalarProperty Name="DateEnd" ColumnName="DateEnd" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Promotions">
+      <EntityTypeMapping TypeName="FinanciaRedModel.Promotions">
+        <MappingFragment StoreEntitySet="Promotions">
+          <ScalarProperty Name="IdPromotion" ColumnName="IdPromotion" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="InterestRate" ColumnName="InterestRate" />
+          <ScalarProperty Name="NumberFortnights" ColumnName="NumberFortnights" />
+          <ScalarProperty Name="DateStart" ColumnName="DateStart" />
+          <ScalarProperty Name="DateEnd" ColumnName="DateEnd" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RelationshipsClientsTypes">
+      <EntityTypeMapping TypeName="FinanciaRedModel.RelationshipsClientsTypes">
+        <MappingFragment StoreEntitySet="RelationshipsClientsTypes">
+          <ScalarProperty Name="IdRelationshipClient" ColumnName="IdRelationshipClient" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RolesEmployees">
+      <EntityTypeMapping TypeName="FinanciaRedModel.RolesEmployees">
+        <MappingFragment StoreEntitySet="RolesEmployees">
+          <ScalarProperty Name="IdRoleEmployee" ColumnName="IdRoleEmployee" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StatesAddresses">
+      <EntityTypeMapping TypeName="FinanciaRedModel.StatesAddresses">
+        <MappingFragment StoreEntitySet="StatesAddresses">
+          <ScalarProperty Name="IdStateAddress" ColumnName="IdStateAddress" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StatusesClient">
+      <EntityTypeMapping TypeName="FinanciaRedModel.StatusesClient">
+        <MappingFragment StoreEntitySet="StatusesClient">
+          <ScalarProperty Name="IdStatusClient" ColumnName="IdStatusClient" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StatusesCredit">
+      <EntityTypeMapping TypeName="FinanciaRedModel.StatusesCredit">
+        <MappingFragment StoreEntitySet="StatusesCredit">
+          <ScalarProperty Name="IdStatusCredit" ColumnName="IdStatusCredit" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StatusesCreditApplication">
+      <EntityTypeMapping TypeName="FinanciaRedModel.StatusesCreditApplication">
+        <MappingFragment StoreEntitySet="StatusesCreditApplication">
+          <ScalarProperty Name="StatusCreditApplication" ColumnName="StatusCreditApplication" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StatusesEmployee">
+      <EntityTypeMapping TypeName="FinanciaRedModel.StatusesEmployee">
+        <MappingFragment StoreEntitySet="StatusesEmployee">
+          <ScalarProperty Name="IdStatusEmployee" ColumnName="IdStatusEmployee" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StatusesMarital">
+      <EntityTypeMapping TypeName="FinanciaRedModel.StatusesMarital">
+        <MappingFragment StoreEntitySet="StatusesMarital">
+          <ScalarProperty Name="IdStatusMarital" ColumnName="IdStatusMarital" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WorkClients">
+      <EntityTypeMapping TypeName="FinanciaRedModel.WorkClients">
+        <MappingFragment StoreEntitySet="WorkClients">
+          <ScalarProperty Name="IdWorkClient" ColumnName="IdWorkClient" />
+          <ScalarProperty Name="WorkArea" ColumnName="WorkArea" />
+          <ScalarProperty Name="IdWorkType" ColumnName="IdWorkType" />
+          <ScalarProperty Name="MonthlySalary" ColumnName="MonthlySalary" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WorkTypes">
+      <EntityTypeMapping TypeName="FinanciaRedModel.WorkTypes">
+        <MappingFragment StoreEntitySet="WorkTypes">
+          <ScalarProperty Name="IdWorkType" ColumnName="IdWorkType" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
