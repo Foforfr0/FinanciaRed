@@ -25,6 +25,7 @@ namespace FinanciaRed.View.ManageCreditPolicies {
             this.retrievedCreditPolicies = new ObservableCollection<DTO_CreditPolicy_Consult> (messageResponseConsultCreditPolicies.DataRetrieved);
             dataGrid_CreditPolicies.ItemsSource = null;
             dataGrid_CreditPolicies.ItemsSource = retrievedCreditPolicies;
+            MessageBox.Show (string.Concat(retrievedCreditPolicies[1].DateStart));
         }
 
         private async void ClickSearchCreditPolicies (object sender, RoutedEventArgs e) {

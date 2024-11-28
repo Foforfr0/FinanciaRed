@@ -87,10 +87,17 @@ namespace FinanciaRed.View.ManageClients {
             MessageResponse<List<DTO_Bank>> messageResponseBank = await DAO_GeneralVariables.GetAllBanks ();
             List<DTO_Bank> listBank = messageResponseBank.DataRetrieved;
             foreach (DTO_Bank type in listBank) {
-                comboBox_BankAccount1Name.Items.Add (new ComboBoxItem { Content = type.Name });
-                comboBox_BankAccount2Name.Items.Add (new ComboBoxItem { Content = type.Name });
+                comboBox_BankAccount1Name.Items.Add (new ComboBoxItem { Content = type.Name, TabIndex = type.IdBank });
+                comboBox_BankAccount2Name.Items.Add (new ComboBoxItem { Content = type.Name, TabIndex = type.IdBank });
             }
-
+            /*
+            comboBox_BankAccount1Name.ItemsSource = listBank;
+            comboBox_BankAccount1Name.DisplayMemberPath = "Name";
+            comboBox_BankAccount1Name.SelectedValue = "IdBank";
+            comboBox_BankAccount2Name.ItemsSource = listBank;
+            comboBox_BankAccount2Name.DisplayMemberPath = "Name";
+            comboBox_BankAccount2Name.SelectedValue = "IdBank";
+            */
             comboBox_BankAccount1CardType.Items.Clear ();
             comboBox_BankAccount2CardType.Items.Clear ();
             comboBox_BankAccount1CardType.Items.Add (new ComboBoxItem { Content = "Seleccione una opción", IsSelected = true, Tag = 0 });
@@ -98,8 +105,8 @@ namespace FinanciaRed.View.ManageClients {
             MessageResponse<List<DTO_CardType>> messageResponseTypesCard = await DAO_GeneralVariables.GetAllCardTypes ();
             List<DTO_CardType> listCardTypes = messageResponseTypesCard.DataRetrieved;
             foreach (DTO_CardType type in listCardTypes) {
-                comboBox_BankAccount1CardType.Items.Add (new ComboBoxItem { Content = type.Type });
-                comboBox_BankAccount2CardType.Items.Add (new ComboBoxItem { Content = type.Type });
+                comboBox_BankAccount1CardType.Items.Add (new ComboBoxItem { Content = type.Type, TabIndex = type.IdCardType });
+                comboBox_BankAccount2CardType.Items.Add (new ComboBoxItem { Content = type.Type, TabIndex = type.IdCardType });
             }
         }
 
@@ -272,71 +279,75 @@ namespace FinanciaRed.View.ManageClients {
         }
 
         private async Task SaveDataInDatabase () {
-                DTO_Client_Details newClient = new DTO_Client_Details {
-                    FirstName = textBox_FirstName.Text,
-                    MiddleName = textBox_MiddleName.Text,
-                    LastName = textBox_LastName.Text,
-                    DateBirth = DateTime.Parse (datePicker_DateBirth.Text),
-                    Gender = comboBox_Gender.SelectedIndex == 1 ? "M" : "F",
-                    IdMaritalStatus = comboBox_MaritalStatus.SelectedIndex,
-                    CodeCURP = textBox_CodeCURP.Text,
-                    AddressClient = new DTO_ClientAddress {
-                        IdState = comboBox_State.SelectedIndex,
-                        Municipality = textBox_Municipality.Text,
-                        PostalCode = textBox_PostalCode.Text,
-                        Colony = textBox_Colony.Text,
-                        Street = textBox_Street.Text,
-                        ExteriorNumber = textBox_ExteriorNumber.Text,
-                        InteriorNumber = textBox_InteriorNumber.Text,
-                        IdAddressType = comboBox_AddressType.SelectedIndex
-                    },
-                    Email1 = textBox_Email1.Text,
-                    Email2 = textBox_Email2.Text,
-                    PhoneNumber1 = textBox_PhoneNumber1.Text,
-                    PhoneNumber2 = textBox_PhoneNumber2.Text,
-                    Work = new DTO_WorkInfo {
-                        IdWorkType = comboBox_WorkType.SelectedIndex,
-                        WorkArea = textBox_WorkArea.Text,
-                        MonthlySalary = float.Parse (textBox_MonthlySalary.Text),
-                    },
-                    Reference1 = new DTO_ClientReference {
-                        FirstName = textBox_Reference1FirstName.Text,
-                        MiddleName = textBox_Reference1MiddleName.Text,
-                        LastName = textBox_Reference1LastName.Text,
-                        Email = textBox_Reference1Email.Text,
-                        PhoneNumber = textBox_Reference1PhoneNumber.Text,
-                        IdRelationshipType = comboBox_Reference1RelationshipType.SelectedIndex,
-                    },
-                    Reference2 = new DTO_ClientReference {
-                        FirstName = textBox_Reference2FirstName.Text,
-                        MiddleName = textBox_Reference2MiddleName.Text,
-                        LastName = textBox_Reference2LastName.Text,
-                        Email = textBox_Reference2Email.Text,
-                        PhoneNumber = textBox_Reference2PhoneNumber.Text,
-                        IdRelationshipType = comboBox_Reference2RelationshipType.SelectedIndex,
-                    },
-                    CodeRFC = textBox_CodeRFC.Text,
-                    BankAccount1 = new DTO_BankAccountClient {
-                        IdBankName = comboBox_BankAccount1Name.SelectedIndex,
-                        CLABE = textBox_BankAccount1CodeCLABE.Text,
-                        CardNumber = textBox_BankAccount1CardNumber.Text,
-                        IdCardType = comboBox_BankAccount1CardType.SelectedIndex,
-                    },
-                    IdStatusClient = 1
-                };
-                if ((bool)checkBox_SameAccount.IsChecked) {
-                    newClient.BankAccount2.IdBankName = newClient.BankAccount1.IdBankName;
-                    newClient.BankAccount2.CLABE = newClient.BankAccount1.CLABE;
-                    newClient.BankAccount2.CardNumber = newClient.BankAccount1.CardNumber;
-                    newClient.BankAccount2.IdCardType = newClient.BankAccount1.IdCardType;
-                } else {
-                    newClient.BankAccount2.IdBankName = comboBox_BankAccount2Name.SelectedIndex;
-                    newClient.BankAccount2.CLABE = textBox_BankAccount2CodeCLABE.Text;
-                    newClient.BankAccount2.CardNumber = textBox_BankAccount2CardNumber.Text;
-                    newClient.BankAccount2.IdCardType = comboBox_BankAccount2CardType.SelectedIndex;
-                }
+            DTO_Client_Details newClient = new DTO_Client_Details {
+                FirstName = textBox_FirstName.Text,
+                MiddleName = textBox_MiddleName.Text,
+                LastName = textBox_LastName.Text,
+                DateBirth = DateTime.Parse (datePicker_DateBirth.Text),
+                Gender = comboBox_Gender.SelectedIndex == 1 ? "M" : "F",
+                IdMaritalStatus = comboBox_MaritalStatus.SelectedIndex,
+                CodeCURP = textBox_CodeCURP.Text,
+                AddressClient = new DTO_ClientAddress {
+                    IdState = comboBox_State.SelectedIndex,
+                    Municipality = textBox_Municipality.Text,
+                    PostalCode = textBox_PostalCode.Text,
+                    Colony = textBox_Colony.Text,
+                    Street = textBox_Street.Text,
+                    ExteriorNumber = textBox_ExteriorNumber.Text,
+                    InteriorNumber = textBox_InteriorNumber.Text,
+                    IdAddressType = comboBox_AddressType.SelectedIndex
+                },
+                Email1 = textBox_Email1.Text,
+                Email2 = textBox_Email2.Text,
+                PhoneNumber1 = textBox_PhoneNumber1.Text,
+                PhoneNumber2 = textBox_PhoneNumber2.Text,
+                Work = new DTO_WorkInfo {
+                    IdWorkType = comboBox_WorkType.SelectedIndex,
+                    WorkArea = textBox_WorkArea.Text,
+                    MonthlySalary = float.Parse (textBox_MonthlySalary.Text),
+                },
+                Reference1 = new DTO_ClientReference {
+                    FirstName = textBox_Reference1FirstName.Text,
+                    MiddleName = textBox_Reference1MiddleName.Text,
+                    LastName = textBox_Reference1LastName.Text,
+                    Email = textBox_Reference1Email.Text,
+                    PhoneNumber = textBox_Reference1PhoneNumber.Text,
+                    IdRelationshipType = comboBox_Reference1RelationshipType.SelectedIndex,
+                },
+                Reference2 = new DTO_ClientReference {
+                    FirstName = textBox_Reference2FirstName.Text,
+                    MiddleName = textBox_Reference2MiddleName.Text,
+                    LastName = textBox_Reference2LastName.Text,
+                    Email = textBox_Reference2Email.Text,
+                    PhoneNumber = textBox_Reference2PhoneNumber.Text,
+                    IdRelationshipType = comboBox_Reference2RelationshipType.SelectedIndex,
+                },
+                CodeRFC = textBox_CodeRFC.Text,
+                BankAccount1 = new DTO_BankAccountClient {
+                    IdBankName = comboBox_BankAccount1Name.SelectedIndex,
+                    CLABE = textBox_BankAccount1CodeCLABE.Text,
+                    CardNumber = textBox_BankAccount1CardNumber.Text,
+                    IdCardType = comboBox_BankAccount1CardType.SelectedIndex,
+                },
+                BankAccount2 = new DTO_BankAccountClient {
 
-                MessageResponse<bool> responseRegistryClient = await DAO_Client.RegistryNewClient (newClient);
+                },
+                IdStatusClient = 1
+            };
+            if ((bool)checkBox_SameAccount.IsChecked) {
+                newClient.BankAccount2.IdBankName = newClient.BankAccount1.IdBankName == null ? 1 : newClient.BankAccount1.IdBankName;
+                newClient.BankAccount2.CLABE = newClient.BankAccount1.CLABE;
+                newClient.BankAccount2.CardNumber = newClient.BankAccount1.CardNumber;
+                newClient.BankAccount2.IdCardType = newClient.BankAccount1.IdCardType == null ? 1 : newClient.BankAccount1.IdCardType;
+            } else {
+                newClient.BankAccount2.IdBankName = comboBox_BankAccount2Name.SelectedIndex;
+                newClient.BankAccount2.CLABE = textBox_BankAccount2CodeCLABE.Text;
+                newClient.BankAccount2.CardNumber = textBox_BankAccount2CardNumber.Text;
+                newClient.BankAccount2.IdCardType = comboBox_BankAccount2CardType.SelectedIndex;
+            }
+
+            MessageResponse<bool> responseRegistryClient = await DAO_Client.RegistryNewClient (newClient);
+            MessageBox.Show (responseRegistryClient.Message);
             if (responseRegistryClient.IsError) {
                 MessageBox.Show ("Ha ocurrido un error inesperado.\nIntente más tarde.", "Error inesperado.");
             } else {
@@ -1038,7 +1049,7 @@ namespace FinanciaRed.View.ManageClients {
                 _IsCorrectStage4[1] = true;
             }
 
-            if (textBox_BankAccount1CodeCLABE.Text.Equals(textBox_BankAccount2CodeCLABE.Text)) {
+            if (textBox_BankAccount1CodeCLABE.Text.Equals (textBox_BankAccount2CodeCLABE.Text)) {
                 label_ErrorBankAccount1CodeCLABE.Content = "CLABE igual al otro.";
                 label_ErrorBankAccount1CodeCLABE.Visibility = Visibility.Visible;
                 _IsCorrectStage4[2] = false;

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 
 namespace FinanciaRed.Model.DTO {
     public class DTO_CreditPolicy_Consult {
@@ -15,7 +14,7 @@ namespace FinanciaRed.Model.DTO {
         public DateTime DateStart {
             get; set;
         }
-        public DateTime DateEnd {
+        public DateTime? DateEnd {
             get; set;
         }
     }

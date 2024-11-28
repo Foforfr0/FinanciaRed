@@ -56,7 +56,7 @@ namespace FinanciaRed.Model.DAO {
                             Name = pol.Name,
                             Description = pol.Description,
                             DateStart = pol.DateStart,
-                            DateEnd = pol.DateEnd ?? pol.DateStart
+                            DateEnd = pol.DateEnd
                         }).
                         ToListAsync ();
 

@@ -361,3 +361,4 @@ SELECT * FROM CreditApplications_Policies;
 SELECT * FROM CreditApplications;
 SELECT * FROM CreditApplications_Policies;
 SELECT * FROM Clients;
+SELECT * FROM Promotions;
