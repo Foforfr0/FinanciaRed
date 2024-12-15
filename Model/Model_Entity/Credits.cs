@@ -19,8 +19,8 @@ namespace FinanciaRed.Model.Model_Entity
         public int IdStatusCredit { get; set; }
         public byte[] SignedDocument { get; set; }
         public byte[] PaymentLayout { get; set; }
-        public System.DateTime DateStart { get; set; }
-        public System.DateTime DateEnd { get; set; }
+        public Nullable<System.DateTime> DateStart { get; set; }
+        public Nullable<System.DateTime> DateEnd { get; set; }
         public int IdCreditApplication { get; set; }
     
         public virtual CreditApplications CreditApplications { get; set; }

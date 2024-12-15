@@ -100,7 +100,7 @@ namespace FinanciaRed.View.ManageCreditApplications {
         private void SelectionChangedPromotion (object sender, SelectionChangedEventArgs e) {
             DTO_CreditPromotion_Consult selectedPromotion = comboBox_Promotions.SelectedItem as DTO_CreditPromotion_Consult;
 
-            if (selectedPromotion != null && selectedPromotion.IdCreditPromotion != 0 && !string.IsNullOrEmpty (textBox_SolicitedAmount.Text)) {
+            if (selectedPromotion != null && selectedPromotion.IdCreditPromotion != 0) {
                 newCreditApplicaton.IdPromotion = selectedPromotion.IdCreditPromotion;
                 newCreditApplicaton.InterestRate = selectedPromotion.InterestRate;
                 newCreditApplicaton.NumberFortNigths = selectedPromotion.NumberFortNigths;

@@ -20,7 +20,7 @@ namespace FinanciaRed.Model.Model_Entity
             this.CreditApplications = new HashSet<CreditApplications>();
         }
     
-        public int StatusCreditApplication { get; set; }
+        public int IdStatusCreditApplication { get; set; }
         public string Status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

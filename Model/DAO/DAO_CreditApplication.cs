@@ -9,7 +9,6 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace FinanciaRed.Model.DAO {
     internal class DAO_CreditApplication {
@@ -23,7 +22,9 @@ namespace FinanciaRed.Model.DAO {
                         Select (ca => new DTO_CreditApplication_Consult {
                             IdCreditApplication = ca.IdCreditApplication,
                             AmountTotal = ca.AmountTotal,
+                            AmountTotalS = "$ " + ca.AmountTotal.ToString (),
                             InteresRate = ca.Promotions.InterestRate,
+                            InterestPercentaje = ((ca.Promotions.InterestRate * 100)).ToString () + " %",
                             NumberFortNights = ca.Promotions.NumberFortnights,
                             DateRequest = ca.DateApplication,
                             IdStatus = ca.IdStatusCreditApplication,

@@ -35,7 +35,7 @@ CREATE TABLE ContactsReferencesClients (
     Email VARCHAR(80) NOT NULL,
 	IdRelationshipType INT NOT NULL,
 
-	CONSTRAINT fk_RelationshipClientType_ContactReferenceClient FOREIGN KEY (IdRelationshipType) REFERENCES RelationshipsClientsTypes (IdRelationshipClient),
+	CONSTRAINT fk_RelationshipClientType_ContactReferenceClient FOREIGN KEY (IdRelationshipType) REFERENCES RelationshipsClientsTypes (IdRelationshipClient)
 );
 
 CREATE TABLE Banks (
@@ -100,7 +100,7 @@ CREATE TABLE WorkClients (
 
 CREATE TABLE StatusesClient (
     IdStatusClient INT NOT NULL PRIMARY KEY IDENTITY(1,1),
-    Status VARCHAR(20) NOT NULL UNIQUE,
+    Status VARCHAR(20) NOT NULL UNIQUE
 );
 
 CREATE TABLE Clients (
@@ -142,7 +142,7 @@ CREATE TABLE RolesEmployees (
 
 CREATE TABLE StatusesEmployee (
     IdStatusEmployee INT NOT NULL PRIMARY KEY IDENTITY(1,1),
-    Status VARCHAR(20) NOT NULL UNIQUE,
+    Status VARCHAR(20) NOT NULL UNIQUE
 );
 
 CREATE TABLE Employees (
@@ -165,7 +165,7 @@ CREATE TABLE Employees (
 );
 
 CREATE TABLE StatusesCreditApplication (
-    StatusCreditApplication INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+    IdStatusCreditApplication INT NOT NULL PRIMARY KEY IDENTITY(1,1),
     Status VARCHAR(20) NOT NULL
 );
 
@@ -177,6 +177,11 @@ CREATE TABLE Promotions (
     DateStart DATE NOT NULL,
     DateEnd DATE NOT NULL,
     IsActive BIT NOT NULL
+);
+
+CREATE TABLE ContractClientTemplates (
+    IdContractClientTemplate INT NOT NULL PRIMARY KEY IDENTITY(1,1),
+    Doc VARBINARY(MAX) NOT NULL
 );
 
 CREATE TABLE CreditApplications (
@@ -194,7 +199,7 @@ CREATE TABLE CreditApplications (
     ValorationOpinion TEXT,
 
     CONSTRAINT fk_Employee_CreditApplication FOREIGN KEY (IdEmployeeApplication) REFERENCES Employees (IdEmployee),
-    CONSTRAINT fk_StatusCreditApplication_CreditApplication FOREIGN KEY (IdStatusCreditApplication) REFERENCES StatusesCreditApplication (StatusCreditApplication),
+    CONSTRAINT fk_StatusCreditApplication_CreditApplication FOREIGN KEY (IdStatusCreditApplication) REFERENCES StatusesCreditApplication (IdStatusCreditApplication),
     CONSTRAINT fk_Promotion_CreditApplication FOREIGN KEY (IdPromotion) REFERENCES Promotions (IdPromotion),
     CONSTRAINT fk_Client_CreditApplication FOREIGN KEY (IdClient) REFERENCES Clients (IdClient)
 );
@@ -205,7 +210,7 @@ CREATE TABLE Policies (
     Description TEXT NOT NULL,
     DateStart DATE NOT NULL,
     DateEnd DATE,
-    IsActive BIT NOT NULL,
+    IsActive BIT NOT NULL
 );
 
 CREATE TABLE CreditApplications_Policies (
@@ -220,7 +225,7 @@ CREATE TABLE CreditApplications_Policies (
 
 CREATE TABLE StatusesCredit (
 	IdStatusCredit INT NOT NULL PRIMARY KEY IDENTITY(1,1),
-	Status VARCHAR(15) NOT NULL UNIQUE
+	Status VARCHAR(30) NOT NULL UNIQUE
 );
 
 CREATE TABLE Credits (
@@ -229,8 +234,8 @@ CREATE TABLE Credits (
     IdStatusCredit INT NOT NULL,
     SignedDocument VARBINARY(MAX),
     PaymentLayout VARBINARY(MAX),
-    DateStart DATETIME NOT NULL,
-    DateEnd DATETIME NOT NULL,
+    DateStart DATETIME,
+    DateEnd DATETIME,
     IdCreditApplication INT NOT NULL UNIQUE,
 
 	CONSTRAINT fk_StatusCredit_Credit FOREIGN KEY (IdStatusCredit) REFERENCES StatusesCredit (IdStatusCredit),
@@ -270,7 +275,11 @@ INSERT INTO BankCardTypes (Type) VALUES ('Débito'), ('Crédito');
 INSERT INTO RelationshipsClientsTypes (Type)
             VALUES ('Amigo/a'), ('Familiar'), ('Pareja');
 
-INSERT INTO AddressesTypes (Type) VALUES ('Cuarto'), ('Departamento'), ('Casa');
+INSERT INTO AddressesTypes (Type) 
+            VALUES ('Cuarto'), 
+                   ('Departamento'), 
+                   ('Casa');
+
 INSERT INTO StatesAddresses (Name) 
             VALUES ('Aguascalientes'), ('Baja california'), ('Baja california sur'), ('Campeche'),
                    ('Chiapas'), ('Chihuahua'), ('Coahuila'), ('Colima'), ('Durango'), ('Guanajuato'), 
@@ -286,11 +295,17 @@ INSERT INTO WorkTypes (Type)
                    ('Educativo'), 
                    ('Limpieza');
 
-INSERT INTO StatusesCreditApplication VALUES ('Aplicado'), ('Aceptado'), ('Rechazado');
+INSERT INTO ContractClientTemplates (Doc)
+            VALUES ((SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Archivos\Example Files\FinanciaRed\TemplateContract.docx', SINGLE_BLOB) AS Doc));
 
-INSERT INTO StatusesCredit (Status) VALUES ('Cobrable'), ('Incobrale');
+INSERT INTO StatusesCreditApplication 
+            VALUES ('Aplicado'), ('Aceptado'), ('Rechazado');
 
-INSERT INTO RolesEmployees (Role) VALUES ('Administrador'), ('Gestor de cobranza'), ('Analista de crédito'), ('Asesor de crédito');
+INSERT INTO StatusesCredit (Status) 
+            VALUES ('En espera de confirmación'), ('Cobrable'), ('Incobrale');
+
+INSERT INTO RolesEmployees (Role) 
+            VALUES ('Administrador'), ('Gestor de cobranza'), ('Analista de crédito'), ('Asesor de crédito');
 --INSERTIONS----------------------------------------------------------
 INSERT INTO BankAccounts (IdNameBank, CardNumber, CodeCLABE, IdCardType)
             VALUES (1, '4152-3139-1162-1724', '123-456-789-012-345-678', 1),
@@ -310,10 +325,11 @@ INSERT INTO ClientsAddresses (IdState, Municipality, PostalCode, Colony, Street,
 
 INSERT INTO WorkClients (WorkArea, IdWorkType, MonthlySalary)
             VALUES ('Ingeniero de software', 2, 20000),
-                   ('Ingeniero tecnologías de la información', 2, 25000);
+                   ('Ingeniero tecnología   s de la información', 2, 25000);
 
-INSERT INTO Clients (FirstName, MiddleName, LastName, DateBirth, Gender, IdStatusMarital, PhoneNumber1, PhoneNumber2, Email1, Email2, CodeRFC, CodeCURP, 
-					 IdContactReference1, IdContactReference2, IdBankAccount1, IdBankAccount2, IdAddress, IdWorkClient, IdStatusClient) 
+INSERT INTO Clients (FirstName, MiddleName, LastName, DateBirth, Gender, IdStatusMarital, 
+                     PhoneNumber1, PhoneNumber2, Email1, Email2, 
+                     CodeRFC, CodeCURP, IdContactReference1, IdContactReference2, IdBankAccount1, IdBankAccount2, IdAddress, IdWorkClient, IdStatusClient) 
 			VALUES  ('Pedro', 'Pica', 'Piedra', '2003-10-26', 'M', 1, 
 					 '228-123-1234', '228-321-4321', 'p_p_p@gmail.com', 'pedro_loco@gmail.com', 
 					 'PIPP031026TGK', 'PIPP031026HVZRDDA2', 1, 2, 1, 2, 1, 1, 1),
@@ -324,41 +340,73 @@ INSERT INTO Clients (FirstName, MiddleName, LastName, DateBirth, Gender, IdStatu
                      '228-555-5555', '228-666-6666', 'ana.gomez@example.com', NULL, 
                      'GOMA950515MDF', 'GOMA950515HDFGNA01', 4, NULL, 4, NULL, 1, 2, 1);
 
-INSERT INTO Employees (FirstName, MiddleName, LastName, DateBirth, Gender, CodeRFC, CodeCURP, Email, Password, IdRole, IdStatusEmployee)
-            VALUES ('Rodolfo', 'Fernández', 'Rodríguez', '2003-10-26', 'M', 'FERR031026TG6', 'FERR031026HVZRDDA2', 'administrador@gmail.com', '1234', 1, 1),
-                   ('Martin Emmanuel', 'Cruz', 'Carmona', '2004-11-27', 'M', 'CRCM041127X4G', 'CACM041127HVZGEHE7', 'cobrador@gmail.com', '1234', 2, 1),
-                   ('Sara', 'Hernández', 'Roldán', '2004-08-03', 'M', 'HERS040803HAI', 'HERS040803MVZGJKF9', 'analista@gmail.com', '1234', 3, 1),
-                   ('Mario Alberto', 'Hernández', 'Pérez', '1990-05-13', 'M', 'HEPM900513KJS', 'HEPM900513HVZHDHG0', 'asesor@gmail.com', '1234', 4, 1);
+INSERT INTO Employees (FirstName, MiddleName, LastName, DateBirth, Gender, 
+                       CodeRFC, CodeCURP, Email, Password, IdRole, IdStatusEmployee)
+            VALUES ('Rodolfo', 'Fernández', 'Rodríguez', '2003-10-26', 'M', 
+                    'FERR031026TG6', 'FERR031026HVZRDDA2', 'administrador@gmail.com', '1234', 1, 1),
+                   ('Martin Emmanuel', 'Cruz', 'Carmona', '2004-11-27', 'M', 
+                    'CRCM041127X4G', 'CACM041127HVZGEHE7', 'cobrador@gmail.com', '1234', 2, 1),
+                   ('Sara', 'Hernández', 'Roldán', '2004-08-03', 'M', 
+                    'HERS040803HAI', 'HERS040803MVZGJKF9', 'analista@gmail.com', '1234', 3, 1),
+                   ('Mario Alberto', 'Hernández', 'Pérez', '1990-05-13', 'M', 
+                    'HEPM900513KJS', 'HEPM900513HVZHDHG0', 'asesor@gmail.com', '1234', 4, 1);
 
 INSERT INTO Promotions (Name, InterestRate, NumberFortnights, DateStart, DateEnd, IsActive)
             VALUES ('Plazoz chiquitoz', 0.05, 2, '2024-06-01', '2024-12-31', 1),
                    ('Para pacientes', 0.15, 4, '2024-06-01', '2024-12-31', 1);
 
 INSERT INTO CreditApplications (DateApplication, DateAcepted, AmountTotal, IdStatusCreditApplication, ValorationOpinion,
-            IdPromotion,IdEmployeeApplication, IdClient, ProofINE, ProofAddress, ProofLastPayStub)
-VALUES  ('2024-10-23', '2024-10-29', 10000, 2, 'Ejemplo de valoración 1', 1, 1, 1,
-        (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Users\fofor\Desktop\Escuela\Desarrollo de software\ProofINE.pdf', SINGLE_BLOB) AS ProofINE),
-        (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Users\fofor\Desktop\Escuela\Desarrollo de software\ProofAddress.pdf', SINGLE_BLOB) AS ProofAddress),
-        (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Users\fofor\Desktop\Escuela\Desarrollo de software\ProofLastPayStub.pdf', SINGLE_BLOB) AS ProofLastPayStub)),
-        ('2024-10-24', NULL, 35000, 1, NULL, 2, 1, 2,
-        (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Users\fofor\Desktop\Escuela\Desarrollo de software\ProofINE.pdf', SINGLE_BLOB) AS ProofINE),
-        (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Users\fofor\Desktop\Escuela\Desarrollo de software\ProofAddress.pdf', SINGLE_BLOB) AS ProofAddress),
-        (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Users\fofor\Desktop\Escuela\Desarrollo de software\ProofLastPayStub.pdf', SINGLE_BLOB) AS ProofLastPayStub));
+                                IdPromotion,IdEmployeeApplication, IdClient, ProofINE, ProofAddress, ProofLastPayStub)
+                    -- Aplicado
+            VALUES  ('2024-10-23 14:00:23', NULL, 35000, 1, 'Ejemplo de valoración solicitud crédito', 
+                     1, 4, 1,
+                    (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Archivos\Example Files\FinanciaRed\ProofINE.pdf', SINGLE_BLOB) AS ProofINE),
+                    (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Archivos\Example Files\FinanciaRed\ProofAddress.pdf', SINGLE_BLOB) AS ProofAddress),
+                    (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Archivos\Example Files\FinanciaRed\ProofLastPayStub.pdf', SINGLE_BLOB) AS ProofLastPayStub)),
+                    -- Aceptado
+                    ('2024-10-24 12:28:36', '2024-10-30 14:23:52', 40000, 2, 'Ejemplo de valoración solicitud crédito', 
+                     2, 4, 1,
+                    (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Archivos\Example Files\FinanciaRed\ProofINE.pdf', SINGLE_BLOB) AS ProofINE),
+                    (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Archivos\Example Files\FinanciaRed\ProofAddress.pdf', SINGLE_BLOB) AS ProofAddress),
+                    (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Archivos\Example Files\FinanciaRed\ProofLastPayStub.pdf', SINGLE_BLOB) AS ProofLastPayStub)),
+                    -- Aceptado
+                    ('2024-10-25 12:28:36', '2024-11-01 13:23:52', 55000, 2, 'Ejemplo de valoración solicitud crédito', 
+                     2, 4, 2,
+                    (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Archivos\Example Files\FinanciaRed\ProofINE.pdf', SINGLE_BLOB) AS ProofINE),
+                    (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Archivos\Example Files\FinanciaRed\ProofAddress.pdf', SINGLE_BLOB) AS ProofAddress),
+                    (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Archivos\Example Files\FinanciaRed\ProofLastPayStub.pdf', SINGLE_BLOB) AS ProofLastPayStub)),
+                    -- Aceptado
+                    ('2024-10-25 12:28:36', '2024-11-02 17:23:52', 62000, 2, 'Ejemplo de valoración solicitud crédito', 
+                     2, 4, 3,
+                    (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Archivos\Example Files\FinanciaRed\ProofINE.pdf', SINGLE_BLOB) AS ProofINE),
+                    (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Archivos\Example Files\FinanciaRed\ProofAddress.pdf', SINGLE_BLOB) AS ProofAddress),
+                    (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Archivos\Example Files\FinanciaRed\ProofLastPayStub.pdf', SINGLE_BLOB) AS ProofLastPayStub)),
+                    -- Reachazado
+                    ('2024-10-25 11:34:51', '2024-11-02 14:22:42', 24800, 3, 'Ejemplo de valoración solicitud crédito', 
+                     2, 4, 3,
+                    (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Archivos\Example Files\FinanciaRed\ProofINE.pdf', SINGLE_BLOB) AS ProofINE),
+                    (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Archivos\Example Files\FinanciaRed\ProofAddress.pdf', SINGLE_BLOB) AS ProofAddress),
+                    (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Archivos\Example Files\FinanciaRed\ProofLastPayStub.pdf', SINGLE_BLOB) AS ProofLastPayStub));
 
 INSERT INTO Policies (Name, Description, DateStart, DateEnd, IsActive)
             VALUES ('Crédito máximo', 'El monto total de un crédito que solicita un cliente no debe superar el 30% de su salario mensual total.', '2000-01-01', NULL, 1),
                    ('Crédito mínimo', 'El monto minimo de un crédito que solicita un cliente es de $5,000 MXN.', '2000-01-01', NULL, 0),
                    ('Credito superior', 'En créditos mayores de $100,000 MXN, se debe tener en cuenta la zona y tipo de vivienda del cliente.', '2000-01-01', NULL, 1);
 
-INSERT INTO Credits (AmountLeft, IdStatusCredit, SignedDocument, PaymentLayout, DateStart, DateEnd, IdCreditApplication) 
-            VALUES (10000, 1, NULL, NULL, '2024-10-26 11:50:00', '2025-01-18 11:50:00', 1);
-
 INSERT INTO CreditApplications_Policies (IdCreditApplication, IdPolicy, IsAprobed)
-            VALUES (1, 1, 1), (1, 2, 1), (1, 3, 1),
-                   (2, 1, NULL), (2, 2, NULL), (2, 3, NULL);
+            VALUES (1, 1, NULL),    (1, 2, NULL),       (1, 3, NULL),   -- Credit application 1
+                   (2, 1, 1),       (2, 2, 1),          (2, 3, 1),      -- Credit application 2
+                   (3, 1, 1),       (3, 2, 1),          (3, 3, 1),      -- Credit application 3
+                   (4, 1, 1),       (4, 2, 1),          (4, 3, 1),      -- Credit application 4
+                   (5, 1, 1),       (5, 2, 0),          (5, 3, 1);      -- Credit application 5
+
+INSERT INTO Credits (AmountLeft, IdStatusCredit, DateStart, DateEnd, IdCreditApplication, SignedDocument, PaymentLayout) 
+                   -- Credit application 2 - En espera de confirmación
+            VALUES (40000, 1, '2024-10-30 14:23:52', '2025-01-18 11:50:00', 2, NULL, NULL),
+                   -- Credit application 3 - Cobrable
+                   (55000, 2, '2024-11-01 13:23:52', '2025-01-18 11:50:00', 3, NULL, NULL),
+                   -- Credit application 4 - Incobrable
+                   (62000, 3, '2024-11-02 17:23:52', '2025-01-18 11:50:00', 4, NULL, NULL);
+
 --TESTS---------------------------------------------------------------
-SELECT * FROM CreditApplications_Policies;
-SELECT * FROM CreditApplications;
-SELECT * FROM CreditApplications_Policies;
-SELECT * FROM Clients;
-SELECT * FROM Promotions;
+SELECT * FROM Policies;

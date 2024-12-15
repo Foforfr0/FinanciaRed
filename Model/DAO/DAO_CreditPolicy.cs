@@ -16,16 +16,26 @@ namespace FinanciaRed.Model.DAO {
 
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
                 try {
-                    List<DTO_CreditPolicy_Consult> dataRetrieved = await
-                        context.Policies.
+                    List<DTO_CreditPolicy_Consult> dataRetrieved = (await context.Policies.
+                        Select (policy => new {
+                            policy.IdPolicy,
+                            policy.Name,
+                            policy.Description,
+                            policy.DateStart,
+                            policy.DateEnd
+                        }).
+                        ToListAsync ()).
                         Select (policy => new DTO_CreditPolicy_Consult {
                             IdCreditPolicy = policy.IdPolicy,
                             Name = policy.Name,
                             Description = policy.Description,
                             DateStart = policy.DateStart,
-                            DateEnd = policy.DateEnd ?? policy.DateStart
+                            DateEnd = policy.DateEnd,
+                            DateEndS = policy.DateEnd.HasValue
+                                ? policy.DateEnd.Value.ToString ("dd/MM/yyyy")
+                                : "Sin vigencia"
                         }).
-                        ToListAsync ();
+                        ToList ();
 
                     if (dataRetrieved != null) {
                         responseConsultCreditPolicies = MessageResponse<List<DTO_CreditPolicy_Consult>>.Success (
@@ -214,7 +224,7 @@ namespace FinanciaRed.Model.DAO {
                             Name = policy.Name,
                             Description = policy.Description,
                             DateStart = policy.DateStart,
-                            DateEnd = policy.DateEnd ?? policy.DateStart
+                            DateEnd = policy.DateEnd
                         }).
                         FirstOrDefaultAsync ();
 
@@ -230,6 +240,58 @@ namespace FinanciaRed.Model.DAO {
                 }
             }
             return responseConsultCreditPolicies;
+        }
+
+        public static async Task<MessageResponse<bool>> ModifyCreditPolicy (DTO_CreditPolicy_Consult modifyPolicy) {
+            MessageResponse<bool> responseCreditPolicy = null;
+
+            using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                try {
+                    Policies currentCreditPolicy = context.Policies.Find (modifyPolicy.IdCreditPolicy);
+
+                    if (currentCreditPolicy != null) {
+                        context.Policies.Attach (currentCreditPolicy);
+
+                        currentCreditPolicy.Name = modifyPolicy.Name;
+                        currentCreditPolicy.Description = modifyPolicy.Description;
+                        currentCreditPolicy.DateStart = modifyPolicy.DateStart;
+                        currentCreditPolicy.DateEnd = modifyPolicy.DateEnd;
+
+                        bool SaveFailed = false;
+                        do {
+                            try {
+                                context.Entry (currentCreditPolicy).State = EntityState.Modified;
+                                await context.SaveChangesAsync ();
+
+                            } catch (DbUpdateConcurrencyException ex) {
+                                SaveFailed = true;
+                                foreach (var entry in ex.Entries) {
+                                    if (entry.Entity is Match) {
+                                        var proposedValues = entry.CurrentValues;
+                                        var databaseValues = entry.GetDatabaseValues ();
+
+                                        if (databaseValues != null) {
+                                            var databaseEntity = (Clients)databaseValues.ToObject ();
+                                            // Actualiza los valores originales con los valores actuales de la base de datos.
+                                            entry.OriginalValues.SetValues (databaseValues);
+                                            // Decide qué hacer con los valores propuestos.
+                                            entry.CurrentValues.SetValues (proposedValues);
+                                        }
+                                    }
+                                }
+                            }
+                        } while (SaveFailed);
+
+                        responseCreditPolicy = MessageResponse<bool>.Success (
+                            $"Credit credpolicy ID {currentCreditPolicy.IdPolicy} updated", true);
+                    } else {
+                        responseCreditPolicy = MessageResponse<bool>.Failure ($"Credit credpolicy ID {currentCreditPolicy.IdPolicy} doesn´t exists.");
+                    }
+                } catch (Exception ex) {
+                    responseCreditPolicy = MessageResponse<bool>.Failure ("Exception" + ex.Message);
+                }
+            }
+            return responseCreditPolicy;
         }
     }
 }

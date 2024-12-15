@@ -11,6 +11,9 @@ namespace FinanciaRed.Model.DTO {
         public float InterestRate {
             get; set;
         }
+        public string InterestPercentaje {
+            get; set;
+        }
         public int NumberFortNigths {
             get; set;
         }

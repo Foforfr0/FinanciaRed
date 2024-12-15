@@ -5,22 +5,31 @@ namespace FinanciaRed.Model.DTO {
         public int IdCredit {
             get; set;
         }
-        public long AmountTotal {
+        public float AmountTotal {
             get; set;
         }
-        public long? AmountLeft {
+        public string AmountTotalS {
             get; set;
         }
-        public double InteresRate {
+        public float? AmountLeft {
+            get; set;
+        }
+        public string AmountLeftS {
+            get; set;
+        }
+        public float InterestRate {
+            get; set;
+        }
+        public string InterestPercentaje {
             get; set;
         }
         public int NumberFortnigths {
             get; set;
         }
-        public DateTime DateStart {
+        public DateTime? DateStart {
             get; set;
         }
-        public DateTime DateEnd {
+        public DateTime? DateEnd {
             get; set;
         }
     }

@@ -26,8 +26,8 @@
                     <Image Source="/View/Images/icon-search.png" Width="18"/>
                 </Button>
                 
-                <Button Click="ClickDefineOpinion" Content="Dictámen" Padding="10 4" Margin="5 0"  BorderBrush="Transparent"/>
-                <Button Click="ClickRegisterCreditApplication" Content="Registrar" Padding="10 4" BorderBrush="Transparent"/>
+                <Button x:Name="button_DefineOpinion" Click="ClickDefineOpinion" Content="Dictámen" Padding="10 4" Margin="5 0" BorderBrush="Transparent"/>
+                <Button x:Name="button_RegistryCreditApplication" Click="ClickRegisterCreditApplication" Content="Registrar" Padding="10 4" BorderBrush="Transparent"/>
             </StackPanel>
             <DataGrid x:Name="dataGrid_CreditAplications" AutoGenerateColumns="False" Height="430" Width="770" 
                       HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20 20 40 50" 
@@ -36,8 +36,8 @@
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                       ItemsSource="{Binding retrievedCreditApplications}" IsReadOnly="true" SelectionMode="Single">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Monto total" Binding="{Binding AmountTotal}" Width="*" />
-                    <DataGridTextColumn Header="Interés" Binding="{Binding InteresRate}" Width="*" />
+                    <DataGridTextColumn Header="Monto total" Binding="{Binding AmountTotalS}" Width="*" />
+                    <DataGridTextColumn Header="Interés" Binding="{Binding InterestPercentaje}" Width="*" />
                     <DataGridTextColumn Header="Quincenas" Binding="{Binding NumberFortNights}" Width="*" />
                     <DataGridTextColumn Header="Fecha solicitada" Binding="{Binding DateRequest, StringFormat='dd/MM/yyyy'}" Width="*" />
                     <DataGridTextColumn Header="Estado" Binding="{Binding Status}" Width="*" />

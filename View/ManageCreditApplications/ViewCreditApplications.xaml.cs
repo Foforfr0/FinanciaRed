@@ -17,6 +17,16 @@ namespace FinanciaRed.View.ManageCreditApplications {
             InitializeComponent ();
 
             _ = RetrieveCreditApplicationsDB ();
+            if (CURRENT_USER.Instance.IdRol == 3) {
+                button_DefineOpinion.Visibility = Visibility.Visible;
+            } else {
+                button_DefineOpinion.Visibility = Visibility.Hidden;
+            }
+            if (CURRENT_USER.Instance.IdRol == 4) {
+                button_RegistryCreditApplication.Visibility = Visibility.Visible;
+            } else {
+                button_RegistryCreditApplication.Visibility = Visibility.Hidden;
+            }
         }
 
         private async Task RetrieveCreditApplicationsDB () {

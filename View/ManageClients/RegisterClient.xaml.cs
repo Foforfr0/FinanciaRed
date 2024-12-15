@@ -90,14 +90,7 @@ namespace FinanciaRed.View.ManageClients {
                 comboBox_BankAccount1Name.Items.Add (new ComboBoxItem { Content = type.Name, TabIndex = type.IdBank });
                 comboBox_BankAccount2Name.Items.Add (new ComboBoxItem { Content = type.Name, TabIndex = type.IdBank });
             }
-            /*
-            comboBox_BankAccount1Name.ItemsSource = listBank;
-            comboBox_BankAccount1Name.DisplayMemberPath = "Name";
-            comboBox_BankAccount1Name.SelectedValue = "IdBank";
-            comboBox_BankAccount2Name.ItemsSource = listBank;
-            comboBox_BankAccount2Name.DisplayMemberPath = "Name";
-            comboBox_BankAccount2Name.SelectedValue = "IdBank";
-            */
+            
             comboBox_BankAccount1CardType.Items.Clear ();
             comboBox_BankAccount2CardType.Items.Clear ();
             comboBox_BankAccount1CardType.Items.Add (new ComboBoxItem { Content = "Seleccione una opción", IsSelected = true, Tag = 0 });

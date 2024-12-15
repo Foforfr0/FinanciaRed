@@ -44,7 +44,7 @@
                     <DataGridTextColumn Header="Nombre" Binding="{Binding Name, Converter={StaticResource RemoveNewLineConverter}}" Width="*" />
                     <DataGridTextColumn Header="Descripción" Binding="{Binding Description, Converter={StaticResource RemoveNewLineConverter}}" Width="2*" />
                     <DataGridTextColumn Header="Fecha inicio" Binding="{Binding DateStart, StringFormat='dd/MM/yyyy'}" Width="90" />
-                    <DataGridTextColumn Header="Fecha fin" Binding="{Binding DateEnd, StringFormat='dd/MM/yyyy'}" Width="90" />
+                    <DataGridTextColumn Header="Fecha fin" Binding="{Binding DateEndS}" Width="90" />
 
                     <!-- Columna con botón de detalles -->
                     <DataGridTemplateColumn Header="Detalles">

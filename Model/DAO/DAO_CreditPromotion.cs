@@ -21,6 +21,7 @@ namespace FinanciaRed.Model.DAO {
                             IdCreditPromotion = cp.IdPromotion,
                             Name = cp.Name,
                             InterestRate = cp.InterestRate,
+                            InterestPercentaje = ((cp.InterestRate * 100)).ToString () + " %",
                             NumberFortNigths = cp.NumberFortnights,
                             DateStart = cp.DateStart,
                             DateEnd = cp.DateEnd

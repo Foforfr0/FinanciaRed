@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5b470e7e087c4965a86186be5efa58bf" Name="Diagram1">
+      <Diagram DiagramId="ce84bc99d4014aefaaefab9efcd9fa85" Name="Diagram1">
         <EntityTypeShape EntityType="FinanciaRedModel.AddressesTypes" Width="1.5" PointX="0.75" PointY="8.625" IsExpanded="true" />
         <EntityTypeShape EntityType="FinanciaRedModel.BankAccounts" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
         <EntityTypeShape EntityType="FinanciaRedModel.BankCardTypes" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
@@ -12,6 +12,7 @@
         <EntityTypeShape EntityType="FinanciaRedModel.Clients" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="FinanciaRedModel.ClientsAddresses" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
         <EntityTypeShape EntityType="FinanciaRedModel.ContactsReferencesClients" Width="1.5" PointX="3" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinanciaRedModel.ContractClientTemplates" Width="1.5" PointX="9.75" PointY="6.875" IsExpanded="true" />
         <EntityTypeShape EntityType="FinanciaRedModel.CreditApplications" Width="1.5" PointX="7.5" PointY="2.25" IsExpanded="true" />
         <EntityTypeShape EntityType="FinanciaRedModel.CreditApplications_Policies" Width="1.5" PointX="9.75" PointY="3.5" IsExpanded="true" />
         <EntityTypeShape EntityType="FinanciaRedModel.Credits" Width="1.5" PointX="12.75" PointY="3.125" IsExpanded="true" />

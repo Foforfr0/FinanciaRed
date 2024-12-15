@@ -1,23 +1,48 @@
 ﻿using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 
 namespace FinanciaRed.Utils {
     internal class ShowPDFWebBrowser {
-        public static void ShowPDF (string NameFile, byte[] PdfFile, WebBrowser PdfViewer) {
+        public static string ShowPDF (string nameFile, byte[] pdfFile, WebBrowser pdfViewer) {
+            string status = "";
             try {
-                if (PdfFile != null && PdfFile.Length > 0) {
-                    string tempFilePath = System.IO.Path.Combine (System.IO.Path.GetTempPath (), NameFile);
+                if (pdfFile != null && pdfFile.Length > 0) {
+                    string projectDirectory = AppDomain.CurrentDomain.BaseDirectory;
+                    string tempDirectory = Path.Combine (projectDirectory, "TempFiles");
 
-                    System.IO.File.WriteAllBytes (tempFilePath, PdfFile);
+                    if (!Directory.Exists (tempDirectory)) {
+                        Directory.CreateDirectory (tempDirectory);
+                    }
 
-                    PdfViewer.Navigate (new Uri (tempFilePath));
+                    string tempFilePath = Path.Combine (tempDirectory, $"{Guid.NewGuid ()}_{nameFile}");
+
+                    File.WriteAllBytes (tempFilePath, pdfFile);
+
+                    pdfViewer.Navigate (new Uri (tempFilePath));
+
+                    pdfViewer.Navigated += (sender, e) => {
+                        try {
+                            // Eliminar archivos anteriores relacionados con este visor
+                            foreach (var file in Directory.GetFiles (tempDirectory, $"*_{nameFile}")) {
+                                if (file != tempFilePath) // No eliminar el archivo actual
+                                {
+                                    File.Delete (file);
+                                }
+                            }
+                        } catch (Exception) {
+                            status = "Fallo al eliminar cache de visualizador.";
+                        }
+                    };
                 } else {
-                    MessageBox.Show ("El archivo PDF está vacío o no disponible.");
+                    status = "El archivo PDF está vacío o no disponible.";
                 }
             } catch (Exception ex) {
-                MessageBox.Show ($"Error al mostrar el PDF: {ex.Message}");
+                status = $"Error al mostrar el PDF: {ex.Message}";
             }
+            return status;
         }
+
     }
 }

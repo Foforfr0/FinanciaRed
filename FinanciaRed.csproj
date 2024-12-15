@@ -140,6 +140,9 @@
     <Compile Include="Model\Model_Entity\ContactsReferencesClients.cs">
       <DependentUpon>Model_Entity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\Model_Entity\ContractClientTemplates.cs">
+      <DependentUpon>Model_Entity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Model_Entity\CreditApplications.cs">
       <DependentUpon>Model_Entity.tt</DependentUpon>
     </Compile>

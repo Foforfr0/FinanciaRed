@@ -18,10 +18,13 @@ namespace FinanciaRed.Model.DAO {
                         Select (crdt => new DTO_Credit_Consult {
                             IdCredit = crdt.IdCredit,
                             AmountTotal = crdt.CreditApplications.AmountTotal,
+                            AmountTotalS = "$ " + (crdt.CreditApplications.AmountTotal).ToString (),
                             AmountLeft = crdt.AmountLeft,
+                            AmountLeftS = "$ " + (crdt.AmountLeft).ToString (),
                             DateStart = crdt.DateStart,
                             DateEnd = crdt.DateEnd,
-                            InteresRate = crdt.CreditApplications.Promotions.InterestRate,
+                            InterestRate = crdt.CreditApplications.Promotions.InterestRate,
+                            InterestPercentaje = (crdt.CreditApplications.Promotions.InterestRate * 100).ToString () + " %",
                             NumberFortnigths = crdt.CreditApplications.Promotions.NumberFortnights
                         }).
                         ToListAsync ();
@@ -83,6 +86,36 @@ namespace FinanciaRed.Model.DAO {
                 }
             }
             return responseChangeStatusCredits;
+        }
+
+        public static async Task<MessageResponse<bool>> CreateCredit (DTO_CreditApplication_Details newCredit) {
+            /*
+             * Se crea un Credito pero sin inciar, hace falta el documento firmado por el cliente
+             */
+            MessageResponse<bool> responseCreateCredit = null;
+
+            using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                try {
+                    Credits createdCredit = new Credits {
+                        AmountLeft = newCredit.AmountSolicited,
+                        IdStatusCredit = 1,
+                        SignedDocument = null,
+                        PaymentLayout = null,
+                        DateStart = null,
+                        DateEnd = null,
+                        IdCreditApplication = newCredit.IdCreditApplication,
+                    };
+
+                    context.Credits.Add (createdCredit);
+                    await context.SaveChangesAsync ();
+
+                    responseCreateCredit = MessageResponse<bool>.Success (
+                        $"Credit created.", true);
+                } catch (Exception ex) {
+                    responseCreateCredit = MessageResponse<bool>.Failure ("Exception: " + ex.Message);
+                }
+            }
+            return responseCreateCredit;
         }
     }
 }

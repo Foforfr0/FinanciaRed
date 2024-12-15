@@ -17,5 +17,8 @@ namespace FinanciaRed.Model.DTO {
         public DateTime? DateEnd {
             get; set;
         }
+        public string DateEndS {
+            get; set;
+        }
     }
 }

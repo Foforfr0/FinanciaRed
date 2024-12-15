@@ -1,6 +1,7 @@
 ﻿using FinanciaRed.Model.DAO;
 using FinanciaRed.Model.DTO;
 using FinanciaRed.Model.DTO.CreditApplication;
+using FinanciaRed.Utils;
 using FinanciaRed.View.ManageClients;
 using FinanciaRed.View.ManageCreditPolicies;
 using System.Collections.Generic;
@@ -69,6 +70,57 @@ namespace FinanciaRed.View.ManageCreditApplications {
                 ViewDetailsCreditPolicy viewDetailsCreditPolicyWindow =
                     new ViewDetailsCreditPolicy ((dataGrid_CreditPolicies.SelectedItem as DTO_CreditApplication_CreditPolicies).IdCreditPolicy, false);
                 viewDetailsCreditPolicyWindow.ShowDialog ();
+            }
+        }
+
+        private void ClickShowProofINE (object sender, RoutedEventArgs e) {
+            if (selectedCreditApplication.ProofINE.Length == 0 || selectedCreditApplication.ProofINE == null) {
+                label_LoadingFile.Visibility = Visibility.Visible;
+                label_LoadingFile.Content = "Error al cargar el archivo, cierre y vuelva a abrir la ventana.";
+                PdfViewer.Visibility = Visibility.Collapsed;
+            } else {
+                label_LoadingFile.Visibility = Visibility.Collapsed;
+                label_LoadingFile.Content = "";
+                PdfViewer.Visibility = Visibility.Visible;
+                label_LoadingFile.Content = ShowPDFWebBrowser.ShowPDF (selectedCreditApplication.CodeCURP + "-INE.pdf",
+                        selectedCreditApplication.ProofINE, PdfViewer);
+                if (!label_LoadingFile.Content.Equals ("")) {
+                    PdfViewer.Visibility = Visibility.Collapsed;
+                }
+            }
+        }
+
+        private void ClickShowProofAddress (object sender, RoutedEventArgs e) {
+            if (selectedCreditApplication.ProofAddress.Length == 0 || selectedCreditApplication.ProofAddress == null) {
+                label_LoadingFile.Visibility = Visibility.Visible;
+                label_LoadingFile.Content = "Error al cargar el archivo, cierre y vuelva a abrir la ventana.";
+                PdfViewer.Visibility = Visibility.Collapsed;
+            } else {
+                label_LoadingFile.Visibility = Visibility.Collapsed;
+                label_LoadingFile.Content = "";
+                PdfViewer.Visibility = Visibility.Visible;
+                label_LoadingFile.Content = ShowPDFWebBrowser.ShowPDF (selectedCreditApplication.CodeCURP + "-ComprobanteDomicilio.pdf",
+                    selectedCreditApplication.ProofAddress, PdfViewer);
+                if (!label_LoadingFile.Content.Equals ("")) {
+                    PdfViewer.Visibility = Visibility.Collapsed;
+                }
+            }
+        }
+
+        private void ClickShowProofLastPayStub (object sender, RoutedEventArgs e) {
+            if (selectedCreditApplication.ProofLastVoucher.Length == 0 || selectedCreditApplication.ProofLastVoucher == null) {
+                label_LoadingFile.Visibility = Visibility.Visible;
+                label_LoadingFile.Content = "Error al cargar el archivo, cierre y vuelva a abrir la ventana.";
+                PdfViewer.Visibility = Visibility.Collapsed;
+            } else {
+                label_LoadingFile.Visibility = Visibility.Collapsed;
+                label_LoadingFile.Content = "";
+                PdfViewer.Visibility = Visibility.Visible;
+                label_LoadingFile.Content = ShowPDFWebBrowser.ShowPDF (selectedCreditApplication.CodeCURP + "-UltimoTalonPago.pdf",
+                    selectedCreditApplication.ProofLastVoucher, PdfViewer);
+                if (!label_LoadingFile.Content.Equals ("")) {
+                    PdfViewer.Visibility = Visibility.Collapsed;
+                }
             }
         }
     }

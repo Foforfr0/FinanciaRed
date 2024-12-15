@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:FinanciaRed.View.ManageCreditApplications"
         mc:Ignorable="d"
         xmlns:utils="clr-namespace:FinanciaRed.Utils"
-        Title="Detalles de política de crédito" d:Height="1000" Height="650" Width="800" 
+        Title="Detalles de solicitud de crédito" d:Height="1500" Height="650" Width="800" 
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
 
     <Window.Resources>
@@ -35,8 +35,8 @@
                 <Label Content="FinanciaRed" VerticalAlignment="Center" FontWeight="Bold" FontSize="20" Padding="0" Margin="10"/>
             </Grid>
             <Grid>
-                <StackPanel x:Name="stackPanel_Stage1" d:Height="895"  Height="525" Width="740" Margin="20" Background="#FFFFFF">
-                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" d:Height="895" Height="525" Width="740">
+                <StackPanel x:Name="stackPanel_Stage1" d:Height="1395"  Height="525" Width="740" Margin="20" Background="#FFFFFF">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" d:Height="1395" Height="525" Width="740">
                         <StackPanel Margin="20 10">
                             <Label Content="Detalles de política de crédito" Margin="0" Style="{StaticResource HeaderText}"/>
                             <Label Content="" Style="{StaticResource InstructionPage}"/>
@@ -61,7 +61,7 @@
                                 </StackPanel>
                             </StackPanel>
                             <!--Data credit application-->
-                            <StackPanel Grid.Row="0" Margin="20 10" Background="#FFEAEAEA">
+                            <StackPanel Grid.Row="0" Margin="20 10" d:Height="1110" Background="#FFEAEAEA">
                                 <Label Content="Detalles de la solicitud de crédito" Margin="8 5" Style="{StaticResource HeaderText2}"/>
                                 <StackPanel Orientation="Vertical" Margin="0 0 0 8" HorizontalAlignment="Center">
                                     <Label Content="Asesor de crédito: " Style="{StaticResource FieldTag}"/>
@@ -163,6 +163,35 @@
                                 <Label Content="Valoración" Margin="14 0 14 0" Style="{StaticResource HeaderText2}"/>
                                 <TextBox x:Name="textBox_Valoration" Margin="14 5 14 20" Height="150" TextWrapping="Wrap" AcceptsReturn="True" 
                                         VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"/>
+                                <Label Content="Valoración" Margin="14 0 14 0" Style="{StaticResource HeaderText2}"/>
+                                <Grid Margin="14 5 14 20">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="0">
+                                        <Label Content="INE" Style="{StaticResource FieldTag}" HorizontalAlignment="Center"/>
+                                        <Image Source="/View/Images/pdf-icon.png" Height="100"/>
+                                        <Button Click="ClickShowProofINE" Content="Visualizar"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="2">
+                                        <Label Content="Comprobante de domicilio" Style="{StaticResource FieldTag}" HorizontalAlignment="Center"/>
+                                        <Image Source="/View/Images/pdf-icon.png" Height="100"/>
+                                        <Button Click="ClickShowProofAddress" Content="Visualizar"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="1">
+                                        <Label Content="Último talón de pago" Style="{StaticResource FieldTag}" HorizontalAlignment="Center"/>
+                                        <Image Source="/View/Images/pdf-icon.png" Height="100"/>
+                                        <Button Click="ClickShowProofLastPayStub" Content="Visualizar"/>
+                                    </StackPanel>
+                                </Grid>
+                                <Border Margin="14 5 14 20" BorderBrush="Black" BorderThickness="1">
+                                    <Grid Height="280" Background="White">
+                                        <Label x:Name="label_LoadingFile" d:Content="Estado archivo" d:Visibility="Visible" Visibility="Hidden" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                        <WebBrowser x:Name="PdfViewer" Height="300" Visibility="Collapsed"/>
+                                    </Grid>
+                                </Border>
                             </StackPanel>
                         </StackPanel>
                     </ScrollViewer>

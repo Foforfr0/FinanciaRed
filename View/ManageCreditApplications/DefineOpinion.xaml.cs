@@ -169,7 +169,8 @@ namespace FinanciaRed.View.ManageCreditApplications {
         private async Task SaveOpinionDB () {
             List<string> errors = new List<string> ();
 
-            var messageResponseCheckList = await DAO_CreditApplication.SaveCheckListPolicies (
+            // Saving checklist policies
+            MessageResponse<bool> messageResponseCheckList = await DAO_CreditApplication.SaveCheckListPolicies (
                 IdCreditApplication,
                 new List<DTO_CreditApplication_CreditPolicies> (retrievedCreditPolicies),
                 new List<DTO_CreditApplication_CreditPolicies> (retrievedCreditPolicies).All (a => a.IsApplied ?? false)
@@ -178,7 +179,8 @@ namespace FinanciaRed.View.ManageCreditApplications {
                 errors.Add ($"Error al guardar la lista de políticas cumplidas.");
             }
 
-            var messageResponseValoration = await DAO_CreditApplication.DefineOpinion (
+            // Saving valoration
+            MessageResponse<bool> messageResponseValoration = await DAO_CreditApplication.DefineOpinion (
                 IdCreditApplication,
                 textBox_Valoration.Text
             );
@@ -186,8 +188,11 @@ namespace FinanciaRed.View.ManageCreditApplications {
                 errors.Add ($"Error al guardar la valoración.");
             }
 
+            // TODO Creating a new Credit object 
+
+
             if (errors.Count == 0) {
-                MessageBox.Show ("Se ha realizado el dictamen correctamente.", "Éxito");
+                MessageBox.Show ("Se ha realizado el dictamen correctamente.\n\nPara consultar el crédito, dirígase a la gestión de créditos.", "Registro exitoso");
                 this.Close ();
             } else {
                 string errorMessage = string.Join (Environment.NewLine, errors);

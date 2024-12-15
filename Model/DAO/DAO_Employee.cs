@@ -243,7 +243,8 @@ namespace FinanciaRed.Model.DAO {
                         Email = newEmployee.Email,
                         Password = newEmployee.Password,
                         IdRole = newEmployee.IdRol,
-                        ProfilePhoto = newEmployee.ProfilePhoto
+                        ProfilePhoto = newEmployee.ProfilePhoto,
+                        IdStatusEmployee = 1
                     };
 
                     context.Employees.Add (createdEmployee);

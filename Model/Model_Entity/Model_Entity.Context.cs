@@ -32,6 +32,7 @@ namespace FinanciaRed.Model.Model_Entity
         public virtual DbSet<Clients> Clients { get; set; }
         public virtual DbSet<ClientsAddresses> ClientsAddresses { get; set; }
         public virtual DbSet<ContactsReferencesClients> ContactsReferencesClients { get; set; }
+        public virtual DbSet<ContractClientTemplates> ContractClientTemplates { get; set; }
         public virtual DbSet<CreditApplications> CreditApplications { get; set; }
         public virtual DbSet<CreditApplications_Policies> CreditApplications_Policies { get; set; }
         public virtual DbSet<Credits> Credits { get; set; }

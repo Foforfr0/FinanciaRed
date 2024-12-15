@@ -37,7 +37,7 @@
                       ItemsSource="{Binding retrievedCredits}" IsReadOnly="true" SelectionMode="Single">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Nombre" Binding="{Binding Name}" Width="*" />
-                    <DataGridTextColumn Header="Interés" Binding="{Binding InterestRate}" Width="*" />
+                    <DataGridTextColumn Header="Interés" Binding="{Binding InterestPercentaje}" Width="*" />
                     <DataGridTextColumn Header="Quincenas" Binding="{Binding NumberFortNigths}" Width="*" />
                     <DataGridTextColumn Header="Fecha inicio" Binding="{Binding DateStart, StringFormat='dd/MM/yyyy'}" Width="*" />
                     <DataGridTextColumn Header="Fecha fin" Binding="{Binding DateEnd, StringFormat='dd/MM/yyyy'}" Width="*" />
