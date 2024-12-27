@@ -86,10 +86,10 @@ namespace FinanciaRed.View.ManageCreditPolicies {
 
         private bool ValidateDateField (
             DateTime? date, Label errorLabel,
-            string emptyError, DateTime? startDate = null,
+            string emptyError, int numDate = 0, DateTime? startDate = null,
             string compareError = "") {
 
-            if (date == null) {
+            if (date == null && numDate == 1) {
                 ShowError (errorLabel, emptyError);
                 return false;
             } else if (startDate != null && date < startDate) {
@@ -116,8 +116,8 @@ namespace FinanciaRed.View.ManageCreditPolicies {
             DTO_CreditPolicy_Consult newCreditPolicy = new DTO_CreditPolicy_Consult () {
                 Name = textBox_Name.Text,
                 Description = textBox_Description.Text,
-                DateStart = datePicker_DateStart.SelectedDate.Value,
-                DateEnd = datePicker_DateEnd.SelectedDate.Value
+                DateStart = datePicker_DateStart.SelectedDate ?? DateTime.Now,
+                DateEnd = datePicker_DateEnd.SelectedDate,
             };
 
             MessageResponse<bool> responseRegisterCreditPolicy = await DAO_CreditPolicy.RegistryNewCreditPolicy (newCreditPolicy);

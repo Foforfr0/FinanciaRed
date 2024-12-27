@@ -19,7 +19,7 @@ namespace FinanciaRed.View {
             textBox_Email.Text = "administrador@gmail.com";         //Administrador
             //textBox_Email.Text = "cobrador@gmail.com";            //Gestor de cobranza
             //textBox_Email.Text = "analista@gmail.com";            //Analista de crédito
-            textBox_Email.Text = "asesor@gmail.com";                //Asesor de cobranza
+            //textBox_Email.Text = "asesor@gmail.com";                //Asesor de cobranza
 
             passwordBox_Password.Password = "1234";
         }

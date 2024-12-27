@@ -8,6 +8,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace FinanciaRed.Model.DAO {
     internal class DAO_CreditPolicy {
@@ -162,11 +163,18 @@ namespace FinanciaRed.Model.DAO {
 
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
                 try {
+                    MessageBox.Show (
+                        $" ID: {newCreditPolicy.IdCreditPolicy}\n" + 
+                        $"Name: {newCreditPolicy.Name}\n" + 
+                        $"Descripcion: {newCreditPolicy.Description}\n" + 
+                        $"DateStart: {newCreditPolicy.DateStart.ToString ("dd/MM/yyyy")}\n" + 
+                        $"DateStart: {newCreditPolicy.DateEnd?.ToString ("dd/MM/yyyy")}\n");
                     Policies createdCreditPolicy = new Policies {
                         Name = newCreditPolicy.Name,
                         Description = newCreditPolicy.Description,
                         DateStart = newCreditPolicy.DateStart,
-                        DateEnd = newCreditPolicy.DateEnd
+                        DateEnd = newCreditPolicy.DateEnd,
+                        IsActive = true
                     };
 
                     context.Policies.Add (createdCreditPolicy);

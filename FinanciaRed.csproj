@@ -90,6 +90,7 @@
     <Compile Include="Model\DAO\DAO_CreditPromotion.cs" />
     <Compile Include="Model\DAO\DAO_Employee.cs" />
     <Compile Include="Model\DAO\DAO_GeneralVariables.cs" />
+    <Compile Include="Model\DAO\DAO_Efficiencies.cs" />
     <Compile Include="Model\DTO\Client\DTO_ClientAddress.cs" />
     <Compile Include="Model\DTO\Addres\DTO_AddressState.cs" />
     <Compile Include="Model\DTO\Addres\DTO_AddressType.cs" />
@@ -116,6 +117,7 @@
     <Compile Include="Model\DTO\Client\DTO_StatusesMarital.cs" />
     <Compile Include="Model\DTO\Client\DTO_ClientReference.cs" />
     <Compile Include="Model\DTO\Client\DTO_RelationshipType.cs" />
+    <Compile Include="Model\DTO\MonthlyEfficiencies\DTO_Efficiencies.cs" />
     <Compile Include="Model\DTO\WorkArea\DTO_WorkInfo.cs" />
     <Compile Include="Model\DTO\MessageResponse.cs" />
     <Compile Include="Model\DTO\WorkArea\DTO_WorkType.cs" />
@@ -299,8 +301,8 @@
     <Compile Include="View\ManageEmployees\ViewEmployees.xaml.cs">
       <DependentUpon>ViewEmployees.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\ManageMonthlyEfficiencies\ViewMonthlyEfficiencies.xaml.cs">
-      <DependentUpon>ViewMonthlyEfficiencies.xaml</DependentUpon>
+    <Compile Include="View\ManageEfficiencies\ViewEfficiencies.xaml.cs">
+      <DependentUpon>ViewEfficiencies.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\WindowContainer.xaml.cs">
       <DependentUpon>WindowContainer.xaml</DependentUpon>
@@ -425,7 +427,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ManageMonthlyEfficiencies\ViewMonthlyEfficiencies.xaml">
+    <Page Include="View\ManageEfficiencies\ViewEfficiencies.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

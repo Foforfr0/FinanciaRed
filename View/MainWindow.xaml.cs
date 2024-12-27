@@ -6,7 +6,7 @@ using FinanciaRed.View.ManageCreditPolicies;
 using FinanciaRed.View.ManageCreditPromotions;
 using FinanciaRed.View.ManageCredits;
 using FinanciaRed.View.ManageEmployees;
-using FinanciaRed.View.ManageMonthlyEfficiencies;
+using FinanciaRed.View.ManageEfficiencies;
 using FinanciaRed.View.ManageUsers;
 using System;
 using System.Windows;
@@ -41,11 +41,11 @@ namespace FinanciaRed.View {
                 label_GlobalOptionEmployees.Visibility = Visibility.Visible;
                 label_GlobalOptionPromotions.Visibility = Visibility.Visible;
                 label_GlobalOptionCreditPolicies.Visibility = Visibility.Visible;
-                label_GlobalOptionMonthlyEfficiencies.Visibility = Visibility.Visible;
+                label_GlobalOptionEfficiencies.Visibility = Visibility.Visible;
             }
             if (CURRENT_USER.Instance.IdRol == 2) {       //Gestor de cobranza
                 label_GlobalOptionCredits.Visibility = Visibility;
-                label_GlobalOptionMonthlyEfficiencies.Visibility = Visibility.Visible;
+                label_GlobalOptionEfficiencies.Visibility = Visibility.Visible;
             }
             if (CURRENT_USER.Instance.IdRol == 3) {       //Analista de crédito
                 label_GlobalOptionCreditApplications.Visibility = Visibility.Visible;
@@ -85,8 +85,8 @@ namespace FinanciaRed.View {
             innerFrameContainer.Navigate (new ViewCreditPolicies ());
         }
 
-        private void ClickShowManagementMonthlyEfficienciesFrame (object sender, RoutedEventArgs e) {
-            innerFrameContainer.Navigate (new ViewMonthlyEfficiencies ());
+        private void ClickShowManagementEfficienciesFrame (object sender, RoutedEventArgs e) {
+            innerFrameContainer.Navigate (new ViewEfficiencies ());
         }
 
         private void ClickLogOut (object sender, RoutedEventArgs e) {

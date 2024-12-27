@@ -93,8 +93,6 @@ namespace FinanciaRed.View.ManageCreditPolicies {
                 datePicker_DateStart.SelectedDate,
                 label_ErrorDateStart,
                 "Seleccione una fecha válida.",
-                startDate: DateTime.Now,
-                compareError: "",
                 1
             );
 
@@ -103,9 +101,9 @@ namespace FinanciaRed.View.ManageCreditPolicies {
                 datePicker_DateEnd.SelectedDate,
                 label_ErrorDateEnd,
                 "Seleccione una fecha válida.",
+                2,
                 startDate: datePicker_DateStart.SelectedDate,
-                compareError: "Seleccione una fecha después o igual a la fecha de inicio.",
-                2
+                compareError: "Seleccione una fecha después o igual a la fecha de inicio."
             );
 
             return isFormOk;
@@ -130,8 +128,8 @@ namespace FinanciaRed.View.ManageCreditPolicies {
 
         private bool ValidateDateField (
             DateTime? date, Label errorLabel,
-            string emptyError, DateTime? startDate = null,
-            string compareError = "", int numDate = 0) {
+            string emptyError, int numDate = 0, DateTime? startDate = null,
+            string compareError = "") {
 
             if (date == null && numDate == 1) {
                 ShowError (errorLabel, emptyError);

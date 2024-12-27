@@ -1,0 +1,192 @@
+﻿<Page x:Class="FinanciaRed.View.ManageEfficiencies.ViewEfficiencies"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FinanciaRed.View.ManageEfficiencies"
+      mc:Ignorable="d" 
+      Height="590" Width="830"
+      Title="Eficiencias mensuales">
+
+    <Grid Background="#FFFFFF">
+        <StackPanel>
+            <Label Content="Eficiencias de créditos" Style="{StaticResource HeaderText}"/>
+            <Border Background="LightGray" Width="600" Padding="6">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Label Content="Fecha de inicio: "
+                       VerticalAlignment="Center" Style="{StaticResource FieldTag}"/>
+                    <DatePicker x:Name="datePicker_DateStart">
+                        <DatePicker.Resources>
+                            <Style TargetType="DatePickerTextBox">
+                                <Setter Property="IsReadOnly" Value="True"/>
+                            </Style>
+                        </DatePicker.Resources>
+                    </DatePicker>
+                    <Label Content="Fecha de fin: " Margin="10 0 0 0"
+                       VerticalAlignment="Center" Style="{StaticResource FieldTag}"/>
+                    <DatePicker x:Name="datePicker_DateEnd">
+                        <DatePicker.Resources>
+                            <Style TargetType="DatePickerTextBox">
+                                <Setter Property="IsReadOnly" Value="True"/>
+                            </Style>
+                        </DatePicker.Resources>
+                    </DatePicker>
+                    <Button x:Name="button_SearchData" Click="ClickRetrieveEfficiencies"
+                        Content="Buscar" Margin="10 0 0 0" Width="80"
+                        Background="#FF0693C3" Foreground="#FFFFFF"/>
+                </StackPanel>
+            </Border>
+            <Label Content="Aprobación de créditos" Margin="200 0" 
+                   Style="{StaticResource HeaderText2}"/>
+            <Grid Width="430">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="190"/>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="120"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="23"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <!-- Row 0 -->
+                <Border Grid.Row="0" Grid.Column="0" Background="LightGray"
+                        BorderThickness="0.8 0.8 0 0.8" BorderBrush="Black">
+                    <Label Content="División" FontWeight="Bold"
+                        HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <Border Grid.Row="0" Grid.Column="1" Background="LightGray"
+                        BorderThickness="0.8 0.8 0 0.8" BorderBrush="Black">
+                    <Label Content="Cantidad" FontWeight="Bold"
+                        HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <Border Grid.Row="0" Grid.Column="2" Background="LightGray"
+                        BorderThickness="0.8" BorderBrush="Black">
+                    <Label Content="Procentaje" FontWeight="Bold"
+                        HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <!-- Row 1 -->
+                <Border Grid.Row="1" Grid.Column="0" BorderThickness="0.8 0 0 0.8" BorderBrush="Black">
+                    <Label x:Name="label_CreditsApplicated"
+                        Content="Número de créditos solicitados:" Margin="2"
+                        HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <Border Grid.Row="1" Grid.Column="1" BorderThickness="0 0 0 0.8" BorderBrush="Black">
+                    <Label x:Name="label_CreditsApplicatedNumb"
+                        Content="-" Margin="2"
+                        HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <Border Grid.Row="1" Grid.Column="2" BorderThickness="0 0 0.8 0.8" BorderBrush="Black">
+                    <Label x:Name="label_CreditsApplicatedPercent"
+                       Content="-" Margin="2"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <!-- Row 2 -->
+                <Border Grid.Row="2" Grid.Column="0" BorderThickness="0.8 0 0 0.8" BorderBrush="Black">
+                    <Label x:Name="label_CreditsAccepted"
+                       Content="Aceptados:" Margin="2"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <Border Grid.Row="2" Grid.Column="1" BorderThickness="0 0 0 0.8" BorderBrush="Black">
+                    <Label x:Name="label_CreditsAcceptedNumb"
+                       Content="-" Margin="2"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <Border Grid.Row="2" Grid.Column="2" BorderThickness="0 0 0.8 0.8" BorderBrush="Black">
+                    <Label x:Name="label_CreditsAcceptedPercent"
+                       Content="-" Margin="2"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <!-- Row 3 -->
+                <Border Grid.Row="3" Grid.Column="0" BorderThickness="0.8 0 0 0.8" BorderBrush="Black">
+                    <Label x:Name="label_CreditsDeclined"
+                       Content="Rechazados:" Margin="2"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <Border Grid.Row="3" Grid.Column="1" BorderThickness="0 0 0 0.8" BorderBrush="Black">
+                    <Label x:Name="label_CreditsDeclinedNumb"
+                       Content="-" Margin="2"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <Border Grid.Row="3" Grid.Column="2" BorderThickness="0 0 0.8 0.8" BorderBrush="Black">
+                    <Label x:Name="label_CreditsDeclinedPercent"
+                       Content="-" Margin="2"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <!-- Row 4-->
+                <Border Grid.Row="4" Grid.Column="0" BorderThickness="0.8 0 0 0.8" BorderBrush="Black">
+                    <Label x:Name="label_CreditsAwaiting"
+                       Content="En espera:" Margin="2"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <Border Grid.Row="4" Grid.Column="1" BorderThickness="0 0 0 0.8" BorderBrush="Black">
+                    <Label x:Name="label_CreditsAwaitingNumb"
+                       Content="-" Margin="2"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <Border Grid.Row="4" Grid.Column="2" BorderThickness="0 0 0.8 0.8" BorderBrush="Black">
+                    <Label x:Name="label_CreditsAwaitingPercent"
+                       Content="-" Margin="2"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+            </Grid>
+            <Label Content="Montos otorgados" Margin="200 8 200 0"
+                   Style="{StaticResource HeaderText2}"/>
+            <Grid Width="310">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="190"/>
+                    <ColumnDefinition Width="120"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="23"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <!-- Row 0 -->
+                <Border Grid.Row="0" Grid.Column="0" Background="LightGray"
+                        BorderThickness="0.8 0.8 0 0.8" BorderBrush="Black">
+                    <Label Content="División" FontWeight="Bold"
+                        HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <Border Grid.Row="0" Grid.Column="1" Background="LightGray"
+                        BorderThickness="0.8 0.8 0.8 0.8" BorderBrush="Black">
+                    <Label Content="Cantidad" FontWeight="Bold" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <!-- Row 1 -->
+                <Border Grid.Row="1" Grid.Column="0" BorderThickness="0.8 0 0 0.8" BorderBrush="Black">
+                    <Label Content="Monto total histórico:" Margin="2"
+                        HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <Border Grid.Row="1" Grid.Column="1" BorderThickness="0 0 0.9 0.8" BorderBrush="Black">
+                    <Label x:Name="label_TotalAmountCredits"
+                        Content="-" Margin="2" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <!-- Row 2 -->
+                <Border Grid.Row="2" Grid.Column="0" BorderThickness="0.8 0 0 0.8" BorderBrush="Black">
+                    <Label Content="Promedio:" Margin="2"
+                        HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <Border Grid.Row="2" Grid.Column="1" BorderThickness="0 0 0.8 0.8" BorderBrush="Black">
+                    <Label x:Name="label_AverageAmountCredit"
+                        Content="-" Margin="2" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <!-- Row 3 -->
+                <Border Grid.Row="3" Grid.Column="0" BorderThickness="0.8 0 0 0.8" BorderBrush="Black">
+                    <Label Content="Máximo:" Margin="2" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+                <Border Grid.Row="3" Grid.Column="1" BorderThickness="0 0 0.8 0.8" BorderBrush="Black">
+                    <Label x:Name="label_MaximumAmountCredit"
+                        Content="-" Margin="2" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Border>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Page>

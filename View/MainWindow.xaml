@@ -79,9 +79,9 @@
                                 <Run Text="Políticas"/>
                             </Hyperlink>
                         </Label>
-                        <TextBlock x:Name="label_GlobalOptionMonthlyEfficiencies" Padding="0 0 0 8" TextWrapping="Wrap" Visibility="Collapsed" d:Visibility="Visible">
-                            <Hyperlink Click="ClickShowManagementMonthlyEfficienciesFrame">
-                                <Run Text="Eficiencias mensuales"/>
+                        <TextBlock x:Name="label_GlobalOptionEfficiencies" Padding="0 0 0 8" TextWrapping="Wrap" Visibility="Collapsed" d:Visibility="Visible">
+                            <Hyperlink Click="ClickShowManagementEfficienciesFrame">
+                                <Run Text="Eficiencias"/>
                             </Hyperlink>
                         </TextBlock>
                         <Label Margin="0 428 0 0">

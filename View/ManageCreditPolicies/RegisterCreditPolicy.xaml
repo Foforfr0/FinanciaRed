@@ -75,10 +75,7 @@
                                         <Label x:Name="label_ErrorDateStart" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
                                     </StackPanel>
                                     <StackPanel Width="200">
-                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0 15 0 0">
-                                            <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
-                                            <Label Content="Fecha de término:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
-                                        </StackPanel>
+                                        <Label Content="Fecha de término:" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
                                         <DatePicker x:Name="datePicker_DateEnd">
                                             <DatePicker.Resources>
                                                 <Style TargetType="DatePickerTextBox">

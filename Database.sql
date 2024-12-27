@@ -358,7 +358,7 @@ INSERT INTO Promotions (Name, InterestRate, NumberFortnights, DateStart, DateEnd
 INSERT INTO CreditApplications (DateApplication, DateAcepted, AmountTotal, IdStatusCreditApplication, ValorationOpinion,
                                 IdPromotion,IdEmployeeApplication, IdClient, ProofINE, ProofAddress, ProofLastPayStub)
                     -- Aplicado
-            VALUES  ('2024-10-23 14:00:23', NULL, 35000, 1, 'Ejemplo de valoración solicitud crédito', 
+            VALUES  ('2024-10-23 14:00:23', NULL, 35000, 1, NULL, 
                      1, 4, 1,
                     (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Archivos\Example Files\FinanciaRed\ProofINE.pdf', SINGLE_BLOB) AS ProofINE),
                     (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Archivos\Example Files\FinanciaRed\ProofAddress.pdf', SINGLE_BLOB) AS ProofAddress),
@@ -410,3 +410,4 @@ INSERT INTO Credits (AmountLeft, IdStatusCredit, DateStart, DateEnd, IdCreditApp
 
 --TESTS---------------------------------------------------------------
 SELECT * FROM Policies;
+SELECT * FROM CreditApplications;
