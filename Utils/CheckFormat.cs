@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Windows.Media;
 
 namespace FinanciaRed.Utils {
     internal class CheckFormat {
@@ -163,6 +164,10 @@ namespace FinanciaRed.Utils {
                 return formattedNumber;
             }
             return formattedNumber;
+        }
+
+        public static int SetFormatNumber (string number, bool isPositive, int min, int max) {
+            return 0;
         }
     }
 }

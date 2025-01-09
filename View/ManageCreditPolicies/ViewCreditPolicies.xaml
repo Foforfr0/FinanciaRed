@@ -39,7 +39,9 @@
                       ScrollViewer.CanContentScroll="True"
                       ScrollViewer.VerticalScrollBarVisibility="Auto"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                      ItemsSource="{Binding retrievedCreditPolicies}" IsReadOnly="true" SelectionMode="Single" >
+                      CanUserResizeRows="False" SelectionMode="Single"
+                      CanUserResizeColumns="False"
+                      ItemsSource="{Binding retrievedCreditPolicies}" IsReadOnly="true">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Nombre" Binding="{Binding Name, Converter={StaticResource RemoveNewLineConverter}}" Width="*" />
                     <DataGridTextColumn Header="Descripción" Binding="{Binding Description, Converter={StaticResource RemoveNewLineConverter}}" Width="2*" />

@@ -13,7 +13,7 @@ using System.Windows.Controls;
 
 namespace FinanciaRed.View.ManageCreditApplications {
     /// <summary>
-    /// Interaction logic for DefineOpinion.xaml
+    /// Interaction logic for PutOpinionAsync.xaml
     /// </summary>
     public partial class DefineOpinion : Window {
         private int IdCreditApplication = 0;
@@ -31,7 +31,7 @@ namespace FinanciaRed.View.ManageCreditApplications {
 
         private async Task RetrieveCreditApplicationDB () {
             MessageResponse<DTO_CreditApplication_Details> messageResponseCreditPolicy =
-                await DAO_CreditApplication.GetDetailsCreditApplication (IdCreditApplication);
+                await DAO_CreditApplication.GetDetailsAsync (IdCreditApplication);
             selectedCreditApplication = messageResponseCreditPolicy.DataRetrieved;
             ShowDataCreditApplication ();
         }
@@ -86,7 +86,7 @@ namespace FinanciaRed.View.ManageCreditApplications {
 
         private async Task RetrieveCreditPoliciesDB () {
             MessageResponse<List<DTO_CreditApplication_CreditPolicies>> messageResponseConsultCreditPolicies =
-                    await DAO_CreditPolicy.GetCreditPolicies_CreditApplitacion (IdCreditApplication);
+                    await DAO_CreditPolicy.GetPolicies_ApplitacionAsync (IdCreditApplication);
             this.retrievedCreditPolicies = new ObservableCollection<DTO_CreditApplication_CreditPolicies> (messageResponseConsultCreditPolicies.DataRetrieved);
             dataGrid_CreditPolicies.ItemsSource = null;
             dataGrid_CreditPolicies.ItemsSource = retrievedCreditPolicies;
@@ -170,7 +170,7 @@ namespace FinanciaRed.View.ManageCreditApplications {
             List<string> errors = new List<string> ();
 
             // Saving checklist policies
-            MessageResponse<bool> messageResponseCheckList = await DAO_CreditApplication.SaveCheckListPolicies (
+            MessageResponse<bool> messageResponseCheckList = await DAO_CreditApplication.PutPoliciesAsync (
                 IdCreditApplication,
                 new List<DTO_CreditApplication_CreditPolicies> (retrievedCreditPolicies),
                 new List<DTO_CreditApplication_CreditPolicies> (retrievedCreditPolicies).All (a => a.IsApplied ?? false)
@@ -180,7 +180,7 @@ namespace FinanciaRed.View.ManageCreditApplications {
             }
 
             // Saving valoration
-            MessageResponse<bool> messageResponseValoration = await DAO_CreditApplication.DefineOpinion (
+            MessageResponse<bool> messageResponseValoration = await DAO_CreditApplication.PutOpinionAsync (
                 IdCreditApplication,
                 textBox_Valoration.Text
             );
@@ -188,7 +188,16 @@ namespace FinanciaRed.View.ManageCreditApplications {
                 errors.Add ($"Error al guardar la valoración.");
             }
 
-            // TODO Creating a new Credit object 
+            // TEST Creating a new Credit object 
+            MessageResponse<bool> messageResponseCredit = await DAO_Credit.PostAsync (
+                new DTO_CreditApplication_Details {
+                    AmountSolicited = selectedCreditApplication.AmountSolicited,
+                    IdCreditApplication = selectedCreditApplication.IdCreditApplication
+                }
+            );
+            if (!messageResponseCredit.DataRetrieved) {
+                errors.Add ("Error al crear un nuevo crédito.");
+            }
 
 
             if (errors.Count == 0) {
@@ -196,7 +205,10 @@ namespace FinanciaRed.View.ManageCreditApplications {
                 this.Close ();
             } else {
                 string errorMessage = string.Join (Environment.NewLine, errors);
-                MessageBox.Show ($"Se encontraron los siguientes errores:\n{errorMessage}", "Error inesperado", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show (
+                    $"Se encontraron los siguientes errores:\n{errorMessage}", 
+                    "Error inesperado", 
+                    MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 

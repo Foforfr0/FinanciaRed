@@ -38,7 +38,7 @@ namespace FinanciaRed.View.ManageEmployees {
 
             comboBox_Rol.Items.Clear ();
             comboBox_Rol.Items.Add (new ComboBoxItem { Content = "Seleccione una opción", IsSelected = true, Tag = 0 });
-            MessageResponse<List<DTO_EmployeeRol>> messageResponseER = await DAO_GeneralVariables.GetAllEmployeeRoles ();
+            MessageResponse<List<DTO_EmployeeRol>> messageResponseER = await DAO_GeneralVariables.GetEmployeeRolesAsync ();
             List<DTO_EmployeeRol> listER = messageResponseER.DataRetrieved;
             foreach (DTO_EmployeeRol rol in listER) {
                 comboBox_Rol.Items.Add (new ComboBoxItem { Content = rol.Rol });
@@ -51,8 +51,7 @@ namespace FinanciaRed.View.ManageEmployees {
             MessageBoxResult result = MessageBox.Show (
                 "¿Está seguro de cancelar?\nNo se podrán recuperar los datos.",
                 "Cancelar registro.",
-                MessageBoxButton.YesNo
-            );
+                MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
                 this.Close ();
         }
@@ -82,7 +81,10 @@ namespace FinanciaRed.View.ManageEmployees {
                     await SaveDataInDatabase ();
                 }
             } else {
-                MessageBox.Show ("Faltan datos por ingresar o algunos datos están incorrectos.", "Formulario incompleto.");
+                MessageBox.Show (
+                    "Faltan datos por ingresar o algunos datos están incorrectos.",
+                    "Formulario incompleto.",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
@@ -101,9 +103,12 @@ namespace FinanciaRed.View.ManageEmployees {
                 ProfilePhoto = TEMP_profileImageSelected ?? null
             };
 
-            MessageResponse<bool> responseRegisterEmployee = await DAO_Employee.RegistryNewEmployee (newDataEmployee);
+            MessageResponse<bool> responseRegisterEmployee = await DAO_Employee.PostAsync (newDataEmployee);
             if (responseRegisterEmployee.IsError) {
-                MessageBox.Show ("Ha ocurrido un error inesperado.\nIntente más tarde.", "Error inesperado.");
+                MessageBox.Show (
+                    "Ha ocurrido un error inesperado.\nIntente más tarde.",
+                    "Error inesperado.",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
             } else {
                 MessageBox.Show ($"Se ha registrado correctamente al\nEMPLEADO: \"{newDataEmployee.FirstName} {newDataEmployee.MiddleName} {newDataEmployee.LastName}\"", "Modificación completa.");
                 this.Close ();
@@ -281,7 +286,7 @@ namespace FinanciaRed.View.ManageEmployees {
                 _IsCorrectStage1[4] = true;
             }
 
-            if (string.IsNullOrEmpty(textBox_CodeCURP.Text)) {
+            if (string.IsNullOrEmpty (textBox_CodeCURP.Text)) {
                 label_ErrorCodeCURP.Content = "Campo necesario.";
                 label_ErrorCodeCURP.Visibility = Visibility.Visible;
                 _IsCorrectStage1[5] = false;

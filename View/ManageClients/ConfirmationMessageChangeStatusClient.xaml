@@ -40,8 +40,12 @@
             
             <!-- Reply buttons -->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
-                <Button x:Name="button_Accept" Content="Aceptar" Width="75" Margin="5" Click="OkButton_Click"/>
-                <Button x:Name="button_Cancel" Content="Cancelar" Width="75" Margin="5" Click="CancelButton_Click"/>
+                <Button x:Name="button_Accept" Click="OkButton_Click" 
+                        Content="Aceptar" Margin="5" Width="80" 
+                        Background="#FF06C32B" Foreground="#FFFFFF"/>
+                <Button x:Name="button_Cancel" Click="CancelButton_Click" 
+                        Content="Cancelar" Margin="5"
+                        Width="80" Background="#FFDE2323" Foreground="#FFFFFF"/>
             </StackPanel>
         </StackPanel>
     </Border>

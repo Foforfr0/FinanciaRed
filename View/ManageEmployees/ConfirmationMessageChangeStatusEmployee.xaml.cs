@@ -31,7 +31,7 @@ namespace FinanciaRed.View.ManageEmployees {
         }
 
         private static async Task<string> RetrieveStatusEmployee (int idEmployee) {
-            MessageResponse<string> messageResponseStatusEmployee = await DAO_Employee.GetStatusEmployee (idEmployee);
+            MessageResponse<string> messageResponseStatusEmployee = await DAO_Employee.GetStatusAsync (idEmployee);
             statusEmployee = messageResponseStatusEmployee.DataRetrieved;
             return messageResponseStatusEmployee.DataRetrieved;
         }
@@ -51,8 +51,8 @@ namespace FinanciaRed.View.ManageEmployees {
                 case "Muerto":
                     textBlockStatusEmployee.Text = "Muerto";
                     stackPanelNewStatus.Visibility = Visibility.Collapsed;
-                    buttonAccept.Visibility = Visibility.Collapsed;
-                    buttonCancel.Content = "Aceptar";
+                    button_Accept.Visibility = Visibility.Collapsed;
+                    button_Cancel.Content = "Aceptar";
                     break;
                 default:
                     textBlockStatusEmployee.Text = "---";
@@ -61,14 +61,17 @@ namespace FinanciaRed.View.ManageEmployees {
         }
 
         private async Task ChangeStatusEmployee (int idNewStatus) {
-            MessageResponse<bool> messageResponseUpdateStatus = await DAO_Employee.ChangeStatusEmployee (idEmployee, idNewStatus);
+            MessageResponse<bool> messageResponseUpdateStatus = await DAO_Employee.PutStatusAsync (idEmployee, idNewStatus);
         }
 
         private async void OkButton_Click (object sender, RoutedEventArgs e) {
             RadioButton selectedRadioButton = Utils.GetElementVisualTree.GetSelectedRadioButton (stackPanelRadioButtons);
 
             if (selectedRadioButton == null) {
-                MessageBox.Show ("Para poder continuar, seleccione un nuevo estado.", "Selección requerida.");
+                MessageBox.Show (
+                    "Para poder continuar, seleccione un nuevo estado.", 
+                    "Selección requerida.",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 

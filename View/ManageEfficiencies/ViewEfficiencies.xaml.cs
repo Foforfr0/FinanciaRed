@@ -22,9 +22,15 @@ namespace FinanciaRed.View.ManageEfficiencies {
 
         private async void ClickRetrieveEfficiencies (object sender, RoutedEventArgs e) {
             if (datePicker_DateStart.SelectedDate == null || datePicker_DateStart.SelectedDate == null) {
-                MessageBox.Show ("Para realizar la consulta de las eficiencias,\nindique la fecha de inicio y fin.", "Fechas requeridas.");
+                MessageBox.Show (
+                    "Para realizar la consulta de las eficiencias,\nindique la fecha de inicio y fin.", 
+                    "Fechas requeridas.",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
             } else if (datePicker_DateEnd.SelectedDate.Value < datePicker_DateStart.SelectedDate.Value) {
-                MessageBox.Show ("La fecha de fin debe ser posterior o igual a la fecha de inicio.", "Fechas no aceptables.");
+                MessageBox.Show (
+                    "La fecha de fin debe ser posterior o igual a la fecha de inicio.", 
+                    "Fechas no aceptables.",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
             } else {
                 await RetrieveEfficienciesDB ();
             }
@@ -33,7 +39,7 @@ namespace FinanciaRed.View.ManageEfficiencies {
         private async Task RetrieveEfficienciesDB () {
             MessageResponse<DTO_Efficiencies> messageResponseConsutlEfficiences =
                     new MessageResponse<DTO_Efficiencies> ();
-            messageResponseConsutlEfficiences = await DAO_Efficiencies.GetEfficiencies (new DTO_Efficiencies {
+            messageResponseConsutlEfficiences = await DAO_Efficiencies.GetAsync (new DTO_Efficiencies {
                 DateStart = datePicker_DateStart.SelectedDate ?? DateTime.Now,
                 DateEnd = datePicker_DateEnd.SelectedDate ?? DateTime.Now
             });
@@ -64,12 +70,15 @@ namespace FinanciaRed.View.ManageEfficiencies {
                 label_AverageAmountCredit.Content = "0";
                 label_MaximumAmountCredit.Content = "0";
 
-                MessageBox.Show (messageResponseConsutlEfficiences.Message, "Error inesperado.");
+                MessageBox.Show (
+                    messageResponseConsutlEfficiences.Message, 
+                    "Error inesperado.",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         private void ShowEffficiencies () {
-            if (efficiencies.CreditsApplicatedNumb == 0 || efficiencies.CreditsApplicatedNumb == null) {
+            if (efficiencies.CreditsApplicatedNumb == 0 || efficiencies?.CreditsApplicatedNumb == null) {
                 label_CreditsApplicatedNumb.Content = "0";
                 label_CreditsApplicatedPercent.Content = "0";
                 label_CreditsAcceptedNumb.Content = "0";

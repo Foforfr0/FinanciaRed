@@ -10,11 +10,6 @@ namespace FinanciaRed.View.ManageClients {
     /// <summary>
     /// Interaction logic for ViewClients.xaml
     /// </summary>
-    /// <TODO>
-    /// *Modificar para que al iniciar la ventana no se obtengan todos los elementos 
-    ///  de la base de datos, solo de la búsqueda.
-    /// *Mostrar los resultados por una tabla con índice.
-    /// </TODO>
 
     public partial class ViewClients : Page {
         private ObservableCollection<DTO_Client_Consult> retrievedClients = new ObservableCollection<DTO_Client_Consult> ();
@@ -28,7 +23,7 @@ namespace FinanciaRed.View.ManageClients {
 
         private async Task RetrieveClientsDB () {
             MessageResponse<List<DTO_Client_Consult>> messageResponseConsultClients =
-                 await DAO_Client.GetAllClients ();
+                 await DAO_Client.GetAsync ();
             this.retrievedClients = new ObservableCollection<DTO_Client_Consult> (messageResponseConsultClients.DataRetrieved);
             dataGridClients.ItemsSource = null;
             dataGridClients.ItemsSource = retrievedClients;
@@ -38,7 +33,7 @@ namespace FinanciaRed.View.ManageClients {
             string keyText = textBoxKeyWord.Text;
 
             MessageResponse<List<DTO_Client_Consult>> messageResponseFilterClients =
-                await DAO_Client.GetFilteredClients (keyText);
+                await DAO_Client.GetAsync (keyText);
 
             this.filteredClients = new ObservableCollection<DTO_Client_Consult> (messageResponseFilterClients.DataRetrieved);
             dataGridClients.ItemsSource = null;
@@ -51,14 +46,18 @@ namespace FinanciaRed.View.ManageClients {
             if (selectedClient == null) {
                 MessageBox.Show (
                     "Seleccione un cliente primero de la tabla para poder continuar.",
-                    "Selección requerida");
+                    "Selección requerida",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
             } else {
                 ConfirmationMessageChangeStatusClient.idClient = selectedClient.IdClient;
                 bool? result = await ConfirmationMessageChangeStatusClient.Show (
                     selectedClient.FirstName + " " + selectedClient.MiddleName);
                 ConfirmationMessageChangeStatusClient.idClient = 0;
                 if (result == true) {
-                    MessageBox.Show ("Se ha modificado correctamente el estado del cliente.", "Modificación completa.");
+                    MessageBox.Show (
+                        "Se ha modificado correctamente el estado del cliente.", 
+                        "Modificación completa.",
+                        MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
         }

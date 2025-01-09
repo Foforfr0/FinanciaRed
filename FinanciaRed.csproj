@@ -53,6 +53,9 @@
     <ApplicationIcon>View\Images\logo-business.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CsvTextFieldParser, Version=1.2.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\CsvTextFieldParser.1.2.2\lib\netstandard2.0\CsvTextFieldParser.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -109,6 +112,8 @@
     <Compile Include="Model\DTO\CreditApplication\DTO_CreditApplication_Consult.cs" />
     <Compile Include="Model\DTO\CreditApplication\DTO_CreditApplication_Details.cs" />
     <Compile Include="Model\DTO\Credit\DTO_Credit_Consult.cs" />
+    <Compile Include="Model\DTO\Credit\DTO_Credit_Details.cs" />
+    <Compile Include="Model\DTO\Credit\DTO_StatusCredit.cs" />
     <Compile Include="Model\DTO\Employee\DTO_EmployeeRol.cs" />
     <Compile Include="Model\DTO\Employee\DTO_Employee_Consult.cs" />
     <Compile Include="Model\DTO\Employee\DTO_Employee_Details.cs" />
@@ -215,6 +220,7 @@
     <Compile Include="Utils\ManageLabelsError.cs" />
     <Compile Include="Utils\RemoveNewLineConverter.cs" />
     <Compile Include="Utils\RetrieveDataVariables.cs" />
+    <Compile Include="Utils\ShowCsvDatagrid.cs" />
     <Compile Include="Utils\ShowPDFWebBrowser.cs" />
     <Compile Include="View\Components\Header.xaml.cs" />
     <Compile Include="View\ManageClients\ConfirmationMessageChangeStatusClient.xaml.cs">
@@ -268,6 +274,9 @@
     <Compile Include="View\ManageCreditPromotions\ViewDetailsCreditPromotion.xaml.cs">
       <DependentUpon>ViewDetailsCreditPromotion.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ManageCredits\ConfirmationMessageChangeStatusCredit.xaml.cs">
+      <DependentUpon>ConfirmationMessageChangeStatusCredit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ManageCredits\ViewDetailsCredit.xaml.cs">
       <DependentUpon>ViewDetailsCredit.xaml</DependentUpon>
     </Compile>
@@ -303,6 +312,9 @@
     </Compile>
     <Compile Include="View\ManageEfficiencies\ViewEfficiencies.xaml.cs">
       <DependentUpon>ViewEfficiencies.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ManagePayments\ViewPayments.xaml.cs">
+      <DependentUpon>ViewPayments.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\WindowContainer.xaml.cs">
       <DependentUpon>WindowContainer.xaml</DependentUpon>
@@ -379,6 +391,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\ManageCredits\ConfirmationMessageChangeStatusCredit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ManageCredits\ViewDetailsCredit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -428,6 +444,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ManageEfficiencies\ViewEfficiencies.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ManagePayments\ViewPayments.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

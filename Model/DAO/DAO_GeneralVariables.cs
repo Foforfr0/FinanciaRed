@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FinanciaRed.Model.DAO {
     internal class DAO_GeneralVariables {
-        public static async Task<MessageResponse<List<DTO_StatusesMarital>>> GetAllMaritalStatuses () {
+        public static async Task<MessageResponse<List<DTO_StatusesMarital>>> GetMaritalStatusesAsync () {
             MessageResponse<List<DTO_StatusesMarital>> responseConsultMaritalStatuses = null;
 
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
@@ -36,7 +36,7 @@ namespace FinanciaRed.Model.DAO {
             return responseConsultMaritalStatuses;
         }
 
-        public static async Task<MessageResponse<List<DTO_AddressState>>> GetAllAddressStates () {
+        public static async Task<MessageResponse<List<DTO_AddressState>>> GetAddressStatesAsync () {
             MessageResponse<List<DTO_AddressState>> responseConsultStatesAddress = null;
 
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
@@ -64,7 +64,7 @@ namespace FinanciaRed.Model.DAO {
             return responseConsultStatesAddress;
         }
 
-        public static async Task<MessageResponse<List<DTO_WorkType>>> GetAllWorkTypes () {
+        public static async Task<MessageResponse<List<DTO_WorkType>>> GetWorkTypesAsync () {
             MessageResponse<List<DTO_WorkType>> responseConsultWorkType = null;
 
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
@@ -92,7 +92,7 @@ namespace FinanciaRed.Model.DAO {
             return responseConsultWorkType;
         }
 
-        public static async Task<MessageResponse<List<DTO_RelationshipType>>> GetAllRelationshipsTypes () {
+        public static async Task<MessageResponse<List<DTO_RelationshipType>>> GetRelationshipsTypesAsync () {
             MessageResponse<List<DTO_RelationshipType>> responseConsultRelationTypes = null;
 
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
@@ -120,7 +120,7 @@ namespace FinanciaRed.Model.DAO {
             return responseConsultRelationTypes;
         }
 
-        public static async Task<MessageResponse<List<DTO_Bank>>> GetAllBanks () {
+        public static async Task<MessageResponse<List<DTO_Bank>>> GetBanksAsync () {
             MessageResponse<List<DTO_Bank>> responseConsultBanks = null;
 
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
@@ -148,7 +148,7 @@ namespace FinanciaRed.Model.DAO {
             return responseConsultBanks;
         }
 
-        public static async Task<MessageResponse<List<DTO_CardType>>> GetAllCardTypes () {
+        public static async Task<MessageResponse<List<DTO_CardType>>> GetCardTypesAsync () {
             MessageResponse<List<DTO_CardType>> responseConsultCardTypes = null;
 
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
@@ -176,7 +176,7 @@ namespace FinanciaRed.Model.DAO {
             return responseConsultCardTypes;
         }
 
-        public static async Task<MessageResponse<List<DTO_AddressType>>> GetAllAdressesTypes () {
+        public static async Task<MessageResponse<List<DTO_AddressType>>> GetAdressesTypesAsync () {
             MessageResponse<List<DTO_AddressType>> responseConsultAddressTypes = null;
 
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
@@ -204,7 +204,7 @@ namespace FinanciaRed.Model.DAO {
             return responseConsultAddressTypes;
         }
 
-        public static async Task<MessageResponse<List<DTO_EmployeeRol>>> GetAllEmployeeRoles () {
+        public static async Task<MessageResponse<List<DTO_EmployeeRol>>> GetEmployeeRolesAsync () {
             MessageResponse<List<DTO_EmployeeRol>> responseConsultAddressTypes = null;
 
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {

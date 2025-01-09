@@ -23,7 +23,7 @@ namespace FinanciaRed.View.ManageUsers {
 
         private async Task RetrieveEmployeesDB () {
             MessageResponse<List<DTO_Employee_Consult>> messageResponseConsultEmployees =
-                 await DAO_Employee.GetAllEmployees ();
+                 await DAO_Employee.GetAsync ();
             this.retrievedEmployees = new ObservableCollection<DTO_Employee_Consult> (messageResponseConsultEmployees.DataRetrieved);
             dataGridEmployees.ItemsSource = null;
             dataGridEmployees.ItemsSource = retrievedEmployees;
@@ -33,7 +33,7 @@ namespace FinanciaRed.View.ManageUsers {
             string keyText = textBoxKeyWord.Text;
 
             MessageResponse<List<DTO_Employee_Consult>> messageResponseFilterEmployees =
-                await DAO_Employee.GetFilteredEmployees (keyText);
+                await DAO_Employee.GetAsync (keyText);
 
             this.filteredEmployees = new ObservableCollection<DTO_Employee_Consult> (messageResponseFilterEmployees.DataRetrieved);
             dataGridEmployees.ItemsSource = null;
@@ -46,14 +46,18 @@ namespace FinanciaRed.View.ManageUsers {
             if (selectedEmployee == null) {
                 MessageBox.Show (
                     "Seleccione un empleado primero de la tabla para poder continuar.",
-                    "Selección requerida.");
+                    "Selección requerida.",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
             } else {
                 ConfirmationMessageChangeStatusEmployee.idEmployee = selectedEmployee.IdEmployee;
                 bool? result = await ConfirmationMessageChangeStatusEmployee.Show (
                     selectedEmployee.FirstName + " " + selectedEmployee.MiddleName);
                 ConfirmationMessageChangeStatusEmployee.idEmployee = 0;
                 if (result == true) {
-                    MessageBox.Show ("Se ha modificado correctamente el estado del empleado.", "Modificación completa.");
+                    MessageBox.Show (
+                        "Se ha modificado correctamente el estado del empleado.",
+                        "Modificación completa.",
+                        MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
         }

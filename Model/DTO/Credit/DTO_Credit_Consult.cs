@@ -32,5 +32,11 @@ namespace FinanciaRed.Model.DTO {
         public DateTime? DateEnd {
             get; set;
         }
+        public int IdStatus {
+            get; set;
+        }
+        public string Status {
+            get; set;
+        }
     }
 }

@@ -12,10 +12,9 @@ using System.Threading.Tasks;
 
 namespace FinanciaRed.Model.DAO {
     internal class DAO_CreditApplication {
-        public static async Task<MessageResponse<List<DTO_CreditApplication_Consult>>> GetAllCreditApplications () {
-            MessageResponse<List<DTO_CreditApplication_Consult>> responseConsultCreditApplications = null;
-
+        public static async Task<MessageResponse<List<DTO_CreditApplication_Consult>>> GetAsync () {
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                MessageResponse<List<DTO_CreditApplication_Consult>> response = null;
                 try {
                     List<DTO_CreditApplication_Consult> dataRetrieved = await
                         context.CreditApplications.
@@ -34,26 +33,24 @@ namespace FinanciaRed.Model.DAO {
                         ToListAsync ();
 
                     if (dataRetrieved != null) {
-                        responseConsultCreditApplications = MessageResponse<List<DTO_CreditApplication_Consult>>.Success (
-                            dataRetrieved.Count + " credits applications retrieved.",
+                        response = MessageResponse<List<DTO_CreditApplication_Consult>>.Success (
+                            dataRetrieved.Count + " solicitudes de crédito obtenidos.",
                             dataRetrieved);
                     } else {
-                        responseConsultCreditApplications = MessageResponse<List<DTO_CreditApplication_Consult>>.Failure ("Cannot retrieve credit applications.");
+                        response = MessageResponse<List<DTO_CreditApplication_Consult>>.Failure ("No se logró obtenr la lista de solicitudes de crédito.");
                     }
                 } catch (Exception ex) {
-                    responseConsultCreditApplications = MessageResponse<List<DTO_CreditApplication_Consult>>.Failure (ex.ToString ());
+                    response = MessageResponse<List<DTO_CreditApplication_Consult>>.Failure ($"Error inesperado: {ex.Message}");
                 }
+                return response;
             }
-            return responseConsultCreditApplications;
         }
 
-        public static async Task<MessageResponse<List<DTO_CreditApplication_Consult>>> GetFilteredCreditApplications (string keyWord) {
-            MessageResponse<List<DTO_CreditApplication_Consult>> responseConsultCreditApplications = null;
-
+        public static async Task<MessageResponse<List<DTO_CreditApplication_Consult>>> GetAsync (string keyWord) {
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                MessageResponse<List<DTO_CreditApplication_Consult>> response = null;
                 try {
-                    List<DTO_CreditApplication_Consult> dataRetrieved = await
-                        context.CreditApplications.
+                    List<DTO_CreditApplication_Consult> dataRetrieved = await context.CreditApplications.
                         Where (ca =>
                             string.Concat (ca.AmountTotal).Contains (keyWord) ||
                             string.Concat (ca.DateAcepted).Contains (keyWord) ||
@@ -71,27 +68,25 @@ namespace FinanciaRed.Model.DAO {
                         ToListAsync ();
 
                     if (dataRetrieved != null) {
-                        responseConsultCreditApplications = MessageResponse<List<DTO_CreditApplication_Consult>>.Success (
-                            dataRetrieved.Count + " credits applications retrieved.",
+                        response = MessageResponse<List<DTO_CreditApplication_Consult>>.Success (
+                            dataRetrieved.Count + " solicitudes de crédito obtenidos.",
                             dataRetrieved);
                     } else {
-                        responseConsultCreditApplications = MessageResponse<List<DTO_CreditApplication_Consult>>.Failure ("Cannot retrieve credit applications.");
+                        response = MessageResponse<List<DTO_CreditApplication_Consult>>.Failure ("No se logró obtener la lista de solicitudes de crédito.");
                     }
                 } catch (Exception ex) {
-                    responseConsultCreditApplications = MessageResponse<List<DTO_CreditApplication_Consult>>.Failure (ex.ToString ());
+                    response = MessageResponse<List<DTO_CreditApplication_Consult>>.Failure ($"Error inesperado: {ex.Message}");
                 }
+                return response;
             }
-            return responseConsultCreditApplications;
         }
 
-        public static async Task<MessageResponse<bool>> RegistryNewCreditApplication (DTO_CreditApplication_Create newCreditApplication) {
-            if (newCreditApplication == null || newCreditApplication.IdClient <= 0) {
-                return MessageResponse<bool>.Failure ("Invalid credit application data.");
-            }
-
-            MessageResponse<bool> responseCreateCA = null;
-
+        public static async Task<MessageResponse<bool>> PostAsync (DTO_CreditApplication_Create newCreditApplication) {
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                if (newCreditApplication == null || newCreditApplication.IdClient <= 0) {
+                    return MessageResponse<bool>.Failure ("Datos del crédito invélidos.");
+                }
+                MessageResponse<bool> response = null;
                 using (var transaction = context.Database.BeginTransaction ()) {
                     try {
                         CreditApplications createdCreditApplication = new CreditApplications {
@@ -110,7 +105,9 @@ namespace FinanciaRed.Model.DAO {
 
                         DateTime today = DateTime.Now;
                         List<Policies> activePolicies = await context.Policies
-                            .Where (p => today >= p.DateStart && today <= (p.DateEnd ?? DateTime.Now))
+                            .Where (p =>
+                                today >= p.DateStart &&
+                                today <= (p.DateEnd ?? DateTime.Now))
                             .ToListAsync ();
 
                         foreach (Policies policy in activePolicies) {
@@ -124,21 +121,19 @@ namespace FinanciaRed.Model.DAO {
                         }
                         transaction.Commit ();
 
-                        responseCreateCA = MessageResponse<bool>.Success ("Credit application created successfully.", true);
+                        response = MessageResponse<bool>.Success ("Solicitud de crédito creada correctamente.", true);
                     } catch (Exception ex) {
                         transaction.Rollback ();
-                        responseCreateCA = MessageResponse<bool>.Failure ($"Transaction failed: {ex.Message}");
+                        response = MessageResponse<bool>.Failure ($"Error inesperado: {ex.Message}");
                     }
                 }
+                return response;
             }
-
-            return responseCreateCA;
         }
 
-        public static async Task<MessageResponse<DTO_CreditApplication_Details>> GetDetailsCreditApplication (int idCreditApplication) {
-            MessageResponse<DTO_CreditApplication_Details> responseDetailsCreditApplications = null;
-
+        public static async Task<MessageResponse<DTO_CreditApplication_Details>> GetDetailsAsync (int idCreditApplication) {
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                MessageResponse<DTO_CreditApplication_Details> response = null;
                 try {
                     DTO_CreditApplication_Details dataRetrieved = await context.CreditApplications.
                         Where (ca => ca.IdCreditApplication == idCreditApplication).
@@ -210,20 +205,20 @@ namespace FinanciaRed.Model.DAO {
                         FirstOrDefaultAsync ();
 
                     if (dataRetrieved != null) {
-                        responseDetailsCreditApplications = MessageResponse<DTO_CreditApplication_Details>.Success (
-                            $"Credit application ID {idCreditApplication} retrieved.",
+                        response = MessageResponse<DTO_CreditApplication_Details>.Success (
+                            $"Solicitud de crédito ID {idCreditApplication} obtenido.",
                             dataRetrieved);
                     } else {
-                        responseDetailsCreditApplications = MessageResponse<DTO_CreditApplication_Details>.Failure ("Cannot retrieve credit application.");
+                        response = MessageResponse<DTO_CreditApplication_Details>.Failure ("No se logró obtener la solicitud de crédito.");
                     }
                 } catch (Exception ex) {
-                    responseDetailsCreditApplications = MessageResponse<DTO_CreditApplication_Details>.Failure (ex.ToString ());
+                    response = MessageResponse<DTO_CreditApplication_Details>.Failure ($"Error inesperado: {ex.Message}");
                 }
+                return response;
             }
-            return responseDetailsCreditApplications;
         }
 
-        public static async Task<MessageResponse<bool>> SaveCheckListPolicies (int idCreditApplication, List<DTO_CreditApplication_CreditPolicies> checkListPolicies, bool isApproved) {
+        public static async Task<MessageResponse<bool>> PutPoliciesAsync (int idCreditApplication, List<DTO_CreditApplication_CreditPolicies> checkListPolicies, bool isApproved) {
             try {
                 using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
                     List<CreditApplications_Policies> relations = await context.CreditApplications_Policies.
@@ -231,9 +226,7 @@ namespace FinanciaRed.Model.DAO {
                         ToListAsync ();
 
                     Dictionary<int, bool?> policyDict = checkListPolicies.
-                        Where (
-                            cl => cl.IdCreditApplication == idCreditApplication
-                        ).
+                        Where (cl => cl.IdCreditApplication == idCreditApplication).
                         ToDictionary (
                             cl => cl.IdCreditPolicy,
                             cl => cl.IsApplied
@@ -248,25 +241,22 @@ namespace FinanciaRed.Model.DAO {
                     }
                     await context.SaveChangesAsync ();
 
-
-
-                    CreditApplications currentCreditApplication = context.CreditApplications.Attach (context.CreditApplications.Find (idCreditApplication));
+                    CreditApplications currentCreditApplication =
+                        context.CreditApplications.Attach (context.CreditApplications.Find (idCreditApplication));
                     currentCreditApplication.IdStatusCreditApplication = isApproved ? 2 : 3;
                     context.Entry (currentCreditApplication).State = EntityState.Modified;
                     await context.SaveChangesAsync ();
 
-
-                    return MessageResponse<bool>.Success ("The policies was updated.", true);
+                    return MessageResponse<bool>.Success ("Las políticas han sido actualizadas.", true);
                 }
             } catch (Exception ex) {
-                return MessageResponse<bool>.Failure ($"Cannot save the changes: {ex.Message}");
+                return MessageResponse<bool>.Failure ($"Error inesperado: {ex.Message}");
             }
         }
 
-        public static async Task<MessageResponse<bool>> DefineOpinion (int idCreditApplcation, string valoration) {
-            MessageResponse<bool> responseUpdateValorationCrdApp = null;
-
+        public static async Task<MessageResponse<bool>> PutOpinionAsync (int idCreditApplcation, string valoration) {
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                MessageResponse<bool> response = null;
                 try {
                     CreditApplications currentCreditApplication = context.CreditApplications.Find (idCreditApplcation);
 
@@ -274,6 +264,7 @@ namespace FinanciaRed.Model.DAO {
                         context.CreditApplications.Attach (currentCreditApplication);
 
                         currentCreditApplication.ValorationOpinion = valoration;
+                        currentCreditApplication.DateAcepted = DateTime.Now;
 
                         bool SaveFailed = false;
                         do {
@@ -283,16 +274,13 @@ namespace FinanciaRed.Model.DAO {
 
                             } catch (DbUpdateConcurrencyException ex) {
                                 SaveFailed = true;
-                                foreach (var entry in ex.Entries) {
+                                foreach (DbEntityEntry entry in ex.Entries) {
                                     if (entry.Entity is Match) {
-                                        var proposedValues = entry.CurrentValues;
-                                        var databaseValues = entry.GetDatabaseValues ();
-
+                                        DbPropertyValues proposedValues = entry.CurrentValues;
+                                        DbPropertyValues databaseValues = entry.GetDatabaseValues ();
                                         if (databaseValues != null) {
-                                            var databaseEntity = (Clients)databaseValues.ToObject ();
-                                            // Actualiza los valores originales con los valores actuales de la base de datos.
+                                            CreditApplications databaseEntity = (CreditApplications)databaseValues.ToObject ();
                                             entry.OriginalValues.SetValues (databaseValues);
-                                            // Decide qué hacer con los valores propuestos.
                                             entry.CurrentValues.SetValues (proposedValues);
                                         }
                                     }
@@ -300,16 +288,16 @@ namespace FinanciaRed.Model.DAO {
                             }
                         } while (SaveFailed);
 
-                        responseUpdateValorationCrdApp = MessageResponse<bool>.Success (
-                            $"Credit applicacion ID {idCreditApplcation} updated", true);
+                        response = MessageResponse<bool>.Success (
+                            $"Solicitud de crédito ID {idCreditApplcation} actualizado.", true);
                     } else {
-                        responseUpdateValorationCrdApp = MessageResponse<bool>.Failure ($"Credit application ID {idCreditApplcation} doesn´t exists.");
+                        response = MessageResponse<bool>.Failure ($"Solicitud de crédito ID {idCreditApplcation} no se logró obtener.");
                     }
                 } catch (Exception ex) {
-                    responseUpdateValorationCrdApp = MessageResponse<bool>.Failure ("Exception" + ex.Message);
+                    response = MessageResponse<bool>.Failure ($"Error inesperado: {ex.Message}");
                 }
+                return response;
             }
-            return responseUpdateValorationCrdApp;
         }
     }
 }

@@ -34,7 +34,9 @@
                       ScrollViewer.CanContentScroll="True"
                       ScrollViewer.VerticalScrollBarVisibility="Auto"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                      ItemsSource="{Binding retrievedCredits}" IsReadOnly="true" SelectionMode="Single">
+                      CanUserResizeRows="False" SelectionMode="Single"
+                      CanUserResizeColumns="False"
+                      ItemsSource="{Binding retrievedCredits}" IsReadOnly="true">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Nombre" Binding="{Binding Name}" Width="*" />
                     <DataGridTextColumn Header="Interés" Binding="{Binding InterestPercentaje}" Width="*" />

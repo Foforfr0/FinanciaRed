@@ -24,7 +24,7 @@ namespace FinanciaRed.View.ManageClients {
         }
 
         private async Task RetrieveDataClientDB (int idClient) {
-            MessageResponse<DTO_Client_Details> messageResponseDetailsClient = await DAO_Client.GetDetailsClient (idClient);
+            MessageResponse<DTO_Client_Details> messageResponseDetailsClient = await DAO_Client.GetDetailsAync (idClient);
             selectedClient = messageResponseDetailsClient.DataRetrieved;
         }
 
@@ -86,7 +86,10 @@ namespace FinanciaRed.View.ManageClients {
 
         private void ClicModifyClient (object sender, EventArgs e) {
             if (selectedClient == null) {
-                MessageBox.Show ("No se pudo recuperar los datos del cliente.\nIntente más tarde.", "Error inesperado.");
+                MessageBox.Show (
+                    "No se pudo recuperar los datos del cliente.\nIntente más tarde.", 
+                    "Error inesperado.",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
             } else {
                 ModifyClientData modifyClientDataWindow = new ModifyClientData (selectedClient);
                 modifyClientDataWindow.ShowDialog ();

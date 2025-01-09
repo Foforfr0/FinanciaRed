@@ -11,9 +11,9 @@
             <Label Content="Gestión de créditos" Style="{StaticResource HeaderText}"/>
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20 10 40 0">
                 <Label Content="Palabra clave: " Padding="0" VerticalContentAlignment="Center"/>
-                <TextBox x:Name="textBoxKeyWord" Margin="3 0 8 0" Padding="1" Width="240"/>
+                <TextBox x:Name="textBox_KeyWord" Margin="3 0 8 0" Padding="1" Width="240"/>
 
-                <Button Click="ClickSearchCredits" BorderBrush="Transparent" Margin="20 0 289 0" Height="30" Width="30">
+                <Button Click="ClickSearchCredits" BorderBrush="Transparent" Margin="20 0 204 0" Height="30" Width="30">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Grid>
@@ -25,19 +25,23 @@
                     <Image Source="/View/Images/icon-search.png" Width="18"/>
                 </Button>
 
-                <Button Click="ClickChangeState" Content="Cambiar estado" Padding="010 4" BorderBrush="Transparent"/>
+                <Button Click="ClickShowPayments" Content="Ver pagos" Margin="0 0 10 0" Padding="10 4" BorderBrush="Transparent"/>
+                <Button Click="ClickChangeState" Content="Cambiar estado" Margin="0" Padding="10 4" BorderBrush="Transparent"/>
             </StackPanel>
             <DataGrid x:Name="dataGridCredits" AutoGenerateColumns="False" Height="430" Width="770" 
                       HorizontalAlignment="Center" VerticalAlignment="Top" Margin="20 20 40 50" 
                       ScrollViewer.CanContentScroll="True"
                       ScrollViewer.VerticalScrollBarVisibility="Auto"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                      ItemsSource="{Binding retrievedCredits}" IsReadOnly="true" SelectionMode="Single">
+                      CanUserResizeRows="False" SelectionMode="Single"
+                      CanUserResizeColumns="False"
+                      ItemsSource="{Binding retrievedCredits}" IsReadOnly="true">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Monto total" Binding="{Binding AmountTotalS}" Width="*" />
                     <DataGridTextColumn Header="Monto faltante" Binding="{Binding AmountLeftS}" Width="*" />
                     <DataGridTextColumn Header="Interés" Binding="{Binding InterestPercentaje}" Width="*" />
                     <DataGridTextColumn Header="Quincenas" Binding="{Binding NumberFortnigths}" Width="*" />
+                    <DataGridTextColumn Header="Estado" Binding="{Binding Status}" Width="*" />
                     <DataGridTextColumn Header="Fecha inicio" Binding="{Binding DateStart, StringFormat='dd/MM/yyyy'}" Width="*" />
                     <DataGridTextColumn Header="Fecha fin" Binding="{Binding DateEnd, StringFormat='dd/MM/yyyy'}" Width="*" />
 

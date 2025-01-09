@@ -23,9 +23,10 @@ namespace FinanciaRed.View.ManageCreditPolicies {
 
         private async Task RetrieveCreditPolciesDB (int idCreditPolicy, bool canModificate) {
             MessageResponse<DTO_CreditPolicy_Consult> currentCreditPolicy =
-                await DAO_CreditPolicy.GetDetailsCreditPolicy (idCreditPolicy);
+                await DAO_CreditPolicy.GetDetailsAsync (idCreditPolicy);
             selectedCreditPolicy = currentCreditPolicy.DataRetrieved;
-            ShowDataCreditPolicy (canModificate);
+            if (selectedCreditPolicy != null)
+                ShowDataCreditPolicy (canModificate);
         }
 
         private void ShowDataCreditPolicy (bool canModificate) {
@@ -52,7 +53,8 @@ namespace FinanciaRed.View.ManageCreditPolicies {
             MessageBoxResult result = MessageBox.Show (
                 "¿Está seguro de cancelar?\nNo se podrán recuperar los datos.",
                 "Cancelar modificación.",
-                MessageBoxButton.YesNo
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question
             );
             if (result == MessageBoxResult.Yes) {
                 ShowDataCreditPolicy (true);
@@ -162,11 +164,17 @@ namespace FinanciaRed.View.ManageCreditPolicies {
                 DateEnd = datePicker_DateEnd.SelectedDate
             };
 
-            MessageResponse<bool> WasUpdated = await DAO_CreditPolicy.ModifyCreditPolicy (newPolicy);
+            MessageResponse<bool> WasUpdated = await DAO_CreditPolicy.PutAsync (newPolicy);
             if (WasUpdated.DataRetrieved) {
-                MessageBox.Show ("No se pudo realizar el registro correctamente de la política de crédito.", "Error inesperado.");
+                MessageBox.Show (
+                    "No se pudo realizar el registro correctamente de la política de crédito.", 
+                    "Error inesperado.",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
             } else {
-                MessageBox.Show ("Se ha registrado correctamente la nueva política de crédito.", "Registro exitoso.");
+                MessageBox.Show (
+                    "Se ha registrado correctamente la nueva política de crédito.",
+                    "Registro exitoso.",
+                    MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close ();
             }
         }

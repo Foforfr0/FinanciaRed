@@ -27,18 +27,21 @@ namespace FinanciaRed.View.ManageCreditApplications {
 
         private async Task RetrieveCreditPoliciesDB (int idCreditApplication) {
             MessageResponse<List<DTO_CreditApplication_CreditPolicies>> messageResponseConsultCreditPolicies =
-                    await DAO_CreditPolicy.GetCreditPolicies_CreditApplitacion (idCreditApplication);
+                    await DAO_CreditPolicy.GetPolicies_ApplitacionAsync (idCreditApplication);
             this.retrievedCreditPolicies = new ObservableCollection<DTO_CreditApplication_CreditPolicies> (messageResponseConsultCreditPolicies.DataRetrieved);
             dataGrid_CreditPolicies.ItemsSource = null;
             dataGrid_CreditPolicies.ItemsSource = retrievedCreditPolicies;
         }
 
         private async Task RetrieveCreditApplicationDB (int idCreditApplication) {
-            MessageResponse<DTO_CreditApplication_Details> messageResponseCreditAppli = await DAO_CreditApplication.GetDetailsCreditApplication (idCreditApplication);
+            MessageResponse<DTO_CreditApplication_Details> messageResponseCreditAppli = await DAO_CreditApplication.GetDetailsAsync (idCreditApplication);
             this.selectedCreditApplication = messageResponseCreditAppli.DataRetrieved;
 
             if (messageResponseCreditAppli.IsError) {
-                MessageBox.Show ("No se logró recuperar los datos de la solicitud de crédito.\nIntente más tarde.", "Error inesperado");
+                MessageBox.Show (
+                    "No se logró recuperar los datos de la solicitud de crédito.\nIntente más tarde.", 
+                    "Error inesperado",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
             } else {
                 ShowDataCreditAppplication ();
             }

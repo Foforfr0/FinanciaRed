@@ -23,7 +23,7 @@ namespace FinanciaRed.View.ManageCreditPromotions {
         }
 
         private async Task RetrieveDataPromotionDB (int idPromotion) {
-            MessageResponse<DTO_CreditPromotion_Details> messageResponseDetailsPromotion = await DAO_CreditPromotion.GetDetailsCreditPromotion (idPromotion);
+            MessageResponse<DTO_CreditPromotion_Details> messageResponseDetailsPromotion = await DAO_CreditPromotion.GetDetailsAsync (idPromotion);
             selectedPromotion = messageResponseDetailsPromotion.DataRetrieved;
         }
 
@@ -37,7 +37,10 @@ namespace FinanciaRed.View.ManageCreditPromotions {
 
         private void ClickModifyPromotion (object sender, RoutedEventArgs e) {
             if (selectedPromotion == null) {
-                MessageBox.Show ("No se pudo recuperar los datos de la promoción.\nIntente más tarde.", "Error inesperado.");
+                MessageBox.Show (
+                    "No se pudo recuperar los datos de la promoción.\nIntente más tarde.", 
+                    "Error inesperado.",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
             } else {
                 ModifyCreditPromotionData modifyPromotionDataWindow = new ModifyCreditPromotionData (selectedPromotion);
                 modifyPromotionDataWindow.ShowDialog ();

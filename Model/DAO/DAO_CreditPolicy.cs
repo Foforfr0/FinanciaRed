@@ -8,14 +8,12 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace FinanciaRed.Model.DAO {
     internal class DAO_CreditPolicy {
-        public static async Task<MessageResponse<List<DTO_CreditPolicy_Consult>>> GetAllCreditPolicies () {
-            MessageResponse<List<DTO_CreditPolicy_Consult>> responseConsultCreditPolicies = null;
-
+        public static async Task<MessageResponse<List<DTO_CreditPolicy_Consult>>> GetAsync () {
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                MessageResponse<List<DTO_CreditPolicy_Consult>> response = null;
                 try {
                     List<DTO_CreditPolicy_Consult> dataRetrieved = (await context.Policies.
                         Select (policy => new {
@@ -39,23 +37,22 @@ namespace FinanciaRed.Model.DAO {
                         ToList ();
 
                     if (dataRetrieved != null) {
-                        responseConsultCreditPolicies = MessageResponse<List<DTO_CreditPolicy_Consult>>.Success (
-                            dataRetrieved.Count + " credits policies retrieved.",
+                        response = MessageResponse<List<DTO_CreditPolicy_Consult>>.Success (
+                            dataRetrieved.Count + " Políticas de crédito obtenidas.",
                             dataRetrieved);
                     } else {
-                        responseConsultCreditPolicies = MessageResponse<List<DTO_CreditPolicy_Consult>>.Failure ("Cannot retrieve credit policies.");
+                        response = MessageResponse<List<DTO_CreditPolicy_Consult>>.Failure ("No se logró obtener la lista de Políticas de crédito.");
                     }
                 } catch (Exception ex) {
-                    responseConsultCreditPolicies = MessageResponse<List<DTO_CreditPolicy_Consult>>.Failure (ex.ToString ());
+                    response = MessageResponse<List<DTO_CreditPolicy_Consult>>.Failure ($"Error inesperado: {ex.Message}");
                 }
+                return response;
             }
-            return responseConsultCreditPolicies;
         }
 
-        public static async Task<MessageResponse<List<DTO_CreditPolicy_Consult>>> GetFilteredCreditPolicies (string keyWord) {
-            MessageResponse<List<DTO_CreditPolicy_Consult>> responseFilteredCreditPolicies = null;
-
+        public static async Task<MessageResponse<List<DTO_CreditPolicy_Consult>>> GetAsync (string keyWord) {
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                MessageResponse<List<DTO_CreditPolicy_Consult>> response = null;
                 try {
                     List<DTO_CreditPolicy_Consult> dataRetrieved = await context.Policies.
                         Where (pol =>
@@ -72,23 +69,22 @@ namespace FinanciaRed.Model.DAO {
                         ToListAsync ();
 
                     if (dataRetrieved != null) {
-                        responseFilteredCreditPolicies = MessageResponse<List<DTO_CreditPolicy_Consult>>.Success (
-                            dataRetrieved.Count + " credit policies retrieved.",
+                        response = MessageResponse<List<DTO_CreditPolicy_Consult>>.Success (
+                            dataRetrieved.Count + " políticas de crédito obtenidas.",
                             dataRetrieved);
                     } else {
-                        responseFilteredCreditPolicies = MessageResponse<List<DTO_CreditPolicy_Consult>>.Failure ("Cannot retrieved filtered credit policies.");
+                        response = MessageResponse<List<DTO_CreditPolicy_Consult>>.Failure ("No se logró obtener la lista de políticas de crédito.");
                     }
                 } catch (Exception ex) {
-                    responseFilteredCreditPolicies = MessageResponse<List<DTO_CreditPolicy_Consult>>.Failure (ex.ToString ());
+                    response = MessageResponse<List<DTO_CreditPolicy_Consult>>.Failure ($"Error inesperado: {ex.Message}");
                 }
+                return response;
             }
-            return responseFilteredCreditPolicies;
         }
 
-        public static async Task<MessageResponse<string>> GetStatusCreditPolicy (int idCreditPolicy) {
-            MessageResponse<string> responseStatus = null;
-
+        public static async Task<MessageResponse<string>> GetStatusAsync (int idCreditPolicy) {
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                MessageResponse<string> response = null;
                 try {
                     string dataRetrieved = await context.Policies.
                         Where (empl => empl.IdPolicy == idCreditPolicy).
@@ -96,23 +92,22 @@ namespace FinanciaRed.Model.DAO {
                         FirstOrDefaultAsync ();
 
                     if (dataRetrieved != null) {
-                        responseStatus = MessageResponse<string>.Success (
+                        response = MessageResponse<string>.Success (
                             dataRetrieved,
                             dataRetrieved);
                     } else {
-                        responseStatus = MessageResponse<string>.Failure ($"Credit credpolicy ID {idCreditPolicy} without status.");
+                        response = MessageResponse<string>.Failure ($"Política de crédito ID {idCreditPolicy} sin estado.");
                     }
                 } catch (Exception ex) {
-                    responseStatus = MessageResponse<string>.Failure (ex.ToString ());
+                    response = MessageResponse<string>.Failure ($"Error inesperado: {ex.Message}");
                 }
+                return response;
             }
-            return responseStatus;
         }
 
-        public static async Task<MessageResponse<bool>> ChangeStatusCreditPolicy (int idCreditPolicy, bool isActive) {
-            MessageResponse<bool> responseUpdateStatusCreditPolicy = null;
-
+        public static async Task<MessageResponse<bool>> PutStatusAsync (int idCreditPolicy, bool isActive) {
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                MessageResponse<bool> response = null;
                 try {
                     Policies currentCreditPolicy = context.Policies.Find (idCreditPolicy);
 
@@ -129,16 +124,14 @@ namespace FinanciaRed.Model.DAO {
 
                             } catch (DbUpdateConcurrencyException ex) {
                                 SaveFailed = true;
-                                foreach (var entry in ex.Entries) {
+                                foreach (DbEntityEntry entry in ex.Entries) {
                                     if (entry.Entity is Match) {
-                                        var proposedValues = entry.CurrentValues;
-                                        var databaseValues = entry.GetDatabaseValues ();
+                                        DbPropertyValues proposedValues = entry.CurrentValues;
+                                        DbPropertyValues databaseValues = entry.GetDatabaseValues ();
 
                                         if (databaseValues != null) {
-                                            var databaseEntity = (Clients)databaseValues.ToObject ();
-                                            // Actualiza los valores originales con los valores actuales de la base de datos.
+                                            Policies databaseEntity = (Policies)databaseValues.ToObject ();
                                             entry.OriginalValues.SetValues (databaseValues);
-                                            // Decide qué hacer con los valores propuestos.
                                             entry.CurrentValues.SetValues (proposedValues);
                                         }
                                     }
@@ -146,29 +139,22 @@ namespace FinanciaRed.Model.DAO {
                             }
                         } while (SaveFailed);
 
-                        responseUpdateStatusCreditPolicy = MessageResponse<bool>.Success (
-                            $"Credit credpolicy ID {currentCreditPolicy.IdPolicy} updated", true);
+                        response = MessageResponse<bool>.Success (
+                            $"Política de crédito ID {currentCreditPolicy.IdPolicy} actualizado", true);
                     } else {
-                        responseUpdateStatusCreditPolicy = MessageResponse<bool>.Failure ($"Credit credpolicy ID {currentCreditPolicy.IdPolicy} doesn´t exists.");
+                        response = MessageResponse<bool>.Failure ($"No se logró obtener la Política de crédito ID {currentCreditPolicy.IdPolicy}.");
                     }
                 } catch (Exception ex) {
-                    responseUpdateStatusCreditPolicy = MessageResponse<bool>.Failure ("Exception" + ex.Message);
+                    response = MessageResponse<bool>.Failure ($"Error inesperado: {ex.Message}");
                 }
+                return response;
             }
-            return responseUpdateStatusCreditPolicy;
         }
 
-        public static async Task<MessageResponse<bool>> RegistryNewCreditPolicy (DTO_CreditPolicy_Consult newCreditPolicy) {
-            MessageResponse<bool> responseCreateCreditPolicy = null;
-
+        public static async Task<MessageResponse<bool>> PostAsync (DTO_CreditPolicy_Consult newCreditPolicy) {
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                MessageResponse<bool> response = null;
                 try {
-                    MessageBox.Show (
-                        $" ID: {newCreditPolicy.IdCreditPolicy}\n" + 
-                        $"Name: {newCreditPolicy.Name}\n" + 
-                        $"Descripcion: {newCreditPolicy.Description}\n" + 
-                        $"DateStart: {newCreditPolicy.DateStart.ToString ("dd/MM/yyyy")}\n" + 
-                        $"DateStart: {newCreditPolicy.DateEnd?.ToString ("dd/MM/yyyy")}\n");
                     Policies createdCreditPolicy = new Policies {
                         Name = newCreditPolicy.Name,
                         Description = newCreditPolicy.Description,
@@ -180,22 +166,20 @@ namespace FinanciaRed.Model.DAO {
                     context.Policies.Add (createdCreditPolicy);
                     await context.SaveChangesAsync ();
 
-                    responseCreateCreditPolicy = MessageResponse<bool>.Success (
-                        $"Credit credpolicy created.", true);
+                    response = MessageResponse<bool>.Success (
+                        $"Política de crédito creado.", true);
                 } catch (Exception ex) {
-                    responseCreateCreditPolicy = MessageResponse<bool>.Failure ("Exception" + ex.Message);
+                    response = MessageResponse<bool>.Failure ($"Errror inesperado: {ex.Message}");
                 }
+                return response;
             }
-            return responseCreateCreditPolicy;
         }
 
-        public static async Task<MessageResponse<List<DTO_CreditApplication_CreditPolicies>>> GetCreditPolicies_CreditApplitacion (int idCreditApplication) {
-            MessageResponse<List<DTO_CreditApplication_CreditPolicies>> responseConsultCreditPolicies = null;
-
+        public static async Task<MessageResponse<List<DTO_CreditApplication_CreditPolicies>>> GetPolicies_ApplitacionAsync (int idCreditApplication) {
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                MessageResponse<List<DTO_CreditApplication_CreditPolicies>> response = null;
                 try {
-                    List<DTO_CreditApplication_CreditPolicies> dataRetrieved = await
-                        context.CreditApplications_Policies.
+                    List<DTO_CreditApplication_CreditPolicies> dataRetrieved = await context.CreditApplications_Policies.
                         Where (cap => cap.CreditApplications.IdCreditApplication == idCreditApplication).
                         Select (credpolicy => new DTO_CreditApplication_CreditPolicies {
                             IdCreditPolicy = credpolicy.IdPolicy,
@@ -206,26 +190,24 @@ namespace FinanciaRed.Model.DAO {
                         ToListAsync ();
 
                     if (dataRetrieved != null) {
-                        responseConsultCreditPolicies = MessageResponse<List<DTO_CreditApplication_CreditPolicies>>.Success (
-                            dataRetrieved.Count + " credits policies retrieved.",
+                        response = MessageResponse<List<DTO_CreditApplication_CreditPolicies>>.Success (
+                            dataRetrieved.Count + " politicas de crédito obtenidas.",
                             dataRetrieved);
                     } else {
-                        responseConsultCreditPolicies = MessageResponse<List<DTO_CreditApplication_CreditPolicies>>.Failure ("Cannot retrieve credit policies.");
+                        response = MessageResponse<List<DTO_CreditApplication_CreditPolicies>>.Failure ("No se logró obtener la lista de políticas de crédito.");
                     }
                 } catch (Exception ex) {
-                    responseConsultCreditPolicies = MessageResponse<List<DTO_CreditApplication_CreditPolicies>>.Failure (ex.ToString ());
+                    response = MessageResponse<List<DTO_CreditApplication_CreditPolicies>>.Failure (ex.ToString ());
                 }
+                return response;
             }
-            return responseConsultCreditPolicies;
         }
 
-        public static async Task<MessageResponse<DTO_CreditPolicy_Consult>> GetDetailsCreditPolicy (int idPolicy) {
-            MessageResponse<DTO_CreditPolicy_Consult> responseConsultCreditPolicies = null;
-
+        public static async Task<MessageResponse<DTO_CreditPolicy_Consult>> GetDetailsAsync (int idPolicy) {
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                MessageResponse<DTO_CreditPolicy_Consult> response = null;
                 try {
-                    DTO_CreditPolicy_Consult dataRetrieved = await
-                        context.Policies.
+                    DTO_CreditPolicy_Consult dataRetrieved = await context.Policies.
                         Where (pol => pol.IdPolicy == idPolicy).
                         Select (policy => new DTO_CreditPolicy_Consult {
                             IdCreditPolicy = policy.IdPolicy,
@@ -237,23 +219,22 @@ namespace FinanciaRed.Model.DAO {
                         FirstOrDefaultAsync ();
 
                     if (dataRetrieved != null) {
-                        responseConsultCreditPolicies = MessageResponse<DTO_CreditPolicy_Consult>.Success (
-                            $"Credit credpolicy ID {idPolicy} retrieved.",
+                        response = MessageResponse<DTO_CreditPolicy_Consult>.Success (
+                            $"Política de crédito {idPolicy} obtenido.",
                             dataRetrieved);
                     } else {
-                        responseConsultCreditPolicies = MessageResponse<DTO_CreditPolicy_Consult>.Failure ("Cannot retrieve credit credpolicy.");
+                        response = MessageResponse<DTO_CreditPolicy_Consult>.Failure ("No se logró obtener la política de crédito.");
                     }
                 } catch (Exception ex) {
-                    responseConsultCreditPolicies = MessageResponse<DTO_CreditPolicy_Consult>.Failure (ex.ToString ());
+                    response = MessageResponse<DTO_CreditPolicy_Consult>.Failure (ex.ToString ());
                 }
+                return response;
             }
-            return responseConsultCreditPolicies;
         }
 
-        public static async Task<MessageResponse<bool>> ModifyCreditPolicy (DTO_CreditPolicy_Consult modifyPolicy) {
-            MessageResponse<bool> responseCreditPolicy = null;
-
+        public static async Task<MessageResponse<bool>> PutAsync (DTO_CreditPolicy_Consult modifyPolicy) {
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                MessageResponse<bool> response = null;
                 try {
                     Policies currentCreditPolicy = context.Policies.Find (modifyPolicy.IdCreditPolicy);
 
@@ -273,16 +254,14 @@ namespace FinanciaRed.Model.DAO {
 
                             } catch (DbUpdateConcurrencyException ex) {
                                 SaveFailed = true;
-                                foreach (var entry in ex.Entries) {
+                                foreach (DbEntityEntry entry in ex.Entries) {
                                     if (entry.Entity is Match) {
-                                        var proposedValues = entry.CurrentValues;
-                                        var databaseValues = entry.GetDatabaseValues ();
+                                        DbPropertyValues proposedValues = entry.CurrentValues;
+                                        DbPropertyValues databaseValues = entry.GetDatabaseValues ();
 
                                         if (databaseValues != null) {
-                                            var databaseEntity = (Clients)databaseValues.ToObject ();
-                                            // Actualiza los valores originales con los valores actuales de la base de datos.
+                                            Policies databaseEntity = (Policies)databaseValues.ToObject ();
                                             entry.OriginalValues.SetValues (databaseValues);
-                                            // Decide qué hacer con los valores propuestos.
                                             entry.CurrentValues.SetValues (proposedValues);
                                         }
                                     }
@@ -290,16 +269,16 @@ namespace FinanciaRed.Model.DAO {
                             }
                         } while (SaveFailed);
 
-                        responseCreditPolicy = MessageResponse<bool>.Success (
-                            $"Credit credpolicy ID {currentCreditPolicy.IdPolicy} updated", true);
+                        response = MessageResponse<bool>.Success (
+                            $"Política de crédito ID {currentCreditPolicy.IdPolicy} actualizado.", true);
                     } else {
-                        responseCreditPolicy = MessageResponse<bool>.Failure ($"Credit credpolicy ID {currentCreditPolicy.IdPolicy} doesn´t exists.");
+                        response = MessageResponse<bool>.Failure ($"No se logró obtener la Política de crédito ID {currentCreditPolicy.IdPolicy}.");
                     }
                 } catch (Exception ex) {
-                    responseCreditPolicy = MessageResponse<bool>.Failure ("Exception" + ex.Message);
+                    response = MessageResponse<bool>.Failure ($"Error inesperado: {ex.Message}");
                 }
+                return response;
             }
-            return responseCreditPolicy;
         }
     }
 }

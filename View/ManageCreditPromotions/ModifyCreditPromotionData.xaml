@@ -64,7 +64,7 @@
                                                 <Label Content="*" Foreground="Red" FontWeight="Heavy" FontSize="20" VerticalAlignment="Bottom" Padding="-4" Margin="0 -5"/>
                                                 <Label Content="Plazo (quincenas):" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
                                             </StackPanel>
-                                            <TextBox x:Name="textBox_NumberFortNigths" />
+                                            <TextBox x:Name="textBox_NumberFortNigths"/>
                                             <Label x:Name="label_ErrorNumberFortNigths" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
                                         </StackPanel>
                                         <StackPanel Grid.Column="3">

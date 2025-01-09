@@ -31,7 +31,7 @@ namespace FinanciaRed.View.ManageCreditApplications {
 
         private async Task RetrieveCreditApplicationsDB () {
             MessageResponse<List<DTO_CreditApplication_Consult>> messageResponseConsultCreditPolicies =
-                    await DAO_CreditApplication.GetAllCreditApplications ();
+                    await DAO_CreditApplication.GetAsync ();
 
             this.retrievedCreditApplications = new ObservableCollection<DTO_CreditApplication_Consult> (messageResponseConsultCreditPolicies.DataRetrieved);
             dataGrid_CreditAplications.ItemsSource = null;
@@ -42,7 +42,7 @@ namespace FinanciaRed.View.ManageCreditApplications {
             string keyText = textBoxKeyWord.Text;
 
             MessageResponse<List<DTO_CreditApplication_Consult>> messageResponseConsultCreditPolicies =
-                await DAO_CreditApplication.GetFilteredCreditApplications (keyText);
+                await DAO_CreditApplication.GetAsync (keyText);
 
             this.retrievedCreditApplications = new ObservableCollection<DTO_CreditApplication_Consult> (messageResponseConsultCreditPolicies.DataRetrieved);
             dataGrid_CreditAplications.ItemsSource = null;
@@ -55,11 +55,13 @@ namespace FinanciaRed.View.ManageCreditApplications {
             if (selectedCreditApplication == null) {
                 MessageBox.Show (
                     "Seleccione una solicitud de crédito primero de la tabla para poder continuar.",
-                    "Selección requerida");
+                    "Selección requerida",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
             } else if (selectedCreditApplication.Status != "Aplicado") {
                 MessageBox.Show (
                     "Ya se ha aplicado un dictámen a la solicitud de crédito.\nSeleccione otra.",
-                    "Ditámen ya realizado");
+                    "Ditámen ya realizado",
+                    MessageBoxButton.OK, MessageBoxImage.Information);
             } else {
                 DefineOpinion defineOpinionWindow = new DefineOpinion (selectedCreditApplication.IdCreditApplication);
                 defineOpinionWindow.ShowDialog ();

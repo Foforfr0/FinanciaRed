@@ -105,7 +105,8 @@
                         <RowDefinition Height="20"/>
                     </Grid.RowDefinitions>
 
-                    <Frame x:Name="innerFrameContainer" Background="#FFFFFF" NavigationUIVisibility="Hidden" Height="550" Width="815" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2">
+                    <Frame x:Name="innerFrameContainer" Background="#FFFFFF" 
+                           NavigationUIVisibility="Hidden" Height="550" Width="815" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2">
                         <Frame.Effect>
                             <DropShadowEffect ShadowDepth="5" Direction="320" Opacity="0.5" BlurRadius="5" Color="Black"/>
                         </Frame.Effect>

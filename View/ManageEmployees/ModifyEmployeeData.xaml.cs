@@ -30,7 +30,7 @@ namespace FinanciaRed.View.ManageEmployees {
         private async Task LoadVariables () {
             comboBox_Rol.Items.Clear ();
             comboBox_Rol.Items.Add (new ComboBoxItem { Content = "Seleccione una opción", IsSelected = true, Tag = 0 });
-            MessageResponse<List<DTO_EmployeeRol>> messageResponseER = await DAO_GeneralVariables.GetAllEmployeeRoles ();
+            MessageResponse<List<DTO_EmployeeRol>> messageResponseER = await DAO_GeneralVariables.GetEmployeeRolesAsync ();
             List<DTO_EmployeeRol> listER = messageResponseER.DataRetrieved;
             foreach (DTO_EmployeeRol rol in listER) {
                 comboBox_Rol.Items.Add (new ComboBoxItem { Content = rol.Rol });
@@ -50,7 +50,7 @@ namespace FinanciaRed.View.ManageEmployees {
             MessageBoxResult result = MessageBox.Show (
                 "¿Está seguro de cancelar?\nNo se podrán recuperar los datos.",
                 "Cancelar modificación.",
-                MessageBoxButton.YesNo
+                MessageBoxButton.YesNo, MessageBoxImage.Question
             );
             if (result == MessageBoxResult.Yes)
                 this.Close ();
@@ -75,7 +75,10 @@ namespace FinanciaRed.View.ManageEmployees {
                     }
                 }
             } else {
-                MessageBox.Show ("Faltan datos por ingresar o algunos datos están incorrectos.", "Formulario incompleto.");
+                MessageBox.Show (
+                    "Faltan datos por ingresar o algunos datos están incorrectos.", 
+                    "Formulario incompleto.",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
@@ -87,11 +90,17 @@ namespace FinanciaRed.View.ManageEmployees {
                 ProfilePhoto = TEMP_profileImageSelected
             };
 
-            MessageResponse<bool> responseModifyEmployee = DAO_Employee.SaveChangesDataEmployee (newDataEmployee, false);
+            MessageResponse<bool> responseModifyEmployee = DAO_Employee.PutAsync (newDataEmployee, false);
             if (responseModifyEmployee.IsError) {
-                MessageBox.Show ("Ha ocurrido un error inesperado.\nIntente más tarde.", "Error inesperado.");
+                MessageBox.Show (
+                    "Ha ocurrido un error inesperado.\nIntente más tarde.", 
+                    "Error inesperado.",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
             } else {
-                MessageBox.Show ($"Se ha modificado correctamente al\nEMPLEADO: \"{newDataEmployee.FirstName} {newDataEmployee.MiddleName} {newDataEmployee.LastName}\"", "Modificación completa.");
+                MessageBox.Show (
+                    $"Se ha modificado correctamente al\nEMPLEADO: \"{newDataEmployee.FirstName} {newDataEmployee.MiddleName} {newDataEmployee.LastName}\"", 
+                    "Modificación completa",
+                    MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close ();
             }
         }

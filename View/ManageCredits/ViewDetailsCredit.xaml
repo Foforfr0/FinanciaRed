@@ -4,11 +4,97 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FinanciaRed.View.ManageCredits"
-        mc:Ignorable="d" d:Height="850"
-        Title="Detalles del cliente" Height="550" Width="800" 
+        mc:Ignorable="d"
+        Title="Detalles de crédito" Height="650" Width="800" 
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
-    
+
     <Grid>
-        
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#EADDD9" Offset="0"/>
+                <GradientStop Color="#E9E7D7" Offset="0.5"/>
+                <GradientStop Color="#DFE2DD" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <StackPanel Orientation="Vertical" Width="800" HorizontalAlignment="Left">
+            <Grid Background="#FFFEEA" Width="800" Height="50">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="FinanciaRed" VerticalAlignment="Center" FontWeight="Bold" FontSize="20" Padding="0" Margin="10"/>
+            </Grid>
+            <Grid>
+                <!--Data credit policy-->
+                <StackPanel x:Name="stackPanel_Stage1" Height="525" Width="740" Margin="20" Background="#FFFFFF">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Height="525" Width="740">
+                        <StackPanel Margin="20 10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="Detalles del crédito" 
+                                       Grid.Column="0" Margin="0" VerticalAlignment="Center" 
+                                       Style="{StaticResource HeaderText}"/>
+                                <Button Click="ClickViewCreditApplication"
+                                        HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1"
+                                        Width="130" Height="auto" Margin="0 8" Padding="5"
+                                        Background="#FF0693C3" Foreground="#FFFFFF">
+                                    <Button.Content>
+                                        <TextBlock Text="Consultar solicitud de crédito" 
+                                                   TextWrapping="Wrap"
+                                                   TextAlignment="Center"/>
+                                    </Button.Content>
+                                </Button>
+                            </Grid>
+                            <Grid Margin="25 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="8"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0">
+                                    <Label Content="Estado del crédito:" Style="{StaticResource FieldTag}"/>
+                                    <Label x:Name="label_StatusCredit"
+                                           Content="-" Margin="5 2" Padding="0" Style="{StaticResource FieldTag}"/>
+                                    <Label Content="Monto solicitado:" Style="{StaticResource FieldTag}"/>
+                                    <Label x:Name="label_SolicitedAmount" 
+                                           Content="-" Margin="5 2" Padding="0" Style="{StaticResource FieldTag}"/>
+                                    <Label Content="Monto restante:" Style="{StaticResource FieldTag}"/>
+                                    <Label x:Name="label_LeftAmount" 
+                                           Content="-" Margin="5 2" Padding="0" Style="{StaticResource FieldTag}"/>
+                                    <Label Content="Tasa de interés:" Style="{StaticResource FieldTag}"/>
+                                    <Label x:Name="label_InterestRate" 
+                                           Content="-" Margin="5 2" Padding="0" Style="{StaticResource FieldTag}"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="2">
+                                    <Label Content="Fecha de solicitud de crédito:" Style="{StaticResource FieldTag}"/>
+                                    <Label x:Name="label_CreditApplicationDate" 
+                                           Content="-" Margin="5 2" Padding="0" Style="{StaticResource FieldTag}"/>
+                                    <Label Content="Fecha de emisión de dictámen:" Style="{StaticResource FieldTag}"/>
+                                    <Label x:Name="label_OpinionDate" 
+                                           Content="-" Margin="5 2" Padding="0" Style="{StaticResource FieldTag}"/>
+                                    <Label Content="Fecha de inicio de crédito:" Style="{StaticResource FieldTag}"/>
+                                    <Label x:Name="label_StartCreditDate" 
+                                           Content="-" Margin="5 2" Padding="0" Style="{StaticResource FieldTag}"/>
+                                    <Label Content="Fecha de termino de crédito:" Style="{StaticResource FieldTag}"/>
+                                    <Label x:Name="label_EndCreditDate" 
+                                           Content="-" Margin="5 2" Padding="0" Style="{StaticResource FieldTag}"/>
+                                </StackPanel>
+                            </Grid>
+                            <Button x:Name="button_StartCredit" 
+                                    Click="ClickShowPaymentLayout"
+                                    Content="Layout de cobro"
+                                    Background="#FF0693C3" Foreground="#FFFFFF"/>
+                        </StackPanel>
+                    </ScrollViewer>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
     </Grid>
 </Window>

@@ -33,6 +33,7 @@
                   ScrollViewer.CanContentScroll="True"
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                  CanUserResizeRows="False" SelectionMode="Single" CanUserResizeColumns="False"
                   ItemsSource="{Binding retrievedEmployees}" IsReadOnly="true">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Nombre(s)" Binding="{Binding FirstName}" Width="*" />

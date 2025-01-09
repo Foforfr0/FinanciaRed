@@ -11,10 +11,9 @@ using System.Threading.Tasks;
 
 namespace FinanciaRed.Model.DAO {
     internal class DAO_Client {
-        public static async Task<MessageResponse<List<DTO_Client_Consult>>> GetAllClients () {
-            MessageResponse<List<DTO_Client_Consult>> responseConsultClients = null;
-
+        public static async Task<MessageResponse<List<DTO_Client_Consult>>> GetAsync () {
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                MessageResponse<List<DTO_Client_Consult>> response = null;
                 try {
                     List<DTO_Client_Consult> dataRetrieved = await
                         context.Clients.
@@ -31,23 +30,22 @@ namespace FinanciaRed.Model.DAO {
                         ToListAsync ();
 
                     if (dataRetrieved != null) {
-                        responseConsultClients = MessageResponse<List<DTO_Client_Consult>>.Success (
-                            dataRetrieved.Count + " clients retrieved.",
+                        response = MessageResponse<List<DTO_Client_Consult>>.Success (
+                            dataRetrieved.Count + " clientes obtenidos.",
                             dataRetrieved);
                     } else {
-                        responseConsultClients = MessageResponse<List<DTO_Client_Consult>>.Failure ("Cannot retrieved clients.");
+                        response = MessageResponse<List<DTO_Client_Consult>>.Failure ("No se logró obtener la lista de clientes.");
                     }
                 } catch (Exception ex) {
-                    responseConsultClients = MessageResponse<List<DTO_Client_Consult>>.Failure (ex.ToString ());
+                    response = MessageResponse<List<DTO_Client_Consult>>.Failure ($"Error inesperado: {ex.Message}");
                 }
+                return response;
             }
-            return responseConsultClients;
         }
 
-        public static async Task<MessageResponse<List<DTO_Client_Consult>>> GetFilteredClients (string keyWord) {
-            MessageResponse<List<DTO_Client_Consult>> responseFilteredClients = null;
-
+        public static async Task<MessageResponse<List<DTO_Client_Consult>>> GetAsync (string keyWord) {
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                MessageResponse<List<DTO_Client_Consult>> response = null;
                 try {
                     List<DTO_Client_Consult> dataRetrieved = await
                         context.Clients.
@@ -70,23 +68,22 @@ namespace FinanciaRed.Model.DAO {
                         ToListAsync ();
 
                     if (dataRetrieved != null) {
-                        responseFilteredClients = MessageResponse<List<DTO_Client_Consult>>.Success (
-                            dataRetrieved.Count + " clients retrieved.",
+                        response = MessageResponse<List<DTO_Client_Consult>>.Success (
+                            dataRetrieved.Count + " clientes obtenidos.",
                             dataRetrieved);
                     } else {
-                        responseFilteredClients = MessageResponse<List<DTO_Client_Consult>>.Failure ("Cannot retrieved filtered clients..");
+                        response = MessageResponse<List<DTO_Client_Consult>>.Failure ("No se logró obtener la lista de clientes.");
                     }
                 } catch (Exception ex) {
-                    responseFilteredClients = MessageResponse<List<DTO_Client_Consult>>.Failure (ex.ToString ());
+                    response = MessageResponse<List<DTO_Client_Consult>>.Failure ($"Error inesperado:  inesperado: {ex.Message}");
                 }
+                return response;
             }
-            return responseFilteredClients;
         }
 
-        public static async Task<MessageResponse<string>> GetStatusClient (int idClient) {
-            MessageResponse<string> responseStatus = null;
-
+        public static async Task<MessageResponse<string>> GetStatusAsync (int idClient) {
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                MessageResponse<string> response = null;
                 try {
                     string dataRetrieved = await context.Clients.
                         Where (clnt => clnt.IdClient == idClient).
@@ -94,23 +91,22 @@ namespace FinanciaRed.Model.DAO {
                         FirstOrDefaultAsync ();
 
                     if (dataRetrieved != null) {
-                        responseStatus = MessageResponse<string>.Success (
+                        response = MessageResponse<string>.Success (
                             dataRetrieved,
                             dataRetrieved);
                     } else {
-                        responseStatus = MessageResponse<string>.Failure ($"Client ID {idClient} without status.");
+                        response = MessageResponse<string>.Failure ($"Cliente ID {idClient} sin estado asignado.");
                     }
                 } catch (Exception ex) {
-                    responseStatus = MessageResponse<string>.Failure (ex.ToString ());
+                    response = MessageResponse<string>.Failure ($"Error inesperado: {ex.Message}");
                 }
+                return response;
             }
-            return responseStatus;
         }
 
-        public static async Task<MessageResponse<bool>> ChangeStatusClient (int idClient, int idStatus) {
-            MessageResponse<bool> responseUpdateStatusClient = null;
-
+        public static async Task<MessageResponse<bool>> PutAsync (int idClient, int idStatus) {
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                MessageResponse<bool> response = null;
                 try {
                     Clients currentClient = context.Clients.Find (idClient);
 
@@ -127,16 +123,14 @@ namespace FinanciaRed.Model.DAO {
 
                             } catch (DbUpdateConcurrencyException ex) {
                                 SaveFailed = true;
-                                foreach (var entry in ex.Entries) {
+                                foreach (DbEntityEntry entry in ex.Entries) {
                                     if (entry.Entity is Match) {
-                                        var proposedValues = entry.CurrentValues;
-                                        var databaseValues = entry.GetDatabaseValues ();
+                                        DbPropertyValues proposedValues = entry.CurrentValues;
+                                        DbPropertyValues databaseValues = entry.GetDatabaseValues ();
 
                                         if (databaseValues != null) {
-                                            var databaseEntity = (Clients)databaseValues.ToObject ();
-                                            // Actualiza los valores originales con los valores actuales de la base de datos.
+                                            Clients databaseEntity = (Clients)databaseValues.ToObject ();
                                             entry.OriginalValues.SetValues (databaseValues);
-                                            // Decide qué hacer con los valores propuestos.
                                             entry.CurrentValues.SetValues (proposedValues);
                                         }
                                     }
@@ -144,22 +138,21 @@ namespace FinanciaRed.Model.DAO {
                             }
                         } while (SaveFailed);
 
-                        responseUpdateStatusClient = MessageResponse<bool>.Success (
-                            $"Client ID {currentClient.IdClient} updated", true);
+                        response = MessageResponse<bool>.Success (
+                            $"Cliente ID {currentClient.IdClient} actualizado.", true);
                     } else {
-                        responseUpdateStatusClient = MessageResponse<bool>.Failure ($"Client ID {currentClient.IdClient} doesn´t exists.");
+                        response = MessageResponse<bool>.Failure ($"Cliente ID {currentClient.IdClient} no encontrado.");
                     }
                 } catch (Exception ex) {
-                    responseUpdateStatusClient = MessageResponse<bool>.Failure ("Exception" + ex.Message);
+                    response = MessageResponse<bool>.Failure ($"Error inesperado: {ex.Message}");
                 }
+                return response;
             }
-            return responseUpdateStatusClient;
         }
 
-        public static async Task<MessageResponse<DTO_Client_Details>> GetDetailsClient (int idClient) {
-            MessageResponse<DTO_Client_Details> responseDetails = null;
-
+        public static async Task<MessageResponse<DTO_Client_Details>> GetDetailsAync (int idClient) {
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                MessageResponse<DTO_Client_Details> response = null;
                 try {
                     DTO_Client_Details dataRetrieved = await context.Clients
                         .Where (clnt => clnt.IdClient == idClient)
@@ -245,24 +238,23 @@ namespace FinanciaRed.Model.DAO {
                         .FirstOrDefaultAsync ();
 
                     if (dataRetrieved != null) {
-                        responseDetails = MessageResponse<DTO_Client_Details>.Success (
-                            $"Client name \"{dataRetrieved.FirstName}\" retrieved.",
+                        response = MessageResponse<DTO_Client_Details>.Success (
+                            $"Cliente con nombre \"{dataRetrieved.FirstName}\" obtenido.",
                             dataRetrieved);
                     } else {
-                        responseDetails = MessageResponse<DTO_Client_Details>.Failure ("Client not retrieved.");
+                        response = MessageResponse<DTO_Client_Details>.Failure ($"No se logró obtener Cliente con nombre \"{dataRetrieved.FirstName}\".");
                     }
                 } catch (Exception ex) {
-                    responseDetails = MessageResponse<DTO_Client_Details>.Failure (ex.ToString ());
+                    response = MessageResponse<DTO_Client_Details>.Failure ($"Error inesperado: {ex.Message}");
                 }
+                return response;
             }
-            return responseDetails;
         }
 
 
-        public static async Task<MessageResponse<bool>> RegistryNewClient (DTO_Client_Details newClient) {
-            MessageResponse<bool> responseCreateClient = null;
-
+        public static async Task<MessageResponse<bool>> PostAsync (DTO_Client_Details newClient) {
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                MessageResponse<bool> response = null;
                 try {
                     Clients createdClient = new Clients {
                         FirstName = newClient.FirstName,
@@ -326,19 +318,18 @@ namespace FinanciaRed.Model.DAO {
                     context.Clients.Add (createdClient);
                     await context.SaveChangesAsync ();
 
-                    responseCreateClient = MessageResponse<bool>.Success (
-                        $"Client {createdClient.FirstName} created.", true);
+                    response = MessageResponse<bool>.Success (
+                        $"Cliente {createdClient.FirstName} creado.", true);
                 } catch (Exception ex) {
-                    responseCreateClient = MessageResponse<bool>.Failure ("Exception" + ex.Message);
+                    response = MessageResponse<bool>.Failure ($"Error inesperado: {ex.Message}");
                 }
+                return response;
             }
-            return responseCreateClient;
         }
 
-        public static async Task<MessageResponse<bool>> SaveChangesDataClient (DTO_Client_Details newDataClient) {
-            MessageResponse<bool> responseUpdateDataClient = null;
-
+        public static async Task<MessageResponse<bool>> PutAsync (DTO_Client_Details newDataClient) {
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                MessageResponse<bool> response = null;
                 try {
                     Clients currentClient = context.Clients.Find (newDataClient.IdClient);
 
@@ -384,16 +375,14 @@ namespace FinanciaRed.Model.DAO {
 
                             } catch (DbUpdateConcurrencyException ex) {
                                 SaveFailed = true;
-                                foreach (var entry in ex.Entries) {
+                                foreach (DbEntityEntry entry in ex.Entries) {
                                     if (entry.Entity is Match) {
-                                        var proposedValues = entry.CurrentValues;
-                                        var databaseValues = entry.GetDatabaseValues ();
+                                        DbPropertyValues proposedValues = entry.CurrentValues;
+                                        DbPropertyValues databaseValues = entry.GetDatabaseValues ();
 
                                         if (databaseValues != null) {
-                                            var databaseEntity = (Clients)databaseValues.ToObject ();
-                                            // Actualiza los valores originales con los valores actuales de la base de datos.
+                                            Clients databaseEntity = (Clients)databaseValues.ToObject ();
                                             entry.OriginalValues.SetValues (databaseValues);
-                                            // Decide qué hacer con los valores propuestos.
                                             entry.CurrentValues.SetValues (proposedValues);
                                         }
                                     }
@@ -401,22 +390,21 @@ namespace FinanciaRed.Model.DAO {
                             }
                         } while (SaveFailed);
 
-                        responseUpdateDataClient = MessageResponse<bool>.Success (
-                            $"Client ID {currentClient.IdClient} updated", true);
+                        response = MessageResponse<bool>.Success (
+                            $"Cliente ID {currentClient.IdClient} actualizado.", true);
                     } else {
-                        responseUpdateDataClient = MessageResponse<bool>.Failure ($"Client ID {currentClient.IdClient} doesn´t exists.");
+                        response = MessageResponse<bool>.Failure ($"No se logró obtener el Cliente ID {currentClient.IdClient}.");
                     }
                 } catch (Exception ex) {
-                    responseUpdateDataClient = MessageResponse<bool>.Failure ("Exception" + ex.Message);
+                    response = MessageResponse<bool>.Failure ($"Error inesperado: {ex.Message}");
                 }
+                return response;
             }
-            return responseUpdateDataClient;
         }
 
-        public static async Task<MessageResponse<string>> GetRFCClient (int idClient) {
-            MessageResponse<string> responseConsultRFC = null;
-
+        public static async Task<MessageResponse<string>> GetRFCClientAsync (int idClient) {
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                MessageResponse<string> response = null;
                 try {
                     string dataRetrieved = await
                         context.Clients.
@@ -424,18 +412,18 @@ namespace FinanciaRed.Model.DAO {
                         Select (clnt => clnt.CodeRFC).
                         FirstOrDefaultAsync ();
 
-                    if (responseConsultRFC != null) {
-                        responseConsultRFC = MessageResponse<string>.Success (
-                            $"cardNumber code \"{responseConsultRFC}\" retrieved.",
+                    if (response != null) {
+                        response = MessageResponse<string>.Success (
+                            $"Númeor de tarjeta \"{response}\" obtenido.",
                             dataRetrieved);
                     } else {
-                        responseConsultRFC = MessageResponse<string>.Failure ("cardNumber doesn´t retrieved.");
+                        response = MessageResponse<string>.Failure ("No se encontró el número de tarjeta.");
                     }
                 } catch (Exception ex) {
-                    responseConsultRFC = MessageResponse<string>.Failure (ex.ToString ());
+                    response = MessageResponse<string>.Failure ($"Error inesperado: {ex.Message}");
                 }
+                return response;
             }
-            return responseConsultRFC;
         }
 
         public static async Task<bool> VerifyExistenceEmail (string email) {
@@ -443,7 +431,9 @@ namespace FinanciaRed.Model.DAO {
                 try {
                     string dataRetrieved = await
                         context.Clients.
-                        Where (clnt => clnt.Email1.Equals (email) || clnt.Email2.Equals (email)).
+                        Where (clnt => 
+                            clnt.Email1.Equals (email) || 
+                            clnt.Email2.Equals (email)).
                         Select (clnt => clnt.Email1).
                         FirstOrDefaultAsync ();
 
@@ -463,7 +453,9 @@ namespace FinanciaRed.Model.DAO {
                 try {
                     string dataRetrieved = await
                         context.Clients.
-                        Where (clnt => clnt.PhoneNumber1.Equals (phoneNumber) || clnt.PhoneNumber2.Equals (phoneNumber)).
+                        Where (clnt => 
+                            clnt.PhoneNumber1.Equals (phoneNumber) || 
+                            clnt.PhoneNumber2.Equals (phoneNumber)).
                         Select (clnt => clnt.PhoneNumber1).
                         FirstOrDefaultAsync ();
 
@@ -523,7 +515,9 @@ namespace FinanciaRed.Model.DAO {
                 try {
                     string dataRetrieved = await
                         context.Clients.
-                        Where (clnt => clnt.BankAccounts.CardNumber.Equals (cardNumber) || clnt.BankAccounts1.CardNumber.Equals (cardNumber)).
+                        Where (clnt => 
+                            clnt.BankAccounts.CardNumber.Equals (cardNumber) || 
+                            clnt.BankAccounts1.CardNumber.Equals (cardNumber)).
                         Select (clnt => clnt.BankAccounts.CardNumber).
                         FirstOrDefaultAsync ();
 
@@ -543,8 +537,9 @@ namespace FinanciaRed.Model.DAO {
                 try {
                     string dataRetrieved = await
                         context.Clients.
-                        Where (clnt => clnt.BankAccounts.CodeCLABE.Equals (clabe) ||
-                                                      clnt.BankAccounts1.CodeCLABE.Equals (clabe)).
+                        Where (clnt => 
+                            clnt.BankAccounts.CodeCLABE.Equals (clabe) ||
+                            clnt.BankAccounts1.CodeCLABE.Equals (clabe)).
                         Select (clnt => clnt.BankAccounts.CodeCLABE).
                         FirstOrDefaultAsync ();
 
@@ -559,10 +554,9 @@ namespace FinanciaRed.Model.DAO {
             }
         }
 
-        public static async Task<MessageResponse<DTO_Client_Search>> SearchClientCreditApplication (string name, string codeCurp, string codeRFC) {
-            MessageResponse<DTO_Client_Search> responseSearch = null;
-
+        public static async Task<MessageResponse<DTO_Client_Search>> GetClientCreditApplicationAsync (string name, string codeCurp, string codeRFC) {
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                MessageResponse<DTO_Client_Search> response = null;
                 try {
                     DTO_Client_Search dataRetrieved = await context.Clients.
                         Where (clnt =>
@@ -578,17 +572,17 @@ namespace FinanciaRed.Model.DAO {
                         FirstOrDefaultAsync ();
 
                     if (dataRetrieved != null) {
-                        responseSearch = MessageResponse<DTO_Client_Search>.Success (
-                            $"Client ID {dataRetrieved.IdClient} retrieved.",
+                        response = MessageResponse<DTO_Client_Search>.Success (
+                            $"Cliente ID {dataRetrieved.IdClient} obtenido.",
                             dataRetrieved);
                     } else {
-                        responseSearch = MessageResponse<DTO_Client_Search>.Failure ($"Client doesn't retrieved.");
+                        response = MessageResponse<DTO_Client_Search>.Failure ($"No se logró obtener el Cliente.");
                     }
                 } catch (Exception ex) {
-                    responseSearch = MessageResponse<DTO_Client_Search>.Failure (ex.ToString ());
+                    response = MessageResponse<DTO_Client_Search>.Failure (ex.ToString ());
                 }
+                return response;
             }
-            return responseSearch;
         }
     }
 }

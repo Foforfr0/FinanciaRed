@@ -21,8 +21,8 @@ namespace FinanciaRed.View.ManageCreditPolicies {
             MessageBoxResult result = MessageBox.Show (
                 "¿Está seguro de cancelar?\nNo se podrán recuperar los datos.",
                 "Cancelar registro.",
-                MessageBoxButton.YesNo
-            );
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
                 this.Close ();
         }
@@ -120,11 +120,17 @@ namespace FinanciaRed.View.ManageCreditPolicies {
                 DateEnd = datePicker_DateEnd.SelectedDate,
             };
 
-            MessageResponse<bool> responseRegisterCreditPolicy = await DAO_CreditPolicy.RegistryNewCreditPolicy (newCreditPolicy);
+            MessageResponse<bool> responseRegisterCreditPolicy = await DAO_CreditPolicy.PostAsync (newCreditPolicy);
             if (responseRegisterCreditPolicy.IsError) {
-                MessageBox.Show ("Ha ocurrido un error inesperado.\nIntente más tarde.", "Error inesperado.");
+                MessageBox.Show (
+                    "Ha ocurrido un error inesperado.\nIntente más tarde.", 
+                    "Error inesperado.",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
             } else {
-                MessageBox.Show ($"Se ha registrado correctamente la nueva política de crédito.", "Modificación completa.");
+                MessageBox.Show (
+                    $"Se ha registrado correctamente la nueva política de crédito.", 
+                    "Modificación completa.",
+                    MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close ();
             }
         }

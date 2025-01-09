@@ -20,5 +20,8 @@ namespace FinanciaRed.Model.DTO.CreditPromotion {
         public DateTime DateEnd {
             get; set;
         }
+        public bool IsActive {
+            get; set;
+        }
     }
 }

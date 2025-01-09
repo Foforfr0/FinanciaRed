@@ -302,7 +302,7 @@ INSERT INTO StatusesCreditApplication
             VALUES ('Aplicado'), ('Aceptado'), ('Rechazado');
 
 INSERT INTO StatusesCredit (Status) 
-            VALUES ('En espera de confirmación'), ('Cobrable'), ('Incobrale');
+            VALUES ('Sin iniciar'), ('Cobrable'), ('Incobrale'), ('Terminado');
 
 INSERT INTO RolesEmployees (Role) 
             VALUES ('Administrador'), ('Gestor de cobranza'), ('Analista de crédito'), ('Asesor de crédito');
@@ -404,10 +404,14 @@ INSERT INTO Credits (AmountLeft, IdStatusCredit, DateStart, DateEnd, IdCreditApp
                    -- Credit application 2 - En espera de confirmación
             VALUES (40000, 1, '2024-10-30 14:23:52', '2025-01-18 11:50:00', 2, NULL, NULL),
                    -- Credit application 3 - Cobrable
-                   (55000, 2, '2024-11-01 13:23:52', '2025-01-18 11:50:00', 3, NULL, NULL),
+                   (55000, 2, '2024-11-01 13:23:52', '2025-01-18 11:50:00', 3, NULL, 
+                   (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Archivos\Example Files\FinanciaRed\PaymentLayout.csv', SINGLE_BLOB) AS PaymentLayout)),
                    -- Credit application 4 - Incobrable
-                   (62000, 3, '2024-11-02 17:23:52', '2025-01-18 11:50:00', 4, NULL, NULL);
+                   (62000, 3, '2024-11-02 17:23:52', '2025-01-18 11:50:00', 4, NULL, 
+                   (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Archivos\Example Files\FinanciaRed\PaymentLayout.csv', SINGLE_BLOB) AS PaymentLayout));
 
 --TESTS---------------------------------------------------------------
-SELECT * FROM Policies;
-SELECT * FROM CreditApplications;
+SELECT * FROM Credits 
+LEFT JOIN CreditApplications ON Credits.IdCreditApplication = CreditApplications.IdCreditApplication
+LEFT JOIN Promotions ON CreditApplications.IdPromotion = Promotions.IdPromotion
+LEFT JOIN Clients ON CreditApplications.IdClient = Clients.IdClient;

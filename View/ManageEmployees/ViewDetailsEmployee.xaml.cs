@@ -18,7 +18,7 @@ namespace FinanciaRed.View.ManageEmployees {
         }
 
         private async Task RetrieveDataEmployeeDB (int idEmployee) {
-            MessageResponse<DTO_Employee_Details> messageResponseDetailsEmployee = await DAO_Employee.GetDetailsEmployee (idEmployee, false);
+            MessageResponse<DTO_Employee_Details> messageResponseDetailsEmployee = await DAO_Employee.GetAsync (idEmployee, false);
             selectedEmployee = messageResponseDetailsEmployee.DataRetrieved;
         }
 
@@ -41,7 +41,10 @@ namespace FinanciaRed.View.ManageEmployees {
 
         private void ClickModifyEmployee (object sender, EventArgs e) {
             if (selectedEmployee == null) {
-                MessageBox.Show ("No se pudo recuperar los datos del empleado.\nIntente más tarde.", "Error inesperado.");
+                MessageBox.Show (
+                    "No se pudo recuperar los datos del empleado.\nIntente más tarde.", 
+                    "Error inesperado.", 
+                    MessageBoxButton.OK, MessageBoxImage.Error);
             } else {
                 ModifyEmployeeData modifyEmployeeDataWindow = new ModifyEmployeeData (selectedEmployee);
                 modifyEmployeeDataWindow.ShowDialog ();

@@ -31,7 +31,7 @@ namespace FinanciaRed.View.ManageCreditPolicies {
         }
 
         private static async Task<string> RetrieveStatusCreditPolicy (int idCreditPolicy) {
-            MessageResponse<string> messageResponseStatusCreditPolicy = await DAO_CreditPolicy.GetStatusCreditPolicy (idCreditPolicy);
+            MessageResponse<string> messageResponseStatusCreditPolicy = await DAO_CreditPolicy.GetStatusAsync (idCreditPolicy);
             statusCreditPolicy = messageResponseStatusCreditPolicy.DataRetrieved;
             return messageResponseStatusCreditPolicy.DataRetrieved;
         }
@@ -53,14 +53,17 @@ namespace FinanciaRed.View.ManageCreditPolicies {
         }
 
         private async Task ChangeStatusCreditPolicy (bool newStatus) {
-            MessageResponse<bool> messageResponseUpdateStatus = await DAO_CreditPolicy.ChangeStatusCreditPolicy (idCreditPolicy, newStatus);
+            MessageResponse<bool> messageResponseUpdateStatus = await DAO_CreditPolicy.PutStatusAsync (idCreditPolicy, newStatus);
         }
 
         private async void OkButton_Click (object sender, RoutedEventArgs e) {
             RadioButton selectedRadioButton = Utils.GetElementVisualTree.GetSelectedRadioButton (stackPanelRadioButtons);
 
             if (selectedRadioButton == null) {
-                MessageBox.Show ("Para poder continuar, seleccione un nuevo estado.", "Selección requerida.");
+                MessageBox.Show (
+                    "Para poder continuar, seleccione un nuevo estado.", 
+                    "Selección requerida.",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 

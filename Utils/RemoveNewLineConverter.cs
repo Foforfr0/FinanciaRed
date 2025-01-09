@@ -1,6 +1,6 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using System.Windows.Data;
-using System;
 
 namespace FinanciaRed.Utils {
     public class RemoveNewLineConverter : IValueConverter {

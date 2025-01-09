@@ -11,13 +11,11 @@ using System.Threading.Tasks;
 
 namespace FinanciaRed.Model.DAO {
     internal class DAO_Employee {
-        public static async Task<MessageResponse<DTO_Employee_Login>> GetLogin (String email, String password) {
-            MessageResponse<DTO_Employee_Login> responseLogin = null;
-
+        public static async Task<MessageResponse<DTO_Employee_Login>> GetAsync (String email, String password) {
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                MessageResponse<DTO_Employee_Login> response = null;
                 try {
-                    DTO_Employee_Login dataRetrieved = await
-                        context.Employees.
+                    DTO_Employee_Login dataRetrieved = await context.Employees.
                         Where (empl => empl.Email.Equals (email) &&
                                 empl.Password.Equals (password)).
                         Select (empl => new DTO_Employee_Login {
@@ -32,24 +30,23 @@ namespace FinanciaRed.Model.DAO {
                         FirstOrDefaultAsync ();
 
                     if (dataRetrieved != null) {
-                        responseLogin = MessageResponse<DTO_Employee_Login>.Success (
-                            $"Welcome {dataRetrieved.FirstName}.",
+                        response = MessageResponse<DTO_Employee_Login>.Success (
+                            $"Bienvenid@ {dataRetrieved.FirstName}.",
                             dataRetrieved
                         );
                     } else {
-                        responseLogin = MessageResponse<DTO_Employee_Login>.Failure ("Wrong credentials.");
+                        response = MessageResponse<DTO_Employee_Login>.Failure ("Credenciales incorrectas.");
                     }
                 } catch (Exception ex) {
-                    responseLogin = MessageResponse<DTO_Employee_Login>.Failure (ex.ToString ());
+                    response = MessageResponse<DTO_Employee_Login>.Failure ($"Error inesperado: {ex.Message}");
                 }
+                return response;
             }
-            return responseLogin;
         }
 
-        public static async Task<MessageResponse<List<DTO_Employee_Consult>>> GetAllEmployees () {
-            MessageResponse<List<DTO_Employee_Consult>> responseConsultEmployees = null;
-
+        public static async Task<MessageResponse<List<DTO_Employee_Consult>>> GetAsync () {
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                MessageResponse<List<DTO_Employee_Consult>> response = null;
                 try {
                     List<DTO_Employee_Consult> dataRetrieved = await
                         context.Employees.
@@ -64,23 +61,22 @@ namespace FinanciaRed.Model.DAO {
                         ToListAsync ();
 
                     if (dataRetrieved != null) {
-                        responseConsultEmployees = MessageResponse<List<DTO_Employee_Consult>>.Success (
-                            dataRetrieved.Count + " employees retrieved.",
+                        response = MessageResponse<List<DTO_Employee_Consult>>.Success (
+                            dataRetrieved.Count + " Empleados obtenidos.",
                             dataRetrieved);
                     } else {
-                        responseConsultEmployees = MessageResponse<List<DTO_Employee_Consult>>.Failure ("Employess doesn´t retrieved.");
+                        response = MessageResponse<List<DTO_Employee_Consult>>.Failure ("No se logró obtener la lista de Empleado.");
                     }
                 } catch (Exception ex) {
-                    responseConsultEmployees = MessageResponse<List<DTO_Employee_Consult>>.Failure (ex.ToString ());
+                    response = MessageResponse<List<DTO_Employee_Consult>>.Failure (ex.ToString ());
                 }
+                return response;
             }
-            return responseConsultEmployees;
         }
 
-        public static async Task<MessageResponse<List<DTO_Employee_Consult>>> GetFilteredEmployees (string keyWord) {
-            MessageResponse<List<DTO_Employee_Consult>> responseConsultEmployees = null;
-
+        public static async Task<MessageResponse<List<DTO_Employee_Consult>>> GetAsync (string keyWord) {
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                MessageResponse<List<DTO_Employee_Consult>> response = null;
                 try {
                     List<DTO_Employee_Consult> dataRetrieved = await
                         context.Employees.
@@ -101,47 +97,45 @@ namespace FinanciaRed.Model.DAO {
                         ToListAsync ();
 
                     if (dataRetrieved != null) {
-                        responseConsultEmployees = MessageResponse<List<DTO_Employee_Consult>>.Success (
-                            dataRetrieved.Count + " employees retrieved.",
+                        response = MessageResponse<List<DTO_Employee_Consult>>.Success (
+                            dataRetrieved.Count + " Empleado obtenidos.",
                             dataRetrieved);
                     } else {
-                        responseConsultEmployees = MessageResponse<List<DTO_Employee_Consult>>.Failure ("Employess doesn´t retrieved.");
+                        response = MessageResponse<List<DTO_Employee_Consult>>.Failure ("No se logró obtener la lista de Empleados.");
                     }
                 } catch (Exception ex) {
-                    responseConsultEmployees = MessageResponse<List<DTO_Employee_Consult>>.Failure (ex.ToString ());
+                    response = MessageResponse<List<DTO_Employee_Consult>>.Failure ($"Error inesperado: {ex.Message}");
                 }
+                return response;
             }
-            return responseConsultEmployees;
         }
 
-        public static async Task<MessageResponse<string>> GetStatusEmployee (int idEmployee) {
-            MessageResponse<string> responseStatus = null;
-
+        public static async Task<MessageResponse<string>> GetStatusAsync (int idEmployee) {
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                MessageResponse<string> response = null;
                 try {
                     string dataRetrieved = await context.Employees.
-                        Where (empl => empl.IdEmployee== idEmployee).
+                        Where (empl => empl.IdEmployee == idEmployee).
                         Select (clnt => clnt.StatusesEmployee.Status).
                         FirstOrDefaultAsync ();
 
                     if (dataRetrieved != null) {
-                        responseStatus = MessageResponse<string>.Success (
+                        response = MessageResponse<string>.Success (
                             dataRetrieved,
                             dataRetrieved);
                     } else {
-                        responseStatus = MessageResponse<string>.Failure ($"Employee ID {idEmployee} without status.");
+                        response = MessageResponse<string>.Failure ($"Empleado ID {idEmployee} sin estado.");
                     }
                 } catch (Exception ex) {
-                    responseStatus = MessageResponse<string>.Failure (ex.ToString ());
+                    response = MessageResponse<string>.Failure ($"Error inesperado: {ex.Message}");
                 }
+                return response;
             }
-            return responseStatus;
         }
 
-        public static async Task<MessageResponse<bool>> ChangeStatusEmployee (int idEmployee, int idStatus) {
-            MessageResponse<bool> responseUpdateStatusEmployee = null;
-
+        public static async Task<MessageResponse<bool>> PutStatusAsync (int idEmployee, int idStatus) {
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                MessageResponse<bool> response = null;
                 try {
                     Employees currentEmployee = context.Employees.Find (idEmployee);
 
@@ -158,16 +152,14 @@ namespace FinanciaRed.Model.DAO {
 
                             } catch (DbUpdateConcurrencyException ex) {
                                 SaveFailed = true;
-                                foreach (var entry in ex.Entries) {
+                                foreach (DbEntityEntry entry in ex.Entries) {
                                     if (entry.Entity is Match) {
-                                        var proposedValues = entry.CurrentValues;
-                                        var databaseValues = entry.GetDatabaseValues ();
+                                        DbPropertyValues proposedValues = entry.CurrentValues;
+                                        DbPropertyValues databaseValues = entry.GetDatabaseValues ();
 
                                         if (databaseValues != null) {
-                                            var databaseEntity = (Clients)databaseValues.ToObject ();
-                                            // Actualiza los valores originales con los valores actuales de la base de datos.
+                                            Employees databaseEntity = (Employees)databaseValues.ToObject ();
                                             entry.OriginalValues.SetValues (databaseValues);
-                                            // Decide qué hacer con los valores propuestos.
                                             entry.CurrentValues.SetValues (proposedValues);
                                         }
                                     }
@@ -175,25 +167,23 @@ namespace FinanciaRed.Model.DAO {
                             }
                         } while (SaveFailed);
 
-                        responseUpdateStatusEmployee = MessageResponse<bool>.Success (
-                            $"Employee ID {currentEmployee.IdEmployee} updated", true);
+                        response = MessageResponse<bool>.Success (
+                            $"Empleado ID {currentEmployee.IdEmployee} actualizado.", true);
                     } else {
-                        responseUpdateStatusEmployee = MessageResponse<bool>.Failure ($"Employee ID {currentEmployee.IdEmployee} doesn´t exists.");
+                        response = MessageResponse<bool>.Failure ($"No se logró obtener Empleado ID {currentEmployee.IdEmployee}.");
                     }
                 } catch (Exception ex) {
-                    responseUpdateStatusEmployee = MessageResponse<bool>.Failure ("Exception" + ex.Message);
+                    response = MessageResponse<bool>.Failure ($"Error inesperado: {ex.Message}");
                 }
+                return response;
             }
-            return responseUpdateStatusEmployee;
         }
 
-        public static async Task<MessageResponse<DTO_Employee_Details>> GetDetailsEmployee (int idEmployee, bool withPassword) {
-            MessageResponse<DTO_Employee_Details> responseDetailsEmployee = null;
-
+        public static async Task<MessageResponse<DTO_Employee_Details>> GetAsync (int idEmployee, bool withPassword) {
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                MessageResponse<DTO_Employee_Details> response = null;
                 try {
-                    DTO_Employee_Details retrievedData = await
-                        context.Employees.
+                    DTO_Employee_Details retrievedData = await context.Employees.
                         Where (empl => empl.IdEmployee == idEmployee).
                         Select (empl => new DTO_Employee_Details {
                             IdEmployee = empl.IdEmployee,
@@ -213,24 +203,23 @@ namespace FinanciaRed.Model.DAO {
                         FirstOrDefaultAsync ();
 
                     if (retrievedData != null) {
-                        responseDetailsEmployee = MessageResponse<DTO_Employee_Details>.Success (
-                            $"Details of ID {retrievedData.IdEmployee} retrieved.",
+                        response = MessageResponse<DTO_Employee_Details>.Success (
+                            $"{retrievedData.IdEmployee} Empleado obtenido.",
                             retrievedData
                         );
                     } else {
-                        responseDetailsEmployee = MessageResponse<DTO_Employee_Details>.Failure ("Details doesn't retrieved.");
+                        response = MessageResponse<DTO_Employee_Details>.Failure ("No se logró obtener el Empleado.");
                     }
                 } catch (Exception ex) {
-                    responseDetailsEmployee = MessageResponse<DTO_Employee_Details>.Failure (ex.ToString ());
+                    response = MessageResponse<DTO_Employee_Details>.Failure ($"Error inesperado: {ex.Message}");
                 }
+                return response;
             }
-            return responseDetailsEmployee;
         }
 
-        public static async Task<MessageResponse<bool>> RegistryNewEmployee (DTO_Employee_Details newEmployee) {
-            MessageResponse<bool> responseCreateEmployee = null;
-
+        public static async Task<MessageResponse<bool>> PostAsync (DTO_Employee_Details newEmployee) {
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                MessageResponse<bool> response = null;
                 try {
                     Employees createdEmployee = new Employees {
                         FirstName = newEmployee.FirstName,
@@ -250,19 +239,18 @@ namespace FinanciaRed.Model.DAO {
                     context.Employees.Add (createdEmployee);
                     await context.SaveChangesAsync ();
 
-                    responseCreateEmployee = MessageResponse<bool>.Success (
-                        $"Employee {createdEmployee.FirstName} created", true);
+                    response = MessageResponse<bool>.Success (
+                        $"Empleado {createdEmployee.FirstName} creado.", true);
                 } catch (Exception ex) {
-                    responseCreateEmployee = MessageResponse<bool>.Failure ("Exception" + ex.Message);
+                    response = MessageResponse<bool>.Failure ($"Error inesperado: {ex.Message}");
                 }
+                return response;
             }
-            return responseCreateEmployee;
         }
 
-        public static MessageResponse<bool> SaveChangesDataEmployee (DTO_Employee_Details newDataEmployee, bool changePassword) {
-            MessageResponse<bool> responseUpdateDataEmployee = null;
-
+        public static MessageResponse<bool> PutAsync (DTO_Employee_Details newDataEmployee, bool changePassword) {
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
+                MessageResponse<bool> response = null;
                 try {
                     Employees currentEmployee = context.Employees.Find (newDataEmployee.IdEmployee);
 
@@ -285,36 +273,34 @@ namespace FinanciaRed.Model.DAO {
 
                             } catch (DbUpdateConcurrencyException ex) {
                                 failedSave = true;
-                                foreach (var entry in ex.Entries) {
+                                foreach (DbEntityEntry entry in ex.Entries) {
                                     if (entry.Entity is Employees) {
-                                        var proposedValues = entry.CurrentValues;
-                                        var databaseValues = entry.GetDatabaseValues ();
+                                        DbPropertyValues proposedValues = entry.CurrentValues;
+                                        DbPropertyValues databaseValues = entry.GetDatabaseValues ();
 
                                         if (databaseValues != null) {
-                                            var databaseEntity = (Employees)databaseValues.ToObject ();
-                                            // Actualiza los valores originales con los valores actuales de la base de datos.
+                                            Employees databaseEntity = (Employees)databaseValues.ToObject ();
                                             entry.OriginalValues.SetValues (databaseValues);
-                                            // Decide qué hacer con los valores propuestos.
                                             entry.CurrentValues.SetValues (proposedValues);
                                         }
                                     }
                                 }
                             }
                         } while (failedSave);
-                        responseUpdateDataEmployee = MessageResponse<bool>.Success (
-                            $"ID {newDataEmployee.IdEmployee} data employee modified.",
+                        response = MessageResponse<bool>.Success (
+                            $"Empleado ID {newDataEmployee.IdEmployee} actualizado.",
                             true
                             );
                     } else {
-                        responseUpdateDataEmployee = MessageResponse<bool>.Failure ("Modification no realized.");
+                        response = MessageResponse<bool>.Failure ($"No se logró obtener el Empleado Id {currentEmployee.IdEmployee}.");
                     }
                 } catch (DbEntityValidationException ex) {
-                    responseUpdateDataEmployee = MessageResponse<bool>.Failure (ex.StackTrace);
+                    response = MessageResponse<bool>.Failure ($"Error inesperado: {ex.Message}");
                 } catch (Exception ex) {
-                    responseUpdateDataEmployee = MessageResponse<bool>.Failure (ex.Message);
+                    response = MessageResponse<bool>.Failure ($"Error inesperado: {ex.Message}");
                 }
+                return response;
             }
-            return responseUpdateDataEmployee;
         }
 
         public static async Task<bool> VerifyExistenceEmail (string email) {

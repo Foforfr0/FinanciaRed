@@ -33,7 +33,7 @@ namespace FinanciaRed.View.ManageCreditPromotions {
         }
 
         private static async Task<string> RetrieveStatusPromotion (int idPromotion) {
-            MessageResponse<string> messageResponseStatusPromotion = await DAO_CreditPromotion.GetStatusCreditPromotion(idPromotion);
+            MessageResponse<string> messageResponseStatusPromotion = await DAO_CreditPromotion.GetStatusAsync(idPromotion);
             statusPromotion = messageResponseStatusPromotion.DataRetrieved;
             return messageResponseStatusPromotion.DataRetrieved;
         }
@@ -55,7 +55,7 @@ namespace FinanciaRed.View.ManageCreditPromotions {
         }
 
         private async Task ChangeStatusCreditPromotion (bool isActive) {
-            MessageResponse<bool> messageResponseUpdateStatus = await DAO_CreditPromotion.ChangeStatusCreditPromotion(idPromotion, isActive);
+            MessageResponse<bool> messageResponseUpdateStatus = await DAO_CreditPromotion.PutAsync(idPromotion, isActive);
         }
 
         private async void ClickAccept (object sender, RoutedEventArgs e) {

@@ -33,7 +33,7 @@ namespace FinanciaRed.View.ManageClients {
 
             comboBox_MaritalStatus.Items.Clear ();
             comboBox_MaritalStatus.Items.Add (new ComboBoxItem { Content = "Seleccione una opción", IsSelected = true, Tag = 0 });
-            MessageResponse<List<DTO_StatusesMarital>> messageResponseMS = await DAO_GeneralVariables.GetAllMaritalStatuses ();
+            MessageResponse<List<DTO_StatusesMarital>> messageResponseMS = await DAO_GeneralVariables.GetMaritalStatusesAsync ();
             List<DTO_StatusesMarital> listMS = messageResponseMS.DataRetrieved;
             foreach (DTO_StatusesMarital status in listMS) {
                 comboBox_MaritalStatus.Items.Add (new ComboBoxItem { Content = status.Status });
@@ -47,7 +47,7 @@ namespace FinanciaRed.View.ManageClients {
 
             comboBox_AddressType.Items.Clear ();
             comboBox_AddressType.Items.Add (new ComboBoxItem { Content = "Seleccione una opción", IsSelected = true, Tag = 0 });
-            MessageResponse<List<DTO_AddressType>> messageResponseAT = await DAO_GeneralVariables.GetAllAdressesTypes ();
+            MessageResponse<List<DTO_AddressType>> messageResponseAT = await DAO_GeneralVariables.GetAdressesTypesAsync ();
             List<DTO_AddressType> listAT = messageResponseAT.DataRetrieved;
             foreach (DTO_AddressType type in listAT) {
                 comboBox_AddressType.Items.Add (new ComboBoxItem { Content = type.Type });
@@ -55,7 +55,7 @@ namespace FinanciaRed.View.ManageClients {
 
             comboBox_State.Items.Clear ();
             comboBox_State.Items.Add (new ComboBoxItem { Content = "Seleccione una opción", IsSelected = true, Tag = 0 });
-            MessageResponse<List<DTO_AddressState>> messageResponseSA = await DAO_GeneralVariables.GetAllAddressStates ();
+            MessageResponse<List<DTO_AddressState>> messageResponseSA = await DAO_GeneralVariables.GetAddressStatesAsync ();
             List<DTO_AddressState> listSA = messageResponseSA.DataRetrieved;
             foreach (DTO_AddressState state in listSA) {
                 comboBox_State.Items.Add (new ComboBoxItem { Content = state.Name });
@@ -63,7 +63,7 @@ namespace FinanciaRed.View.ManageClients {
 
             comboBox_WorkType.Items.Clear ();
             comboBox_WorkType.Items.Add (new ComboBoxItem { Content = "Seleccione una opción", IsSelected = true, Tag = 0 });
-            MessageResponse<List<DTO_WorkType>> messageResponseWT = await DAO_GeneralVariables.GetAllWorkTypes ();
+            MessageResponse<List<DTO_WorkType>> messageResponseWT = await DAO_GeneralVariables.GetWorkTypesAsync ();
             List<DTO_WorkType> listWT = messageResponseWT.DataRetrieved;
             foreach (DTO_WorkType type in listWT) {
                 comboBox_WorkType.Items.Add (new ComboBoxItem { Content = type.Type });
@@ -73,7 +73,7 @@ namespace FinanciaRed.View.ManageClients {
             comboBox_Reference2RelationshipType.Items.Clear ();
             comboBox_Reference1RelationshipType.Items.Add (new ComboBoxItem { Content = "Seleccione una opción", IsSelected = true, Tag = 0 });
             comboBox_Reference2RelationshipType.Items.Add (new ComboBoxItem { Content = "Seleccione una opción", IsSelected = true, Tag = 0 });
-            MessageResponse<List<DTO_RelationshipType>> messageResponseRST = await DAO_GeneralVariables.GetAllRelationshipsTypes ();
+            MessageResponse<List<DTO_RelationshipType>> messageResponseRST = await DAO_GeneralVariables.GetRelationshipsTypesAsync ();
             List<DTO_RelationshipType> listRST = messageResponseRST.DataRetrieved;
             foreach (DTO_RelationshipType type in listRST) {
                 comboBox_Reference1RelationshipType.Items.Add (new ComboBoxItem { Content = type.Type });
@@ -84,7 +84,7 @@ namespace FinanciaRed.View.ManageClients {
             comboBox_BankAccount2Name.Items.Clear ();
             comboBox_BankAccount1Name.Items.Add (new ComboBoxItem { Content = "Seleccione una opción", IsSelected = true, Tag = 0 });
             comboBox_BankAccount2Name.Items.Add (new ComboBoxItem { Content = "Seleccione una opción", IsSelected = true, Tag = 0 });
-            MessageResponse<List<DTO_Bank>> messageResponseBank = await DAO_GeneralVariables.GetAllBanks ();
+            MessageResponse<List<DTO_Bank>> messageResponseBank = await DAO_GeneralVariables.GetBanksAsync ();
             List<DTO_Bank> listBank = messageResponseBank.DataRetrieved;
             foreach (DTO_Bank type in listBank) {
                 comboBox_BankAccount1Name.Items.Add (new ComboBoxItem { Content = type.Name, TabIndex = type.IdBank });
@@ -95,7 +95,7 @@ namespace FinanciaRed.View.ManageClients {
             comboBox_BankAccount2CardType.Items.Clear ();
             comboBox_BankAccount1CardType.Items.Add (new ComboBoxItem { Content = "Seleccione una opción", IsSelected = true, Tag = 0 });
             comboBox_BankAccount2CardType.Items.Add (new ComboBoxItem { Content = "Seleccione una opción", IsSelected = true, Tag = 0 });
-            MessageResponse<List<DTO_CardType>> messageResponseTypesCard = await DAO_GeneralVariables.GetAllCardTypes ();
+            MessageResponse<List<DTO_CardType>> messageResponseTypesCard = await DAO_GeneralVariables.GetCardTypesAsync ();
             List<DTO_CardType> listCardTypes = messageResponseTypesCard.DataRetrieved;
             foreach (DTO_CardType type in listCardTypes) {
                 comboBox_BankAccount1CardType.Items.Add (new ComboBoxItem { Content = type.Type, TabIndex = type.IdCardType });
@@ -107,7 +107,8 @@ namespace FinanciaRed.View.ManageClients {
             MessageBoxResult result = MessageBox.Show (
                 "¿Está seguro de cancelar?\nNo se podrán recuperar los datos.",
                 "Cancelar registro.",
-                MessageBoxButton.YesNo
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question
             );
             if (result == MessageBoxResult.Yes)
                 this.Close ();
@@ -147,7 +148,10 @@ namespace FinanciaRed.View.ManageClients {
                     stackPanel_Stage4.Visibility = Visibility.Collapsed;
                 }
             } else {
-                MessageBox.Show ("Faltan datos por ingresar o algunos datos están incorrectos.", "Formulario incompleto.");
+                MessageBox.Show (
+                    "Faltan datos por ingresar o algunos datos están incorrectos.", 
+                    "Formulario incompleto.",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
@@ -196,7 +200,10 @@ namespace FinanciaRed.View.ManageClients {
                     stackPanel_Stage4.Visibility = Visibility.Collapsed;
                 }
             } else {
-                MessageBox.Show ("Faltan datos por ingresar o algunos datos están incorrectos.", "Formulario incompleto.");
+                MessageBox.Show (
+                    "Faltan datos por ingresar o algunos datos están incorrectos.", 
+                    "Formulario incompleto.",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
@@ -216,7 +223,10 @@ namespace FinanciaRed.View.ManageClients {
                 stackPanel_Stage3.Visibility = Visibility.Collapsed;
                 stackPanel_Stage4.Visibility = Visibility.Visible;
             } else {
-                MessageBox.Show ("Faltan datos por ingresar o algunos datos están incorrectos.", "Formulario incompleto.");
+                MessageBox.Show (
+                    "Faltan datos por ingresar o algunos datos están incorrectos.", 
+                    "Formulario incompleto.",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
@@ -328,10 +338,10 @@ namespace FinanciaRed.View.ManageClients {
                 IdStatusClient = 1
             };
             if ((bool)checkBox_SameAccount.IsChecked) {
-                newClient.BankAccount2.IdBankName = newClient.BankAccount1.IdBankName == null ? 1 : newClient.BankAccount1.IdBankName;
+                newClient.BankAccount2.IdBankName = newClient.BankAccount1?.IdBankName == null ? 1 : newClient.BankAccount1.IdBankName;
                 newClient.BankAccount2.CLABE = newClient.BankAccount1.CLABE;
                 newClient.BankAccount2.CardNumber = newClient.BankAccount1.CardNumber;
-                newClient.BankAccount2.IdCardType = newClient.BankAccount1.IdCardType == null ? 1 : newClient.BankAccount1.IdCardType;
+                newClient.BankAccount2.IdCardType = newClient.BankAccount1?.IdCardType == null ? 1 : newClient.BankAccount1.IdCardType;
             } else {
                 newClient.BankAccount2.IdBankName = comboBox_BankAccount2Name.SelectedIndex;
                 newClient.BankAccount2.CLABE = textBox_BankAccount2CodeCLABE.Text;
@@ -339,12 +349,18 @@ namespace FinanciaRed.View.ManageClients {
                 newClient.BankAccount2.IdCardType = comboBox_BankAccount2CardType.SelectedIndex;
             }
 
-            MessageResponse<bool> responseRegistryClient = await DAO_Client.RegistryNewClient (newClient);
+            MessageResponse<bool> responseRegistryClient = await DAO_Client.PostAsync (newClient);
             MessageBox.Show (responseRegistryClient.Message);
             if (responseRegistryClient.IsError) {
-                MessageBox.Show ("Ha ocurrido un error inesperado.\nIntente más tarde.", "Error inesperado.");
+                MessageBox.Show (
+                    "Ha ocurrido un error inesperado.\nIntente más tarde.", 
+                    "Error inesperado.",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
             } else {
-                MessageBox.Show ($"Se ha registrado correctamente al\nCLIENTE: \"{newClient.FirstName} {newClient.MiddleName} {newClient.LastName}\"", "Registro completo.");
+                MessageBox.Show (
+                    $"Se ha registrado correctamente al\nCLIENTE: \"{newClient.FirstName} {newClient.MiddleName} {newClient.LastName}\"", 
+                    "Registro completo.",
+                    MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close ();
             }
         }

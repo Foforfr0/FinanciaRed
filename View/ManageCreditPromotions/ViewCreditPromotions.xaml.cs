@@ -21,7 +21,7 @@ namespace FinanciaRed.View.ManageCreditPromotions {
 
         private async Task RetrieveCreditPromotionsDB () {
             MessageResponse<List<DTO_CreditPromotion_Consult>> messageResponseCreditPromotions =
-                await DAO_CreditPromotion.GetAllCreditPromotions ();
+                await DAO_CreditPromotion.GetAsync ();
             this.retrievedCreditPromotions = new ObservableCollection<DTO_CreditPromotion_Consult> (messageResponseCreditPromotions.DataRetrieved);
             dataGrid_CreditPromotions.ItemsSource = null;
             dataGrid_CreditPromotions.ItemsSource = retrievedCreditPromotions;
@@ -31,7 +31,7 @@ namespace FinanciaRed.View.ManageCreditPromotions {
             string keyText = textBox_KeyWord.Text;
 
             MessageResponse<List<DTO_CreditPromotion_Consult>> messageResponseFilterCreditPromotions =
-                await DAO_CreditPromotion.GetFilteredCreditPromotions (keyText);
+                await DAO_CreditPromotion.GetAsync (keyText);
 
             this.retrievedCreditPromotions = new ObservableCollection<DTO_CreditPromotion_Consult> (messageResponseFilterCreditPromotions.DataRetrieved);
             dataGrid_CreditPromotions.ItemsSource = null;
@@ -44,13 +44,17 @@ namespace FinanciaRed.View.ManageCreditPromotions {
             if (selectedCreditPromotion == null) {
                 MessageBox.Show (
                     "Seleccione una promoción de crédito primero de la tabla para poder continuar.",
-                    "Selección requerida");
+                    "Selección requerida",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
             } else {
                 ConfirmationMessageChangeStateCreditPromotion.idPromotion = selectedCreditPromotion.IdCreditPromotion;
                 bool? result = await ConfirmationMessageChangeStateCreditPromotion.Show (selectedCreditPromotion.Name);
                 ConfirmationMessageChangeStateCreditPromotion.idPromotion = 0;
                 if (result == true) {
-                    MessageBox.Show ("Se ha modificado correctamente la promoción de crédito.", "Modificación completa.");
+                    MessageBox.Show (
+                        "Se ha modificado correctamente la promoción de crédito.", 
+                        "Modificación completa.",
+                    MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
         }

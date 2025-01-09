@@ -65,9 +65,8 @@
                                                 <Label Content="Plazo (quincenas):" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
                                             </StackPanel>
                                             <TextBox x:Name="textBox_NumberFortNigths" 
-                                                     AcceptsReturn="True"
-                                                     VerticalScrollBarVisibility="Auto"
-                                                     HorizontalScrollBarVisibility="Auto"
+                                                     PreviewTextInput="NumericTextBox_PreviewTextInput"
+                                                     DataObject.Pasting="NumericTextBox_Pasting"
                                                      Height="35"/>
                                             <Label x:Name="label_ErrorNumberFortNigths" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
                                         </StackPanel>
@@ -77,10 +76,8 @@
                                                 <Label Content="Taza de interés (%):" Foreground="Black" FontWeight="Bold" VerticalAlignment="Center"/>
                                             </StackPanel>
                                             <TextBox x:Name="textBox_InterestRate" 
-                                                     AcceptsReturn="True"
-                                                     VerticalScrollBarVisibility="Auto"
-                                                     HorizontalScrollBarVisibility="Auto"
-                                                     TextWrapping="Wrap"
+                                                     PreviewTextInput="DecimalTextBox_PreviewTextInput"
+                                                     DataObject.Pasting="DecimalTextBox_Pasting"
                                                      Height="35"/>
                                             <Label x:Name="label_ErrorInteresrRate" d:Content="Message Error" d:Visibility="Visible" Style="{StaticResource LabelErrorForm}"/>
                                         </StackPanel>

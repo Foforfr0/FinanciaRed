@@ -37,13 +37,13 @@ namespace FinanciaRed.View.ManageClients {
         }
 
         private static async Task<string> RetrieveStatusClient (int idClient) {
-            MessageResponse<string> messageResponseStatusClient = await DAO_Client.GetStatusClient (idClient);
+            MessageResponse<string> messageResponseStatusClient = await DAO_Client.GetStatusAsync (idClient);
             statusClient = messageResponseStatusClient.DataRetrieved;
             return messageResponseStatusClient.DataRetrieved;
         }
 
         private static async Task<string> RetrieveActiveCreditClient (int idClient) {
-            MessageResponse<bool> messageResponseCreditActiveClient = await DAO_Credit.GetCreditActiveClient (idClient);
+            MessageResponse<bool> messageResponseCreditActiveClient = await DAO_Credit.GetStatusCreditClientAsync (idClient);
             HaveActiveCredit = messageResponseCreditActiveClient.DataRetrieved;
             return messageResponseCreditActiveClient.DataRetrieved ? "SI TIENE " : "NO TIENE ";
         }
@@ -73,18 +73,21 @@ namespace FinanciaRed.View.ManageClients {
         }
 
         private async Task ChangeStatusClient (int idNewStatus) {
-            MessageResponse<bool> messageResponseUpdateStatus = await DAO_Client.ChangeStatusClient (idClient, idNewStatus);
+            MessageResponse<bool> messageResponseUpdateStatus = await DAO_Client.PutAsync (idClient, idNewStatus);
         }
 
         private async Task ChangeStatusCredit (int idNewStatusCredit) {
-            MessageResponse<int> messageResponseUpdateStatues = await DAO_Credit.ChangeStatusCreditsClient (idClient, idNewStatusCredit);
+            MessageResponse<int> messageResponseUpdateStatues = await DAO_Credit.PutStatusCreditsClientAsync (idClient, idNewStatusCredit);
         }
 
         private async void OkButton_Click (object sender, RoutedEventArgs e) {
             RadioButton selectedRadioButton = Utils.GetElementVisualTree.GetSelectedRadioButton (stackPanelRadioButtons);
 
             if (selectedRadioButton == null) {
-                MessageBox.Show ("Para poder continuar, seleccione un nuevo estado.", "Selección requerida.");
+                MessageBox.Show (
+                    "Para poder continuar, seleccione un nuevo estado.", 
+                    "Selección requerida.",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
@@ -96,7 +99,7 @@ namespace FinanciaRed.View.ManageClients {
             // Mensaje según el estado seleccionado
             switch (selectedStatus) {
                 case "Activo":
-                    message = "El cliente estará ativo de nuevo." +
+                    message = "El cliente estará activo de nuevo." +
                               "\n¿Desea continuar?";
                     idNewStatus = 1;
                     confirmationRequired = true;

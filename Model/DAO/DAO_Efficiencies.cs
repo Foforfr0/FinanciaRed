@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace FinanciaRed.Model.DAO {
     internal class DAO_Efficiencies {
-        public static async Task<MessageResponse<DTO_Efficiencies>> GetEfficiencies (DTO_Efficiencies solicitedEfficiencies) {
+        public static async Task<MessageResponse<DTO_Efficiencies>> GetAsync (DTO_Efficiencies solicitedEfficiencies) {
             using (FinanciaRedEntities context = new FinanciaRedEntities ()) {
-                MessageResponse<DTO_Efficiencies> retrievedEfficiencies = null;
+                MessageResponse<DTO_Efficiencies> response = null;
                 DTO_Efficiencies dataRetrieved = new DTO_Efficiencies ();
                 try {
                     // Aprobación de créditos
@@ -70,15 +70,11 @@ namespace FinanciaRed.Model.DAO {
                             DefaultIfEmpty (0).
                             MaxAsync ();
                     }
-
-                    retrievedEfficiencies = MessageResponse<DTO_Efficiencies>.Success ("Efficiencies retrieved.", dataRetrieved);
-                } catch (Exception) {
-                    retrievedEfficiencies =
-                        MessageResponse<DTO_Efficiencies>.
-                        Failure ("Error al obtener las eficiencias soliitadas");
+                    response = MessageResponse<DTO_Efficiencies>.Success ("Eficiencias obtenidas.", dataRetrieved);
+                } catch (Exception ex) {
+                    response = MessageResponse<DTO_Efficiencies>.Failure ($"Error inesperado: {ex.Message}");
                 }
-
-                return retrievedEfficiencies;
+                return response;
             }
         }
     }

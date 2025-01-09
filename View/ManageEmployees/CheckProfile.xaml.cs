@@ -26,7 +26,7 @@ namespace FinanciaRed.View.ManageEmployees {
 
         private async Task RetrieveDetailsAccount (int idEmployee, bool withPassword) {
             MessageResponse<DTO_Employee_Details> messageResponseDetailsAccountEmployee =
-                await DAO_Employee.GetDetailsEmployee (idEmployee, withPassword);
+                await DAO_Employee.GetAsync (idEmployee, withPassword);
 
             if (!messageResponseDetailsAccountEmployee.IsError) {
                 currentEmployee = messageResponseDetailsAccountEmployee.DataRetrieved;
@@ -44,7 +44,10 @@ namespace FinanciaRed.View.ManageEmployees {
                     label_PhotoStatus.Content = "";
                 }
             } else {
-                MessageBox.Show ("No se pudo obtener los datos.", "Error inesperado");
+                MessageBox.Show (
+                    "No se pudo obtener los datos.", 
+                    "Error inesperado",
+                    MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -113,16 +116,16 @@ namespace FinanciaRed.View.ManageEmployees {
 
                 MessageResponse<bool> responseModify;
                 if (string.IsNullOrEmpty (textBox_Password.Text) && string.IsNullOrEmpty (textBox_PasswordConfirmation.Text)) {
-                    responseModify = DAO_Employee.SaveChangesDataEmployee (newDataEmployee, false);
+                    responseModify = DAO_Employee.PutAsync (newDataEmployee, false);
                 } else {
-                    responseModify = DAO_Employee.SaveChangesDataEmployee (newDataEmployee, true);
+                    responseModify = DAO_Employee.PutAsync (newDataEmployee, true);
                 }
 
                 if (responseModify.IsError) {
                     MessageBox.Show (
                         "Error al guardar los cambios, intente más tarde.",
-                        "Error inesperado"
-                    );
+                        "Error inesperado",
+                        MessageBoxButton.OK, MessageBoxImage.Error);
                 } else {
                     CURRENT_USER.Instance.ProfilePhoto = TEMP_profileImageSelected;
                     Frame parentFrame = Utils.GetElementVisualTree.GetParent<Frame> (this);

@@ -63,7 +63,7 @@ namespace FinanciaRed.View.ManageCreditApplications {
         private async void ClickSearchClient (object sender, RoutedEventArgs e) {
             if (ValidateClientForm ()) {
                 MessageResponse<DTO_Client_Search> response =
-                    await DAO_Client.SearchClientCreditApplication (
+                    await DAO_Client.GetClientCreditApplicationAsync (
                         textBox_ClientName.Text.Trim (),
                         textBox_CodeCURP.Text.Trim (),
                         textBox_CodeRFC.Text.Trim ()
@@ -83,7 +83,7 @@ namespace FinanciaRed.View.ManageCreditApplications {
 
         private async Task LoadVariables () {
             MessageResponse<List<DTO_CreditPromotion_Consult>> messageResponseProm =
-                await DAO_CreditPromotion.GetCreditPromotionsAvailable (DateTime.Now);
+                await DAO_CreditPromotion.GetAsync (DateTime.Now);
 
             var promotions = new List<DTO_CreditPromotion_Consult> {
                 new DTO_CreditPromotion_Consult { Name = "Seleccione una opción", IdCreditPromotion = 0 }
@@ -117,7 +117,8 @@ namespace FinanciaRed.View.ManageCreditApplications {
             MessageBoxResult result = MessageBox.Show (
                 "¿Está seguro de cancelar?\nNo se podrán recuperar los datos.",
                 "Cancelar registro.",
-                MessageBoxButton.YesNo
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question
             );
             if (result == MessageBoxResult.Yes)
                 this.Close ();
@@ -170,7 +171,10 @@ namespace FinanciaRed.View.ManageCreditApplications {
                 label_RecurringPayment.Content = "$" + (newCreditApplicaton.AmountSolicited + (newCreditApplicaton.AmountSolicited * newCreditApplicaton.InterestRate)) / newCreditApplicaton.NumberFortNigths;
                 stackPanel_Stage2.Visibility = Visibility.Visible;
             } else {
-                MessageBox.Show ("Faltan datos por ingresar o algunos datos están incorrectos.", "Formulario incompleto.");
+                MessageBox.Show (
+                    "Faltan datos por ingresar o algunos datos están incorrectos.",
+                    "Formulario incompleto.",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
 
@@ -278,11 +282,17 @@ namespace FinanciaRed.View.ManageCreditApplications {
                 newCreditApplicaton.DateApplication = DateTime.Now;
                 newCreditApplicaton.IdEmployee = CURRENT_USER.Instance.IdEmployee;
                 MessageResponse<bool> messageResponseRegistraCA =
-                    await DAO_CreditApplication.RegistryNewCreditApplication (newCreditApplicaton);
+                    await DAO_CreditApplication.PostAsync (newCreditApplicaton);
                 if (messageResponseRegistraCA.IsError) {
-                    MessageBox.Show ("No se pudo guardar la nueva solicitud de crédito.\nIntente más tarde.", "Error inesperado.");
+                    MessageBox.Show (
+                        "No se pudo guardar la nueva solicitud de crédito.\nIntente más tarde.", 
+                        "Error inesperado.",
+                        MessageBoxButton.OK, MessageBoxImage.Error);
                 } else {
-                    MessageBox.Show ("Se ha registrado correctamente la nueva solicitud de crédito.", "Registro completo.");
+                    MessageBox.Show (
+                        "Se ha registrado correctamente la nueva solicitud de crédito.", 
+                        "Registro completo.",
+                        MessageBoxButton.OK, MessageBoxImage.Information);
                     this.Close ();
                 }
             }

@@ -17,7 +17,7 @@ namespace FinanciaRed.View {
             InitializeComponent ();
 
             textBox_Email.Text = "administrador@gmail.com";         //Administrador
-            //textBox_Email.Text = "cobrador@gmail.com";            //Gestor de cobranza
+            textBox_Email.Text = "cobrador@gmail.com";            //Gestor de cobranza
             //textBox_Email.Text = "analista@gmail.com";            //Analista de crédito
             //textBox_Email.Text = "asesor@gmail.com";                //Asesor de cobranza
 
@@ -65,7 +65,7 @@ namespace FinanciaRed.View {
                 string emailLogin = textBox_Email.Text;
                 string passwordLogin = passwordBox_Password.Password;
                 MessageResponse<DTO_Employee_Login> messageResponseLogin =
-                    await DAO_Employee.GetLogin (emailLogin, passwordLogin);
+                    await DAO_Employee.GetAsync (emailLogin, passwordLogin);
 
                 if (messageResponseLogin.DataRetrieved == null) {
                     MessageBox.Show (
