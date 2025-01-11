@@ -357,31 +357,31 @@ INSERT INTO Promotions (Name, InterestRate, NumberFortnights, DateStart, DateEnd
 
 INSERT INTO CreditApplications (DateApplication, DateAcepted, AmountTotal, IdStatusCreditApplication, ValorationOpinion,
                                 IdPromotion,IdEmployeeApplication, IdClient, ProofINE, ProofAddress, ProofLastPayStub)
-                    -- Aplicado
+                    -- Aplicado 1
             VALUES  ('2024-10-23 14:00:23', NULL, 35000, 1, NULL, 
                      1, 4, 1,
                     (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Archivos\Example Files\FinanciaRed\ProofINE.pdf', SINGLE_BLOB) AS ProofINE),
                     (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Archivos\Example Files\FinanciaRed\ProofAddress.pdf', SINGLE_BLOB) AS ProofAddress),
                     (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Archivos\Example Files\FinanciaRed\ProofLastPayStub.pdf', SINGLE_BLOB) AS ProofLastPayStub)),
-                    -- Aceptado
+                    -- Aceptado 2
                     ('2024-10-24 12:28:36', '2024-10-30 14:23:52', 40000, 2, 'Ejemplo de valoración solicitud crédito', 
                      2, 4, 1,
                     (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Archivos\Example Files\FinanciaRed\ProofINE.pdf', SINGLE_BLOB) AS ProofINE),
                     (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Archivos\Example Files\FinanciaRed\ProofAddress.pdf', SINGLE_BLOB) AS ProofAddress),
                     (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Archivos\Example Files\FinanciaRed\ProofLastPayStub.pdf', SINGLE_BLOB) AS ProofLastPayStub)),
-                    -- Aceptado
+                    -- Aceptado 3
                     ('2024-10-25 12:28:36', '2024-11-01 13:23:52', 55000, 2, 'Ejemplo de valoración solicitud crédito', 
                      2, 4, 2,
                     (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Archivos\Example Files\FinanciaRed\ProofINE.pdf', SINGLE_BLOB) AS ProofINE),
                     (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Archivos\Example Files\FinanciaRed\ProofAddress.pdf', SINGLE_BLOB) AS ProofAddress),
                     (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Archivos\Example Files\FinanciaRed\ProofLastPayStub.pdf', SINGLE_BLOB) AS ProofLastPayStub)),
-                    -- Aceptado
+                    -- Aceptado 4
                     ('2024-10-25 12:28:36', '2024-11-02 17:23:52', 62000, 2, 'Ejemplo de valoración solicitud crédito', 
                      2, 4, 3,
                     (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Archivos\Example Files\FinanciaRed\ProofINE.pdf', SINGLE_BLOB) AS ProofINE),
                     (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Archivos\Example Files\FinanciaRed\ProofAddress.pdf', SINGLE_BLOB) AS ProofAddress),
                     (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Archivos\Example Files\FinanciaRed\ProofLastPayStub.pdf', SINGLE_BLOB) AS ProofLastPayStub)),
-                    -- Reachazado
+                    -- Reachazado 5
                     ('2024-10-25 11:34:51', '2024-11-02 14:22:42', 24800, 3, 'Ejemplo de valoración solicitud crédito', 
                      2, 4, 3,
                     (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Archivos\Example Files\FinanciaRed\ProofINE.pdf', SINGLE_BLOB) AS ProofINE),
@@ -402,13 +402,13 @@ INSERT INTO CreditApplications_Policies (IdCreditApplication, IdPolicy, IsAprobe
 
 INSERT INTO Credits (AmountLeft, IdStatusCredit, DateStart, DateEnd, IdCreditApplication, SignedDocument, PaymentLayout) 
                    -- Credit application 2 - En espera de confirmación
-            VALUES (40000, 1, '2024-10-30 14:23:52', '2025-01-18 11:50:00', 2, NULL, NULL),
+            VALUES (40000, 1, NULL, NULL, 2, NULL, NULL),
                    -- Credit application 3 - Cobrable
-                   (55000, 2, '2024-11-01 13:23:52', '2025-01-18 11:50:00', 3, NULL, 
-                   (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Archivos\Example Files\FinanciaRed\PaymentLayout.csv', SINGLE_BLOB) AS PaymentLayout)),
+                   (55000, 2, '2024-11-01 13:23:52', '2024-12-13 11:50:00', 3, NULL, 
+                   (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Archivos\Example Files\FinanciaRed\PaymentLayout1.csv', SINGLE_BLOB) AS PaymentLayout)),
                    -- Credit application 4 - Incobrable
-                   (62000, 3, '2024-11-02 17:23:52', '2025-01-18 11:50:00', 4, NULL, 
-                   (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Archivos\Example Files\FinanciaRed\PaymentLayout.csv', SINGLE_BLOB) AS PaymentLayout));
+                   (62000, 3, '2024-11-02 17:23:52', '2025-01-14 11:50:00', 4, NULL, 
+                   (SELECT BulkColumn FROM OPENROWSET(BULK 'C:\Archivos\Example Files\FinanciaRed\PaymentLayout2.csv', SINGLE_BLOB) AS PaymentLayout));
 
 --TESTS---------------------------------------------------------------
 SELECT * FROM Credits 

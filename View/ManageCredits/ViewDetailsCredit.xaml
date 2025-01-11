@@ -90,7 +90,8 @@
                             <Button x:Name="button_StartCredit" 
                                     Click="ClickShowPaymentLayout"
                                     Content="Layout de cobro"
-                                    Background="#FF0693C3" Foreground="#FFFFFF"/>
+                                    Background="#FF0693C3" Foreground="#FFFFFF"
+                                    Width="100" Padding="5"/>
                         </StackPanel>
                     </ScrollViewer>
                 </StackPanel>
